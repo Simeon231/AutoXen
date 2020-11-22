@@ -2,13 +2,14 @@
 {
     using System.Reflection;
 
+    using AutoMapper;
     using AutoXen.Data;
     using AutoXen.Data.Common;
     using AutoXen.Data.Common.Repositories;
     using AutoXen.Data.Models;
     using AutoXen.Data.Repositories;
     using AutoXen.Data.Seeding;
-    using AutoXen.Services.Data;
+    using AutoXen.Services;
     using AutoXen.Services.Mapping;
     using AutoXen.Services.Messaging;
     using AutoXen.Web.ViewModels;
@@ -61,9 +62,12 @@
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
+            services.AddAutoMapper(typeof(Startup));
+
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<ICarService, CarService>();
+            services.AddTransient<ICarWashService, CarWashService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

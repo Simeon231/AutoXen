@@ -8,7 +8,12 @@
 
     using AutoXen.Data.Common.Models;
     using AutoXen.Data.Models;
-
+    using AutoXen.Data.Models.AnnualTechnicalInspection;
+    using AutoXen.Data.Models.Car;
+    using AutoXen.Data.Models.CarWash;
+    using AutoXen.Data.Models.Insurance;
+    using AutoXen.Data.Models.RoadsideAssistance;
+    using AutoXen.Data.Models.Workshop;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
@@ -24,7 +29,55 @@
         {
         }
 
-        public DbSet<Setting> Settings { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+
+        public DbSet<BaseRequest> BaseRequests { get; set; }
+
+        public DbSet<Message> Messages { get; set; }
+
+        public DbSet<Car> Cars { get; set; }
+
+        public DbSet<OtherCarUser> OtherCarUsers { get; set; }
+
+        public DbSet<CarExtra> CarExtras { get; set; }
+
+        public DbSet<Extra> Extras { get; set; }
+
+        public DbSet<CarWashRequest> CarWashRequests { get; set; }
+
+        public DbSet<CarWash> CarWashes { get; set; }
+
+        public DbSet<Insurance> Insurances { get; set; }
+
+        public DbSet<InsurersRequest> InsurersRequests { get; set; }
+
+        public DbSet<Insurer> Insurers { get; set; }
+
+        public DbSet<InsurerInsurances> InsurerInsurances { get; set; }
+
+        public DbSet<Province> Provinces { get; set; }
+
+        public DbSet<RoadsideAssistance> RoadsideAssistances { get; set; }
+
+        public DbSet<RoadsideAssistanceProvince> RoadsideAssistanceProvinces { get; set; }
+
+        public DbSet<RoadsideAssistanceRequest> RoadsideAssistanceRequests { get; set; }
+
+        public DbSet<RoadsideAssistanceService> RoadsideAssistanceServices { get; set; }
+
+        public DbSet<RService> RServices { get; set; }
+
+        public DbSet<AnnualTechnicalInspection> AnnualTechnicalInspections { get; set; }
+
+        public DbSet<AnnualTechnicalInspectionRequest> AnnualTechnicalInspectionRequests { get; set; }
+
+        public DbSet<Workshop> Workshops { get; set; }
+
+        public DbSet<WorkshopRequest> WorkshopRequests { get; set; }
+
+        public DbSet<WorkshopService> WorkshopServices { get; set; }
+
+        public DbSet<WService> WServices { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -47,6 +100,19 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            // TODO: move to configurations
+            builder
+                .Entity<BaseRequest>()
+                .HasOne<ApplicationUser>("AcceptedBy")
+                .WithMany()
+                .HasForeignKey("AcceptedById");
+
+            builder
+                .Entity<BaseRequest>()
+                .HasOne<ApplicationUser>("User")
+                .WithMany("BaseRequests")
+                .HasForeignKey("UserId");
+
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
 

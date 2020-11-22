@@ -1,0 +1,91 @@
+﻿@using AutoXen.Services
+@model CarWashRequestViewModel
+@inject ICarWashService washService
+@inject ICarService carService
+
+<form method="post">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="offset-1 col-md-10">
+                <div class="text-center">
+                    <label class="col-form-label">Pick your car</label>
+                </div>
+                <select class="form-control" name="CarId">
+                    @foreach (CarViewModel car in carService.AllCars(Model.UserId))
+                    {
+                        var name = $"Brand: {car.Brand} - Model: {car.Model} - Registration plate: {car.RegistrationPlate}";
+                        <option value="@car.Id">
+                            @name
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <br />
+
+            <div class="form-row">
+                <div class="list-group-item col-md-4 offset-4">
+                    <div class="text-center">
+                        <label class="col-form-label" asp-for="PickUpFastAsPossible"></label>
+                        <input class="form-check-inline" asp-for="PickUpFastAsPossible" id="pickUpFastAsPossible" />
+                        <span asp-validation-for="PickUpFastAsPossible" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="text-center">
+                        <label class="col-form-label" asp-for="PickUpLocation"></label>
+                        <input class="input-group form-control" asp-for="PickUpLocation" />
+                        <span asp-validation-for="PickUpLocation" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-center">
+                        <label class="col-form-label" asp-for="PickUpTime"></label>
+                        <input class="input-group form-control" asp-for="PickUpTime" id="pickUpTime" />
+                        <span asp-validation-for="PickUpTime" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <div class="form-row">
+                <div class="list-group-item col-md-4 offset-4">
+                    <div class="text-center">
+                        <label class="col-form-label" asp-for="AdminChooseCarWash"></label>
+                        <input class="form-check-inline" asp-for="AdminChooseCarWash" id="adminChooseCarWash" />
+                        <span asp-validation-for="AdminChooseCarWash" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="form-row">
+                @foreach (var carWash in washService.GetAllCarWashes())
+                {
+                    <div class="col-md-4 form-check">
+                        <input type="radio" class="form-check-input" value="@carWash.Id" name="CarWashId" />
+                        <label class="form-check-label" for="@carWash.Id">@carWash.Name</label>
+                    </div>
+                }
+            </div>
+            <br />
+            <div class="row">
+                <div class="col text-center">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <label class="col-form-label text-center">Write your message</label>
+            <textarea class="form-control input-group" rows="20"></textarea>
+        </div>
+    </div>
+</form>
+
+<script src="~/js/CarWash.js"></script>

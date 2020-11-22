@@ -24,10 +24,19 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="All">My Cars</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Маке Request
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/CarWash/Create">Car wash</a>
+                                <a class="dropdown-item" href="#">Insurence</a>
+                                <a class="dropdown-item" href="#">Roadside assistance</a>
+                                <a class="dropdown-item" href="#">Workshop</a>
+                                <a class="dropdown-item" href="#">Annual technical inspection</a>
+                            </div>
                         </li>
                     </ul>
                 </div>
