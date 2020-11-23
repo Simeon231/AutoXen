@@ -1,4 +1,4 @@
-﻿namespace AutoXen.Profiles
+﻿namespace AutoXen.Web.Profiles
 {
     using AutoMapper;
     using AutoXen.Data.Models.Car;

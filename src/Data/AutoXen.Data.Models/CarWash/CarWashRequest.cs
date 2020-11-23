@@ -3,8 +3,6 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    using AutoXen.Data.Common.Models;
-
     public class CarWashRequest
     {
         public CarWashRequest()
@@ -35,7 +33,7 @@
 
         public BaseRequest BaseRequest { get; set; }
 
-        public int CarWashId { get; set; }
+        public int? CarWashId { get; set; }
 
         public CarWash CarWash { get; set; }
     }

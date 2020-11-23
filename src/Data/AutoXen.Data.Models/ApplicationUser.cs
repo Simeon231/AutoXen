@@ -21,7 +21,6 @@ namespace AutoXen.Data.Models
             this.Logins = new HashSet<IdentityUserLogin<string>>();
         }
 
-        [Required]
         public string Address { get; set; }
 
         [Required]
