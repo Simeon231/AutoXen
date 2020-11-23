@@ -13,7 +13,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><i class="fab fa-autoprefixer"></i> @GlobalConstants.SystemName</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><i class="fab fa-asymmetrik"></i> @GlobalConstants.SystemName</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -57,7 +57,7 @@
     
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="About">About</a>
+            @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-controller="Home" asp-action="About">About</a>
         </div>
     </footer>
 
@@ -69,3 +69,11 @@
     @await this.RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+<script>
+    var settings = {
+        errorClass: "is-invalid"
+    };
+    $.validator.setDefaults(settings);
+    $.validator.unobtrusive.options = settings;
+</script>

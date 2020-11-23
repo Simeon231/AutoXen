@@ -11,6 +11,7 @@
                     <label class="col-form-label">Pick your car</label>
                 </div>
                 <select class="form-control" name="CarId">
+                    <option hidden>Pick your car</option>
                     @foreach (CarViewModel car in carService.AllCars(Model.UserId))
                     {
                         var name = $"Brand: {car.Brand} - Model: {car.Model} - Registration plate: {car.RegistrationPlate}";
