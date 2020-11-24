@@ -63,7 +63,13 @@
       "library": "moment.js@2.29.1",
       "provider": "cdnjs",
       "destination": "wwwroot/lib/momentJs",
-      "files": ["moment-with-locales.min.js"]
+      "files": [ "moment-with-locales.min.js" ]
+    },
+    {
+      "library": "select2@4.0.13",
+      "destination": "wwwroot/lib/select2",
+      "files": ["css/select2.min.css", "js/select2.full.min.js"],
+      "provider": "cdnjs"
     }
   ]
 }

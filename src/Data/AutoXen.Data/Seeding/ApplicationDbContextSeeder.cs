@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using AutoXen.Data.Seeding.Workshop;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
@@ -28,6 +28,9 @@
                               new RolesSeeder(),
                               new CarWashesSeeder(),
                               new ExtrasSeeder(),
+                              new WorkshopSeeder(),
+                              new WServicesSeeder(),
+                              new WorkshopServicesSeeder(),
                           };
 
             foreach (var seeder in seeders)

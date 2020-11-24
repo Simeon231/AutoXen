@@ -1,6 +1,7 @@
 ﻿namespace Sandbox
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
     using System.Threading.Tasks;
@@ -22,29 +23,52 @@
 
     public static class Program
     {
-        public static int Main(string[] args)
+        public static void Main(string[] args)
         {
-            Console.WriteLine($"{typeof(Program).Namespace} ({string.Join(" ", args)}) starts working...");
-            var serviceCollection = new ServiceCollection();
-            ConfigureServices(serviceCollection);
-            IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider(true);
-
-            // Seed data on application startup
-            using (var serviceScope = serviceProvider.CreateScope())
+            for (int i = 0; i < 5; i++)
             {
-                var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                dbContext.Database.Migrate();
-                new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+                var nums = RandomNumbers(20);
+                var randomD = RandomPrice();
             }
 
-            using (var serviceScope = serviceProvider.CreateScope())
-            {
-                serviceProvider = serviceScope.ServiceProvider;
+            ////Console.WriteLine($"{typeof(Program).Namespace} ({string.Join(" ", args)}) starts working...");
+            ////var serviceCollection = new ServiceCollection();
+            ////ConfigureServices(serviceCollection);
+            ////IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider(true);
 
-                return Parser.Default.ParseArguments<SandboxOptions>(args).MapResult(
-                    opts => SandboxCode(opts, serviceProvider).GetAwaiter().GetResult(),
-                    _ => 255);
+            ////// Seed data on application startup
+            ////using (var serviceScope = serviceProvider.CreateScope())
+            ////{
+            ////    var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            ////    dbContext.Database.Migrate();
+            ////    new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+            ////}
+
+            ////using (var serviceScope = serviceProvider.CreateScope())
+            ////{
+            ////    serviceProvider = serviceScope.ServiceProvider;
+
+            ////    return Parser.Default.ParseArguments<SandboxOptions>(args).MapResult(
+            ////        opts => SandboxCode(opts, serviceProvider).GetAwaiter().GetResult(),
+            ////        _ => 255);
+            ////}
+        }
+
+        private static IEnumerable<int> RandomNumbers(int maxNumber)
+        {
+            var nums = new HashSet<int>();
+
+            for (int i = 0; i < maxNumber; i++)
+            {
+                nums.Add(new Random().Next(1, maxNumber));
             }
+
+            return nums;
+        }
+
+        private static double RandomPrice()
+        {
+            return new Random().NextDouble() * 100.0;
         }
 
         private static async Task<int> SandboxCode(SandboxOptions options, IServiceProvider serviceProvider)

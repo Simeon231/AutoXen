@@ -1,8 +1,4 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-
+﻿// My
 var deleteBtn = document.getElementsByName("deleteBtn");
 if (deleteBtn != null) {
     deleteBtn.forEach(x => x.addEventListener("click", () => {
@@ -10,6 +6,7 @@ if (deleteBtn != null) {
     }))
 }
 
+// convert datetime to datetime.now
 var dates = document.getElementsByName('date');
 
 if (dates != null) {
@@ -18,10 +15,16 @@ if (dates != null) {
     });
 }
 
+//moment.js
 function convertTimeToLocal(time) {
     var fmt = 'DD/MM/YYYY HH:mm:ss';
     var result = moment.utc(time.textContent, fmt).local().format(fmt);
     time.textContent = result;
 }
+
+//Select2
+$(document).ready(function () {
+    $('.js-example-basic-multiple').select2();
+});
 
 // TODO: Change js to functions
