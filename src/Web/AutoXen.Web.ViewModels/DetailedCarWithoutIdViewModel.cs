@@ -3,8 +3,8 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using AutoXen.Data.Enums;
     using AutoXen.Data.Models.Car;
+    using AutoXen.Data.Models.Enums;
     using AutoXen.Services.Mapping;
     using AutoXen.Web.ViewModels.Validation_Atributes;
 

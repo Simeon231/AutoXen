@@ -7,8 +7,8 @@
 
     using AutoMapper;
     using AutoXen.Data.Common.Repositories;
-    using AutoXen.Data.Enums;
     using AutoXen.Data.Models.Car;
+    using AutoXen.Data.Models.Enums;
     using AutoXen.Web.ViewModels;
 
     public class CarService : ICarService
@@ -50,6 +50,16 @@
 
             return cars;
         }
+
+        ////public Dictionary<string, string> AllCars(string userId)
+        ////{
+        ////    var cars = this.carRepository.AllAsNoTracking()
+        ////        .Where(x => x.UserId == userId)
+        ////        .OrderByDescending(x => x.CreatedOn)
+        ////        .ToDictionary(x => x.Id, y => $"Brand: {y.Brand} - Model: {y.Model} - Registration plate: {y.RegistrationPlate}");
+
+        ////    return cars;
+        ////}
 
         public IEnumerable<ExtraViewModel> GetAllExtras()
         {

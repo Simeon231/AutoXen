@@ -1,4 +1,4 @@
-﻿namespace AutoXen.Data.Enums
+﻿namespace AutoXen.Data.Models.Enums
 {
     public enum RequestName
     {

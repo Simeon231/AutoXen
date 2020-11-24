@@ -11,3 +11,5 @@ if (deleteBtn != null) {
         confirm("Are you sure you want to delete your " + x.getAttribute("property") + "?");
     }))
 }
+
+// TODO: Change js to functions

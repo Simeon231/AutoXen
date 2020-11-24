@@ -1,5 +1,6 @@
 ﻿namespace AutoXen.Controllers
 {
+    using System;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -11,28 +12,20 @@
     public class CarWashController : Controller
     {
         private readonly ICarWashService carWashService;
+        private readonly ICarService carService;
 
-        public CarWashController(ICarWashService carWashService)
+        public CarWashController(
+            ICarWashService carWashService,
+            ICarService carService)
         {
             this.carWashService = carWashService;
-        }
-
-        // GET: CarWashController
-        public ActionResult Index()
-        {
-            return null;
-        }
-
-        // GET: CarWashController/Details/5
-        public ActionResult Details(int id)
-        {
-            return this.View();
+            this.carService = carService;
         }
 
         public ActionResult Create()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var carWash = new CarWashRequestViewModel() { UserId = userId };
+            var carWash = new CarWashRequestViewModel() { Cars = this.carService.AllCars(userId) };
 
             return this.View(carWash);
         }
@@ -42,15 +35,22 @@
         public async Task<ActionResult> Create(CarWashRequestViewModel model)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var carWash = new CarWashRequestViewModel() { Cars = this.carService.AllCars(userId) };
 
             if (!this.ModelState.IsValid)
             {
-                var carWash = new CarWashRequestViewModel() { UserId = userId };
-
                 return this.View(carWash);
             }
 
-            await this.carWashService.AddCarWashRequestAsync(model, userId);
+            try
+            {
+                await this.carWashService.AddCarWashRequestAsync(model, userId);
+            }
+            catch (Exception err)
+            {
+                this.ModelState.AddModelError("Key", err.Message);
+                return this.View(carWash);
+            }
 
             return this.Redirect("/");
         }

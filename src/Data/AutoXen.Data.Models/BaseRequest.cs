@@ -4,7 +4,7 @@
     using System.Collections.Generic;
 
     using AutoXen.Data.Common.Models;
-    using AutoXen.Data.Enums;
+    using AutoXen.Data.Models.Enums;
 
     public class BaseRequest : BaseDeletableModel<string>
     {
@@ -28,7 +28,7 @@
 
         public Car.Car Car { get; set; }
 
-        public DateTime FinishedOn { get; set; }
+        public DateTime? FinishedOn { get; set; }
 
         public ICollection<Message> Messages { get; set; }
     }

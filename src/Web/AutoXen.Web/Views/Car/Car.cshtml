@@ -59,13 +59,13 @@
         <div class="col-md-4 offset-md-1">
             <label class="col-form-label">Fuel type</label>
             <select asp-for="FuelType" class="form-control"
-                    asp-items="@Html.GetEnumSelectList<AutoXen.Data.Enums.FuelType>()">
+                    asp-items="@Html.GetEnumSelectList<AutoXen.Data.Models.Enums.FuelType>()">
             </select>
         </div>
         <div class="offset-md-1 col-md-4">
             <label class="col-form-label">Transmission type</label>
             <select asp-for="TransmissionType" class="form-control"
-                    asp-items="@Html.GetEnumSelectList<AutoXen.Data.Enums.TransmissionType>()">
+                    asp-items="@Html.GetEnumSelectList<AutoXen.Data.Models.Enums.TransmissionType>()">
             </select>
         </div>
     </div>

@@ -5,7 +5,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using AutoXen.Data.Common.Models;
-    using AutoXen.Data.Enums;
+    using AutoXen.Data.Models.Enums;
 
     public class Car : BaseDeletableModel<string>
     {

@@ -7,12 +7,16 @@
     <div class="row">
         <div class="col-md-8">
             <div class="offset-1 col-md-10">
+                <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="text-center">
                     <label class="col-form-label">Pick your car</label>
                 </div>
+                @*<select class="form-control" asp-for="@Model.CarId" asp-items="@(new SelectList(Model.Cars.Values.ToList(), Model.Cars.Keys.ToList()))">
+                    <option hidden>Choose a car</option>
+                </select>*@
                 <select class="form-control" name="CarId">
                     <option hidden>Pick your car</option>
-                    @foreach (CarViewModel car in carService.AllCars(Model.UserId))
+                    @foreach (CarViewModel car in Model.Cars)
                     {
                         var name = $"Brand: {car.Brand} - Model: {car.Model} - Registration plate: {car.RegistrationPlate}";
                         <option value="@car.Id">

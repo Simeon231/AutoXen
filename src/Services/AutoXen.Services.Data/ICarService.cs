@@ -11,6 +11,8 @@
 
         public IEnumerable<CarViewModel> AllCars(string userId);
 
+        ////public Dictionary<string, string> AllCars(string userId);
+
         public IEnumerable<ExtraViewModel> GetAllExtras();
 
         public DetailedCarWithoutIdViewModel GetCarDetails(string carId);

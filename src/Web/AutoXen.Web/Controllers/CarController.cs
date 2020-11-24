@@ -38,6 +38,7 @@
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             await this.carService.AddCarAsync(userId, car);
+
             return this.RedirectToAction(nameof(this.All));
         }
 
