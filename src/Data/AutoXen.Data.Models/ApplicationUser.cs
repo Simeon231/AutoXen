@@ -15,7 +15,6 @@ namespace AutoXen.Data.Models
         {
             this.Id = Guid.NewGuid().ToString();
             this.Cars = new HashSet<Car.Car>();
-            this.BaseRequests = new HashSet<BaseRequest>();
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
@@ -34,8 +33,6 @@ namespace AutoXen.Data.Models
 
         public IEnumerable<Car.Car> Cars { get; set; }
 
-        public IEnumerable<BaseRequest> BaseRequests { get; set; }
-
         // Audit info
         public DateTime CreatedOn { get; set; }
 
@@ -51,5 +48,7 @@ namespace AutoXen.Data.Models
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+        // TODO Add request collections
     }
 }

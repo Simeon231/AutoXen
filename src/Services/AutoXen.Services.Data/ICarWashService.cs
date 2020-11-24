@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using AutoXen.Data.Models.CarWash;
     using AutoXen.Web.ViewModels;
 
     public interface ICarWashService
@@ -11,6 +12,6 @@
 
         public Task AddCarWashRequestAsync(CarWashRequestViewModel model, string userId);
 
-        public IEnumerable<CarWashRequestViewModel> GetAllRequests(string userId);
+        public IEnumerable<CarWashRequest> GetAllRequests(string userId);
     }
 }

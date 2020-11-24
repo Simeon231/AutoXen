@@ -11,6 +11,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201124141137_ChangeNameOfRequest.cs" />
+    <Compile Remove="Migrations\20201124141137_ChangeNameOfRequest.Designer.cs" />
+    <Compile Remove="Migrations\20201124141333_ChangeNameOfRequest.cs" />
+    <Compile Remove="Migrations\20201124141333_ChangeNameOfRequest.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
 

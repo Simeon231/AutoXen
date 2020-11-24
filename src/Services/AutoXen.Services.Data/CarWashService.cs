@@ -9,8 +9,8 @@
     using AutoXen.Data.Common.Repositories;
     using AutoXen.Data.Models.Car;
     using AutoXen.Data.Models.CarWash;
-    using AutoXen.Data.Models.Enums;
     using AutoXen.Web.ViewModels;
+    using Microsoft.EntityFrameworkCore;
 
     public class CarWashService : ICarWashService
     {
@@ -51,9 +51,7 @@
             }
 
             var dbRequest = this.mapper.Map<CarWashRequest>(model);
-            dbRequest.BaseRequest.CarId = model.CarId;
-            dbRequest.BaseRequest.UserId = userId;
-            dbRequest.BaseRequest.RequestName = RequestName.CarWash;
+            dbRequest.UserId = userId;
             await this.carWashRequestRepository.AddAsync(dbRequest);
 
             await this.carWashRequestRepository.SaveChangesAsync();
@@ -71,9 +69,9 @@
                 .ToList();
         }
 
-        public IEnumerable<CarWashRequestViewModel> GetAllRequests(string userId)
+        public IEnumerable<CarWashRequest> GetAllRequests(string userId)
         {
-            throw new NotImplementedException();
+            return this.carWashRequestRepository.AllAsNoTracking().Include(x => x.Car).Where(x => x.UserId == userId).ToList();
         }
     }
 }

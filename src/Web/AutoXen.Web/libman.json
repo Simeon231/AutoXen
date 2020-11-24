@@ -58,6 +58,12 @@
         "css/all.css",
         "css/all.min.css"
       ]
+    },
+    {
+      "library": "moment.js@2.29.1",
+      "provider": "cdnjs",
+      "destination": "wwwroot/lib/momentJs",
+      "files": ["moment-with-locales.min.js"]
     }
   ]
 }

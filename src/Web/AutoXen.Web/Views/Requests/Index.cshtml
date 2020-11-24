@@ -1,21 +1,35 @@
 ﻿@model IEnumerable<AutoXen.Web.ViewModels.Requests.RequestViewModel>
 
-<h3>Your Requests</h3>
+<h4 class="text-center mb-3">Your Requests</h4>
 
-<table class="table table-active">
+<table class="table table-hover border border-dark table-bordered">
     <thead class="thead-dark">
         <tr>
             <th >
                 Your car
             </th>
             <th>
-                Request type
+                Created on
             </th>
             <th>
-                <a class="btn btn-outline-info">Info</a>
+                Request type
+            </th>
+            <th class="text-center">
+                Info
             </th>
         </tr>
     </thead>
     <tbody>
+        @if(Model != null){
+            @foreach (var request in Model)
+            {
+                <tr>
+                    <td>@($"Brand: {request.Car.Brand} - Model: {request.Car.Model} - {request.Car.RegistrationPlate}")</td>
+                    <td name="date">@request.CreatedOn</td>
+                    <td>@request.RequestName</td>
+                    <td class="text-center"><a class="btn btn-outline-info">Info</a></td>
+                </tr>
+            }
+        }
     </tbody>
 </table>

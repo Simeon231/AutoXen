@@ -1,6 +1,4 @@
-﻿// TODO: Change namespace to all enums
-
-namespace AutoXen.Data.Models.Enums
+﻿namespace AutoXen.Data.Models.Enums
 {
     using System.ComponentModel.DataAnnotations;
 

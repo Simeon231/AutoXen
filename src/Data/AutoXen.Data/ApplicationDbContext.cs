@@ -31,10 +31,7 @@
 
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
 
-        public DbSet<BaseRequest> BaseRequests { get; set; }
-
-        public DbSet<Message> Messages { get; set; }
-
+        // public DbSet<Message> Messages { get; set; }
         public DbSet<Car> Cars { get; set; }
 
         public DbSet<OtherCarUser> OtherCarUsers { get; set; }
@@ -100,19 +97,6 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            // TODO: move to configurations
-            builder
-                .Entity<BaseRequest>()
-                .HasOne<ApplicationUser>("AcceptedBy")
-                .WithMany()
-                .HasForeignKey("AcceptedById");
-
-            builder
-                .Entity<BaseRequest>()
-                .HasOne<ApplicationUser>("User")
-                .WithMany("BaseRequests")
-                .HasForeignKey("UserId");
-
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
 

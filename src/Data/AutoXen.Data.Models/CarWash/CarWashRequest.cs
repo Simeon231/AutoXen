@@ -1,17 +1,17 @@
 ﻿namespace AutoXen.Data.Models.CarWash
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class CarWashRequest
+    using AutoXen.Data.Common.Models;
+
+    public class CarWashRequest : BaseDeletableModel<string>, IRequest
     {
         public CarWashRequest()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.BaseRequest = new BaseRequest();
         }
-
-        public string Id { get; set; }
 
         [Required]
         public string PickUpLocation { get; set; }
@@ -28,13 +28,26 @@
 
         public bool ReturnedCar { get; set; }
 
-        [Required]
-        public string BaseRequestId { get; set; }
-
-        public BaseRequest BaseRequest { get; set; }
-
         public int? CarWashId { get; set; }
 
         public CarWash CarWash { get; set; }
+
+        public string AcceptedById { get; set; }
+
+        public ApplicationUser AcceptedBy { get; set; }
+
+        [Required]
+        public string UserId { get; set; }
+
+        public ApplicationUser User { get; set; }
+
+        [Required]
+        public string CarId { get; set; }
+
+        public Car.Car Car { get; set; }
+
+        public DateTime? FinishedOn { get; set; }
+
+        // public ICollection<Message> Messages { get; set; }
     }
 }
