@@ -56,7 +56,7 @@
         {
             var maxPrice = 100.0;
 
-            return new Random().NextDouble() * maxPrice;
+            return Math.Round(new Random().NextDouble() * maxPrice, 2);
         }
     }
 }

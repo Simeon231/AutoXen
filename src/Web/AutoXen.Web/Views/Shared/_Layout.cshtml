@@ -23,28 +23,28 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Home</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index" asp-area=""><i class="fas fa-home"></i> Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="About"><i class="fas fa-info-circle"></i> About</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="About" asp-area=""><i class="fas fa-info-circle"></i> About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Car" asp-action="All"><i class="fas fa-car"></i> My Cars</a>
+                            <a class="nav-link text-dark" asp-controller="Car" asp-action="All" asp-area=""><i class="fas fa-car"></i> My Cars</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-people-carry"></i> Маке Request
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" asp-controller="CarWash" asp-action="Create"><i class="fas fa-soap"></i> Car wash</a>
+                                <a class="dropdown-item" asp-controller="CarWash" asp-action="Create" asp-area=""><i class="fas fa-soap"></i> Car wash</a>
                                 <a class="dropdown-item" href="#"><i class="fas fa-shield-alt"></i> Insurence</a>
                                 <a class="dropdown-item" href="#"><i class="fas fa-car-crash"></i> Roadside assistance</a>
-                                <a class="dropdown-item" asp-controller="Workshops" asp-action="Index"><i class="fas fa-tools"></i> Workshop</a>
+                                <a class="dropdown-item" asp-controller="Workshops" asp-action="Index" asp-area=""><i class="fas fa-tools"></i> Workshop</a>
                                 <a class="dropdown-item" href="#"><i class="fas fa-tasks"></i> Annual technical inspection</a>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Requests" asp-action="Index"><i class="fas fa-people-carry"></i> Requests</a>
+                            <a class="nav-link text-dark" asp-controller="Requests" asp-action="Index" asp-area=""><i class="fas fa-people-carry"></i> Requests</a>
                         </li>
                     </ul>
                 </div>
@@ -61,7 +61,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-controller="Home" asp-action="About">About</a>
+            @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-controller="Home" asp-action="About" asp-area="">About</a>
         </div>
     </footer>
 

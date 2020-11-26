@@ -37,7 +37,7 @@
                 </div>
             </div>
 
-            <div class="mb-4 mt-1 d-flex justify-content-center">
+            <div class="mb-2 mt-1 d-flex justify-content-center">
                 <select class="js-example-basic-multiple col-md-9 form-control" asp-for="@Model.ServiceIds" multiple="multiple">
                     @foreach (var service in Model.Services)
                     {
@@ -48,6 +48,18 @@
                 </select>
             </div>
 
+            @*TODO add other service by user*@
+                <div class="pb-4 d-flex justify-content-center">
+                    <div class="col-md-10">
+                        <div class="text-center">
+                            <label class="col-form-label" asp-for="CarId"></label>
+                            <textarea class="form-control" asp-for="CarId" rows="4"> </textarea>
+                            <span asp-validation-for="CarId" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+
             <div class="row">
                 <div class="col text-center">
                     <button type="submit" class="btn btn-success">Submit</button>
@@ -55,9 +67,9 @@
             </div>
         </div>
 
-        <div class="col-md-4">
-            <label class="col-form-label text-center">Write your message</label>
-            <textarea class="form-control input-group" rows="20"></textarea>
+            <div class="col-md-4">
+                <label class="col-form-label text-center">Write your message</label>
+                <textarea class="form-control input-group" rows="20"></textarea>
+            </div>
         </div>
-    </div>
 </form>
