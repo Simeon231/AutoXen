@@ -9,7 +9,7 @@
     using AutoXen.Data.Models;
     using AutoXen.Data.Repositories;
     using AutoXen.Data.Seeding;
-    using AutoXen.Services;
+    using AutoXen.Services.Data;
     using AutoXen.Services.Data.Requests;
     using AutoXen.Services.Mapping;
     using AutoXen.Services.Messaging;
@@ -70,6 +70,7 @@
             services.AddTransient<ICarService, CarService>();
             services.AddTransient<ICarWashService, CarWashService>();
             services.AddTransient<IRequestsService, RequestsService>();
+            services.AddTransient<IWorkshopService, WorkshopService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

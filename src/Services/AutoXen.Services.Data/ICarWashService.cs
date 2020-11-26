@@ -1,4 +1,4 @@
-﻿namespace AutoXen.Services
+﻿namespace AutoXen.Services.Data
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;

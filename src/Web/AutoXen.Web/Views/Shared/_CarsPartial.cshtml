@@ -1,0 +1,21 @@
+﻿@model IEnumerable<CarViewModel>
+
+<div class="pb-4">
+    <div class="form-row d-flex justify-content-center ">
+        <label class="col-form-label" for="CarId">Pick your car</label>
+    </div>
+    <div class="form-row d-flex justify-content-center">
+        <div class="col-lg-10">
+            <select class="form-control" name="CarId">
+                <option hidden>Pick your car</option>
+                @foreach (CarViewModel car in Model)
+                {
+                    var name = $"Brand: {car.Brand} - Model: {car.Model} - Registration plate: {car.RegistrationPlate}";
+                    <option value="@car.Id">
+                        @name
+                    </option>
+                }
+            </select>
+        </div>
+    </div>
+</div>

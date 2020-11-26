@@ -12,13 +12,25 @@
         public WorkshopRequest()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.WorkshopRequestServices = new HashSet<WorkshopRequestServices>();
         }
 
         public bool CarDone { get; set; }
 
-        public int WorkshopServiceId { get; set; }
+        [Required]
+        public string PickUpLocation { get; set; }
 
-        public WorkshopService WorkshopService { get; set; }
+        public bool PickUpFastAsPossible { get; set; }
+
+        public bool AdminChooseWorkshop { get; set; }
+
+        public DateTime? PickUpTime { get; set; }
+
+        public bool PickedUp { get; set; }
+
+        public bool ReturnedCar { get; set; }
+
+        public ICollection<WorkshopRequestServices> WorkshopRequestServices { get; set; }
 
         public string AcceptedById { get; set; }
 

@@ -1,4 +1,4 @@
-﻿namespace AutoXen.Services
+﻿namespace AutoXen.Services.Data
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -10,8 +10,6 @@
         public Task AddCarAsync(string userId, DetailedCarWithoutIdViewModel model);
 
         public IEnumerable<CarViewModel> AllCars(string userId);
-
-        ////public Dictionary<string, string> AllCars(string userId);
 
         public IEnumerable<ExtraViewModel> GetAllExtras();
 

@@ -4,14 +4,16 @@ using AutoXen.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AutoXen.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201125162206_AddWorkshopRequestServiceTable")]
+    partial class AddWorkshopRequestServiceTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -942,7 +944,6 @@ namespace AutoXen.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("WorkshopRequestId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("WorkshopServiceId")
@@ -1283,9 +1284,7 @@ namespace AutoXen.Data.Migrations
                 {
                     b.HasOne("AutoXen.Data.Models.Workshop.WorkshopRequest", "WorkshopRequest")
                         .WithMany("WorkshopRequestServices")
-                        .HasForeignKey("WorkshopRequestId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("WorkshopRequestId");
 
                     b.HasOne("AutoXen.Data.Models.Workshop.WorkshopService", "WorkshopService")
                         .WithMany()

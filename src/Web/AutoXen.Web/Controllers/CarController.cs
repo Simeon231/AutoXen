@@ -3,7 +3,7 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
 
-    using AutoXen.Services;
+    using AutoXen.Services.Data;
     using AutoXen.Web.ViewModels;
     using Microsoft.AspNetCore.Mvc;
 

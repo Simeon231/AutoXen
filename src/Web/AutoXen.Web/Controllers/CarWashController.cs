@@ -4,8 +4,9 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
 
-    using AutoXen.Services;
+    using AutoXen.Services.Data;
     using AutoXen.Web.ViewModels;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +23,7 @@
             this.carService = carService;
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -30,7 +32,7 @@
             return this.View(carWash);
         }
 
-        // TODO: [Authorize] [ValidateAntiForgeryToken]
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> Create(CarWashRequestViewModel model)
         {
@@ -42,6 +44,7 @@
                 return this.View(carWash);
             }
 
+            // TODO add better Exception
             try
             {
                 await this.carWashService.AddCarWashRequestAsync(model, userId);
@@ -55,13 +58,14 @@
             return this.Redirect("/");
         }
 
+        [Authorize]
         public ActionResult Edit(int id)
         {
             return this.View();
         }
 
-        // TODO: [ValidateAntiForgeryToken]
         [HttpPost]
+        [Authorize]
         public ActionResult Edit(int id, IFormCollection collection)
         {
             return null;

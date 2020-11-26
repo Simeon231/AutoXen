@@ -1,4 +1,4 @@
-﻿namespace AutoXen.Services
+﻿namespace AutoXen.Services.Data
 {
     using System;
     using System.Collections.Generic;
@@ -40,9 +40,9 @@
                 throw new NullReferenceException("Invalid car");
             }
 
-            if (model.PickUpFastAsPossible)
+            if (model.PickUp.FastAsPossible)
             {
-                model.PickUpTime = null;
+                model.PickUp.Time = null;
             }
 
             if (model.AdminChooseCarWash)

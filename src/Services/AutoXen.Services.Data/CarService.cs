@@ -1,4 +1,4 @@
-﻿namespace AutoXen.Services
+﻿namespace AutoXen.Services.Data
 {
     using System;
     using System.Collections.Generic;
@@ -50,16 +50,6 @@
 
             return cars;
         }
-
-        ////public Dictionary<string, string> AllCars(string userId)
-        ////{
-        ////    var cars = this.carRepository.AllAsNoTracking()
-        ////        .Where(x => x.UserId == userId)
-        ////        .OrderByDescending(x => x.CreatedOn)
-        ////        .ToDictionary(x => x.Id, y => $"Brand: {y.Brand} - Model: {y.Model} - Registration plate: {y.RegistrationPlate}");
-
-        ////    return cars;
-        ////}
 
         public IEnumerable<ExtraViewModel> GetAllExtras()
         {

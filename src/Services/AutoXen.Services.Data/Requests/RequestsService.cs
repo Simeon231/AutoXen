@@ -10,6 +10,7 @@
     using AutoXen.Data.Models.Insurance;
     using AutoXen.Data.Models.RoadsideAssistance;
     using AutoXen.Data.Models.Workshop;
+    using AutoXen.Services.Data;
     using AutoXen.Web.ViewModels.Requests;
 
     public class RequestsService : IRequestsService

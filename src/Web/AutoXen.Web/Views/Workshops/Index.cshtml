@@ -1,13 +1,63 @@
-﻿<h1>Workshop</h1>
-<hr />
-<select class="js-example-basic-multiple col-md-8" name="states[]" multiple="multiple">
-    <option value="AL">Alabama</option>
-    ...
-    <option value="WY">Wyoming</option>
+﻿@using AutoXen.Services.Data
+@using AutoXen.Web.ViewModels.Workshop 
+@model WorkshopRequestViewModel
+@inject ICarWashService washService
+@inject ICarService carService
 
-    <option value="as">assa</option>
+<form method="post">
+    <div class="form-row">
+        <div class="col-md-8">
+            <div asp-validation-summary="All" class="text-danger"></div>
 
-    <option value="123">123</option>
+            <partial name="_CarsPartial" model="@Model.Cars" />
 
-    <option value="TTT">TTT</option>
-</select>
+            <partial name="_PickUpPartial" model="@Model.PickUp" />
+
+            <div class="form-row pb-4 d-flex justify-content-center">
+                <div class="p-1 border col-sm-4">
+                    <div class="text-center">
+                        <label class="col-form-label" asp-for="AdminChooseWorkshop"></label>
+                        <input checked onchange="EnableDisableWorkshops(this)" class="form-check-inline" asp-for="AdminChooseWorkshop" onclick="GetAllServices()" />
+                        <span asp-validation-for="AdminChooseWorkshop" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row d-flex justify-content-center">
+                <div class="col-md-9 form-group">
+                    <select disabled class="form-control" name="WorkshopId" id="workshops" onchange="GetWorkshopServices(this)">
+                        <option id="hiddenValue" hidden disabled selected>Pick a workshop</option>
+                        @foreach (var workshop in Model.Workshops)
+                        {
+                            <option data-select2 value="@workshop.Id">
+                                @($"Name: {workshop.Name} - Address: {workshop.Address}")
+                            </option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-4 mt-1 d-flex justify-content-center">
+                <select class="js-example-basic-multiple col-md-9 form-control" asp-for="@Model.ServiceIds" multiple="multiple">
+                    @foreach (var service in Model.Services)
+                    {
+                        <option data-select2 value="@service.Id">
+                            @($"{service.Name}")
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <div class="row">
+                <div class="col text-center">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <label class="col-form-label text-center">Write your message</label>
+            <textarea class="form-control input-group" rows="20"></textarea>
+        </div>
+    </div>
+</form>

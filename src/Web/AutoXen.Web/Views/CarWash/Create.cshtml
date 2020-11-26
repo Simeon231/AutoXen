@@ -1,4 +1,4 @@
-﻿@using AutoXen.Services
+﻿@using AutoXen.Services.Data
 @model CarWashRequestViewModel
 @inject ICarWashService washService
 @inject ICarService carService
@@ -6,63 +6,18 @@
 <form method="post">
     <div class="row">
         <div class="col-md-8">
-            <div class="offset-1 col-md-10">
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="text-center">
-                    <label class="col-form-label">Pick your car</label>
-                </div>
-                @*<select class="form-control" asp-for="@Model.CarId" asp-items="@(new SelectList(Model.Cars.Values.ToList(), Model.Cars.Keys.ToList()))">
-                    <option hidden>Choose a car</option>
-                </select>*@
-                <select class="form-control" name="CarId">
-                    <option hidden>Pick your car</option>
-                    @foreach (CarViewModel car in Model.Cars)
-                    {
-                        var name = $"Brand: {car.Brand} - Model: {car.Model} - Registration plate: {car.RegistrationPlate}";
-                        <option value="@car.Id">
-                            @name
-                        </option>
-                    }
-                </select>
-            </div>
+            <div asp-validation-summary="All" class="text-danger"></div>
 
-            <br />
+            <partial name="_CarsPartial" model="@Model.Cars" />
 
-            <div class="form-row">
-                <div class="list-group-item col-md-4 offset-4">
-                    <div class="text-center">
-                        <label class="col-form-label" asp-for="PickUpFastAsPossible"></label>
-                        <input class="form-check-inline" asp-for="PickUpFastAsPossible" id="pickUpFastAsPossible" />
-                        <span asp-validation-for="PickUpFastAsPossible" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-
-            <br />
-
-            <div class="form-row">
-                <div class="col-md-6">
-                    <div class="text-center">
-                        <label class="col-form-label" asp-for="PickUpLocation"></label>
-                        <input class="input-group form-control" asp-for="PickUpLocation" />
-                        <span asp-validation-for="PickUpLocation" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="text-center">
-                        <label class="col-form-label" asp-for="PickUpTime"></label>
-                        <input class="input-group form-control" asp-for="PickUpTime" id="pickUpTime" />
-                        <span asp-validation-for="PickUpTime" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
+            <partial name="_PickUpPartial" model="@Model.PickUp" />
 
             <br />
             <div class="form-row">
                 <div class="list-group-item col-md-4 offset-4">
                     <div class="text-center">
                         <label class="col-form-label" asp-for="AdminChooseCarWash"></label>
-                        <input class="form-check-inline" asp-for="AdminChooseCarWash" id="adminChooseCarWash" />
+                        <input class="form-check-inline" asp-for="AdminChooseCarWash"/>
                         <span asp-validation-for="AdminChooseCarWash" class="text-danger"></span>
                     </div>
                 </div>

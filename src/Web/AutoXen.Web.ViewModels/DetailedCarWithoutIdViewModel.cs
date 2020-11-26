@@ -8,6 +8,7 @@
     using AutoXen.Services.Mapping;
     using AutoXen.Web.ViewModels.Validation_Atributes;
 
+    // TODO remove interfaces, move all view models to folders and delete Mapping
     public class DetailedCarWithoutIdViewModel : IMapFrom<Car>
     {
         [Required]
