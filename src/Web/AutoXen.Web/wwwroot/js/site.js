@@ -7,17 +7,20 @@ if (deleteBtn != null) {
 }
 
 var pickUpFastAsPossible = document.getElementById('FastAsPossible');
-var pickUpTime = document.getElementsByName('PickUpTime')[0];
 
-pickUpFastAsPossible.addEventListener('click', (event) => {
-    if (pickUpFastAsPossible.checked == true) {
-        pickUpTime.value = null;
-        pickUpTime.disabled = true;
-    }
-    else {
-        pickUpTime.disabled = false;
-    }
-});
+if (pickUpFastAsPossible != null) {
+    pickUpFastAsPossible.addEventListener('click', (event) => {
+        var pickUpTime = document.getElementsByName('PickUpTime')[0];
+
+        if (pickUpFastAsPossible.checked == true) {
+            pickUpTime.value = null;
+            pickUpTime.disabled = true;
+        }
+        else {
+            pickUpTime.disabled = false;
+        }
+    });
+}
 
 // Disable/Enable workshops on click
 function EnableDisableWorkshops(btn) {
