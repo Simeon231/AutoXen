@@ -1,9 +1,6 @@
 ﻿namespace AutoXen.Web.ViewModels
 {
-    using AutoXen.Data.Models.Car;
-    using AutoXen.Services.Mapping;
-
-    public class ExtraViewModel : IMapFrom<Extra>
+    public class ExtraViewModel
     {
         public string Name { get; set; }
 

@@ -3,13 +3,11 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using AutoXen.Data.Models.Car;
     using AutoXen.Data.Models.Enums;
-    using AutoXen.Services.Mapping;
     using AutoXen.Web.ViewModels.Validation_Atributes;
 
     // TODO remove interfaces, move all view models to folders and delete Mapping
-    public class DetailedCarWithoutIdViewModel : IMapFrom<Car>
+    public class DetailedCarWithoutIdViewModel
     {
         [Required]
         [MinLength(2)]

@@ -9,7 +9,7 @@
     using AutoXen.Web.ViewModels.Common;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-    public class CarWashRequestViewModel : IMapFrom<CarWashRequest>
+    public class CarWashRequestViewModel
     {
         [Required]
         public string CarId { get; set; }

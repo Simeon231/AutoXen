@@ -3,7 +3,7 @@
     using AutoXen.Data.Models.CarWash;
     using AutoXen.Services.Mapping;
 
-    public class CarWashViewModel : IMapFrom<CarWash>
+    public class CarWashViewModel
     {
         public int Id { get; set; }
 

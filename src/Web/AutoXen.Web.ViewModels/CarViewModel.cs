@@ -5,7 +5,7 @@
     using AutoXen.Data.Models.Car;
     using AutoXen.Services.Mapping;
 
-    public class CarViewModel : IMapFrom<Car>
+    public class CarViewModel
     {
         [Required]
         public string Id { get; set; }
