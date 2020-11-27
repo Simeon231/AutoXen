@@ -71,7 +71,11 @@
 
         public IEnumerable<CarWashRequest> GetAllRequests(string userId)
         {
-            return this.carWashRequestRepository.AllAsNoTracking().Include(x => x.Car).Where(x => x.UserId == userId).ToList();
+            return this.carWashRequestRepository
+                .AllAsNoTracking()
+                .Include(x => x.Car)
+                .Where(x => x.UserId == userId)
+                .ToList();
         }
     }
 }

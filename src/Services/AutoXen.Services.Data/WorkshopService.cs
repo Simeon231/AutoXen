@@ -87,34 +87,13 @@
             }
         }
 
-        public WorkshopRequestViewModel GetWorkshopServices(string userId)
+        public IEnumerable<WorkshopRequest> GetWorkshopRequests(string userId)
         {
-            ////var viewModel = new WorkshopRequestViewModel
-            ////{
-            ////    WorkshopsServices = this.workshopServiceRepository
-            ////    .AllAsNoTracking()
-            ////    .Include(x => x.Workshop)
-            ////    .Include(x => x.Service)
-            ////    .Select(x => this.mapper.Map<WorkshopServiceViewModel>(x))
-            ////    .ToList(),
-
-            ////    Cars = this.carsRepository
-            ////    .AllAsNoTracking()
-            ////    .Where(x => x.UserId == userId)
-            ////    .Select(x => this.mapper.Map<CarViewModel>(x))
-            ////    .ToList(),
-
-            ////    Workshops = this.workshopRepository
-            ////    .AllAsNoTracking()
-            ////    .Select(x => this.mapper.Map<WorkshopViewModel>(x))
-            ////    .ToList(),
-
-            ////    Services = this.GetAllServices(),
-            ////};
-
-            ////return viewModel;
-
-            return null;
+            return this.workshopRequestRepository
+                .AllAsNoTracking()
+                .Include(x => x.Car)
+                .Where(x => x.UserId == userId)
+                .ToList();
         }
 
         public IEnumerable<WorkshopViewModel> GetAllWorkshops()

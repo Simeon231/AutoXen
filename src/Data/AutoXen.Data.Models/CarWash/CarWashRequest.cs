@@ -48,6 +48,11 @@
 
         public DateTime? FinishedOn { get; set; }
 
-        // public ICollection<Message> Messages { get; set; }
+        //// public ICollection<Message> Messages { get; set; }
+
+        public override string ToString()
+        {
+            return "Car wash";
+        }
     }
 }

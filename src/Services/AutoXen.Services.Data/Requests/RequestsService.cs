@@ -22,6 +22,7 @@
         private readonly IDeletableEntityRepository<InsurersRequest> insurersRequestRepository;
         private readonly IDeletableEntityRepository<RoadsideAssistanceRequest> roadsideAssistanceRequestRepository;
         private readonly ICarWashService carWashService;
+        private readonly IWorkshopService workshopService;
         private readonly IMapper mapper;
 
         public RequestsService(
@@ -31,6 +32,7 @@
             IDeletableEntityRepository<InsurersRequest> insurersRequestRepository,
             IDeletableEntityRepository<RoadsideAssistanceRequest> roadsideAssistanceRequestRepository,
             ICarWashService carWashService,
+            IWorkshopService workshopService,
             IMapper mapper)
         {
             this.carWashRequestRepository = carWashRequestRepository;
@@ -39,6 +41,7 @@
             this.insurersRequestRepository = insurersRequestRepository;
             this.roadsideAssistanceRequestRepository = roadsideAssistanceRequestRepository;
             this.carWashService = carWashService;
+            this.workshopService = workshopService;
             this.mapper = mapper;
         }
 
@@ -46,13 +49,10 @@
         {
             var requests = new List<RequestViewModel>();
 
-            var dbCarWashRequests = this.carWashService.GetAllRequests(userId);
-            foreach (var carWashRequest in dbCarWashRequests)
-            {
-                var model = this.mapper.Map<RequestViewModel>(carWashRequest);
-                model.RequestName = this.carWashName;
-                requests.Add(model);
-            }
+            requests.AddRange(this.carWashService.GetAllRequests(userId).Select(x => this.mapper.Map<RequestViewModel>(x)));
+            requests.AddRange(this.workshopService.GetWorkshopRequests(userId).Select(x => this.mapper.Map<RequestViewModel>(x)));
+
+            requests.OrderByDescending(x => x.CreatedOn);
 
             return requests.OrderByDescending(x => x.CreatedOn);
         }
