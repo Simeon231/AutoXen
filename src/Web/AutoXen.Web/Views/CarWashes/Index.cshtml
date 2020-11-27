@@ -1,14 +1,13 @@
 ﻿@using AutoXen.Services.Data
 @model CarWashRequestViewModel
 @inject ICarWashService washService
-@inject ICarService carService
 
 <form method="post">
     <div class="row">
         <div class="col-md-8">
             <div asp-validation-summary="All" class="text-danger"></div>
 
-            <partial name="_CarsPartial" model="@Model.Cars" />
+            <partial name="_CarsPartial" model="@Model.CarId" />
 
             <partial name="_PickUpPartial" model="@Model.PickUp" />
 
@@ -17,7 +16,14 @@
                 <div class="list-group-item col-md-4 offset-4">
                     <div class="text-center">
                         <label class="col-form-label" asp-for="AdminChooseCarWash"></label>
-                        <input class="form-check-inline" asp-for="AdminChooseCarWash"/>
+                        @if (Model.CarWashId == null)
+                        {
+                            <input checked class="form-check-inline" asp-for="AdminChooseCarWash" />
+                        }
+                        else
+                        {
+                            <input class="form-check-inline" asp-for="AdminChooseCarWash" />
+                        }
                         <span asp-validation-for="AdminChooseCarWash" class="text-danger"></span>
                     </div>
                 </div>
@@ -27,10 +33,18 @@
             <div class="form-row">
                 @foreach (var carWash in washService.GetAllCarWashes())
                 {
-                    <div class="col-md-4 form-check">
-                        <input type="radio" class="form-check-input" value="@carWash.Id" name="CarWashId" />
-                        <label class="form-check-label" for="@carWash.Id">@carWash.Name</label>
-                    </div>
+
+                <div class="col-md-4 form-check">
+                    @if (Model.CarWashId != null && Model.CarWashId == carWash.Id)
+                    {
+                        <input type="radio" checked class="form-check-input" value="@carWash.Id" name="CarWashId" id="@carWash.Id"/>
+                    }
+                    else
+                    {
+                        <input type="radio" class="form-check-input" value="@carWash.Id" name="CarWashId" id="@carWash.Id"/>
+                    }
+                    <label class="form-check-label" for="@carWash.Id">@carWash.Name</label>
+                </div>
                 }
             </div>
             <br />

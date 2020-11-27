@@ -1,4 +1,9 @@
-﻿@model IEnumerable<CarViewModel>
+﻿@using AutoXen.Services.Data
+@using Microsoft.AspNetCore.Identity
+@using AutoXen.Data.Models
+@inject ICarService carService
+@inject UserManager<ApplicationUser> user
+@model string
 
 <div class="pb-4">
     <div class="form-row d-flex justify-content-center ">
@@ -7,13 +12,21 @@
     <div class="form-row d-flex justify-content-center">
         <div class="col-lg-10">
             <select class="form-control" name="CarId">
-                <option hidden>Pick your car</option>
-                @foreach (CarViewModel car in Model)
+                @foreach (CarViewModel car in this.carService.AllCars(user.GetUserId(this.User)))
                 {
                     var name = $"Brand: {car.Brand} - Model: {car.Model} - Registration plate: {car.RegistrationPlate}";
-                    <option value="@car.Id">
-                        @name
-                    </option>
+                    if (car.Id == Model)
+                    {
+                        <option selected value="@car.Id">
+                            @name
+                        </option>
+                    }
+                    else
+                    {
+                        <option value="@car.Id">
+                            @name
+                        </option>
+                    }
                 }
             </select>
         </div>

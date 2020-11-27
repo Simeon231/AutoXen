@@ -76,6 +76,8 @@
 
         public DbSet<WService> WServices { get; set; }
 
+        public DbSet<WorkshopRequestServices> WorkshopRequestServices { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

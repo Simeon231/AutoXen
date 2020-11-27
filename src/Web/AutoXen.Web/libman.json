@@ -17,7 +17,9 @@
         "dist/css/bootstrap.css",
         "dist/css/bootstrap.min.css",
         "dist/js/bootstrap.js",
-        "dist/js/bootstrap.min.js"
+        "dist/js/bootstrap.min.js",
+        "dist/js/bootstrap.min.js.map",
+        "dist/css/bootstrap.min.css.map"
       ]
     },
     {
@@ -63,7 +65,11 @@
       "library": "moment.js@2.29.1",
       "provider": "cdnjs",
       "destination": "wwwroot/lib/momentJs",
-      "files": [ "moment-with-locales.min.js" ]
+      "files": [
+        "moment-with-locales.min.js",
+        "moment-with-locales.min.js.map"
+
+      ]
     },
     {
       "library": "select2@4.0.13",

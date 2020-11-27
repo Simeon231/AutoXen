@@ -1,15 +1,14 @@
-﻿@using AutoXen.Services.Data
-@using AutoXen.Web.ViewModels.Workshop 
+﻿@using AutoXen.Web.ViewModels.Workshop
+@using AutoXen.Services.Data
 @model WorkshopRequestViewModel
-@inject ICarWashService washService
-@inject ICarService carService
+@inject IWorkshopService workshopService
 
 <form method="post">
     <div class="form-row">
         <div class="col-md-8">
             <div asp-validation-summary="All" class="text-danger"></div>
 
-            <partial name="_CarsPartial" model="@Model.Cars" />
+            <partial name="_CarsPartial" model="Model.CarId" />
 
             <partial name="_PickUpPartial" model="@Model.PickUp" />
 
@@ -17,7 +16,7 @@
                 <div class="p-1 border col-sm-4">
                     <div class="text-center">
                         <label class="col-form-label" asp-for="AdminChooseWorkshop"></label>
-                        <input checked onchange="EnableDisableWorkshops(this)" class="form-check-inline" asp-for="AdminChooseWorkshop" onclick="GetAllServices()" />
+                        <input onchange="EnableDisableWorkshops(this)" class="form-check-inline" asp-for="AdminChooseWorkshop" onclick="GetAllServices()" />
                         <span asp-validation-for="AdminChooseWorkshop" class="text-danger"></span>
                     </div>
                 </div>
@@ -25,9 +24,9 @@
 
             <div class="form-row d-flex justify-content-center">
                 <div class="col-md-9 form-group">
-                    <select disabled class="form-control" name="WorkshopId" id="workshops" onchange="GetWorkshopServices(this)">
+                    <select class="form-control" asp-for="WorkshopId" onchange="GetWorkshopServices(this)">
                         <option id="hiddenValue" hidden disabled selected>Pick a workshop</option>
-                        @foreach (var workshop in Model.Workshops)
+                        @foreach (var workshop in this.workshopService.GetAllWorkshops())
                         {
                             <option data-select2 value="@workshop.Id">
                                 @($"Name: {workshop.Name} - Address: {workshop.Address}")
@@ -38,27 +37,46 @@
             </div>
 
             <div class="mb-2 mt-1 d-flex justify-content-center">
-                <select class="js-example-basic-multiple col-md-9 form-control" asp-for="@Model.ServiceIds" multiple="multiple">
-                    @foreach (var service in Model.Services)
+                <select class="js-example-basic-multiple col-md-9 form-control" asp-for="@Model.Ids" multiple="multiple">
+                    @if (Model.WorkshopId != 0)
                     {
-                        <option data-select2 value="@service.Id">
-                            @($"{service.Name}")
-                        </option>
+                        @foreach (var service in this.workshopService.GetServicesByWorkshopId(Model.WorkshopId))
+                        {
+                            if (Model.Ids.Contains(service.Id))
+                            {
+                                <option selected data-select2 value="@service.Id">
+                                    @($"{service.ServiceName} - {service.Price}")
+                                </option>
+                            }
+                            else
+                            {
+                                <option data-select2 value="@service.Id">
+                                    @($"{service.ServiceName} - {service.Price}")
+                                </option>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        @foreach (var service in this.workshopService.GetAllServices())
+                        {
+                            <option data-select2 value="@service.Id">
+                                @($"{service.Name}")
+                            </option>
+                        }
                     }
                 </select>
             </div>
 
-            @*TODO add other service by user*@
-                <div class="pb-4 d-flex justify-content-center">
-                    <div class="col-md-10">
-                        <div class="text-center">
-                            <label class="col-form-label" asp-for="CarId"></label>
-                            <textarea class="form-control" asp-for="CarId" rows="4"> </textarea>
-                            <span asp-validation-for="CarId" class="text-danger"></span>
-                        </div>
+            <div class="pb-4 d-flex justify-content-center">
+                <div class="col-md-10">
+                    <div class="text-center">
+                        <label class="col-form-label" asp-for="OtherServices"></label>
+                        <textarea class="form-control" asp-for="OtherServices" rows="4"> </textarea>
+                        <span asp-validation-for="OtherServices" class="text-danger"></span>
                     </div>
                 </div>
-
+            </div>
 
             <div class="row">
                 <div class="col text-center">
@@ -67,9 +85,11 @@
             </div>
         </div>
 
-            <div class="col-md-4">
-                <label class="col-form-label text-center">Write your message</label>
-                <textarea class="form-control input-group" rows="20"></textarea>
-            </div>
+        <div class="col-md-4">
+            <label class="col-form-label text-center">Write your message</label>
+            <textarea class="form-control input-group" rows="20"></textarea>
         </div>
+    </div>
 </form>
+
+<script src="~/js/workshop.js"></script>

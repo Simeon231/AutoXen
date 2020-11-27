@@ -19,6 +19,8 @@
     <Compile Remove="Migrations\20201125155334_ChangeTypeOfWorkshopServices.Designer.cs" />
     <Compile Remove="Migrations\20201125161840_AddWorkshopRequestServiceTable.cs" />
     <Compile Remove="Migrations\20201125161840_AddWorkshopRequestServiceTable.Designer.cs" />
+    <Compile Remove="Migrations\20201127133002_RemoveWorkshopRequestServiceAndAddWorkshopRequestOtherServices.cs" />
+    <Compile Remove="Migrations\20201127133002_RemoveWorkshopRequestServiceAndAddWorkshopRequestOtherServices.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

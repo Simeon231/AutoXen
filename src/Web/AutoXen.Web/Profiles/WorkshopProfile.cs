@@ -19,6 +19,9 @@
 
             this.CreateMap<WService, ServiceModel>()
                 .ReverseMap();
+
+            this.CreateMap<WorkshopRequest, WorkshopRequestViewModel>()
+                .ReverseMap();
         }
     }
 }

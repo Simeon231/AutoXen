@@ -5,7 +5,7 @@
         <div class="p-1 border col-sm-5">
             <div class="text-center">
                 <label class="col-form-label" asp-for="FastAsPossible"></label>
-                <input class="form-check-inline" asp-for="FastAsPossible" name="PickUp.FastAsPossible" checked/>
+                <input class="form-check-inline" asp-for="FastAsPossible" name="PickUp.FastAsPossible" />
                 <span asp-validation-for="FastAsPossible" class="text-danger"></span>
             </div>
         </div>
@@ -15,16 +15,18 @@
         <div class="col-md-6">
             <div class="text-center">
                 <label class="col-form-label" asp-for="Location"></label>
-                <input class="input-group form-control" asp-for="Location" name="PickUp.Location"/>
+                <input class="input-group form-control" asp-for="Location" name="PickUp.Location" />
                 <span asp-validation-for="Location" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-6">
             <div class="text-center">
                 <label class="col-form-label" asp-for="Time"></label>
-                <input class="input-group form-control" asp-for="Time" name="PickUp.Time" disabled/>
+                <input class="input-group form-control" asp-for="Time" name="PickUp.Time" />
                 <span asp-validation-for="Time" class="text-danger"></span>
             </div>
         </div>
     </div>
 </div>
+
+<script src="~/js/pickUp.js"></script>

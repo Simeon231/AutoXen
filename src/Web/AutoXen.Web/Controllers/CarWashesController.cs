@@ -7,15 +7,14 @@
     using AutoXen.Services.Data;
     using AutoXen.Web.ViewModels;
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
-    public class CarWashController : Controller
+    public class CarWashesController : Controller
     {
         private readonly ICarWashService carWashService;
         private readonly ICarService carService;
 
-        public CarWashController(
+        public CarWashesController(
             ICarWashService carWashService,
             ICarService carService)
         {
@@ -24,7 +23,7 @@
         }
 
         [Authorize]
-        public ActionResult Create()
+        public ActionResult Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var carWash = new CarWashRequestViewModel() { Cars = this.carService.AllCars(userId) };
@@ -34,14 +33,14 @@
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> Create(CarWashRequestViewModel model)
+        public async Task<ActionResult> Index(CarWashRequestViewModel model)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var carWash = new CarWashRequestViewModel() { Cars = this.carService.AllCars(userId) };
 
             if (!this.ModelState.IsValid)
             {
-                return this.View(carWash);
+                model.Cars = this.carService.AllCars(userId);
+                return this.View(model);
             }
 
             // TODO add better Exception
@@ -51,24 +50,25 @@
             }
             catch (Exception err)
             {
+                model.Cars = this.carService.AllCars(userId);
                 this.ModelState.AddModelError("Key", err.Message);
-                return this.View(carWash);
+                return this.View(model.Cars);
             }
 
-            return this.Redirect("/");
+            return this.Redirect("/Requests/Index");
         }
 
-        [Authorize]
-        public ActionResult Edit(int id)
-        {
-            return this.View();
-        }
+        ////[Authorize]
+        ////public ActionResult Edit(int id)
+        ////{
+        ////    return this.View();
+        ////}
 
-        [HttpPost]
-        [Authorize]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            return null;
-        }
+        ////[HttpPost]
+        ////[Authorize]
+        ////public ActionResult Edit(int id, IFormCollection collection)
+        ////{
+        ////    return null;
+        ////}
     }
 }

@@ -44,7 +44,7 @@
         {
             var cars = this.carRepository.AllAsNoTracking()
                 .Where(x => x.UserId == userId)
-                .OrderBy(x => x.CreatedOn)
+                .OrderByDescending(x => x.CreatedOn)
                 .Select(x => this.mapper.Map<CarViewModel>(x))
                 .ToList();
 

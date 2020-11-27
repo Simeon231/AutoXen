@@ -1,10 +1,14 @@
 ﻿@using AutoXen.Common
+@using Microsoft.AspNetCore.Identity
+@using AutoXen.Data.Models
+@inject SignInManager<ApplicationUser> SignInManager
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
+    <title>@this.ViewData["Title"] @GlobalConstants.SystemName</title>
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
@@ -28,24 +32,27 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="About" asp-area=""><i class="fas fa-info-circle"></i> About</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Car" asp-action="All" asp-area=""><i class="fas fa-car"></i> My Cars</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-people-carry"></i> Маке Request
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" asp-controller="CarWash" asp-action="Create" asp-area=""><i class="fas fa-soap"></i> Car wash</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-shield-alt"></i> Insurence</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-car-crash"></i> Roadside assistance</a>
-                                <a class="dropdown-item" asp-controller="Workshops" asp-action="Index" asp-area=""><i class="fas fa-tools"></i> Workshop</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-tasks"></i> Annual technical inspection</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Requests" asp-action="Index" asp-area=""><i class="fas fa-people-carry"></i> Requests</a>
-                        </li>
+                        @if (this.SignInManager.IsSignedIn(this.User))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Cars" asp-action="All" asp-area=""><i class="fas fa-car"></i> My Cars</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-people-carry"></i> Маке Request
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" asp-controller="CarWashes" asp-action="Index" asp-area=""><i class="fas fa-soap"></i> Car wash</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-shield-alt"></i> Insurence</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-car-crash"></i> Roadside assistance</a>
+                                    <a class="dropdown-item" asp-controller="Workshops" asp-action="Index" asp-area=""><i class="fas fa-tools"></i> Workshop</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-tasks"></i> Annual technical inspection</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Requests" asp-action="Index" asp-area=""><i class="fas fa-people-carry"></i> Requests</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

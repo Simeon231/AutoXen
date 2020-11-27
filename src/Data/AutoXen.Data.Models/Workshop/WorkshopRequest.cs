@@ -15,9 +15,13 @@
             this.WorkshopRequestServices = new HashSet<WorkshopRequestServices>();
         }
 
+        [MaxLength(300)]
+        public string OtherServices { get; set; }
+
         public bool CarDone { get; set; }
 
         [Required]
+        [MaxLength(150)]
         public string PickUpLocation { get; set; }
 
         public bool PickUpFastAsPossible { get; set; }

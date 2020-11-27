@@ -7,12 +7,14 @@
 
     public interface IWorkshopService
     {
-        public Task AddWorkshopRequestAsync(WorkshopRequestViewModel model);
+        public Task AddWorkshopRequestAsync(WorkshopRequestViewModel model, string userId);
 
         public WorkshopRequestViewModel GetWorkshopServices(string userId);
 
         public IEnumerable<ServiceWithPriceResponseModel> GetServicesByWorkshopId(int workshopId);
 
         public IEnumerable<ServiceModel> GetAllServices();
+
+        public IEnumerable<WorkshopViewModel> GetAllWorkshops();
     }
 }

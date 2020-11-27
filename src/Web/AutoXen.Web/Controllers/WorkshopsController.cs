@@ -4,7 +4,6 @@
     using System.Threading.Tasks;
 
     using AutoXen.Services.Data;
-    using AutoXen.Web.ViewModels;
     using AutoXen.Web.ViewModels.Workshop;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -21,25 +20,22 @@
         [Authorize]
         public IActionResult Index()
         {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var model = this.workshopService.GetWorkshopServices(userId);
-
-            ////var complex = new ComplexViewModel<WorkshopViewModel, WorkshopGetViewModel>
-            ////{
-            ////    View = model,
-            ////    Input = new WorkshopViewModel(),
-            ////};
-
-            return this.View(model);
+            return this.View(new WorkshopRequestViewModel());
         }
 
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> Index(WorkshopRequestViewModel input)
         {
-            await this.workshopService.AddWorkshopRequestAsync(input);
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
 
-            return this.RedirectToAction(nameof(RequestsController.Index));
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            await this.workshopService.AddWorkshopRequestAsync(input, userId);
+
+            return this.Redirect("Requests/Index");
         }
     }
 }

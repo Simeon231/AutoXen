@@ -6,36 +6,6 @@ if (deleteBtn != null) {
     }))
 }
 
-var pickUpFastAsPossible = document.getElementById('FastAsPossible');
-
-if (pickUpFastAsPossible != null) {
-    pickUpFastAsPossible.addEventListener('click', (event) => {
-        var pickUpTime = document.getElementsByName('PickUpTime')[0];
-
-        if (pickUpFastAsPossible.checked == true) {
-            pickUpTime.value = null;
-            pickUpTime.disabled = true;
-        }
-        else {
-            pickUpTime.disabled = false;
-        }
-    });
-}
-
-// Disable/Enable workshops on click
-function EnableDisableWorkshops(btn) {
-    const workshops = document.getElementById("workshops");
-    const defaultOption = document.getElementById("hiddenValue");
-
-    if (btn.checked == true) {
-        workshops.disabled = true;
-        workshops.value = defaultOption.value;
-    }
-    else {
-        workshops.disabled = false;
-    }
-}
-
 // convert datetime to datetime.now
 var dates = document.getElementsByName('date');
 
@@ -64,44 +34,5 @@ $(document).ready(function () {
     });
 });
 
-// Fetch
-function GetAllServices() {
-    fetch("api/WorkshopServices")
-        .then(resources => resources.json())
-        .then(data => {
-            AddServicesToSelect(data);
-        });
-}
-
-function GetWorkshopServices(workshop) {
-    const id = workshop.selectedOptions[0].value;
-    console.log(workshop.selectedOptions[0].value);
-    fetch(`api/WorkshopServices/${id}`)
-        .then(resources => resources.json())
-        .then(data => {
-            AddServicesToSelect(data);
-        });
-}
-
-function AddServicesToSelect(data) {
-    const select = document.getElementById("ServiceIds");
-    select.innerHTML = null;
-    data.forEach(x => {
-        var option = document.createElement("option");
-        if (x.price == null) {
-            option.text = x.name;
-            option.value = x.id;
-        }
-        else {
-            option.text = `${x.serviceName} - ${x.price}$`
-            option.value = x.serviceId;
-        }
-
-        console.log(option);
-        select.add(option);
-    })
-
-
-}
 
 // TODO: Change js to functions

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CarViewModel>
 
     <div class="col text-center">
-        <a href="/Car/Add" class="btn btn-outline-primary text-center">Add car</a>
+        <a asp-controller="Cars" asp-action="Add" class="btn btn-outline-primary text-center">Add car</a>
     </div>
     <p><br /></p>
 
@@ -21,8 +21,8 @@
                     <td>@car.Brand</td>
                     <td>@car.Model</td>
                     <td>@car.RegistrationPlate</td>
-                    <td><a class="btn btn-outline-info" href="/Car/Details/@car.Id">Details</a></td>
-                    <td><a class="btn btn-outline-danger" href="/Car/Delete/@car.Id" onclick="return confirm('Are you sure you want to delete your car');">Delete</a></td>
+                    <td><a class="btn btn-outline-info" asp-controller="Cars" asp-action="Details" asp-route-id="@car.Id">Details</a></td>
+                    <td><a class="btn btn-outline-danger" asp-controller="Cars" asp-action="Delete" asp-route-id="@car.Id" onclick="return confirm('Are you sure you want to delete your car');">Delete</a></td>
                 </tr>
             }
         </table>

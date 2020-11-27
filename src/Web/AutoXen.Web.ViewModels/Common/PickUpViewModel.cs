@@ -3,6 +3,8 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
+    using AutoXen.Web.ViewModels.Validation_Atributes;
+
     public class PickUpViewModel
     {
         [Required]
@@ -11,6 +13,7 @@
         public string Location { get; set; }
 
         [Display(Name = "Pick up time")]
+        [MinimumPickUpDateTimeAttribute]
         public DateTime? Time { get; set; }
 
         [Display(Name = "Pick up fast as possible")]

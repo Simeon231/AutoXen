@@ -6,12 +6,12 @@
     using AutoXen.Web.ViewModels.Common;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
 
+    // TODO ServiceIds or OtherServices must be not null
     public class WorkshopRequestViewModel
     {
-        public string WorkshopId { get; set; }
+        public int WorkshopId { get; set; }
 
-        [Required]
-        public IEnumerable<int> ServiceIds { get; set; }
+        public IEnumerable<int> Ids { get; set; }
 
         [Required]
         public string CarId { get; set; }
@@ -21,16 +21,8 @@
         [Display(Name = "Every workshop")]
         public bool AdminChooseWorkshop { get; set; }
 
-        [BindNever]
-        public IEnumerable<WorkshopViewModel> Workshops { get; set; }
-
-        [BindNever]
-        public IEnumerable<CarViewModel> Cars { get; set; }
-
-        [BindNever]
-        public IEnumerable<WorkshopServiceViewModel> WorkshopsServices { get; set; }
-
-        [BindNever]
-        public IEnumerable<ServiceModel> Services { get; set; }
+        [MaxLength(300)]
+        [Display(Name = "Your problems are not listed? Write them here.")]
+        public string OtherServices { get; set; }
     }
 }

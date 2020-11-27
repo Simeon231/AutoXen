@@ -14,7 +14,7 @@
         [Required]
         public string CarId { get; set; }
 
-        public string CarWashId { get; set; }
+        public int? CarWashId { get; set; }
 
         public PickUpViewModel PickUp { get; set; }
 
