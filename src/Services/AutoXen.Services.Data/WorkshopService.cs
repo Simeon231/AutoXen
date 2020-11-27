@@ -19,7 +19,8 @@
         private readonly IRepository<WService> serviceRepository;
         private readonly IRepository<Workshop> workshopRepository;
         private readonly IRepository<AutoXen.Data.Models.Workshop.WorkshopService> workshopServiceRepository;
-        private readonly IRepository<WorkshopRequestServices> workshopRequestServiceRepository;
+        private readonly IRepository<WorkshopRequestWorkshopService> workshopRequestServiceRepository;
+        private readonly IRepository<WorkshopRequestWService> workshopRequestWService;
         private readonly IDeletableEntityRepository<Car> carsRepository;
         private readonly IMapper mapper;
 
@@ -28,7 +29,8 @@
             IRepository<WService> serviceRepository,
             IRepository<Workshop> workshopRepository,
             IRepository<AutoXen.Data.Models.Workshop.WorkshopService> workshopServiceRepository,
-            IRepository<WorkshopRequestServices> workshopRequestServiceRepository,
+            IRepository<WorkshopRequestWorkshopService> workshopRequestServiceRepository,
+            IRepository<WorkshopRequestWService> workshopRequestWService,
             IDeletableEntityRepository<Car> carsRepository,
             IMapper mapper)
         {
@@ -37,6 +39,7 @@
             this.workshopRepository = workshopRepository;
             this.workshopServiceRepository = workshopServiceRepository;
             this.workshopRequestServiceRepository = workshopRequestServiceRepository;
+            this.workshopRequestWService = workshopRequestWService;
             this.carsRepository = carsRepository;
             this.mapper = mapper;
         }
@@ -48,11 +51,11 @@
             await this.workshopRequestRepository.AddAsync(request);
             await this.workshopRequestRepository.SaveChangesAsync();
 
-            if (model.Ids != null)
+            if (model.Ids != null && this.workshopRepository.AllAsNoTracking().Any(x => x.Id == model.WorkshopId))
             {
                 foreach (var id in model.Ids)
                 {
-                    var requestServices = new WorkshopRequestServices()
+                    var requestServices = new WorkshopRequestWorkshopService()
                     {
                         WorkshopRequestId = request.Id,
                         WorkshopServiceId = id,
@@ -62,6 +65,25 @@
                 }
 
                 await this.workshopRequestServiceRepository.SaveChangesAsync();
+            }
+            else if (model.Ids != null)
+            {
+                foreach (var id in model.Ids)
+                {
+                    var requestWService = new WorkshopRequestWService()
+                    {
+                        WorkshopRequestId = request.Id,
+                        WServiceId = id,
+                    };
+
+                    await this.workshopRequestWService.AddAsync(requestWService);
+                }
+
+                await this.workshopRequestWService.SaveChangesAsync();
+            }
+            else
+            {
+                // TODO throw exception
             }
         }
 

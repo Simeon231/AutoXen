@@ -949,7 +949,30 @@ namespace AutoXen.Data.Migrations
                     b.ToTable("WorkshopRequests");
                 });
 
-            modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopRequestServices", b =>
+            modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopRequestWService", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("WServiceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WorkshopRequestId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WServiceId");
+
+                    b.HasIndex("WorkshopRequestId");
+
+                    b.ToTable("WorkshopRequestWServices");
+                });
+
+            modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopRequestWorkshopService", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -975,7 +998,7 @@ namespace AutoXen.Data.Migrations
 
                     b.HasIndex("WorkshopServiceId");
 
-                    b.ToTable("WorkshopRequestServices");
+                    b.ToTable("WorkshopRequestWorkshopServices");
                 });
 
             modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopService", b =>
@@ -1300,10 +1323,25 @@ namespace AutoXen.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopRequestServices", b =>
+            modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopRequestWService", b =>
+                {
+                    b.HasOne("AutoXen.Data.Models.Workshop.WService", "WService")
+                        .WithMany()
+                        .HasForeignKey("WServiceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AutoXen.Data.Models.Workshop.WorkshopRequest", "WorkshopRequest")
+                        .WithMany()
+                        .HasForeignKey("WorkshopRequestId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopRequestWorkshopService", b =>
                 {
                     b.HasOne("AutoXen.Data.Models.Workshop.WorkshopRequest", "WorkshopRequest")
-                        .WithMany("WorkshopRequestServices")
+                        .WithMany("WorkshopRequestWorkshopServices")
                         .HasForeignKey("WorkshopRequestId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

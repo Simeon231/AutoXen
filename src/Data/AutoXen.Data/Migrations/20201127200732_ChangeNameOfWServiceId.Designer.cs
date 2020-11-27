@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoXen.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201122201221_AddModels")]
-    partial class AddModels
+    [Migration("20201127200732_ChangeNameOfWServiceId")]
+    partial class ChangeNameOfWServiceId
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.9")
+                .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -63,20 +63,49 @@ namespace AutoXen.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("AcceptedById")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("AnnualTechnicalInspectionId")
                         .HasColumnType("int");
-
-                    b.Property<string>("BaseRequestId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("CarDone")
                         .HasColumnType("bit");
 
+                    b.Property<string>("CarId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FinishedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("AcceptedById");
 
                     b.HasIndex("AnnualTechnicalInspectionId");
 
-                    b.HasIndex("BaseRequestId");
+                    b.HasIndex("CarId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("AnnualTechnicalInspectionRequests");
                 });
@@ -131,7 +160,6 @@ namespace AutoXen.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -215,51 +243,6 @@ namespace AutoXen.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("AutoXen.Data.Models.BaseRequest", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AcceptedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CarId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("FinishedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("RequestName")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AcceptedById");
-
-                    b.HasIndex("CarId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("BaseRequests");
                 });
 
             modelBuilder.Entity("AutoXen.Data.Models.Car.Car", b =>
@@ -463,15 +446,33 @@ namespace AutoXen.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("AcceptedById")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<bool>("AdminChooseCarWash")
                         .HasColumnType("bit");
 
-                    b.Property<string>("BaseRequestId")
+                    b.Property<string>("CarId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("CarWashId")
+                    b.Property<int?>("CarWashId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FinishedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("PickUpFastAsPossible")
                         .HasColumnType("bit");
@@ -489,14 +490,24 @@ namespace AutoXen.Data.Migrations
                     b.Property<bool>("ReturnedCar")
                         .HasColumnType("bit");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<bool>("WashingFinished")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BaseRequestId");
+                    b.HasIndex("AcceptedById");
+
+                    b.HasIndex("CarId");
 
                     b.HasIndex("CarWashId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("CarWashRequests");
                 });
@@ -591,9 +602,21 @@ namespace AutoXen.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("BaseRequestId")
+                    b.Property<string>("AcceptedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CarId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FinishedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("InsurenceStart")
                         .HasColumnType("datetime2");
@@ -601,42 +624,32 @@ namespace AutoXen.Data.Migrations
                     b.Property<int>("InsurerInsurancesId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<byte>("NumberOfInsuranceContributions")
                         .HasColumnType("tinyint");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("BaseRequestId");
+                    b.HasIndex("AcceptedById");
+
+                    b.HasIndex("CarId");
 
                     b.HasIndex("InsurerInsurancesId");
 
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("InsurersRequests");
-                });
-
-            modelBuilder.Entity("AutoXen.Data.Models.Message", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("BaseRequestId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("SentById")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("SentOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BaseRequestId");
-
-                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("AutoXen.Data.Models.RoadsideAssistance.Province", b =>
@@ -749,22 +762,50 @@ namespace AutoXen.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("AcceptedById")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("BaseRequestId")
+                    b.Property<string>("CarId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FinishedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("RoadsideAssistanceProvinceId")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("BaseRequestId");
+                    b.HasIndex("AcceptedById");
+
+                    b.HasIndex("CarId");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("RoadsideAssistanceProvinceId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("RoadsideAssistanceRequests");
                 });
@@ -844,23 +885,122 @@ namespace AutoXen.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("BaseRequestId")
-                        .IsRequired()
+                    b.Property<string>("AcceptedById")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("AdminChooseWorkshop")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("CarDone")
                         .HasColumnType("bit");
+
+                    b.Property<string>("CarId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FinishedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OtherServices")
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
+
+                    b.Property<bool>("PickUpFastAsPossible")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PickUpLocation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
+
+                    b.Property<DateTime?>("PickUpTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("PickedUp")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ReturnedCar")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AcceptedById");
+
+                    b.HasIndex("CarId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("WorkshopRequests");
+                });
+
+            modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopRequestWService", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("WServiceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WorkshopRequestId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WServiceId");
+
+                    b.HasIndex("WorkshopRequestId");
+
+                    b.ToTable("WorkshopRequestWServices");
+                });
+
+            modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopRequestWorkshopService", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("WorkshopRequestId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("WorkshopServiceId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BaseRequestId");
+                    b.HasIndex("WorkshopRequestId");
 
                     b.HasIndex("WorkshopServiceId");
 
-                    b.ToTable("WorkshopRequests");
+                    b.ToTable("WorkshopRequestWorkshopServices");
                 });
 
             modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopService", b =>
@@ -994,30 +1134,27 @@ namespace AutoXen.Data.Migrations
 
             modelBuilder.Entity("AutoXen.Data.Models.AnnualTechnicalInspection.AnnualTechnicalInspectionRequest", b =>
                 {
+                    b.HasOne("AutoXen.Data.Models.ApplicationUser", "AcceptedBy")
+                        .WithMany()
+                        .HasForeignKey("AcceptedById");
+
                     b.HasOne("AutoXen.Data.Models.AnnualTechnicalInspection.AnnualTechnicalInspection", "AnnualTechnicalInspection")
                         .WithMany()
                         .HasForeignKey("AnnualTechnicalInspectionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("AutoXen.Data.Models.BaseRequest", "BaseRequest")
-                        .WithMany()
-                        .HasForeignKey("BaseRequestId");
-                });
-
-            modelBuilder.Entity("AutoXen.Data.Models.BaseRequest", b =>
-                {
-                    b.HasOne("AutoXen.Data.Models.ApplicationUser", "AcceptedBy")
-                        .WithMany()
-                        .HasForeignKey("AcceptedById");
-
                     b.HasOne("AutoXen.Data.Models.Car.Car", "Car")
                         .WithMany()
-                        .HasForeignKey("CarId");
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("AutoXen.Data.Models.ApplicationUser", "User")
-                        .WithMany("BaseRequests")
-                        .HasForeignKey("UserId");
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AutoXen.Data.Models.Car.Car", b =>
@@ -1055,15 +1192,23 @@ namespace AutoXen.Data.Migrations
 
             modelBuilder.Entity("AutoXen.Data.Models.CarWash.CarWashRequest", b =>
                 {
-                    b.HasOne("AutoXen.Data.Models.BaseRequest", "BaseRequest")
+                    b.HasOne("AutoXen.Data.Models.ApplicationUser", "AcceptedBy")
                         .WithMany()
-                        .HasForeignKey("BaseRequestId")
+                        .HasForeignKey("AcceptedById");
+
+                    b.HasOne("AutoXen.Data.Models.Car.Car", "Car")
+                        .WithMany()
+                        .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("AutoXen.Data.Models.CarWash.CarWash", "CarWash")
                         .WithMany()
-                        .HasForeignKey("CarWashId")
+                        .HasForeignKey("CarWashId");
+
+                    b.HasOne("AutoXen.Data.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
@@ -1085,9 +1230,13 @@ namespace AutoXen.Data.Migrations
 
             modelBuilder.Entity("AutoXen.Data.Models.Insurance.InsurersRequest", b =>
                 {
-                    b.HasOne("AutoXen.Data.Models.BaseRequest", "BaseRequest")
+                    b.HasOne("AutoXen.Data.Models.ApplicationUser", "AcceptedBy")
                         .WithMany()
-                        .HasForeignKey("BaseRequestId")
+                        .HasForeignKey("AcceptedById");
+
+                    b.HasOne("AutoXen.Data.Models.Car.Car", "Car")
+                        .WithMany()
+                        .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -1096,13 +1245,12 @@ namespace AutoXen.Data.Migrations
                         .HasForeignKey("InsurerInsurancesId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("AutoXen.Data.Models.Message", b =>
-                {
-                    b.HasOne("AutoXen.Data.Models.BaseRequest", "BaseRequest")
-                        .WithMany("Messages")
-                        .HasForeignKey("BaseRequestId");
+                    b.HasOne("AutoXen.Data.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AutoXen.Data.Models.RoadsideAssistance.RoadsideAssistanceProvince", b =>
@@ -1120,15 +1268,25 @@ namespace AutoXen.Data.Migrations
 
             modelBuilder.Entity("AutoXen.Data.Models.RoadsideAssistance.RoadsideAssistanceRequest", b =>
                 {
-                    b.HasOne("AutoXen.Data.Models.BaseRequest", "BaseRequest")
+                    b.HasOne("AutoXen.Data.Models.ApplicationUser", "AcceptedBy")
                         .WithMany()
-                        .HasForeignKey("BaseRequestId")
+                        .HasForeignKey("AcceptedById");
+
+                    b.HasOne("AutoXen.Data.Models.Car.Car", "Car")
+                        .WithMany()
+                        .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("AutoXen.Data.Models.RoadsideAssistance.RoadsideAssistanceProvince", "RoadsideAssistanceProvince")
                         .WithMany()
                         .HasForeignKey("RoadsideAssistanceProvinceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AutoXen.Data.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
@@ -1150,9 +1308,43 @@ namespace AutoXen.Data.Migrations
 
             modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopRequest", b =>
                 {
-                    b.HasOne("AutoXen.Data.Models.BaseRequest", "BaseRequest")
+                    b.HasOne("AutoXen.Data.Models.ApplicationUser", "AcceptedBy")
                         .WithMany()
-                        .HasForeignKey("BaseRequestId")
+                        .HasForeignKey("AcceptedById");
+
+                    b.HasOne("AutoXen.Data.Models.Car.Car", "Car")
+                        .WithMany()
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AutoXen.Data.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopRequestWService", b =>
+                {
+                    b.HasOne("AutoXen.Data.Models.Workshop.WService", "WService")
+                        .WithMany()
+                        .HasForeignKey("WServiceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AutoXen.Data.Models.Workshop.WorkshopRequest", "WorkshopRequest")
+                        .WithMany()
+                        .HasForeignKey("WorkshopRequestId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopRequestWorkshopService", b =>
+                {
+                    b.HasOne("AutoXen.Data.Models.Workshop.WorkshopRequest", "WorkshopRequest")
+                        .WithMany("WorkshopRequestWorkshopServices")
+                        .HasForeignKey("WorkshopRequestId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -1166,7 +1358,7 @@ namespace AutoXen.Data.Migrations
             modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopService", b =>
                 {
                     b.HasOne("AutoXen.Data.Models.Workshop.WService", "Service")
-                        .WithMany()
+                        .WithMany("WorkshopServices")
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

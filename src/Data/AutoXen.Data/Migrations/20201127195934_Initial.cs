@@ -4,37 +4,10 @@
 
     using Microsoft.EntityFrameworkCore.Migrations;
 
-    public partial class AddModels : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Settings");
-
-            migrationBuilder.AddColumn<string>(
-                name: "Address",
-                table: "AspNetUsers",
-                nullable: false,
-                defaultValue: string.Empty);
-
-            migrationBuilder.AddColumn<string>(
-                name: "FirstName",
-                table: "AspNetUsers",
-                nullable: false,
-                defaultValue: string.Empty);
-
-            migrationBuilder.AddColumn<string>(
-                name: "MiddleName",
-                table: "AspNetUsers",
-                nullable: false,
-                defaultValue: string.Empty);
-
-            migrationBuilder.AddColumn<string>(
-                name: "SurName",
-                table: "AspNetUsers",
-                nullable: false,
-                defaultValue: string.Empty);
-
             migrationBuilder.CreateTable(
                 name: "AnnualTechnicalInspections",
                 columns: table => new
@@ -55,35 +28,54 @@
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cars",
+                name: "AspNetRoles",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    UserId = table.Column<string>(nullable: false),
-                    Brand = table.Column<string>(nullable: false),
-                    Model = table.Column<string>(nullable: false),
-                    FuelType = table.Column<int>(nullable: true),
-                    NumberOfSeats = table.Column<byte>(nullable: true),
-                    YearMade = table.Column<short>(nullable: true),
-                    Weight = table.Column<int>(nullable: true),
-                    Color = table.Column<string>(nullable: true),
-                    TransmissionType = table.Column<int>(nullable: true),
-                    VehicleIdentificationNumber = table.Column<string>(maxLength: 17, nullable: true),
-                    RegistrationPlate = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cars", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Cars_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    UserName = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
+                    Email = table.Column<string>(maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    Address = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: false),
+                    MiddleName = table.Column<string>(nullable: false),
+                    SurName = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -234,37 +226,41 @@
                 });
 
             migrationBuilder.CreateTable(
-                name: "BaseRequests",
+                name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    RequestName = table.Column<int>(nullable: false),
-                    AcceptedById = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true),
-                    CarId = table.Column<string>(nullable: true),
-                    FinishedOn = table.Column<DateTime>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleId = table.Column<string>(nullable: false),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BaseRequests", x => x.Id);
+                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BaseRequests_AspNetUsers_AcceptedById",
-                        column: x => x.AcceptedById,
-                        principalTable: "AspNetUsers",
+                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: false),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BaseRequests_Cars_CarId",
-                        column: x => x.CarId,
-                        principalTable: "Cars",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_BaseRequests_AspNetUsers_UserId",
+                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -272,7 +268,71 @@
                 });
 
             migrationBuilder.CreateTable(
-                name: "OtherCarUsers",
+                name: "AspNetUserLogins",
+                columns: table => new
+                {
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
+                    ProviderDisplayName = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: false),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    RoleId = table.Column<string>(nullable: false),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserTokens",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
+                    Value = table.Column<string>(nullable: true),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cars",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -280,47 +340,25 @@
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Address = table.Column<string>(nullable: false),
-                    FirstName = table.Column<string>(nullable: false),
-                    MiddleName = table.Column<string>(nullable: false),
-                    SurName = table.Column<string>(nullable: false),
-                    Phone = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: false),
-                    CarId = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: false),
+                    Brand = table.Column<string>(nullable: false),
+                    Model = table.Column<string>(nullable: false),
+                    FuelType = table.Column<int>(nullable: true),
+                    NumberOfSeats = table.Column<byte>(nullable: true),
+                    YearMade = table.Column<short>(nullable: true),
+                    Weight = table.Column<int>(nullable: true),
+                    Color = table.Column<string>(nullable: true),
+                    TransmissionType = table.Column<int>(nullable: true),
+                    VehicleIdentificationNumber = table.Column<string>(maxLength: 17, nullable: true),
+                    RegistrationPlate = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OtherCarUsers", x => x.Id);
+                    table.PrimaryKey("PK_Cars", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OtherCarUsers_Cars_CarId",
-                        column: x => x.CarId,
-                        principalTable: "Cars",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CarExtras",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CarId = table.Column<string>(nullable: false),
-                    ExtraId = table.Column<int>(nullable: false),
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CarExtras", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CarExtras_Cars_CarId",
-                        column: x => x.CarId,
-                        principalTable: "Cars",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_CarExtras_Extras_ExtraId",
-                        column: x => x.ExtraId,
-                        principalTable: "Extras",
+                        name: "FK_Cars_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -411,9 +449,9 @@
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Price = table.Column<double>(nullable: false),
                     WorkshopId = table.Column<int>(nullable: false),
                     ServiceId = table.Column<int>(nullable: false),
-                    Price = table.Column<double>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -437,13 +475,26 @@
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
                     CarDone = table.Column<bool>(nullable: false),
-                    BaseRequestId = table.Column<string>(nullable: true),
                     AnnualTechnicalInspectionId = table.Column<int>(nullable: false),
+                    AcceptedById = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: false),
+                    CarId = table.Column<string>(nullable: false),
+                    FinishedOn = table.Column<DateTime>(nullable: true),
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AnnualTechnicalInspectionRequests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AnnualTechnicalInspectionRequests_AspNetUsers_AcceptedById",
+                        column: x => x.AcceptedById,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AnnualTechnicalInspectionRequests_AnnualTechnicalInspections_AnnualTechnicalInspectionId",
                         column: x => x.AnnualTechnicalInspectionId,
@@ -451,9 +502,41 @@
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AnnualTechnicalInspectionRequests_BaseRequests_BaseRequestId",
-                        column: x => x.BaseRequestId,
-                        principalTable: "BaseRequests",
+                        name: "FK_AnnualTechnicalInspectionRequests_Cars_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Cars",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_AnnualTechnicalInspectionRequests_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CarExtras",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CarId = table.Column<string>(nullable: false),
+                    ExtraId = table.Column<int>(nullable: false),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CarExtras", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CarExtras_Cars_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Cars",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CarExtras_Extras_ExtraId",
+                        column: x => x.ExtraId,
+                        principalTable: "Extras",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -463,6 +546,10 @@
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
                     PickUpLocation = table.Column<string>(nullable: false),
                     PickUpFastAsPossible = table.Column<bool>(nullable: false),
                     AdminChooseCarWash = table.Column<bool>(nullable: false),
@@ -470,16 +557,25 @@
                     PickedUp = table.Column<bool>(nullable: false),
                     WashingFinished = table.Column<bool>(nullable: false),
                     ReturnedCar = table.Column<bool>(nullable: false),
-                    BaseRequestId = table.Column<string>(nullable: false),
-                    CarWashId = table.Column<int>(nullable: false),
+                    CarWashId = table.Column<int>(nullable: true),
+                    AcceptedById = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: false),
+                    CarId = table.Column<string>(nullable: false),
+                    FinishedOn = table.Column<DateTime>(nullable: true),
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CarWashRequests", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CarWashRequests_BaseRequests_BaseRequestId",
-                        column: x => x.BaseRequestId,
-                        principalTable: "BaseRequests",
+                        name: "FK_CarWashRequests_AspNetUsers_AcceptedById",
+                        column: x => x.AcceptedById,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CarWashRequests_Cars_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Cars",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -488,79 +584,38 @@
                         principalTable: "CarWashes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Messages",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Text = table.Column<string>(nullable: true),
-                    SentOn = table.Column<DateTime>(nullable: false),
-                    SentById = table.Column<string>(nullable: true),
-                    BaseRequestId = table.Column<string>(nullable: true),
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Messages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Messages_BaseRequests_BaseRequestId",
-                        column: x => x.BaseRequestId,
-                        principalTable: "BaseRequests",
+                        name: "FK_CarWashRequests_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "InsurersRequests",
+                name: "OtherCarUsers",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    InsurenceStart = table.Column<DateTime>(nullable: false),
-                    NumberOfInsuranceContributions = table.Column<byte>(nullable: false),
-                    BaseRequestId = table.Column<string>(nullable: false),
-                    InsurerInsurancesId = table.Column<int>(nullable: false),
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_InsurersRequests", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_InsurersRequests_BaseRequests_BaseRequestId",
-                        column: x => x.BaseRequestId,
-                        principalTable: "BaseRequests",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_InsurersRequests_InsurerInsurances_InsurerInsurancesId",
-                        column: x => x.InsurerInsurancesId,
-                        principalTable: "InsurerInsurances",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RoadsideAssistanceRequests",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    BaseRequestId = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
                     Address = table.Column<string>(nullable: false),
-                    RoadsideAssistanceProvinceId = table.Column<int>(nullable: false),
+                    FirstName = table.Column<string>(nullable: false),
+                    MiddleName = table.Column<string>(nullable: false),
+                    SurName = table.Column<string>(nullable: false),
+                    Phone = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    CarId = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoadsideAssistanceRequests", x => x.Id);
+                    table.PrimaryKey("PK_OtherCarUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RoadsideAssistanceRequests_BaseRequests_BaseRequestId",
-                        column: x => x.BaseRequestId,
-                        principalTable: "BaseRequests",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_RoadsideAssistanceRequests_RoadsideAssistanceProvinces_RoadsideAssistanceProvinceId",
-                        column: x => x.RoadsideAssistanceProvinceId,
-                        principalTable: "RoadsideAssistanceProvinces",
+                        name: "FK_OtherCarUsers_Cars_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Cars",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -570,26 +625,196 @@
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    BaseRequestId = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    OtherServices = table.Column<string>(maxLength: 300, nullable: true),
                     CarDone = table.Column<bool>(nullable: false),
-                    WorkshopServiceId = table.Column<int>(nullable: false),
+                    PickUpLocation = table.Column<string>(maxLength: 150, nullable: false),
+                    PickUpFastAsPossible = table.Column<bool>(nullable: false),
+                    AdminChooseWorkshop = table.Column<bool>(nullable: false),
+                    PickUpTime = table.Column<DateTime>(nullable: true),
+                    PickedUp = table.Column<bool>(nullable: false),
+                    ReturnedCar = table.Column<bool>(nullable: false),
+                    AcceptedById = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: false),
+                    CarId = table.Column<string>(nullable: false),
+                    FinishedOn = table.Column<DateTime>(nullable: true),
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_WorkshopRequests", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WorkshopRequests_BaseRequests_BaseRequestId",
-                        column: x => x.BaseRequestId,
-                        principalTable: "BaseRequests",
+                        name: "FK_WorkshopRequests_AspNetUsers_AcceptedById",
+                        column: x => x.AcceptedById,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_WorkshopRequests_WorkshopServices_WorkshopServiceId",
+                        name: "FK_WorkshopRequests_Cars_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Cars",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_WorkshopRequests_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "InsurersRequests",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    InsurenceStart = table.Column<DateTime>(nullable: false),
+                    NumberOfInsuranceContributions = table.Column<byte>(nullable: false),
+                    InsurerInsurancesId = table.Column<int>(nullable: false),
+                    AcceptedById = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: false),
+                    CarId = table.Column<string>(nullable: false),
+                    FinishedOn = table.Column<DateTime>(nullable: true),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InsurersRequests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_InsurersRequests_AspNetUsers_AcceptedById",
+                        column: x => x.AcceptedById,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_InsurersRequests_Cars_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Cars",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_InsurersRequests_InsurerInsurances_InsurerInsurancesId",
+                        column: x => x.InsurerInsurancesId,
+                        principalTable: "InsurerInsurances",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_InsurersRequests_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RoadsideAssistanceRequests",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Address = table.Column<string>(nullable: false),
+                    RoadsideAssistanceProvinceId = table.Column<int>(nullable: false),
+                    AcceptedById = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: false),
+                    CarId = table.Column<string>(nullable: false),
+                    FinishedOn = table.Column<DateTime>(nullable: true),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoadsideAssistanceRequests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RoadsideAssistanceRequests_AspNetUsers_AcceptedById",
+                        column: x => x.AcceptedById,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_RoadsideAssistanceRequests_Cars_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Cars",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_RoadsideAssistanceRequests_RoadsideAssistanceProvinces_RoadsideAssistanceProvinceId",
+                        column: x => x.RoadsideAssistanceProvinceId,
+                        principalTable: "RoadsideAssistanceProvinces",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_RoadsideAssistanceRequests_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WorkshopRequestWorkshopServices",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    WorkshopRequestId = table.Column<string>(nullable: false),
+                    WorkshopServiceId = table.Column<int>(nullable: false),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkshopRequestWorkshopServices", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WorkshopRequestWorkshopServices_WorkshopRequests_WorkshopRequestId",
+                        column: x => x.WorkshopRequestId,
+                        principalTable: "WorkshopRequests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_WorkshopRequestWorkshopServices_WorkshopServices_WorkshopServiceId",
                         column: x => x.WorkshopServiceId,
                         principalTable: "WorkshopServices",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "WorkshopRequestWServices",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ServiceId = table.Column<int>(nullable: false),
+                    WServiceId = table.Column<int>(nullable: true),
+                    WorkshopRequestId = table.Column<string>(nullable: false),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkshopRequestWServices", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WorkshopRequestWServices_WServices_WServiceId",
+                        column: x => x.WServiceId,
+                        principalTable: "WServices",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_WorkshopRequestWServices_WorkshopRequests_WorkshopRequestId",
+                        column: x => x.WorkshopRequestId,
+                        principalTable: "WorkshopRequests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AnnualTechnicalInspectionRequests_AcceptedById",
+                table: "AnnualTechnicalInspectionRequests",
+                column: "AcceptedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AnnualTechnicalInspectionRequests_AnnualTechnicalInspectionId",
@@ -597,9 +822,19 @@
                 column: "AnnualTechnicalInspectionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AnnualTechnicalInspectionRequests_BaseRequestId",
+                name: "IX_AnnualTechnicalInspectionRequests_CarId",
                 table: "AnnualTechnicalInspectionRequests",
-                column: "BaseRequestId");
+                column: "CarId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AnnualTechnicalInspectionRequests_IsDeleted",
+                table: "AnnualTechnicalInspectionRequests",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AnnualTechnicalInspectionRequests_UserId",
+                table: "AnnualTechnicalInspectionRequests",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AnnualTechnicalInspections_IsDeleted",
@@ -607,24 +842,53 @@
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BaseRequests_AcceptedById",
-                table: "BaseRequests",
-                column: "AcceptedById");
+                name: "IX_AspNetRoleClaims_RoleId",
+                table: "AspNetRoleClaims",
+                column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BaseRequests_CarId",
-                table: "BaseRequests",
-                column: "CarId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BaseRequests_IsDeleted",
-                table: "BaseRequests",
+                name: "IX_AspNetRoles_IsDeleted",
+                table: "AspNetRoles",
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BaseRequests_UserId",
-                table: "BaseRequests",
+                name: "RoleNameIndex",
+                table: "AspNetRoles",
+                column: "NormalizedName",
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserClaims_UserId",
+                table: "AspNetUserClaims",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserLogins_UserId",
+                table: "AspNetUserLogins",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserRoles_RoleId",
+                table: "AspNetUserRoles",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_IsDeleted",
+                table: "AspNetUsers",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "EmailIndex",
+                table: "AspNetUsers",
+                column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "AspNetUsers",
+                column: "NormalizedUserName",
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CarExtras_CarId",
@@ -652,14 +916,29 @@
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CarWashRequests_BaseRequestId",
+                name: "IX_CarWashRequests_AcceptedById",
                 table: "CarWashRequests",
-                column: "BaseRequestId");
+                column: "AcceptedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CarWashRequests_CarId",
+                table: "CarWashRequests",
+                column: "CarId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CarWashRequests_CarWashId",
                 table: "CarWashRequests",
                 column: "CarWashId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CarWashRequests_IsDeleted",
+                table: "CarWashRequests",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CarWashRequests_UserId",
+                table: "CarWashRequests",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Insurances_IsDeleted",
@@ -682,9 +961,14 @@
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InsurersRequests_BaseRequestId",
+                name: "IX_InsurersRequests_AcceptedById",
                 table: "InsurersRequests",
-                column: "BaseRequestId");
+                column: "AcceptedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InsurersRequests_CarId",
+                table: "InsurersRequests",
+                column: "CarId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_InsurersRequests_InsurerInsurancesId",
@@ -692,9 +976,14 @@
                 column: "InsurerInsurancesId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Messages_BaseRequestId",
-                table: "Messages",
-                column: "BaseRequestId");
+                name: "IX_InsurersRequests_IsDeleted",
+                table: "InsurersRequests",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InsurersRequests_UserId",
+                table: "InsurersRequests",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OtherCarUsers_CarId",
@@ -717,14 +1006,29 @@
                 column: "RoadsideAssistanceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RoadsideAssistanceRequests_BaseRequestId",
+                name: "IX_RoadsideAssistanceRequests_AcceptedById",
                 table: "RoadsideAssistanceRequests",
-                column: "BaseRequestId");
+                column: "AcceptedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoadsideAssistanceRequests_CarId",
+                table: "RoadsideAssistanceRequests",
+                column: "CarId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoadsideAssistanceRequests_IsDeleted",
+                table: "RoadsideAssistanceRequests",
+                column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoadsideAssistanceRequests_RoadsideAssistanceProvinceId",
                 table: "RoadsideAssistanceRequests",
                 column: "RoadsideAssistanceProvinceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoadsideAssistanceRequests_UserId",
+                table: "RoadsideAssistanceRequests",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoadsideAssistances_IsDeleted",
@@ -742,14 +1046,44 @@
                 column: "ServiceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkshopRequests_BaseRequestId",
+                name: "IX_WorkshopRequests_AcceptedById",
                 table: "WorkshopRequests",
-                column: "BaseRequestId");
+                column: "AcceptedById");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkshopRequests_WorkshopServiceId",
+                name: "IX_WorkshopRequests_CarId",
                 table: "WorkshopRequests",
+                column: "CarId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkshopRequests_IsDeleted",
+                table: "WorkshopRequests",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkshopRequests_UserId",
+                table: "WorkshopRequests",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkshopRequestWorkshopServices_WorkshopRequestId",
+                table: "WorkshopRequestWorkshopServices",
+                column: "WorkshopRequestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkshopRequestWorkshopServices_WorkshopServiceId",
+                table: "WorkshopRequestWorkshopServices",
                 column: "WorkshopServiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkshopRequestWServices_WServiceId",
+                table: "WorkshopRequestWServices",
+                column: "WServiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkshopRequestWServices_WorkshopRequestId",
+                table: "WorkshopRequestWServices",
+                column: "WorkshopRequestId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WorkshopServices_ServiceId",
@@ -768,6 +1102,21 @@
                 name: "AnnualTechnicalInspectionRequests");
 
             migrationBuilder.DropTable(
+                name: "AspNetRoleClaims");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserClaims");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserLogins");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserRoles");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
                 name: "CarExtras");
 
             migrationBuilder.DropTable(
@@ -775,9 +1124,6 @@
 
             migrationBuilder.DropTable(
                 name: "InsurersRequests");
-
-            migrationBuilder.DropTable(
-                name: "Messages");
 
             migrationBuilder.DropTable(
                 name: "OtherCarUsers");
@@ -789,10 +1135,16 @@
                 name: "RoadsideAssistanceServices");
 
             migrationBuilder.DropTable(
-                name: "WorkshopRequests");
+                name: "WorkshopRequestWorkshopServices");
+
+            migrationBuilder.DropTable(
+                name: "WorkshopRequestWServices");
 
             migrationBuilder.DropTable(
                 name: "AnnualTechnicalInspections");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Extras");
@@ -810,10 +1162,10 @@
                 name: "RServices");
 
             migrationBuilder.DropTable(
-                name: "BaseRequests");
+                name: "WorkshopServices");
 
             migrationBuilder.DropTable(
-                name: "WorkshopServices");
+                name: "WorkshopRequests");
 
             migrationBuilder.DropTable(
                 name: "Insurances");
@@ -828,52 +1180,16 @@
                 name: "RoadsideAssistances");
 
             migrationBuilder.DropTable(
-                name: "Cars");
-
-            migrationBuilder.DropTable(
                 name: "WServices");
 
             migrationBuilder.DropTable(
                 name: "Workshops");
 
-            migrationBuilder.DropColumn(
-                name: "Address",
-                table: "AspNetUsers");
+            migrationBuilder.DropTable(
+                name: "Cars");
 
-            migrationBuilder.DropColumn(
-                name: "FirstName",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropColumn(
-                name: "MiddleName",
-                table: "AspNetUsers");
-
-            migrationBuilder.DropColumn(
-                name: "SurName",
-                table: "AspNetUsers");
-
-            migrationBuilder.CreateTable(
-                name: "Settings",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Settings", x => x.Id);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Settings_IsDeleted",
-                table: "Settings",
-                column: "IsDeleted");
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

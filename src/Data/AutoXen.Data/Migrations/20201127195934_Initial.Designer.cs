@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoXen.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201125163212_ChangeWorkshopIdToRequired")]
-    partial class ChangeWorkshopIdToRequired
+    [Migration("20201127195934_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -888,6 +888,9 @@ namespace AutoXen.Data.Migrations
                     b.Property<string>("AcceptedById")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<bool>("AdminChooseWorkshop")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("CarDone")
                         .HasColumnType("bit");
 
@@ -910,12 +913,30 @@ namespace AutoXen.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("OtherServices")
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
+
+                    b.Property<bool>("PickUpFastAsPossible")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PickUpLocation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
+
+                    b.Property<DateTime?>("PickUpTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("PickedUp")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ReturnedCar")
+                        .HasColumnType("bit");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("WorkshopServiceId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -930,7 +951,33 @@ namespace AutoXen.Data.Migrations
                     b.ToTable("WorkshopRequests");
                 });
 
-            modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopRequestServices", b =>
+            modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopRequestWService", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("WServiceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WorkshopRequestId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WServiceId");
+
+                    b.HasIndex("WorkshopRequestId");
+
+                    b.ToTable("WorkshopRequestWServices");
+                });
+
+            modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopRequestWorkshopService", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -956,7 +1003,7 @@ namespace AutoXen.Data.Migrations
 
                     b.HasIndex("WorkshopServiceId");
 
-                    b.ToTable("WorkshopRequestServices");
+                    b.ToTable("WorkshopRequestWorkshopServices");
                 });
 
             modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopService", b =>
@@ -1281,10 +1328,23 @@ namespace AutoXen.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopRequestServices", b =>
+            modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopRequestWService", b =>
+                {
+                    b.HasOne("AutoXen.Data.Models.Workshop.WService", "WService")
+                        .WithMany()
+                        .HasForeignKey("WServiceId");
+
+                    b.HasOne("AutoXen.Data.Models.Workshop.WorkshopRequest", "WorkshopRequest")
+                        .WithMany()
+                        .HasForeignKey("WorkshopRequestId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopRequestWorkshopService", b =>
                 {
                     b.HasOne("AutoXen.Data.Models.Workshop.WorkshopRequest", "WorkshopRequest")
-                        .WithMany("WorkshopRequestServices")
+                        .WithMany("WorkshopRequestWorkshopServices")
                         .HasForeignKey("WorkshopRequestId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1299,7 +1359,7 @@ namespace AutoXen.Data.Migrations
             modelBuilder.Entity("AutoXen.Data.Models.Workshop.WorkshopService", b =>
                 {
                     b.HasOne("AutoXen.Data.Models.Workshop.WService", "Service")
-                        .WithMany()
+                        .WithMany("WorkshopServices")
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

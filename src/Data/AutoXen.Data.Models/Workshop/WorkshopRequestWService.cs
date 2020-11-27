@@ -2,17 +2,17 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using AutoXen.Data.Common.Models;
-
-    public class WorkshopRequestServices : BaseModel<int>
+    public class WorkshopRequestWService
     {
+        public int Id { get; set; }
+
+        public int WServiceId { get; set; }
+
+        public WService WService { get; set; }
+
         [Required]
         public string WorkshopRequestId { get; set; }
 
         public WorkshopRequest WorkshopRequest { get; set; }
-
-        public int WorkshopServiceId { get; set; }
-
-        public WorkshopService WorkshopService { get; set; }
     }
 }

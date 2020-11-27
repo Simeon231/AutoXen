@@ -76,7 +76,9 @@
 
         public DbSet<WService> WServices { get; set; }
 
-        public DbSet<WorkshopRequestServices> WorkshopRequestServices { get; set; }
+        public DbSet<WorkshopRequestWorkshopService> WorkshopRequestWorkshopServices { get; set; }
+
+        public DbSet<WorkshopRequestWService> WorkshopRequestWServices { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

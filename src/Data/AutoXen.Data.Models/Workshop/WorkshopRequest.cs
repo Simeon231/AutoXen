@@ -12,7 +12,7 @@
         public WorkshopRequest()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.WorkshopRequestServices = new HashSet<WorkshopRequestServices>();
+            this.WorkshopRequestWorkshopServices = new HashSet<WorkshopRequestWorkshopService>();
         }
 
         [MaxLength(300)]
@@ -34,7 +34,7 @@
 
         public bool ReturnedCar { get; set; }
 
-        public ICollection<WorkshopRequestServices> WorkshopRequestServices { get; set; }
+        public ICollection<WorkshopRequestWorkshopService> WorkshopRequestWorkshopServices { get; set; }
 
         public string AcceptedById { get; set; }
 
