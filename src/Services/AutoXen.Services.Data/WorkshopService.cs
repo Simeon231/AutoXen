@@ -21,7 +21,7 @@
         private readonly IRepository<AutoXen.Data.Models.Workshop.WorkshopService> workshopServiceRepository;
         private readonly IRepository<WorkshopRequestWorkshopService> workshopRequestServiceRepository;
         private readonly IRepository<WorkshopRequestWService> workshopRequestWService;
-        private readonly IDeletableEntityRepository<Car> carsRepository;
+        private readonly ICarService carService;
         private readonly IMapper mapper;
 
         public WorkshopService(
@@ -31,7 +31,7 @@
             IRepository<AutoXen.Data.Models.Workshop.WorkshopService> workshopServiceRepository,
             IRepository<WorkshopRequestWorkshopService> workshopRequestServiceRepository,
             IRepository<WorkshopRequestWService> workshopRequestWService,
-            IDeletableEntityRepository<Car> carsRepository,
+            ICarService carService,
             IMapper mapper)
         {
             this.workshopRequestRepository = workshopRequestRepository;
@@ -40,16 +40,20 @@
             this.workshopServiceRepository = workshopServiceRepository;
             this.workshopRequestServiceRepository = workshopRequestServiceRepository;
             this.workshopRequestWService = workshopRequestWService;
-            this.carsRepository = carsRepository;
+            this.carService = carService;
             this.mapper = mapper;
         }
 
+        /// <summary>
+        /// <exception>Throws InvalidCarException.</exception>
+        /// </summary>
         public async Task AddWorkshopRequestAsync(WorkshopRequestViewModel model, string userId)
         {
+            this.carService.CheckUserHasCar(userId, model.CarId);
+
             var request = this.mapper.Map<WorkshopRequest>(model);
             request.UserId = userId;
             await this.workshopRequestRepository.AddAsync(request);
-            await this.workshopRequestRepository.SaveChangesAsync();
 
             if (model.Ids != null && this.workshopRepository.AllAsNoTracking().Any(x => x.Id == model.WorkshopId))
             {
@@ -81,10 +85,8 @@
 
                 await this.workshopRequestWService.SaveChangesAsync();
             }
-            else
-            {
-                // TODO throw exception
-            }
+
+            await this.workshopRequestRepository.SaveChangesAsync();
         }
 
         public IEnumerable<WorkshopRequest> GetWorkshopRequests(string userId)

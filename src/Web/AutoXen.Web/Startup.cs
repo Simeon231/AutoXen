@@ -13,6 +13,7 @@
     using AutoXen.Services.Data.Requests;
     using AutoXen.Services.Mapping;
     using AutoXen.Services.Messaging;
+    using AutoXen.Web.ModelBinders;
     using AutoXen.Web.ViewModels;
 
     using Microsoft.AspNetCore.Builder;
@@ -53,6 +54,7 @@
                 options =>
                     {
                         options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                        options.ModelBinderProviders.Insert(0, new TrimModelBinderProvider());
                     }).AddRazorRuntimeCompilation();
             services.AddRazorPages();
 

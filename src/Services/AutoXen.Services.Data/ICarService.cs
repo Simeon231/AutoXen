@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using AutoXen.Data.Models.Car;
     using AutoXen.Web.ViewModels;
 
     public interface ICarService
@@ -22,5 +23,10 @@
         public Task ChangeCarDetailsAsync(DetailedCarWithIdViewModel model);
 
         public Task Delete(string carId);
+
+        /// <summary>
+        /// <exception>Throws InvalidCarException.</exception>
+        /// </summary>
+        public void CheckUserHasCar(string userId, string carId);
     }
 }

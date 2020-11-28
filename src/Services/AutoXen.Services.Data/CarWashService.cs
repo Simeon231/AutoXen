@@ -9,6 +9,7 @@
     using AutoXen.Data.Common.Repositories;
     using AutoXen.Data.Models.Car;
     using AutoXen.Data.Models.CarWash;
+    using AutoXen.Services.Data.Exceptions;
     using AutoXen.Web.ViewModels;
     using Microsoft.EntityFrameworkCore;
 
@@ -16,29 +17,27 @@
     {
         private readonly IRepository<CarWashRequest> carWashRequestRepository;
         private readonly IDeletableEntityRepository<CarWash> carWashRepository;
-        private readonly IDeletableEntityRepository<Car> carRepository;
+        private readonly ICarService carService;
         private readonly IMapper mapper;
 
         public CarWashService(
             IRepository<CarWashRequest> carWashRequestRepository,
             IDeletableEntityRepository<CarWash> carWashRepository,
-            IDeletableEntityRepository<Car> carRepository,
+            ICarService carService,
             IMapper mapper)
         {
             this.carWashRequestRepository = carWashRequestRepository;
             this.carWashRepository = carWashRepository;
-            this.carRepository = carRepository;
+            this.carService = carService;
             this.mapper = mapper;
         }
 
+        /// <summary>
+        /// <exception>Throws InvalidCarException.</exception>
+        /// </summary>
         public async Task AddCarWashRequestAsync(CarWashRequestViewModel model, string userId)
         {
-            var car = this.carRepository.AllAsNoTracking().FirstOrDefault(x => x.Id == model.CarId);
-
-            if (car == null)
-            {
-                throw new NullReferenceException("Invalid car");
-            }
+            this.carService.CheckUserHasCar(userId, model.CarId);
 
             if (model.PickUp.FastAsPossible)
             {

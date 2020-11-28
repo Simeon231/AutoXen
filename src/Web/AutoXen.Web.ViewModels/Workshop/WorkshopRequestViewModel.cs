@@ -4,10 +4,8 @@
     using System.ComponentModel.DataAnnotations;
 
     using AutoXen.Web.ViewModels.Common;
-    using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-    // TODO ServiceIds or OtherServices must be not null
-    public class WorkshopRequestViewModel
+    public class WorkshopRequestViewModel : IValidatableObject
     {
         public int WorkshopId { get; set; }
 
@@ -23,6 +21,15 @@
 
         [MaxLength(300)]
         [Display(Name = "Your problems are not listed? Write them here.")]
+        [MinLength(5)]
         public string OtherServices { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (this.Ids == null && this.OtherServices == null)
+            {
+                yield return new ValidationResult("You must enter atleast one problem");
+            }
+        }
     }
 }

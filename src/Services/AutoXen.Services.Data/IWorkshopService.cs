@@ -8,6 +8,9 @@
 
     public interface IWorkshopService
     {
+        /// <summary>
+        /// <exception>Throws InvalidCarException.</exception>
+        /// </summary>
         public Task AddWorkshopRequestAsync(WorkshopRequestViewModel model, string userId);
 
         public IEnumerable<WorkshopRequest> GetWorkshopRequests(string userId);

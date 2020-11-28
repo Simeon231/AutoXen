@@ -9,6 +9,7 @@
     using AutoXen.Data.Common.Repositories;
     using AutoXen.Data.Models.Car;
     using AutoXen.Data.Models.Enums;
+    using AutoXen.Services.Data.Exceptions;
     using AutoXen.Web.ViewModels;
 
     public class CarService : ICarService
@@ -112,6 +113,20 @@
             car.CarExtras = this.GetExtras(dbCar.Id);
 
             return car;
+        }
+
+        /// <summary>
+        /// <exception>Throws InvalidCarException.</exception>
+        /// </summary>
+        public void CheckUserHasCar(string userId, string carId)
+        {
+            var car = this.carRepository.AllAsNoTracking().FirstOrDefault(x => x.Id == carId && x.UserId == userId);
+            var usercars = this.carRepository.AllAsNoTracking().Where(x => x.UserId == userId);
+            var curcar = this.carRepository.AllAsNoTracking().Where(x => x.Id == carId);
+            if (car == null)
+            {
+                throw new InvalidCarException("Pick a valid car.");
+            }
         }
 
         private IEnumerable<int> GetExtras(string carId)
