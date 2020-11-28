@@ -13,7 +13,8 @@
     using AutoXen.Services.Data.Requests;
     using AutoXen.Services.Mapping;
     using AutoXen.Services.Messaging;
-    using AutoXen.Web.ModelBinders;
+    using AutoXen.Web.Infrastructure.ModelBinders;
+    using AutoXen.Web.Infrastructure.Profiles;
     using AutoXen.Web.ViewModels;
 
     using Microsoft.AspNetCore.Builder;
@@ -65,7 +66,7 @@
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(CarProfile));
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
@@ -78,6 +79,7 @@
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // TODO remove
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             // Seed data on application startup

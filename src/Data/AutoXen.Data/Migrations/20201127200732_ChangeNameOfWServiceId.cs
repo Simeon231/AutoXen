@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace AutoXen.Data.Migrations
+﻿namespace AutoXen.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class ChangeNameOfWServiceId : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

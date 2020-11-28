@@ -19,7 +19,7 @@
         ////[BindNever]
         ////public IEnumerable<CarViewModel> Cars { get; set; }
 
-        // TODO:
+        // TODO Add messages
         // public IEnumerable<string> Messages { get; set; }
     }
 }

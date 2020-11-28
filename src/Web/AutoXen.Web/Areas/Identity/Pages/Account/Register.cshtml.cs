@@ -19,17 +19,17 @@
     using Microsoft.Extensions.Logging;
 
     [AllowAnonymous]
-    public class RegisterModel : PageModel
+    public class Register : PageModel
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly ILogger<RegisterModel> logger;
+        private readonly ILogger<Register> logger;
         private readonly IEmailSender emailSender;
 
-        public RegisterModel(
+        public Register(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            ILogger<RegisterModel> logger,
+            ILogger<Register> logger,
             IEmailSender emailSender)
         {
             this.userManager = userManager;

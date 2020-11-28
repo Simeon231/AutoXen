@@ -6,7 +6,7 @@ if (deleteBtn != null) {
     }))
 }
 
-// convert datetime to datetime.now
+// convert datetime.utc to user's datetime.now
 var dates = document.getElementsByName('date');
 
 if (dates != null) {

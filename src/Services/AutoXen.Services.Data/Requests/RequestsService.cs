@@ -15,7 +15,6 @@
 
     public class RequestsService : IRequestsService
     {
-        private readonly string carWashName = "Car wash";
         private readonly IDeletableEntityRepository<CarWashRequest> carWashRequestRepository;
         private readonly IDeletableEntityRepository<WorkshopRequest> workshopRequestRepository;
         private readonly IDeletableEntityRepository<AnnualTechnicalInspectionRequest> annualTechnicalInspectionRequestRepository;

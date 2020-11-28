@@ -1,4 +1,4 @@
-﻿namespace AutoXen.Web.ModelBinders
+﻿namespace AutoXen.Web.Infrastructure.ModelBinders
 {
     using System;
 

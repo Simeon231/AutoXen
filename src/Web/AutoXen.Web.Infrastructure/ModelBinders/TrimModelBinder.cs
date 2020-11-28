@@ -1,4 +1,4 @@
-﻿namespace AutoXen.Web.ModelBinders
+﻿namespace AutoXen.Web.Infrastructure.ModelBinders
 {
     using System;
     using System.Threading.Tasks;
@@ -27,7 +27,6 @@
               !string.IsNullOrEmpty(str))
             {
                 objModelBindingContext.Result = ModelBindingResult.Success(str.Trim());
-                return Task.CompletedTask;
             }
 
             ////return this.objIModelBinder.BindModelAsync(objModelBindingContext);

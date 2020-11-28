@@ -19,16 +19,16 @@
         [Display(Name = "Every workshop")]
         public bool AdminChooseWorkshop { get; set; }
 
-        [MaxLength(300)]
         [Display(Name = "Your problems are not listed? Write them here.")]
-        [MinLength(5)]
+        [MaxLength(300, ErrorMessage = "Maximum length is 300.")]
+        [MinLength(5, ErrorMessage = "Minimum length is 5.")]
         public string OtherServices { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (this.Ids == null && this.OtherServices == null)
             {
-                yield return new ValidationResult("You must enter atleast one problem");
+                yield return new ValidationResult("You must enter atleast one problem.");
             }
         }
     }

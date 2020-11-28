@@ -1,4 +1,4 @@
-﻿namespace AutoXen.Web.ViewModels.Validation_Atributes
+﻿namespace AutoXen.Web.ViewModels.ValidationAtributes
 {
     using System;
     using System.ComponentModel.DataAnnotations;

@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using AutoXen.Data.Models.Enums;
-    using AutoXen.Web.ViewModels.Validation_Atributes;
+    using AutoXen.Web.ViewModels.ValidationAtributes;
 
     // TODO remove interfaces, move all view models to folders and delete Mapping
     public class DetailedCarWithoutIdViewModel

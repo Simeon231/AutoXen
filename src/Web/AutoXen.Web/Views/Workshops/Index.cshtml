@@ -6,7 +6,9 @@
 <form method="post">
     <div class="form-row">
         <div class="col-md-8">
-            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="d-flex justify-content-center">
+                <div asp-validation-summary="All" class="text-danger"></div>
+            </div>
 
             <partial name="_CarsPartial" model="Model.CarId" />
 
