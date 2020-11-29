@@ -27,6 +27,7 @@
             var seeders = new List<ISeeder>
                           {
                               new RolesSeeder(),
+                              new AdminSeeder(),
                               new CarWashesSeeder(),
                               new ExtrasSeeder(),
                               new WorkshopSeeder(),

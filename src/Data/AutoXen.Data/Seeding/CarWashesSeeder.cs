@@ -6,7 +6,7 @@
 
     using AutoXen.Data.Models.CarWash;
 
-    public class CarWashesSeeder : ISeeder
+    internal class CarWashesSeeder : ISeeder
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {

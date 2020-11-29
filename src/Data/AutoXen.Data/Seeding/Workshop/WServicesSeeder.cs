@@ -6,7 +6,7 @@
 
     using AutoXen.Data.Models.Workshop;
 
-    public class WServicesSeeder : ISeeder
+    internal class WServicesSeeder : ISeeder
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
