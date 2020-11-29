@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using AutoXen.Services.Data;
+    using AutoXen.Services.Data.Exceptions;
     using AutoXen.Web.ViewModels;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -46,10 +47,31 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
+        ////[Authorize]
+        ////[HttpPost]
+        ////public IActionResult GetDetails(string id)
+        ////{
+        ////    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        ////    var model = this.carService.GetCarDetails(id, userId);
+        ////    return this.View("~/Views/Cars/Car.cshtml", model);
+        ////}
+
         [Authorize]
         public IActionResult Details(string id)
         {
-            var model = this.carService.GetCarDetails(id);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            DetailedCarWithoutIdViewModel model;
+
+            try
+            {
+                model = this.carService.GetCarDetails(id, userId);
+            }
+            catch (WrongCarOwnerException)
+            {
+                return this.Redirect("/");
+            }
+
             return this.View("~/Views/Cars/Car.cshtml", model);
         }
 
@@ -62,14 +84,33 @@
                 return this.View("~/Views/Cars/Car.cshtml", input);
             }
 
-            await this.carService.ChangeCarDetailsAsync(input);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            try
+            {
+                await this.carService.ChangeCarDetailsAsync(input, userId);
+            }
+            catch (WrongCarOwnerException)
+            {
+                return this.Redirect("/");
+            }
+
             return this.RedirectToAction(nameof(this.All));
         }
 
         [Authorize]
         public async Task<IActionResult> Delete(string id)
         {
-            await this.carService.Delete(id);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            try
+            {
+                await this.carService.Delete(id, userId);
+            }
+            catch (WrongCarOwnerException)
+            {
+                return this.Redirect("/");
+            }
 
             return this.RedirectToAction(nameof(this.All));
         }

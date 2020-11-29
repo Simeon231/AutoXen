@@ -63,21 +63,31 @@
                 .ToList();
         }
 
-        public async Task ChangeCarDetailsAsync(DetailedCarWithIdViewModel model)
+        public async Task ChangeCarDetailsAsync(DetailedCarWithIdViewModel model, string userId)
         {
-            var car = this.carRepository.All().FirstOrDefault(x => x.Id == model.Id);
+            var dbCar = this.GetCar(model.Id, userId);
 
-            this.mapper.Map(model, car);
-            await this.AddExtrasToDbAsync(car.Id, model.CarExtras);
+            if (dbCar == null)
+            {
+                throw new WrongCarOwnerException("You are not the car owner!");
+            }
+
+            this.mapper.Map(model, dbCar);
+            await this.AddExtrasToDbAsync(dbCar.Id, model.CarExtras);
 
             await this.carRepository.SaveChangesAsync();
         }
 
-        public async Task Delete(string carId)
+        public async Task Delete(string carId, string userId)
         {
-            var car = this.carRepository.All().FirstOrDefault(x => x.Id == carId);
+            var dbCar = this.GetCar(carId, userId);
 
-            this.carRepository.Delete(car);
+            if (dbCar == null)
+            {
+                throw new WrongCarOwnerException("You are not the car owner!");
+            }
+
+            this.carRepository.Delete(dbCar);
             await this.carRepository.SaveChangesAsync();
         }
 
@@ -105,9 +115,14 @@
             return fuelTypes;
         }
 
-        public DetailedCarWithoutIdViewModel GetCarDetails(string carId)
+        public DetailedCarWithoutIdViewModel GetCarDetails(string carId, string userId)
         {
-            var dbCar = this.carRepository.AllAsNoTracking().FirstOrDefault(x => x.Id == carId);
+            var dbCar = this.GetCar(carId, userId);
+
+            if (dbCar == null)
+            {
+                throw new WrongCarOwnerException("You are not the car owner!");
+            }
 
             var car = this.mapper.Map<DetailedCarWithIdViewModel>(dbCar);
             car.CarExtras = this.GetExtras(dbCar.Id);
@@ -127,6 +142,11 @@
             {
                 throw new InvalidCarException("Pick a valid car.");
             }
+        }
+
+        private Car GetCar(string carId, string userId)
+        {
+            return this.carRepository.AllAsNoTracking().FirstOrDefault(x => x.Id == carId && x.UserId == userId);
         }
 
         private IEnumerable<int> GetExtras(string carId)

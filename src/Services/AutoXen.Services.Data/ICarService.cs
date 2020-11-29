@@ -14,15 +14,15 @@
 
         public IEnumerable<ExtraViewModel> GetAllExtras();
 
-        public DetailedCarWithoutIdViewModel GetCarDetails(string carId);
+        public DetailedCarWithoutIdViewModel GetCarDetails(string carId, string userId);
 
         public List<string> GetAllFuelTypes();
 
         public List<string> GetAllTransmissionTypes();
 
-        public Task ChangeCarDetailsAsync(DetailedCarWithIdViewModel model);
+        public Task ChangeCarDetailsAsync(DetailedCarWithIdViewModel model, string userId);
 
-        public Task Delete(string carId);
+        public Task Delete(string carId, string userId);
 
         /// <summary>
         /// <exception>Throws InvalidCarException.</exception>
