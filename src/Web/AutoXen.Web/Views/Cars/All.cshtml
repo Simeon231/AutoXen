@@ -13,7 +13,6 @@
             <th>Model</th>
             <th>Registration Number</th>
             <th>Details</th>
-            <th>Delete</th>
         </tr>
         @foreach (var car in Model)
         {
@@ -21,8 +20,7 @@
                 <td>@car.Brand</td>
                 <td>@car.Model</td>
                 <td>@car.RegistrationPlate</td>
-                <td><a class="btn btn-outline-info" asp-controller="Cars" asp-action="Details" asp-route-id="@car.Id">Details</a></td>
-                <td><a class="btn btn-outline-danger" asp-controller="Cars" asp-action="Delete" asp-route-id="@car.Id" onclick="return confirm('Are you sure you want to delete your car');">Delete</a></td>
+                <td><a class="btn btn-outline-info" asp-controller="Cars" asp-action="Details" asp-route-id="@car.Id">Details</a></td>                
             </tr>
         }
     </table>

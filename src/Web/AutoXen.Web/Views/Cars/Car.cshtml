@@ -1,6 +1,6 @@
 ﻿@using AutoXen.Services.Data
 @inject ICarService carService
-@model DetailedCarWithoutIdViewModel
+@model DetailedCarWithIdViewModel
 
 <h2>Your car:</h2>
 <form method="post">
@@ -91,11 +91,15 @@
     </div>
 
     <br />
+
     <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                <button type="submit" class="btn btn-success">Submit</button>
-            </div>
+        <div class="col text-center mb-2">
+            <button type="submit" class="btn btn-success" asp-controller="Cars" asp-action="Details">Submit</button>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-danger" asp-controller="Cars" asp-action="Delete" name="id" value="@Model.Id" onclick="return confirm('Are you sure you want to delete your car');">
+                Delete
+            </button>
         </div>
     </div>
 </form>

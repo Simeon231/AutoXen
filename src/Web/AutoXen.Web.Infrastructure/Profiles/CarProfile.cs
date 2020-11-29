@@ -15,9 +15,12 @@
                 .ForMember(x => x.CarExtras, opt => opt.Ignore())
                 .ReverseMap();
 
+            this.CreateMap<Car, DetailedCarWithIdViewModel>()
+                .ForMember(x => x.CarExtras, opt => opt.Ignore());
+
             this.CreateMap<DetailedCarWithIdViewModel, Car>()
                 .ForMember(x => x.CarExtras, opt => opt.Ignore())
-                .ReverseMap();
+                .ForMember(x => x.Id, opt => opt.Ignore());
         }
     }
 }

@@ -31,7 +31,7 @@
             this.mapper = mapper;
         }
 
-        public async Task AddCarAsync(string userId, DetailedCarWithoutIdViewModel model)
+        public async Task AddCarAsync(string userId, DetailedCarWithIdViewModel model)
         {
             var dbCar = this.mapper.Map<Car>(model);
             await this.carRepository.AddAsync(dbCar);
@@ -67,11 +67,6 @@
         {
             var dbCar = this.GetCar(model.Id, userId);
 
-            if (dbCar == null)
-            {
-                throw new WrongCarOwnerException("You are not the car owner!");
-            }
-
             this.mapper.Map(model, dbCar);
             await this.AddExtrasToDbAsync(dbCar.Id, model.CarExtras);
 
@@ -81,11 +76,6 @@
         public async Task Delete(string carId, string userId)
         {
             var dbCar = this.GetCar(carId, userId);
-
-            if (dbCar == null)
-            {
-                throw new WrongCarOwnerException("You are not the car owner!");
-            }
 
             this.carRepository.Delete(dbCar);
             await this.carRepository.SaveChangesAsync();
@@ -115,14 +105,9 @@
             return fuelTypes;
         }
 
-        public DetailedCarWithoutIdViewModel GetCarDetails(string carId, string userId)
+        public DetailedCarWithIdViewModel GetCarDetails(string carId, string userId)
         {
             var dbCar = this.GetCar(carId, userId);
-
-            if (dbCar == null)
-            {
-                throw new WrongCarOwnerException("You are not the car owner!");
-            }
 
             var car = this.mapper.Map<DetailedCarWithIdViewModel>(dbCar);
             car.CarExtras = this.GetExtras(dbCar.Id);
@@ -146,7 +131,14 @@
 
         private Car GetCar(string carId, string userId)
         {
-            return this.carRepository.AllAsNoTracking().FirstOrDefault(x => x.Id == carId && x.UserId == userId);
+            var dbCar = this.carRepository.All().FirstOrDefault(x => x.Id == carId && x.UserId == userId);
+
+            if (dbCar == null)
+            {
+                throw new WrongCarOwnerException("You are not the car owner!");
+            }
+
+            return dbCar;
         }
 
         private IEnumerable<int> GetExtras(string carId)

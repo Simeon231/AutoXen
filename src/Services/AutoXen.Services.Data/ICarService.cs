@@ -8,13 +8,13 @@
 
     public interface ICarService
     {
-        public Task AddCarAsync(string userId, DetailedCarWithoutIdViewModel model);
+        public Task AddCarAsync(string userId, DetailedCarWithIdViewModel model);
 
         public IEnumerable<CarViewModel> AllCars(string userId);
 
         public IEnumerable<ExtraViewModel> GetAllExtras();
 
-        public DetailedCarWithoutIdViewModel GetCarDetails(string carId, string userId);
+        public DetailedCarWithIdViewModel GetCarDetails(string carId, string userId);
 
         public List<string> GetAllFuelTypes();
 

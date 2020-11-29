@@ -34,7 +34,7 @@
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Add(DetailedCarWithoutIdViewModel car)
+        public async Task<IActionResult> Add(DetailedCarWithIdViewModel car)
         {
             if (!this.ModelState.IsValid)
             {
@@ -99,6 +99,7 @@
         }
 
         [Authorize]
+        [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
