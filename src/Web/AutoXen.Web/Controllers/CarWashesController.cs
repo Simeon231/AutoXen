@@ -57,17 +57,17 @@
             return this.Redirect("/Requests/Index");
         }
 
-        ////[Authorize]
-        ////public ActionResult Edit(int id)
-        ////{
-        ////    return this.View();
-        ////}
+        [Authorize]
+        public ActionResult Details(string id)
+        {
+            return this.View();
+        }
 
-        ////[HttpPost]
-        ////[Authorize]
-        ////public ActionResult Edit(int id, IFormCollection collection)
-        ////{
-        ////    return null;
-        ////}
+        [HttpPost]
+        [Authorize]
+        public ActionResult Details()
+        {
+            return null;
+        }
     }
 }

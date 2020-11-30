@@ -20,5 +20,7 @@
         public IEnumerable<ServiceModel> GetAllServices();
 
         public IEnumerable<WorkshopViewModel> GetAllWorkshops();
+
+        public WorkshopRequestDetailsViewModel GetWorkshopDetails(string userId, string requestId);
     }
 }

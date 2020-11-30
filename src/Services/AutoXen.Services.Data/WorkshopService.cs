@@ -19,7 +19,7 @@
         private readonly IRepository<WService> serviceRepository;
         private readonly IRepository<Workshop> workshopRepository;
         private readonly IRepository<AutoXen.Data.Models.Workshop.WorkshopService> workshopServiceRepository;
-        private readonly IRepository<WorkshopRequestWorkshopService> workshopRequestServiceRepository;
+        private readonly IRepository<WorkshopRequestWorkshopService> workshopRequestWorkshopServiceRepository;
         private readonly IRepository<WorkshopRequestWService> workshopRequestWService;
         private readonly ICarService carService;
         private readonly IMapper mapper;
@@ -29,7 +29,7 @@
             IRepository<WService> serviceRepository,
             IRepository<Workshop> workshopRepository,
             IRepository<AutoXen.Data.Models.Workshop.WorkshopService> workshopServiceRepository,
-            IRepository<WorkshopRequestWorkshopService> workshopRequestServiceRepository,
+            IRepository<WorkshopRequestWorkshopService> workshopRequestWorkshopServiceRepository,
             IRepository<WorkshopRequestWService> workshopRequestWService,
             ICarService carService,
             IMapper mapper)
@@ -38,7 +38,7 @@
             this.serviceRepository = serviceRepository;
             this.workshopRepository = workshopRepository;
             this.workshopServiceRepository = workshopServiceRepository;
-            this.workshopRequestServiceRepository = workshopRequestServiceRepository;
+            this.workshopRequestWorkshopServiceRepository = workshopRequestWorkshopServiceRepository;
             this.workshopRequestWService = workshopRequestWService;
             this.carService = carService;
             this.mapper = mapper;
@@ -65,10 +65,10 @@
                         WorkshopServiceId = id,
                     };
 
-                    await this.workshopRequestServiceRepository.AddAsync(requestServices);
+                    await this.workshopRequestWorkshopServiceRepository.AddAsync(requestServices);
                 }
 
-                await this.workshopRequestServiceRepository.SaveChangesAsync();
+                await this.workshopRequestWorkshopServiceRepository.SaveChangesAsync();
             }
             else if (model.Ids != null)
             {
@@ -96,6 +96,45 @@
                 .Include(x => x.Car)
                 .Where(x => x.UserId == userId)
                 .ToList();
+        }
+
+        public WorkshopRequestDetailsViewModel GetWorkshopDetails(string userId, string requestId)
+        {
+            var dbRequest = this.workshopRequestRepository
+                .AllAsNoTracking()
+                .Include(x => x.Car)
+                .Include(x => x.WorkshopRequestWorkshopServices)
+                .FirstOrDefault(x => x.UserId == userId && x.Id == requestId);
+
+            var request = this.mapper.Map<WorkshopRequestDetailsViewModel>(dbRequest);
+
+            if (dbRequest.AdminChooseWorkshop)
+            {
+                request.WServices = this.workshopRequestWService
+                    .AllAsNoTracking()
+                    .Include(x => x.WService)
+                    .Where(x => x.WorkshopRequestId == dbRequest.Id)
+                    .Select(x => this.mapper.Map<WServiceViewModel>(x.WService))
+                    .ToList();
+            }
+            else
+            {
+                request.WorkshopServices = this.workshopRequestWorkshopServiceRepository
+                    .AllAsNoTracking()
+                    .Where(x => x.WorkshopRequestId == dbRequest.Id)
+                    .Include(x => x.WorkshopService.Service)
+                    .Select(x => this.mapper.Map<WorkshopServiceViewModel>(x.WorkshopService))
+                    .ToList();
+
+                var dbWorkshopService = this.workshopRequestWorkshopServiceRepository
+                    .AllAsNoTracking()
+                    .Include(x => x.WorkshopService.Workshop)
+                    .FirstOrDefault(x => x.WorkshopRequestId == dbRequest.Id).WorkshopService.Workshop;
+
+                request.Workshop = this.mapper.Map<WorkshopViewModel>(dbWorkshopService);
+            }
+
+            return request;
         }
 
         public IEnumerable<WorkshopViewModel> GetAllWorkshops()

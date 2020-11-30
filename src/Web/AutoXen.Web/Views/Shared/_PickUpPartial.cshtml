@@ -1,16 +1,6 @@
 ﻿@model AutoXen.Web.ViewModels.Common.PickUpViewModel
 
 <div class="pb-4">
-    <div class="form-row pb-2 d-flex justify-content-center">
-        <div class="p-1 border col-sm-5">
-            <div class="text-center">
-                <label class="col-form-label" asp-for="FastAsPossible"></label>
-                <input class="form-check-inline" asp-for="FastAsPossible" name="PickUp.FastAsPossible" />
-                <span asp-validation-for="FastAsPossible" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-
     <div class="form-row">
         <div class="col-md-6">
             <div class="text-center">
@@ -21,7 +11,8 @@
         </div>
         <div class="col-md-6">
             <div class="text-center">
-                <label class="col-form-label" asp-for="Time"></label>
+                <label class="col-form-label" asp-for="FastAsPossible"></label>
+                <input class="form-check-inline" asp-for="FastAsPossible" name="PickUp.FastAsPossible" />
                 <input class="input-group form-control" asp-for="Time" name="PickUp.Time" />
                 <span asp-validation-for="Time" class="text-danger"></span>
             </div>

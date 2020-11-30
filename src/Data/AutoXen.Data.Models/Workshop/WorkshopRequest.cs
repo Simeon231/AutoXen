@@ -15,10 +15,15 @@
             this.WorkshopRequestWorkshopServices = new HashSet<WorkshopRequestWorkshopService>();
         }
 
-        [MaxLength(300)]
-        public string OtherServices { get; set; }
+        public bool CarWashingDone { get; set; }
 
-        public bool CarDone { get; set; }
+        public DateTime? FinishedOn { get; set; }
+
+        public bool ReturnedCar { get; set; }
+
+        public bool PickedUp { get; set; }
+
+        public bool AdminChooseWorkshop { get; set; }
 
         [Required]
         [MaxLength(150)]
@@ -26,13 +31,10 @@
 
         public bool PickUpFastAsPossible { get; set; }
 
-        public bool AdminChooseWorkshop { get; set; }
-
         public DateTime? PickUpTime { get; set; }
 
-        public bool PickedUp { get; set; }
-
-        public bool ReturnedCar { get; set; }
+        [MaxLength(300)]
+        public string OtherServices { get; set; }
 
         public ICollection<WorkshopRequestWorkshopService> WorkshopRequestWorkshopServices { get; set; }
 
@@ -50,10 +52,9 @@
 
         public Car Car { get; set; }
 
-        public DateTime? FinishedOn { get; set; }
-
         //// public ICollection<Message> Messages { get; set; }
 
+        // Used by WorkshopProfile
         public override string ToString()
         {
             return "Workshop";

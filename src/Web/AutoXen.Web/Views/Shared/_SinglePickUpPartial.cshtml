@@ -1,0 +1,20 @@
+﻿@using AutoXen.Web.ViewModels.Workshop
+@model WorkshopRequestDetailsViewModel
+
+<div class="pb-4">
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class="text-center">
+                <label class="text-muted col-form-label" asp-for="PickUpLocation"></label>
+                <input disabled class="input-group form-control" asp-for="PickUpLocation" />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="text-center">
+                <label class="text-muted col-form-label" asp-for="PickUpTime"></label>
+                <input disabled class="form-check-inline" asp-for="PickUpFastAsPossible" />
+                <input disabled class="input-group form-control" asp-for="PickUpTime" />
+            </div>
+        </div>
+    </div>
+</div> 

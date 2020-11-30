@@ -1,0 +1,118 @@
+﻿@using AutoXen.Common
+@using AutoXen.Web.ViewModels.Workshop
+@model WorkshopRequestDetailsViewModel
+
+<div class="form-row">
+    <div class="col-md-8">
+        <div class="d-flex justify-content-center">
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+
+        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+        {
+            <div class="row">
+                <div class="text-center col-md-4">
+                    <label class="col-form-label" asp-for="PickedUp"></label>
+                    <input class="form-check-inline" asp-for="PickedUp" />
+                </div>
+                <div class="text-center col-md-4">
+                    <label class="col-form-label" asp-for="CarWashingDone"></label>
+                    <input class="form-check-inline" asp-for="CarWashingDone" />
+                </div>
+                <div class="text-center col-md-4">
+                    <label class="col-form-label" asp-for="ReturnedCar"></label>
+                    <input class="form-check-inline" asp-for="ReturnedCar" />
+                </div>
+            </div>
+
+            <div class="row d-flex justify-content-center">
+                <div class="text-center col-sm-5">
+                    <label class=" col-form-label" asp-for="FinishedOn"></label>
+                    <input class="form-control" asp-for="FinishedOn" />
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="text-center col-md-4">
+                    <label class="text-muted col-form-label" asp-for="PickedUp"></label>
+                    <input disabled class="form-check-inline" asp-for="PickedUp" />
+                </div>
+                <div class="text-center col-md-4">
+                    <label class="text-muted col-form-label" asp-for="CarWashingDone"></label>
+                    <input disabled class="form-check-inline" asp-for="CarWashingDone" />
+                </div>
+                <div class="text-center col-md-4">
+                    <label class="text-muted col-form-label" asp-for="ReturnedCar"></label>
+                    <input disabled class="form-check-inline" asp-for="ReturnedCar" />
+                </div>
+            </div>
+
+            <div class="row d-flex justify-content-center">
+                <div class="text-center col-sm-5">
+                    <label class=" text-muted col-form-label" asp-for="FinishedOn"></label>
+                    <input disabled class="form-control" asp-for="FinishedOn" />
+                </div>
+            </div>
+        }
+
+        <hr />
+
+        <partial name="_SingleCarPartial" model="Model.Car" />
+
+        <partial name="_SinglePickUpPartial" model="@Model" />
+
+        <div class="form-row d-flex justify-content-center">
+            <div class="col-md-9 mb-3 text-center">
+                @if (Model.AdminChooseWorkshop)
+                {
+                    <label class="text-muted col-form-label" asp-for="AdminChooseWorkshop"></label>
+                    <input disabled class="form-check-inline" asp-for="AdminChooseWorkshop" />
+                    <input class="form-control" disabled value="You didn't pick a workshop" />
+                }
+                else
+                {
+                    <label class="text-muted col-form-label" asp-for="AdminChooseWorkshop"></label>
+                    <input disabled class="form-check-inline" asp-for="AdminChooseWorkshop" />
+                    <input class="form-control" disabled value="@($"{Model.Workshop.Name} - {Model.Workshop.Address}")" />
+                }
+            </div>
+        </div>
+
+        <div class="form-row mb-2 mt-1 d-flex justify-content-center">
+            @if (Model.AdminChooseWorkshop)
+            {
+                <select disabled class="js-example-basic-multiple col-md-9 form-control" asp-for="@Model.WServices" multiple="multiple">
+                    @foreach (var service in Model.WServices)
+                    {
+                        <option selected>@service.Name</option>
+                    }
+                </select>
+            }
+            else
+            {
+                <select disabled class="js-example-basic-multiple col-md-9 form-control" asp-for="@Model.WorkshopServices" multiple="multiple">
+                    @foreach (var service in Model.WorkshopServices)
+                    {
+                        <option selected>@($"{service.ServiceName} - {service.Price}")</option>
+                    }
+                </select>
+            }
+        </div>
+
+            <div class="pb-3 d-flex justify-content-center">
+                <div class="col-md-10">
+                    <div class="text-center">
+                        <label class="text-muted col-form-label" asp-for="OtherServices"></label>
+                        <textarea disabled class="form-control" asp-for="OtherServices" rows="4"> </textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="col-md-4">
+        <label class="col-form-label text-center">Write your message</label>
+        <textarea class="form-control input-group" rows="20"></textarea>
+    </div>
+</div>

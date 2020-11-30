@@ -46,5 +46,14 @@
 
             return this.Redirect("Requests/Index");
         }
+
+        [Authorize]
+        public IActionResult Details(string id)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var model = this.workshopService.GetWorkshopDetails(userId, id);
+
+            return this.View(model);
+        }
     }
 }
