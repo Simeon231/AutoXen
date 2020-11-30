@@ -58,10 +58,6 @@
                         options.ModelBinderProviders.Insert(0, new TrimModelBinderProvider());
                     }).AddRazorRuntimeCompilation();
             services.AddRazorPages();
-            services.AddAntiforgery(options =>
-            {
-                options.HeaderName = "X-CSRF-TOKEN";
-            });
 
             services.AddSingleton(this.configuration);
 

@@ -26,11 +26,7 @@ function EnableDisableWorkshops(btn) {
 
 // Fetch
 function GetAllServices() {
-    var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
-    fetch("api/WorkshopServices"{
-        "method": "GET",
-        "headers": { "X-CSRF-TOKEN": antiForgeryToken }
-    })
+    fetch("api/WorkshopServices")
     .then(resources => resources.json())
     .then(data => {
         AddServicesToSelect(data);
@@ -39,11 +35,7 @@ function GetAllServices() {
 
 function GetWorkshopServices(workshop) {
     const id = workshop.selectedOptions[0].value;
-    var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
-    fetch(`api/WorkshopServices/${id}`, {
-        "method": "GET",
-        "headers": { "X-CSRF-TOKEN": antiForgeryToken }
-    })
+    fetch(`api/WorkshopServices/${id}`)
     .then(resources => resources.json())
     .then(data => {
         AddServicesToSelect(data);
