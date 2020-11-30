@@ -26,20 +26,28 @@ function EnableDisableWorkshops(btn) {
 
 // Fetch
 function GetAllServices() {
-    fetch("api/WorkshopServices")
-        .then(resources => resources.json())
-        .then(data => {
-            AddServicesToSelect(data);
-        });
+    var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+    fetch("api/WorkshopServices"{
+        "method": "GET",
+        "headers": { "X-CSRF-TOKEN": antiForgeryToken }
+    })
+    .then(resources => resources.json())
+    .then(data => {
+        AddServicesToSelect(data);
+    });
 }
 
 function GetWorkshopServices(workshop) {
     const id = workshop.selectedOptions[0].value;
-    fetch(`api/WorkshopServices/${id}`)
-        .then(resources => resources.json())
-        .then(data => {
-            AddServicesToSelect(data);
-        });
+    var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+    fetch(`api/WorkshopServices/${id}`, {
+        "method": "GET",
+        "headers": { "X-CSRF-TOKEN": antiForgeryToken }
+    })
+    .then(resources => resources.json())
+    .then(data => {
+        AddServicesToSelect(data);
+    });
 }
 
 function AddServicesToSelect(data) {

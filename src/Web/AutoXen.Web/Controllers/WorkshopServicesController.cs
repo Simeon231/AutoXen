@@ -10,6 +10,7 @@
 
     [ApiController]
     [Route("api/[controller]")]
+    ////[ValidateAntiForgeryToken]
     public class WorkshopServicesController : ControllerBase
     {
         private readonly IWorkshopService workshopService;
