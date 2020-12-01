@@ -2,8 +2,8 @@
 @model CarWashRequestViewModel
 @inject ICarWashService washService
 
-<form method="post">
-    <div class="row mt-2">
+<form method="post" class=" d-flex justify-content-center">
+    <div class="row mt-2 container">
         <div class="col-md-8">
             <div asp-validation-summary="All" class="text-danger"></div>
 
@@ -11,7 +11,6 @@
 
             <partial name="_PickUpPartial" model="@Model.PickUp" />
 
-            <br />
             <div class="form-row d-flex justify-content-center">
                 <div class="border p-1 col-md-4">
                     <div class="text-center">
@@ -28,35 +27,36 @@
                     </div>
                 </div>
             </div>
-            <br />
 
-            <div class="form-row ml-2">
+            <div class="form-row">
                 @foreach (var carWash in washService.GetAllCarWashes())
                 {
-                <div class="col m-2 form-check">
+                <div class="col col-sm-2 m-3 form-check">
                     @if (Model.CarWashId != null && Model.CarWashId == carWash.Id)
                     {
                         <input type="radio" checked class="form-check-input" value="@carWash.Id" name="CarWashId" id="@carWash.Id"/>
                     }
                     else
                     {
-                        <input type="radio" class="form-check-input" value="@carWash.Id" name="CarWashId" id="@carWash.Id"/>
+                        <input type="radio" class="form-check-input " value="@carWash.Id" name="CarWashId" id="@carWash.Id"/>
                     }
-                    <label class="form-check-label" for="@carWash.Id">@carWash.Name</label>
+                    <label class="form-check-label nowrap" for="@carWash.Id">@carWash.Name</label>
                 </div>
                 }
             </div>
-            <br />
-            <div class="row">
+
+            <div class="row mt-2">
                 <div class="col text-center">
                     <button type="submit" class="btn btn-success">Submit</button>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <label class="col-form-label text-center">Write your message</label>
-            <textarea class="form-control input-group" rows="20"></textarea>
+        <div class="col-md-4 mt-2">
+            <div class="text-center">
+                <label for="messages" class="col-form-label">Write your message</label>
+            </div>
+            <textarea id="messages" class="form-control input-group" rows="20"></textarea>
         </div>
     </div>
 </form>

@@ -41,17 +41,13 @@ html {
     min-height: 100%;
 }
 
-body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
-}
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     white-space: nowrap;
     /* Set the fixed height of the footer here */
-    height: 60px;
+    height: 30px;
     line-height: 60px; /* Vertically center the text there */
 }
 
@@ -89,4 +85,8 @@ nav div div ul li a{
 
 .custom-toggler.navbar-toggler {
     border-color: rgb(255,196,81);
-} 
+}
+
+.nowrap {
+    white-space: nowrap;
+}

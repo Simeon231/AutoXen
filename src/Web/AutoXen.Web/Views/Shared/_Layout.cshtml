@@ -20,7 +20,7 @@
     <link href="~/theme/owl.carousel.min.css" rel="stylesheet" />
     <link href="~/theme/remixicon.css" rel="stylesheet" />
     <link href="~/theme/venobox.min.css" rel="stylesheet" />
-    <link href="~/theme/style.css" rel="stylesheet" asp-append-version="true"/>
+    <link href="~/theme/style.css" rel="stylesheet" asp-append-version="true" />
     <!-- /theme -->
     <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
 </head>
@@ -71,18 +71,80 @@
         </nav>
     </header>
 
-    <div class="container-fluid">
-        <partial name="_CookieConsentPartial" />
-        <main role="main">
-            @this.RenderBody()
-        </main>
-    </div>
+    <partial name="_CookieConsentPartial" />
+    <main role="main" class="">
+        @this.RenderBody()
+    </main>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-controller="Home" asp-action="About" asp-area="">About</a>
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="footer-info">
+                            <h3>AutoXen<span>.</span></h3>
+                            <p>
+                                A108 Adam Street <br>
+                                NY 535022, USA<br><br>
+                                <strong>Phone:</strong> +1 5589 55488 55<br>
+                                <strong>Email:</strong> info@example.com<br>
+                            </p>
+                            <div class="social-links mt-3">
+                                <a href="#" class="twitter"><i class="fab fa-twitter-square"></i></a>
+                                <a href="#" class="facebook"><i class="fab fa-facebook-square"></i></a>
+                                <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="google-plus"><i class="fab fa-skype"></i></a>
+                                <a href="#" class="linkedin"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="fas fa-home"></i> <a asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li><i class="fas fa-info-circle"></i> <a asp-controller="Home" asp-action="About" asp-area="">About us</a></li>
+                            @if (this.SignInManager.IsSignedIn(this.User))
+                            {
+                                <li><i class="fas fa-car"></i> <a asp-controller="Cars" asp-action="All" asp-area="">My cars</a></li>
+                                <li><i class="fas fa-people-carry"></i> <a asp-controller="Requests" asp-action="Index" asp-area="">My requests</a></li>
+                                <li><i class="fas fa-user"></i> <a asp-area="Identity" asp-page="/Account/Manage/Index">My profile</a></li>
+                            }
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><i class="fas fa-soap"></i> <a asp-controller="CarWashes" asp-action="Index" asp-area="">Car wash</a></li>
+                            <li><i class="fas fa-shield-alt"></i> <a href="#">Insurance</a></li>
+                            <li><i class="fas fa-car-crash"></i> <a href="#">Roadside assistance</a></li>
+                            <li><i class="fas fa-tools"></i> <a asp-controller="Workshops" asp-action="Index" asp-area="">Workshop</a></li>
+                            <li><i class="fas fa-tasks"></i> <a href="#">Annual technical inspection</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 footer-newsletter">
+                        <h4>Our Newsletter</h4>
+                        <p>Subcribe for news about our site</p>
+                        <form action="" method="post">
+                            <input type="email" name="email"><input type="submit" value="Subscribe">
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>AutoXen</span></strong>. All Rights Reserved
+                </div>
+                <div class="credits">
+                    Made by <u>Simeon Kirilov</u>
+                </div>
+            </div>
         </div>
-    </footer>
+    </footer><!-- End Footer -->
 
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
