@@ -12,56 +12,68 @@
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
+    <!-- theme -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="~/theme/aos.css" rel="stylesheet" />
+    <link href="~/theme/boxicons.min.css" rel="stylesheet" />
+    <link href="~/theme/icofont.min.css" rel="stylesheet" />
+    <link href="~/theme/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/theme/remixicon.css" rel="stylesheet" />
+    <link href="~/theme/venobox.min.css" rel="stylesheet" />
+    <link href="~/theme/style.css" rel="stylesheet" asp-append-version="true"/>
+    <!-- /theme -->
     <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><i class="fab fa-asymmetrik"></i> @GlobalConstants.SystemName</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+        <nav class="navbar navbar-dark navbar-expand-lg box-shadow">
+            <div class="container-fluid">
+                <a class="navbar-brand active-text-color" asp-area="" asp-controller="Home" asp-action="Index"><i class="fab fa-asymmetrik"></i> @GlobalConstants.SystemName</a>
+                <button class="navbar-toggler" id="logout" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon active-text-color"></span>
                 </button>
-                <div class="navbar-collapse collapse d-lg-inline-flex flex-lg-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index" asp-area=""><i class="fas fa-home"></i> Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="About" asp-area=""><i class="fas fa-info-circle"></i> About</a>
-                        </li>
-                        @if (this.SignInManager.IsSignedIn(this.User))
-                        {
+                <div class="container">
+                    <div class="navbar-collapse collapse d-lg-inline-flex flex-lg-row-reverse">
+                        <partial name="_LoginPartial" />
+                        <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Cars" asp-action="All" asp-area=""><i class="fas fa-car"></i> My Cars</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-people-carry"></i> Маке Request
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" asp-controller="CarWashes" asp-action="Index" asp-area=""><i class="fas fa-soap"></i> Car wash</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-shield-alt"></i> Insurence</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-car-crash"></i> Roadside assistance</a>
-                                    <a class="dropdown-item" asp-controller="Workshops" asp-action="Index" asp-area=""><i class="fas fa-tools"></i> Workshop</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-tasks"></i> Annual technical inspection</a>
-                                </div>
+                                <a class="nav-link textColor" asp-controller="Home" asp-action="Index" asp-area=""><i class="fas fa-home"></i> Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Requests" asp-action="Index" asp-area=""><i class="fas fa-people-carry"></i> Requests</a>
+                                <a class="nav-link textColor" asp-controller="Home" asp-action="About" asp-area=""><i class="fas fa-info-circle"></i> About</a>
                             </li>
-                        }
-                    </ul>
+                            @if (this.SignInManager.IsSignedIn(this.User))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link textColor" asp-controller="Cars" asp-action="All" asp-area=""><i class="fas fa-car"></i> My Cars</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle textColor" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-people-carry"></i> Маке Request
+                                    </a>
+                                    <div class="dropdown-menu black-baground" aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item textColor white-baground-hover" asp-controller="CarWashes" asp-action="Index" asp-area=""><i class="fas fa-soap"></i> Car wash</a>
+                                        <a class="dropdown-item textColor white-baground-hover" href="#"><i class="fas fa-shield-alt"></i> Insurence</a>
+                                        <a class="dropdown-item textColor white-baground-hover" href="#"><i class="fas fa-car-crash"></i> Roadside assistance</a>
+                                        <a class="dropdown-item textColor white-baground-hover" asp-controller="Workshops" asp-action="Index" asp-area=""><i class="fas fa-tools"></i> Workshop</a>
+                                        <a class="dropdown-item textColor white-baground-hover" href="#"><i class="fas fa-tasks"></i> Annual technical inspection</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link textColor" asp-controller="Requests" asp-action="Index" asp-area=""><i class="fas fa-people-carry"></i> Requests</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
 
-    <div class="container">
+    <div class="container-fluid">
         <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
+        <main role="main">
             @this.RenderBody()
         </main>
     </div>
@@ -76,6 +88,16 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+    <!-- > theme </!-->
+    <script src="~/theme/jquery.easing.min.js"></script>
+    <script src="~/theme/owl.carousel.min.js"></script>
+    <script src="~/theme/isotope.pkgd.min.js"></script>
+    <script src="~/theme/venobox.min.js"></script>
+    <script src="~/theme/jquery.waypoints.min.js"></script>
+    <script src="~/theme/counterup.min.js"></script>
+    <script src="~/theme/aos.js"></script>
+    <script src="~/theme/main.js"></script>
+
     <script src="~/lib/momentJs/moment-with-locales.min.js" asp-append-version="true"></script>
     <script src="~/lib/select2/js/select2.full.min.js"></script>
     <script src="~/js/site.min.js" asp-append-version="true"></script>

@@ -3,7 +3,7 @@
 @inject ICarWashService washService
 
 <form method="post">
-    <div class="row">
+    <div class="row mt-2">
         <div class="col-md-8">
             <div asp-validation-summary="All" class="text-danger"></div>
 
@@ -12,8 +12,8 @@
             <partial name="_PickUpPartial" model="@Model.PickUp" />
 
             <br />
-            <div class="form-row">
-                <div class="list-group-item col-md-4 offset-4">
+            <div class="form-row d-flex justify-content-center">
+                <div class="border p-1 col-md-4">
                     <div class="text-center">
                         <label class="col-form-label" asp-for="AdminChooseCarWash"></label>
                         @if (Model.CarWashId == null)
@@ -30,11 +30,10 @@
             </div>
             <br />
 
-            <div class="form-row">
+            <div class="form-row ml-2">
                 @foreach (var carWash in washService.GetAllCarWashes())
                 {
-
-                <div class="col-md-4 form-check">
+                <div class="col m-2 form-check">
                     @if (Model.CarWashId != null && Model.CarWashId == carWash.Id)
                     {
                         <input type="radio" checked class="form-check-input" value="@carWash.Id" name="CarWashId" id="@carWash.Id"/>

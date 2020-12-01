@@ -9,27 +9,27 @@
     {
         ApplicationUser curUser = this.UserManager.GetUserAsync(this.User).GetAwaiter().GetResult();
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello <i class="fas fa-user"></i> @($"{curUser.FirstName} {curUser.SurName}")!</a>
+            <a class="nav-link textColor" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello <i class="fas fa-user"></i> @($"{curUser.FirstName} {curUser.SurName}")!</a>
         </li>
         if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">Admin</a>
+                <a class="nav-link textColor" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">Admin</a>
             </li>
         }
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
-                <button type="submit" class="nav-link btn btn-link text-dark"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                <button type="submit" class="nav-link btn btn-link textColor"><i class="fas fa-sign-out-alt"></i> Logout</button>
             </form>
         </li>
     }
     else
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register"><i class="fas fa-registered"></i> Register</a>
+            <a class="nav-link textColor" asp-area="Identity" asp-page="/Account/Register"><i class="fas fa-registered"></i> Register</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login"><i class="fas fa-sign-in-alt"></i> Login</a>
+            <a class="nav-link textColor" asp-area="Identity" asp-page="/Account/Login"><i class="fas fa-sign-in-alt"></i> Login</a>
         </li>
     }
 </ul>
