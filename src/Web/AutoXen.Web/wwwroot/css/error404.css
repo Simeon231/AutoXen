@@ -11,7 +11,7 @@ main {
     overflow: hidden;
 }
 
-p {
+.p-error {
     font-family: "Bevan", cursive;
     font-size: 130px;
     margin: 10vh 0 0;
@@ -72,3 +72,16 @@ code b {
     }
 }
 
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    /* Set the fixed height of the footer here */
+    height: 0px;
+    line-height: 0px; /* Vertically center the text there */
+}
+
+.credits{
+    margin-top: 30px;
+}
