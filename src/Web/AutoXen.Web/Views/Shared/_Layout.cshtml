@@ -61,7 +61,7 @@
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link textColor" asp-controller="Requests" asp-action="Index" asp-area=""><i class="fas fa-people-carry"></i> Requests</a>
+                                    <a class="nav-link textColor" asp-controller="Requests" asp-action="Index" asp-area=""><i class="fas fa-hands"></i> Requests</a>
                                 </li>
                             }
                         </ul>
@@ -108,7 +108,7 @@
                             @if (this.SignInManager.IsSignedIn(this.User))
                             {
                                 <li><i class="fas fa-car"></i> <a asp-controller="Cars" asp-action="All" asp-area="">My cars</a></li>
-                                <li><i class="fas fa-people-carry"></i> <a asp-controller="Requests" asp-action="Index" asp-area="">My requests</a></li>
+                                <li><i class="fas fa-hands"></i> <a asp-controller="Requests" asp-action="Index" asp-area="">My requests</a></li>
                                 <li><i class="fas fa-user"></i> <a asp-area="Identity" asp-page="/Account/Manage/Index">My profile</a></li>
                             }
                         </ul>

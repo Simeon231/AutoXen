@@ -2,116 +2,125 @@
 @inject ICarService carService
 @model DetailedCarWithIdViewModel
 
-    <div class="d-flex justify-content-center">
-        <div class="m-4 pb-3 container">
-            <h2 class="text-center">Your car:</h2>
-            <form method="post">
-                <div asp-validation-summary="All" class="text-danger"></div>
+<div class="d-flex justify-content-center">
+    <div class="m-4 pb-3 container">
+        <h2 class="text-center">Your car:</h2>
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
 
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <label class="col-form-label" asp-for="Brand"></label>
-                        <input class="input-group form-control" asp-for="Brand" />
-                        <span asp-validation-for="Brand" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="col-form-label" asp-for="Model"></label>
-                        <input class="input-group form-control" asp-for="Model" />
-                        <span asp-validation-for="Model" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="col-form-label" asp-for="RegistrationPlate"></label>
-                        <input class="input-group form-control" asp-for="RegistrationPlate" />
-                        <span asp-validation-for="RegistrationPlate" class="text-danger"></span>
+            <div class="form-row">
+                <div class="col-md-4">
+                    <label class="col-form-label" asp-for="Brand"></label>
+                    <input class="input-group form-control" asp-for="Brand" />
+                    <span asp-validation-for="Brand" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label" asp-for="Model"></label>
+                    <input class="input-group form-control" asp-for="Model" />
+                    <span asp-validation-for="Model" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label" asp-for="RegistrationPlate"></label>
+                    <input class="input-group form-control" asp-for="RegistrationPlate" />
+                    <span asp-validation-for="RegistrationPlate" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-4">
+                    <label class="col-form-label" asp-for="VehicleIdentificationNumber"></label>
+                    <input class="input-group form-control" asp-for="VehicleIdentificationNumber" />
+                    <span asp-validation-for="VehicleIdentificationNumber" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label" asp-for="YearMade"></label>
+                    <input class="input-group form-control" asp-for="YearMade" />
+                    <span asp-validation-for="YearMade" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label" asp-for="Color"></label>
+                    <input class="input-group form-control" asp-for="Color" />
+                    <span asp-validation-for="Color" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-sm-6 d-flex justify-content-center">
+                    <div class="col-lg-5">
+                        <label class="col-form-label" asp-for="NumberOfSeats"></label>
+                        <input class="input-group form-control" asp-for="NumberOfSeats" />
+                        <span asp-validation-for="NumberOfSeats" class="text-danger"></span>
                     </div>
                 </div>
-
-                <div class="form-row">
-                    <div class="col-md-4">
-                        <label class="col-form-label" asp-for="VehicleIdentificationNumber"></label>
-                        <input class="input-group form-control" asp-for="VehicleIdentificationNumber" />
-                        <span asp-validation-for="VehicleIdentificationNumber" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="col-form-label" asp-for="YearMade"></label>
-                        <input class="input-group form-control" asp-for="YearMade" />
-                        <span asp-validation-for="YearMade" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="col-form-label" asp-for="Color"></label>
-                        <input class="input-group form-control" asp-for="Color" />
-                        <span asp-validation-for="Color" class="text-danger"></span>
+                <div class="col-sm-6 d-flex justify-content-center">
+                    <div class="col-lg-5">
+                        <label class="col-form-label" asp-for="Weight"></label>
+                        <input class="input-group form-control" asp-for="Weight" />
+                        <span asp-validation-for="Weight" class="text-danger"></span>
                     </div>
                 </div>
+            </div>
 
-                <div class="form-row">
-                    <div class="col-sm-6 d-flex justify-content-center">
-                        <div class="col-lg-5">
-                            <label class="col-form-label" asp-for="NumberOfSeats"></label>
-                            <input class="input-group form-control" asp-for="NumberOfSeats" />
-                            <span asp-validation-for="NumberOfSeats" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 d-flex justify-content-center">
-                        <div class="col-lg-5">
-                            <label class="col-form-label" asp-for="Weight"></label>
-                            <input class="input-group form-control" asp-for="Weight" />
-                            <span asp-validation-for="Weight" class="text-danger"></span>
-                        </div>
+            <div class="form-row">
+                <div class="col-sm-6 d-flex justify-content-center">
+                    <div class="col-md-8">
+                        <label class="col-form-label">Fuel type</label>
+                        <select asp-for="FuelType" class="form-control"
+                                asp-items="@Html.GetEnumSelectList<AutoXen.Data.Models.Enums.FuelType>()">
+                        </select>
                     </div>
                 </div>
-
-                <div class="form-row">
-                    <div class="col-sm-6 d-flex justify-content-center">
-                        <div class="col-md-8">
-                            <label class="col-form-label">Fuel type</label>
-                            <select asp-for="FuelType" class="form-control"
-                                    asp-items="@Html.GetEnumSelectList<AutoXen.Data.Models.Enums.FuelType>()">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 d-flex justify-content-center">
-                        <div class="col-md-8">
-                            <label class="col-form-label">Transmission type</label>
-                            <select asp-for="TransmissionType" class="form-control"
-                                    asp-items="@Html.GetEnumSelectList<AutoXen.Data.Models.Enums.TransmissionType>()">
-                            </select>
-                        </div>
+                <div class="col-sm-6 d-flex justify-content-center">
+                    <div class="col-md-8">
+                        <label class="col-form-label">Transmission type</label>
+                        <select asp-for="TransmissionType" class="form-control"
+                                asp-items="@Html.GetEnumSelectList<AutoXen.Data.Models.Enums.TransmissionType>()">
+                        </select>
                     </div>
                 </div>
+            </div>
 
-                    <div class="form-row">
-                        <label class="col-md-3 col-form-label mb-1 font-weight-bold">Car Extras:</label>
-                        <div class="row">
-                            @foreach (var extra in carService.GetAllExtras())
+            <div class="form-row">
+                <label class="col-md-3 col-form-label mb-1 font-weight-bold">Car Extras:</label>
+                <div class="row">
+                    @foreach (var extra in carService.GetAllExtras())
+                    {
+                        <div class="border-bottom pb-2 pt-2 ml-2 mr-2 col-sm-3">
+                            @if (Model != null && Model.CarExtras != null && Model.CarExtras.Contains(extra.Id))
                             {
-                                <div class="border-bottom pb-2 pt-2 ml-2 mr-2 col-sm-3">
-                                    @if (Model != null && Model.CarExtras != null && Model.CarExtras.Contains(extra.Id))
-                                    {
-                                        <input class="form-check-inline" type="checkbox" name="CarExtras" value="@extra.Id" checked />
-                                    }
-                                    else
-                                    {
-                                        <input class="form-check-inline" type="checkbox" name="CarExtras" value="@extra.Id" id="@extra.Id" />
-                                    }
-                                    <label class="d-inline" name="@extra.Name" for="@extra.Id">@extra.Name</label>
-                                </div>
+                                <input class="form-check-inline" type="checkbox" name="CarExtras" value="@extra.Id" checked />
                             }
+                            else
+                            {
+                                <input class="form-check-inline" type="checkbox" name="CarExtras" value="@extra.Id" id="@extra.Id" />
+                            }
+                            <label class="d-inline" name="@extra.Name" for="@extra.Id">@extra.Name</label>
                         </div>
-                    </div>
+                    }
+                </div>
+            </div>
 
-                    <br />
+            <br />
 
-                    <div class="container-fluid row ">
-                        <div class="col text-center mb-2">
-                            <button type="submit" class="btn btn-primary" asp-controller="Cars" asp-action="Details">Submit</button>
-                        </div>
-                        <div class="d-flex justify-content-end pb-2">
-                            <button class="btn btn-danger" asp-controller="Cars" asp-action="Delete" name="id" value="@Model?.Id" onclick="return confirm('Are you sure you want to delete your car');">
-                                Delete
-                            </button>
-                        </div>
+            <div class="container-fluid row ">
+                @if (Model == null)
+                {
+                    <div class="col text-center mb-2">
+                        <button type="submit" class="btn btn-primary" asp-controller="Cars" asp-action="Add">Submit</button>
                     </div>
-</form>
-        </div>
+                }
+                else
+                {
+                    <div class="col text-center mb-2">
+                        <button type="submit" class="btn btn-primary" asp-controller="Cars" asp-action="Details">Submit</button>
+                    </div>
+                    <div class="d-flex justify-content-end pb-2">
+                        <button class="btn btn-danger" asp-controller="Cars" asp-action="Delete" name="id" value="@Model.Id" onclick="return confirm('Are you sure you want to delete your car');">
+                            Delete
+                        </button>
+                    </div>
+                }
+            </div>
+        </form>
     </div>
+</div>
