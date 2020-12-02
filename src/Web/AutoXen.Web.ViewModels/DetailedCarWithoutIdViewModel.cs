@@ -37,7 +37,7 @@
         public TransmissionType TransmissionType { get; set; }
 
         [StringLength(17, MinimumLength = 17, ErrorMessage = "VIN length must be 17.")]
-        [Display(Name = "Vechicle identification number")]
+        [Display(Name = "VIN")]
         [RegularExpression(@"^[A-Za-z0-9]{17}$", ErrorMessage = "VIN must be 17 length and have only letters and numbers")]
         public string VehicleIdentificationNumber { get; set; }
 

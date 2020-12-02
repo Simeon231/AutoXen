@@ -41,6 +41,10 @@ html {
     min-height: 100%;
 }
 
+body{
+    margin-bottom: 30px;
+}
+
 .footer {
     position: absolute;
     bottom: 0;
@@ -89,4 +93,36 @@ nav div div ul li a{
 
 .nowrap {
     white-space: nowrap;
+}
+
+.nav-link.active {
+    background-color: rgb(255,196,81) !important;
+    color: white !important;
+}
+
+.btn.btn-primary {
+    background-color: rgb(255,196,81) !important;
+    color: white !important;
+    border-color: rgb(240, 170, 34) !important;
+}
+
+.btn.btn-primary:hover {
+    background-color: rgb(240, 170, 34) !important;
+    color: white !important;
+}
+
+.btn-outline-primary {
+    background-color: white !important;
+    color: rgb(255,196,81) !important;
+    border-color: rgb(255,196,81) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: rgb(255,196,81) !important;
+    color: white !important;
+}
+
+.underline-primary {
+    text-decoration: underline;
+    text-decoration-color: rgb(255,196,81);
 }
