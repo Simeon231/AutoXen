@@ -34,32 +34,11 @@
                         <partial name="_LoginPartial" />
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link textColor" asp-controller="Home" asp-action="Index" asp-area=""><i class="fas fa-home"></i> Home</a>
+                                <a class="nav-link textColor" asp-controller="Dashboard" asp-action="Index" asp-area="Administration"><i class="fas fa-home"></i> Dashboard</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link textColor" asp-controller="Home" asp-action="About" asp-area=""><i class="fas fa-info-circle"></i> About</a>
+                                <a class="nav-link textColor" asp-controller="Requests" asp-action="Index" asp-area="Administration"><i class="fas fa-hands"></i> Requests</a>
                             </li>
-                            @if (this.SignInManager.IsSignedIn(this.User))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link textColor" asp-controller="Cars" asp-action="All" asp-area=""><i class="fas fa-car"></i> My Cars</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle textColor" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-people-carry"></i> Маке Request
-                                    </a>
-                                    <div class="dropdown-menu black-baground" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item textColor white-baground-hover" asp-controller="CarWashes" asp-action="Index" asp-area=""><i class="fas fa-soap"></i> Car wash</a>
-                                        <a class="dropdown-item textColor white-baground-hover" href="#"><i class="fas fa-shield-alt"></i> Insurence</a>
-                                        <a class="dropdown-item textColor white-baground-hover" href="#"><i class="fas fa-car-crash"></i> Roadside assistance</a>
-                                        <a class="dropdown-item textColor white-baground-hover" asp-controller="Workshops" asp-action="Index" asp-area=""><i class="fas fa-tools"></i> Workshop</a>
-                                        <a class="dropdown-item textColor white-baground-hover" href="#"><i class="fas fa-tasks"></i> Annual technical inspection</a>
-                                    </div>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link textColor" asp-controller="Requests" asp-action="Index" asp-area=""><i class="fas fa-hands"></i> Requests</a>
-                                </li>
-                            }
                         </ul>
                     </div>
                 </div>

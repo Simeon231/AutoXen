@@ -13,7 +13,9 @@
         /// </summary>
         public Task AddWorkshopRequestAsync(WorkshopRequestViewModel model, string userId);
 
-        public IEnumerable<WorkshopRequest> GetWorkshopRequests(string userId);
+        public IEnumerable<WorkshopRequest> GetWorkshopRequestsById(string userId);
+
+        public IEnumerable<WorkshopRequest> GetAllRequests();
 
         public IEnumerable<ServiceWithPriceResponseModel> GetServicesByWorkshopId(int workshopId);
 

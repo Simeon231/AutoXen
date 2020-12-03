@@ -5,5 +5,6 @@
         public const string SystemName = "AutoXen";
 
         public const string AdministratorRoleName = "Administrator";
+        //// ADD REQUEST NAMES
     }
 }

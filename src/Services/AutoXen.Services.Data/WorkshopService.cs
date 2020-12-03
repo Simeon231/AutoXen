@@ -89,12 +89,20 @@
             await this.workshopRequestRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<WorkshopRequest> GetWorkshopRequests(string userId)
+        public IEnumerable<WorkshopRequest> GetWorkshopRequestsById(string userId)
         {
             return this.workshopRequestRepository
                 .AllAsNoTracking()
                 .Include(x => x.Car)
                 .Where(x => x.UserId == userId)
+                .ToList();
+        }
+
+        public IEnumerable<WorkshopRequest> GetAllRequests()
+        {
+            return this.workshopRequestRepository
+                .AllAsNoTracking()
+                .Include(x => x.User)
                 .ToList();
         }
 

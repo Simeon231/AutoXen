@@ -1,0 +1,58 @@
+﻿@using AutoXen.Web.ViewModels.Administration.Requests
+@model IEnumerable<RequestViewModel>
+@{
+    this.ViewData["Title"] = "Requests";
+}
+
+<div class="d-flex justify-content-center mt-4">
+    <table class="table table-sm table-hover border border-dark table-bordered col-md-10">
+        <thead class="thead-dark">
+            <tr>
+                <th class="text-center">
+                    User
+                </th>
+                <th class="text-center">
+                    Created on
+                </th>
+                <th class="text-center">
+                    Request type
+                </th>
+                <th class="text-center">
+                    Accepted
+                </th>
+                <th class="text-center">
+                    Info
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var request in Model)
+                {
+                <tr>
+                    <td>@($"First name: {request.User.FirstName} - Sur name: {request.User.SurName}")</td>
+                    <td name="date">@request.CreatedOn</td>
+                    <td>@request.RequestName</td>
+                    @if (request.AcceptedById == null)
+                    {
+                        <td class="text-center"><a asp-controller="Requests" asp-action="AcceptRequest" asp-area="Administration" asp-route-requestName="@request.RequestName" asp-route-id="@request.Id" class="btn btn-outline-secondary">Accept</a></td>
+                    }
+                    else
+                    {
+                        <td class="text-center">Accepted</td>
+                    }
+                    @if (request.RequestName.ToLower() == "workshop")
+                    {
+                        <td class="text-center"><a asp-controller="Workshops" asp-action="Details" asp-route-id="@request.Id" class="btn btn-outline-info">Info</a></td>
+                    }
+                    else if (request.RequestName.ToLower() == "car wash")
+                    {
+                        <td class="text-center"><a asp-controller="CarWashes" asp-action="Details" asp-route-id="@request.Id" class="btn btn-outline-info">Info</a></td>
+                    }
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

@@ -48,8 +48,8 @@
         {
             var requests = new List<RequestViewModel>();
 
-            requests.AddRange(this.carWashService.GetAllRequests(userId).Select(x => this.mapper.Map<RequestViewModel>(x)));
-            requests.AddRange(this.workshopService.GetWorkshopRequests(userId).Select(x => this.mapper.Map<RequestViewModel>(x)));
+            requests.AddRange(this.carWashService.GetAllRequestsById(userId).Select(x => this.mapper.Map<RequestViewModel>(x)));
+            requests.AddRange(this.workshopService.GetWorkshopRequestsById(userId).Select(x => this.mapper.Map<RequestViewModel>(x)));
 
             requests.OrderByDescending(x => x.CreatedOn);
 

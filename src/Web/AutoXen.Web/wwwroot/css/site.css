@@ -126,3 +126,10 @@ nav div div ul li a{
     text-decoration: underline;
     text-decoration-color: rgb(255,196,81);
 }
+
+.navbar-brand {
+    width: 150px; /* change this according to your layout */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
