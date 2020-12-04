@@ -106,13 +106,13 @@
                 .ToList();
         }
 
-        public WorkshopRequestDetailsViewModel GetWorkshopDetails(string userId, string requestId)
+        public WorkshopRequestDetailsViewModel GetWorkshopDetails(string userId, string requestId, bool isAdmin = false)
         {
             var dbRequest = this.workshopRequestRepository
                 .AllAsNoTracking()
                 .Include(x => x.Car)
                 .Include(x => x.WorkshopRequestWorkshopServices)
-                .FirstOrDefault(x => x.UserId == userId && x.Id == requestId);
+                .FirstOrDefault(x => x.Id == requestId && (x.UserId == userId || isAdmin));
 
             var request = this.mapper.Map<WorkshopRequestDetailsViewModel>(dbRequest);
 

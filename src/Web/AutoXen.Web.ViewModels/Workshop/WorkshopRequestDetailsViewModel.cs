@@ -6,6 +6,8 @@
 
     public class WorkshopRequestDetailsViewModel
     {
+        public string Id { get; set; }
+
         public CarViewModel Car { get; set; }
 
         [Display(Name = "Every workshop")]

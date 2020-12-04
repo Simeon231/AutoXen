@@ -23,6 +23,6 @@
 
         public IEnumerable<WorkshopViewModel> GetAllWorkshops();
 
-        public WorkshopRequestDetailsViewModel GetWorkshopDetails(string userId, string requestId);
+        public WorkshopRequestDetailsViewModel GetWorkshopDetails(string userId, string requestId, bool isAdmin = false);
     }
 }

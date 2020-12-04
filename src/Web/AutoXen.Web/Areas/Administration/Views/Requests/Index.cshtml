@@ -1,5 +1,6 @@
 ﻿@using AutoXen.Web.ViewModels.Administration.Requests
-@model IEnumerable<RequestViewModel>
+@using AutoXen.Common
+@model RequestsViewModel
 @{
     this.ViewData["Title"] = "Requests";
 }
@@ -26,33 +27,38 @@
             </tr>
         </thead>
         <tbody>
-            @if (Model != null)
+            @if (Model.Requests != null)
             {
-                @foreach (var request in Model)
+                @foreach (var request in Model.Requests)
                 {
-                <tr>
-                    <td>@($"First name: {request.User.FirstName} - Sur name: {request.User.SurName}")</td>
-                    <td name="date">@request.CreatedOn</td>
-                    <td>@request.RequestName</td>
-                    @if (request.AcceptedById == null)
-                    {
-                        <td class="text-center"><a asp-controller="Requests" asp-action="AcceptRequest" asp-area="Administration" asp-route-requestName="@request.RequestName" asp-route-id="@request.Id" class="btn btn-outline-secondary">Accept</a></td>
-                    }
-                    else
-                    {
-                        <td class="text-center">Accepted</td>
-                    }
-                    @if (request.RequestName.ToLower() == "workshop")
-                    {
-                        <td class="text-center"><a asp-controller="Workshops" asp-action="Details" asp-route-id="@request.Id" class="btn btn-outline-info">Info</a></td>
-                    }
-                    else if (request.RequestName.ToLower() == "car wash")
-                    {
-                        <td class="text-center"><a asp-controller="CarWashes" asp-action="Details" asp-route-id="@request.Id" class="btn btn-outline-info">Info</a></td>
-                    }
-                </tr>
+                    <tr>
+                        <td>@($"First name: {request.User.FirstName} - Sur name: {request.User.SurName}")</td>
+                        <td name="date">@request.CreatedOn</td>
+                        <td>@request.RequestName</td>
+                        @if (request.AcceptedById == null)
+                        {
+                            <td class="text-center"><a asp-controller="Requests" asp-action="AcceptRequest" asp-area="Administration" asp-route-requestName="@request.RequestName" asp-route-id="@request.Id" class="btn btn-outline-secondary">Accept</a></td>
+                        }
+                        else
+                        {
+                            <td class="text-center">Accepted</td>
+                        }
+                        @if (request.RequestName == GlobalConstants.Workshop)
+                        {
+                            <td class="text-center"><a asp-controller="Workshops" asp-action="Details" asp-route-id="@request.Id" class="btn btn-outline-info">Info</a></td>
+                        }
+                        else if (request.RequestName == GlobalConstants.CarWash)
+                        {
+                            <td class="text-center"><a asp-controller="CarWashes" asp-action="Details" asp-route-id="@request.Id" class="btn btn-outline-info">Info</a></td>
+                        }
+                    </tr>
                 }
             }
         </tbody>
     </table>
+</div>
+<div class="d-flex justify-content-center">
+    <div class="row">
+        <partial name="_PagingPartial" model="@Model" />
+    </div>
 </div>

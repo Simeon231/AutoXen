@@ -25,11 +25,11 @@
     {
         public static void Main(string[] args)
         {
-            for (int i = 0; i < 5; i++)
-            {
-                var nums = RandomNumbers(20);
-                var randomD = RandomPrice();
-            }
+            ////for (int i = 0; i < 5; i++)
+            ////{
+            ////    var nums = RandomNumbers(20);
+            ////    var randomD = RandomPrice();
+            ////}
 
             ////Console.WriteLine($"{typeof(Program).Namespace} ({string.Join(" ", args)}) starts working...");
             ////var serviceCollection = new ServiceCollection();

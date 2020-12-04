@@ -1,4 +1,5 @@
-﻿@model IEnumerable<AutoXen.Web.ViewModels.Requests.RequestViewModel>
+﻿@using AutoXen.Common
+@model IEnumerable<AutoXen.Web.ViewModels.Requests.RequestViewModel>
 
 <h4 class="text-center m-3">Your Requests</h4>
 <div class="d-flex justify-content-center">
@@ -28,11 +29,11 @@
                         <td>@($"Brand: {request.Car.Brand} - Model: {request.Car.Model} - {request.Car.RegistrationPlate}")</td>
                         <td name="date">@request.CreatedOn</td>
                         <td>@request.RequestName</td>
-                        @if (request.RequestName.ToLower() == "workshop")
+                        @if (request.RequestName == GlobalConstants.Workshop)
                         {
                             <td class="text-center"><a asp-controller="Workshops" asp-action="Details" asp-route-id="@request.Id" class="btn btn-outline-info">Info</a></td>
                         }
-                        else if (request.RequestName.ToLower() == "car wash")
+                        else if (request.RequestName == GlobalConstants.CarWash)
                         {
                             <td class="text-center"><a asp-controller="CarWashes" asp-action="Details" asp-route-id="@request.Id" class="btn btn-outline-info">Info</a></td>
                         }

@@ -6,6 +6,6 @@
 
     public interface IRequestsService
     {
-        public IEnumerable<RequestViewModel> GetAllRequests();
+        public RequestsViewModel GetAllRequests(int page, int itemsPerPage = 10);
     }
 }

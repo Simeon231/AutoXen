@@ -9,54 +9,27 @@
                     <div asp-validation-summary="All" class="text-danger"></div>
                 </div>
 
-                @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-                {
-                    <div class="row">
-                        <div class="text-center col-md-4">
-                            <label class="col-form-label" asp-for="PickedUp"></label>
-                            <input class="form-check-inline" asp-for="PickedUp" />
-                        </div>
-                        <div class="text-center col-md-4">
-                            <label class="col-form-label" asp-for="CarWashingDone"></label>
-                            <input class="form-check-inline" asp-for="CarWashingDone" />
-                        </div>
-                        <div class="text-center col-md-4">
-                            <label class="col-form-label" asp-for="ReturnedCar"></label>
-                            <input class="form-check-inline" asp-for="ReturnedCar" />
-                        </div>
+                <div class="row">
+                    <div class="text-center col-md-4">
+                        <label class="text-muted col-form-label" asp-for="PickedUp"></label>
+                        <input disabled class="form-check-inline" asp-for="PickedUp" />
                     </div>
+                    <div class="text-center col-md-4">
+                        <label class="text-muted col-form-label" asp-for="CarWashingDone"></label>
+                        <input disabled class="form-check-inline" asp-for="CarWashingDone" />
+                    </div>
+                    <div class="text-center col-md-4">
+                        <label class="text-muted col-form-label" asp-for="ReturnedCar"></label>
+                        <input disabled class="form-check-inline" asp-for="ReturnedCar" />
+                    </div>
+                </div>
 
-                    <div class="row d-flex justify-content-center">
-                        <div class="text-center col-sm-5">
-                            <label class=" col-form-label" asp-for="FinishedOn"></label>
-                            <input class="form-control" asp-for="FinishedOn" />
-                        </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="text-center col-sm-5">
+                        <label class=" text-muted col-form-label" asp-for="FinishedOn"></label>
+                        <input disabled class="form-control" asp-for="FinishedOn" />
                     </div>
-                }
-                else
-                {
-                    <div class="row">
-                        <div class="text-center col-md-4">
-                            <label class="text-muted col-form-label" asp-for="PickedUp"></label>
-                            <input disabled class="form-check-inline" asp-for="PickedUp" />
-                        </div>
-                        <div class="text-center col-md-4">
-                            <label class="text-muted col-form-label" asp-for="CarWashingDone"></label>
-                            <input disabled class="form-check-inline" asp-for="CarWashingDone" />
-                        </div>
-                        <div class="text-center col-md-4">
-                            <label class="text-muted col-form-label" asp-for="ReturnedCar"></label>
-                            <input disabled class="form-check-inline" asp-for="ReturnedCar" />
-                        </div>
-                    </div>
-
-                    <div class="row d-flex justify-content-center">
-                        <div class="text-center col-sm-5">
-                            <label class=" text-muted col-form-label" asp-for="FinishedOn"></label>
-                            <input disabled class="form-control" asp-for="FinishedOn" />
-                        </div>
-                    </div>
-                }
+                </div>
 
                 <hr />
 

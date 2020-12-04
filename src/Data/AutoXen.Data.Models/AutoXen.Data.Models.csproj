@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\AutoXen.Common\AutoXen.Common.csproj" />
     <ProjectReference Include="..\AutoXen.Data.Common\AutoXen.Data.Common.csproj" />
   </ItemGroup>
   

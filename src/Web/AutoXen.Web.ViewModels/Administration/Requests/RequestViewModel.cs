@@ -1,7 +1,9 @@
 ﻿namespace AutoXen.Web.ViewModels.Administration.Requests
 {
-    using AutoXen.Web.ViewModels.User;
     using System;
+
+    using AutoXen.Web.ViewModels.Common;
+    using AutoXen.Web.ViewModels.User;
 
     public class RequestViewModel
     {

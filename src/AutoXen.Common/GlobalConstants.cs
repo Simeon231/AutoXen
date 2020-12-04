@@ -5,6 +5,15 @@
         public const string SystemName = "AutoXen";
 
         public const string AdministratorRoleName = "Administrator";
-        //// ADD REQUEST NAMES
+
+        public const string Workshop = "Workshop";
+
+        public const string CarWash = "Car wash";
+
+        public const string RoadsideAssistance = "Roadside assistance";
+
+        public const string Ancurance = "Ancurance";
+
+        public const string AnnualTechnicalInspection = "Annual technical inspection";
     }
 }

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using AutoXen.Common;
     using AutoXen.Data.Common.Models;
 
     public class CarWashRequest : BaseDeletableModel<string>, IRequest
@@ -52,7 +53,7 @@
 
         public override string ToString()
         {
-            return "Car wash";
+            return GlobalConstants.CarWash;
         }
     }
 }

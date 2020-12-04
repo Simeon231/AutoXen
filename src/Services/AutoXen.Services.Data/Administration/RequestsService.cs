@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     using AutoMapper;
+    using AutoXen.Data.Common.Models;
     using AutoXen.Data.Common.Repositories;
     using AutoXen.Data.Models.CarWash;
     using AutoXen.Data.Models.Workshop;
@@ -31,14 +33,23 @@
             this.mapper = mapper;
         }
 
-        public IEnumerable<RequestViewModel> GetAllRequests()
+        public RequestsViewModel GetAllRequests(int page, int itemsPerPage = 10)
         {
-            var requests = new List<RequestViewModel>();
+            var workshops = this.workshopService.GetAllRequests().Select(x => this.mapper.Map<RequestViewModel>(x)).ToList();
+            var carwashes = this.carWashService.GetAllRequests().Select(x => this.mapper.Map<RequestViewModel>(x)).ToList();
 
-            requests.AddRange(this.workshopService.GetAllRequests().Select(x => this.mapper.Map<RequestViewModel>(x)));
-            requests.AddRange(this.carWashService.GetAllRequests().Select(x => this.mapper.Map<RequestViewModel>(x)));
+            var requests = new RequestsViewModel()
+            {
+                ItemsPerPage = itemsPerPage,
+                PageNumber = page,
+                RequestsCount = workshops.Count() + carwashes.Count(),
+            };
 
-            return requests.OrderByDescending(x => x.CreatedOn);
+            requests.Requests.AddRange(workshops);
+            requests.Requests.AddRange(carwashes);
+            requests.Requests = requests.Requests.OrderByDescending(x => x.CreatedOn).Skip((page - 1) * itemsPerPage).Take(itemsPerPage).ToList();
+
+            return requests;
         }
     }
 }

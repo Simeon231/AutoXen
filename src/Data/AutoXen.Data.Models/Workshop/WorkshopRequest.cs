@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using AutoXen.Common;
     using AutoXen.Data.Common.Models;
     using AutoXen.Data.Models.Car;
 
@@ -57,7 +58,7 @@
         // Used by WorkshopProfile
         public override string ToString()
         {
-            return "Workshop";
+            return GlobalConstants.Workshop;
         }
     }
 }

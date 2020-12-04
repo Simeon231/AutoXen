@@ -24,9 +24,11 @@
             this.CreateMap<WorkshopRequest, WorkshopRequestViewModel>()
                 .ReverseMap();
 
-            this.CreateMap<WorkshopRequest, WorkshopRequestDetailsViewModel>();
+            this.CreateMap<WorkshopRequest, WorkshopRequestDetailsViewModel>()
+                .ReverseMap();
 
-            this.CreateMap<WService, WServiceViewModel>();
+            this.CreateMap<WService, WServiceViewModel>()
+                .ReverseMap();
         }
     }
 }
