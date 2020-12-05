@@ -1,8 +1,5 @@
-﻿namespace AutoXen.Web.ViewModels
+﻿namespace AutoXen.Web.ViewModels.CarWash
 {
-    using AutoXen.Data.Models.CarWash;
-    using AutoXen.Services.Mapping;
-
     public class CarWashViewModel
     {
         public int Id { get; set; }

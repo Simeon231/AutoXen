@@ -1,4 +1,5 @@
 ﻿@using AutoXen.Services.Data
+@using AutoXen.Web.ViewModels.CarWash
 @model CarWashRequestViewModel
 @inject ICarWashService washService
 
@@ -9,7 +10,7 @@
 
             <partial name="_CarsPartial" model="@Model.CarId" />
 
-            <partial name="_PickUpPartial" model="@Model.PickUp" />
+            <partial name="_PickUpPartial" model="@Model" />
 
             <div class="form-row d-flex justify-content-center">
                 <div class="border p-1 col-md-4">

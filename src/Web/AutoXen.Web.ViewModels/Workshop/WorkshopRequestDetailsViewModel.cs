@@ -4,7 +4,10 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class WorkshopRequestDetailsViewModel
+    using AutoXen.Web.ViewModels.Cars;
+    using AutoXen.Web.ViewModels.Common;
+
+    public class WorkshopRequestDetailsViewModel : PickUpViewModel
     {
         public string Id { get; set; }
 
@@ -12,15 +15,6 @@
 
         [Display(Name = "Every workshop")]
         public bool AdminChooseWorkshop { get; set; }
-
-        [Display(Name = "Pick up location")]
-        public string PickUpLocation { get; set; }
-
-        [Display(Name = "Pick up time")]
-        public DateTime? PickUpTime { get; set; }
-
-        [Display(Name = "Pick up fast as possible")]
-        public bool PickUpFastAsPossible { get; set; }
 
         [Display(Name = "The car is picked up")]
         public bool PickedUp { get; set; }

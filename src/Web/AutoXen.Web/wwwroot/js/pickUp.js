@@ -1,6 +1,6 @@
 // pickUpFunctionallity
-var pickUpBtn = document.getElementById('FastAsPossible');
-var pickUpTime = document.getElementById('Time');
+var pickUpBtn = document.getElementById('PickUpFastAsPossible');
+var pickUpTime = document.getElementById('PickUpTime');
 
 //on load
 if (pickUpTime.value == '') {

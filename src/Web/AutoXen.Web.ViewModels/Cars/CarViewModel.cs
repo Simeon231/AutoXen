@@ -1,9 +1,6 @@
-﻿namespace AutoXen.Web.ViewModels
+﻿namespace AutoXen.Web.ViewModels.Cars
 {
     using System.ComponentModel.DataAnnotations;
-
-    using AutoXen.Data.Models.Car;
-    using AutoXen.Services.Mapping;
 
     public class CarViewModel
     {
@@ -17,6 +14,7 @@
         public string Model { get; set; }
 
         [Required]
+        [Display(Name = "Registration plate")]
         public string RegistrationPlate { get; set; }
     }
 }

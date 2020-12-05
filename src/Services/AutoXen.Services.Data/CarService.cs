@@ -11,6 +11,7 @@
     using AutoXen.Data.Models.Enums;
     using AutoXen.Services.Data.Exceptions;
     using AutoXen.Web.ViewModels;
+    using AutoXen.Web.ViewModels.Cars;
 
     public class CarService : ICarService
     {
@@ -31,7 +32,7 @@
             this.mapper = mapper;
         }
 
-        public async Task AddCarAsync(string userId, DetailedCarWithIdViewModel model)
+        public async Task AddCarAsync(string userId, DetailedCarViewModel model)
         {
             var dbCar = this.mapper.Map<Car>(model);
             await this.carRepository.AddAsync(dbCar);
@@ -63,7 +64,7 @@
                 .ToList();
         }
 
-        public async Task ChangeCarDetailsAsync(DetailedCarWithIdViewModel model, string userId)
+        public async Task ChangeCarDetailsAsync(DetailedCarViewModel model, string userId)
         {
             var dbCar = this.GetCar(model.Id, userId);
 
@@ -105,11 +106,11 @@
             return fuelTypes;
         }
 
-        public DetailedCarWithIdViewModel GetCarDetails(string carId, string userId)
+        public DetailedCarViewModel GetCarDetails(string carId, string userId)
         {
             var dbCar = this.GetCar(carId, userId);
 
-            var car = this.mapper.Map<DetailedCarWithIdViewModel>(dbCar);
+            var car = this.mapper.Map<DetailedCarViewModel>(dbCar);
             car.CarExtras = this.GetExtras(dbCar.Id);
 
             return car;

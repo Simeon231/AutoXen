@@ -1,4 +1,4 @@
-﻿namespace AutoXen.Web.ViewModels
+﻿namespace AutoXen.Web.ViewModels.Cars
 {
     public class ExtraViewModel
     {

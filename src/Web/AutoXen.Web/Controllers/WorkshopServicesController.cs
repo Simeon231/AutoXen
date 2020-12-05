@@ -20,7 +20,7 @@
         }
 
         [HttpGet]
-        public IEnumerable<ServiceModel> Get()
+        public IEnumerable<ServiceResponseModel> Get()
         {
             return this.workshopService.GetAllServices();
         }

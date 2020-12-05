@@ -5,7 +5,7 @@
 
     using AutoXen.Services.Data;
     using AutoXen.Services.Data.Exceptions;
-    using AutoXen.Web.ViewModels;
+    using AutoXen.Web.ViewModels.CarWash;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 

@@ -1,4 +1,4 @@
-﻿namespace AutoXen.Web.ViewModels
+﻿namespace AutoXen.Web.ViewModels.Cars
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -6,21 +6,10 @@
     using AutoXen.Data.Models.Enums;
     using AutoXen.Web.ViewModels.ValidationAtributes;
 
-    // TODO remove interfaces, move all view models to folders and delete Mapping
-    public class DetailedCarWithoutIdViewModel
+    // TODO delete Mapping
+    public class DetailedCarViewModel : CarViewModel
     {
-        [Required]
-        [MinLength(2)]
-        public string Brand { get; set; }
-
-        [Required]
-        public string Model { get; set; }
-
-        [Required]
-        [Display(Name = "Registration plate")]
-        public string RegistrationPlate { get; set; }
-
-        public FuelType FuelType { get; set; }
+        public new string Id { get; set; }
 
         [Display(Name = "Number of seats")]
         [Range(1, 100, ErrorMessage = "The number of seats must be atleast 1.")]
@@ -33,6 +22,8 @@
         public int? Weight { get; set; }
 
         public string Color { get; set; }
+
+        public FuelType FuelType { get; set; }
 
         public TransmissionType TransmissionType { get; set; }
 

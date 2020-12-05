@@ -2,7 +2,7 @@
 {
     using System;
 
-    using AutoXen.Data.Models.Enums;
+    using AutoXen.Web.ViewModels.Cars;
 
     public class RequestViewModel
     {

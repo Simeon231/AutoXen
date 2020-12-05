@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
 
     using AutoXen.Data.Models.CarWash;
-    using AutoXen.Web.ViewModels;
+    using AutoXen.Web.ViewModels.CarWash;
 
     public interface ICarWashService
     {

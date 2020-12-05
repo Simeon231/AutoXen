@@ -18,7 +18,7 @@
             this.CreateMap<WorkshopService, ServiceWithPriceResponseModel>()
                 .ReverseMap();
 
-            this.CreateMap<WService, ServiceModel>()
+            this.CreateMap<WService, ServiceResponseModel>()
                 .ReverseMap();
 
             this.CreateMap<WorkshopRequest, WorkshopRequestViewModel>()

@@ -1,10 +1,10 @@
 ﻿namespace AutoXen.Web.Areas.Administration.Controllers
 {
+    using System.Security.Claims;
+
     using AutoXen.Services.Data;
     using AutoXen.Services.Data.Administration;
-    using AutoXen.Web.ViewModels.Administration.Requests;
     using Microsoft.AspNetCore.Mvc;
-    using System.Security.Claims;
 
     public class RequestsController : AdministrationController
     {

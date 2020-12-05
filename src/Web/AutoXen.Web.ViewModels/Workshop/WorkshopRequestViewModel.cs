@@ -5,7 +5,7 @@
 
     using AutoXen.Web.ViewModels.Common;
 
-    public class WorkshopRequestViewModel : IValidatableObject
+    public class WorkshopRequestViewModel : PickUpViewModel, IValidatableObject
     {
         public int WorkshopId { get; set; }
 
@@ -13,8 +13,6 @@
 
         [Required]
         public string CarId { get; set; }
-
-        public PickUpViewModel PickUp { get; set; }
 
         [Display(Name = "Every workshop")]
         public bool AdminChooseWorkshop { get; set; }

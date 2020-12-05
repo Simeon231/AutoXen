@@ -5,7 +5,7 @@
 
     using AutoXen.Services.Data;
     using AutoXen.Services.Data.Exceptions;
-    using AutoXen.Web.ViewModels;
+    using AutoXen.Web.ViewModels.Cars;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -34,11 +34,11 @@
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Add(DetailedCarWithIdViewModel car)
+        public async Task<IActionResult> Add(DetailedCarViewModel car)
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View();
+                return this.View("~/Views/Cars/Car.cshtml");
             }
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -61,7 +61,7 @@
         public IActionResult Details(string id)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            DetailedCarWithoutIdViewModel model;
+            DetailedCarViewModel model;
 
             try
             {
@@ -77,7 +77,7 @@
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Details(DetailedCarWithIdViewModel input)
+        public async Task<IActionResult> Details(DetailedCarViewModel input)
         {
             if (!this.ModelState.IsValid)
             {

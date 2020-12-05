@@ -153,11 +153,11 @@
                 .ToList();
         }
 
-        public IEnumerable<ServiceModel> GetAllServices()
+        public IEnumerable<ServiceResponseModel> GetAllServices()
         {
             return this.serviceRepository
                 .AllAsNoTracking()
-                .Select(x => this.mapper.Map<ServiceModel>(x))
+                .Select(x => this.mapper.Map<ServiceResponseModel>(x))
                 .ToList();
         }
 

@@ -19,7 +19,7 @@
 
         public IEnumerable<ServiceWithPriceResponseModel> GetServicesByWorkshopId(int workshopId);
 
-        public IEnumerable<ServiceModel> GetAllServices();
+        public IEnumerable<ServiceResponseModel> GetAllServices();
 
         public IEnumerable<WorkshopViewModel> GetAllWorkshops();
 

@@ -2,7 +2,7 @@
 {
     using AutoMapper;
     using AutoXen.Data.Models.Car;
-    using AutoXen.Web.ViewModels;
+    using AutoXen.Web.ViewModels.Cars;
 
     public class CarProfile : Profile
     {
@@ -11,14 +11,10 @@
             this.CreateMap<Car, CarViewModel>()
                 .ReverseMap();
 
-            this.CreateMap<DetailedCarWithoutIdViewModel, Car>()
-                .ForMember(x => x.CarExtras, opt => opt.Ignore())
-                .ReverseMap();
-
-            this.CreateMap<Car, DetailedCarWithIdViewModel>()
+            this.CreateMap<Car, DetailedCarViewModel>()
                 .ForMember(x => x.CarExtras, opt => opt.Ignore());
 
-            this.CreateMap<DetailedCarWithIdViewModel, Car>()
+            this.CreateMap<DetailedCarViewModel, Car>()
                 .ForMember(x => x.CarExtras, opt => opt.Ignore())
                 .ForMember(x => x.Id, opt => opt.Ignore());
         }

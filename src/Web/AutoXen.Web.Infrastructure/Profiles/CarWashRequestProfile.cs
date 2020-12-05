@@ -2,7 +2,7 @@
 {
     using AutoMapper;
     using AutoXen.Data.Models.CarWash;
-    using AutoXen.Web.ViewModels;
+    using AutoXen.Web.ViewModels.CarWash;
 
     public class CarWashRequestProfile : Profile
     {

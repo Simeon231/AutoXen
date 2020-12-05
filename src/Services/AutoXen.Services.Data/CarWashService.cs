@@ -1,16 +1,13 @@
 ﻿namespace AutoXen.Services.Data
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using AutoMapper;
     using AutoXen.Data.Common.Repositories;
-    using AutoXen.Data.Models.Car;
     using AutoXen.Data.Models.CarWash;
-    using AutoXen.Services.Data.Exceptions;
-    using AutoXen.Web.ViewModels;
+    using AutoXen.Web.ViewModels.CarWash;
     using Microsoft.EntityFrameworkCore;
 
     public class CarWashService : ICarWashService
@@ -39,9 +36,9 @@
         {
             this.carService.CheckUserHasCar(userId, model.CarId);
 
-            if (model.PickUp.FastAsPossible)
+            if (model.PickUpFastAsPossible)
             {
-                model.PickUp.Time = null;
+                model.PickUpTime = null;
             }
 
             if (model.AdminChooseCarWash)

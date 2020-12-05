@@ -1,6 +1,6 @@
 ﻿namespace AutoXen.Web.ViewModels.Workshop
 {
-    public class ServiceModel
+    public class ServiceResponseModel
     {
         public int Id { get; set; }
 
