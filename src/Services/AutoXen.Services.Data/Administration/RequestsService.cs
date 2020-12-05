@@ -3,8 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Threading.Tasks;
     using AutoMapper;
+    using AutoXen.Common;
     using AutoXen.Data.Common.Models;
     using AutoXen.Data.Common.Repositories;
     using AutoXen.Data.Models.CarWash;
@@ -31,6 +32,16 @@
             this.workshopService = workshopService;
             this.carWashService = carWashService;
             this.mapper = mapper;
+        }
+
+        public async Task AcceptRequestAsync(string requestName, string requestId)
+        {
+            // TODO !!!
+            switch (requestName)
+            {
+                case GlobalConstants.Workshop: await this.workshopService.AcceptAsync(string.Empty, requestId);
+                    break;
+            }
         }
 
         public RequestsViewModel GetAllRequests(int page, int itemsPerPage = 10)

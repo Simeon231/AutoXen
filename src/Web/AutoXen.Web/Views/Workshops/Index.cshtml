@@ -14,19 +14,13 @@
 
             <partial name="_PickUpPartial" model="@Model" />
 
-            <div class="form-row pb-4 d-flex justify-content-center">
-                <div class="p-1 border col-sm-4">
+            <div class="form-row d-flex justify-content-center">
+                <div class="col-md-9 form-group">
                     <div class="text-center">
                         <label class="col-form-label" asp-for="AdminChooseWorkshop"></label>
                         <input onchange="EnableDisableWorkshops(this)" class="form-check-inline" asp-for="AdminChooseWorkshop" onclick="GetAllServices()" />
-                        <span asp-validation-for="AdminChooseWorkshop" class="text-danger"></span>
                     </div>
-                </div>
-            </div>
-
-            <div class="form-row d-flex justify-content-center">
-                <div class="col-md-9 form-group">
-                    <select class="form-control" asp-for="WorkshopId" onchange="GetWorkshopServices(this)">
+                    <select class="form-control selectId" asp-for="WorkshopId" onchange="GetWorkshopServices(this)">
                         <option id="hiddenValue" hidden disabled selected>Pick a workshop</option>
                         @foreach (var workshop in this.workshopService.GetAllWorkshops())
                         {
@@ -39,7 +33,7 @@
             </div>
 
             <div class="mb-2 mt-1 d-flex justify-content-center">
-                <select class="js-example-basic-multiple col-md-9 form-control" asp-for="@Model.Ids" multiple="multiple">
+                <select class="js-select-multiple col-md-9 form-control selectIds" asp-for="@Model.Ids" multiple="multiple">
                     @if (Model.WorkshopId != 0)
                     {
                         @foreach (var service in this.workshopService.GetServicesByWorkshopId(Model.WorkshopId))

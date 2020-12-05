@@ -24,5 +24,7 @@
         public IEnumerable<WorkshopViewModel> GetAllWorkshops();
 
         public WorkshopRequestDetailsViewModel GetWorkshopDetails(string userId, string requestId, bool isAdmin = false);
+
+        public Task AcceptAsync(string adminId, string requestId);
     }
 }

@@ -24,7 +24,7 @@ function convertTimeToLocal(time) {
 
 // Select2
 $(document).ready(function () {
-    $('.js-example-basic-multiple').select2().select2({
+    $('.js-select-multiple').select2().select2({
         placeholder: 'Select an option',
         allowClear: true
     });

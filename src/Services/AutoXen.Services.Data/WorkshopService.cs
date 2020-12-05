@@ -7,9 +7,7 @@
 
     using AutoMapper;
     using AutoXen.Data.Common.Repositories;
-    using AutoXen.Data.Models.Car;
     using AutoXen.Data.Models.Workshop;
-    using AutoXen.Web.ViewModels;
     using AutoXen.Web.ViewModels.Workshop;
     using Microsoft.EntityFrameworkCore;
 
@@ -169,6 +167,11 @@
                 .Where(x => x.WorkshopId == workshopId)
                 .Select(x => this.mapper.Map<ServiceWithPriceResponseModel>(x))
                 .ToList();
+        }
+
+        public Task AcceptAsync(string adminId, string requestId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

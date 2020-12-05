@@ -27,6 +27,7 @@
         [Display(Name = "Car returned")]
         public bool ReturnedCar { get; set; }
 
+        [Display(Name = "Other services")]
         public string OtherServices { get; set; }
 
         public IEnumerable<WServiceViewModel> WServices { get; set; }

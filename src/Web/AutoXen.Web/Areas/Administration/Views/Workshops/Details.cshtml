@@ -1,11 +1,12 @@
-﻿@using AutoXen.Common
+﻿@using AutoXen.Services.Data
 @using AutoXen.Web.ViewModels.Workshop
 @model WorkshopRequestDetailsViewModel
+@inject IWorkshopService workshopService
 
-<div class="d-flex justify-content-center">
-    <div class="form-row mt-2 pb-2 container">
-        <div class="col-md-8">
-            <form method="post">
+<form method="post">
+    <div class="d-flex pb-3 justify-content-center">
+        <div class="form-row mt-2 container">
+            <div class="col-md-8">
                 <div class="d-flex justify-content-center">
                     <div asp-validation-summary="All" class="text-danger"></div>
                 </div>
@@ -14,14 +15,17 @@
                     <div class="text-center col-md-4">
                         <label class="col-form-label" asp-for="PickedUp"></label>
                         <input class="form-check-inline" asp-for="PickedUp" />
+                        <span asp-validation-for="PickedUp" class="text-danger"></span>
                     </div>
                     <div class="text-center col-md-4">
                         <label class="col-form-label" asp-for="CarWashingDone"></label>
                         <input class="form-check-inline" asp-for="CarWashingDone" />
+                        <span asp-validation-for="CarWashingDone" class="text-danger"></span>
                     </div>
                     <div class="text-center col-md-4">
                         <label class="col-form-label" asp-for="ReturnedCar"></label>
                         <input class="form-check-inline" asp-for="ReturnedCar" />
+                        <span asp-validation-for="ReturnedCar" class="text-danger"></span>
                     </div>
                 </div>
 
@@ -29,72 +33,99 @@
                     <div class="text-center col-sm-5">
                         <label class=" col-form-label" asp-for="FinishedOn"></label>
                         <input class="form-control" asp-for="FinishedOn" />
+                        <span asp-validation-for="FinishedOn" class="text-danger"></span>
                     </div>
                 </div>
 
-                <div class="d-flex justify-content-center mt-3">
-                    <input hidden disabled asp-for="Id"/>
-                    <button type="submit" class="btn btn-primary" asp-area="Administration" asp-controller="Workshops" asp-action="Details">Submit</button>
+                <hr />
+
+                <partial name="_SingleCarPartial" model="Model.Car" />
+
+                <partial name="_SinglePickUpPartial" model="@Model" />
+
+                <div class="form-row d-flex justify-content-center">
+                    <div class="col-md-9 mb-3 text-center">
+                        <label class="col-form-label" asp-for="Workshop.Id">Workshop</label>
+                        <select class="form-control " asp-for="Workshop.Id" onchange="GetWorkshopServices(this)">
+                            <option id="hiddenValue" hidden disabled selected>Pick a workshop</option>
+                            @foreach (var workshop in this.workshopService.GetAllWorkshops())
+                            {
+                                if (Model.Workshop != null && workshop.Id == Model.Workshop.Id)
+                                {
+                                    <option selected data-select2 value="@workshop.Id">
+                                        @($"Name: {workshop.Name} - Address: {workshop.Address}")
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option data-select2 value="@workshop.Id">
+                                        @($"Name: {workshop.Name} - Address: {workshop.Address}")
+                                    </option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="Workshop.Id" class="text-danger"></span>
+                    </div>
                 </div>
-            </form>
 
-            <hr />
-
-            <partial name="_SingleCarPartial" model="Model.Car" />
-
-            <partial name="_SinglePickUpPartial" model="@Model" />
-
-            <div class="form-row d-flex justify-content-center">
-                <div class="col-md-9 mb-3 text-center">
+                <div class="form-row mb-2 mt-1 d-flex justify-content-center">
                     @if (Model.AdminChooseWorkshop)
                     {
-                        <label class="text-muted col-form-label" asp-for="AdminChooseWorkshop"></label>
-                        <input disabled class="form-check-inline" asp-for="AdminChooseWorkshop" />
-                        <input class="form-control" disabled value="You didn't pick a workshop" />
+                        <select class="js-select-multiple col-md-9 form-control selectIds" asp-for="@Model.WServices" multiple="multiple">
+                            @foreach (var service in workshopService.GetAllServices())
+                            {
+                                if (Model.WServices.Any(x => x.Id == service.Id))
+                                {
+                                    <option selected>@service.Name</option>
+                                }
+                                else
+                                {
+                                    <option>@service.Name</option>
+                                }
+                            }
+                        </select>
                     }
                     else
                     {
-                        <label class="text-muted col-form-label" asp-for="AdminChooseWorkshop"></label>
-                        <input disabled class="form-check-inline" asp-for="AdminChooseWorkshop" />
-                        <input class="form-control" disabled value="@($"{Model.Workshop.Name} - {Model.Workshop.Address}")" />
+                        <select class="js-select-multiple col-md-9 form-control selectIds" asp-for="@Model.WorkshopServices" multiple="multiple">
+                            @foreach (var service in workshopService.GetServicesByWorkshopId(Model.Workshop.Id))
+                            {
+                                if (Model.WorkshopServices.Any(x => x.ServiceId == service.Id))
+                                {
+                                    <option selected>@($"{service.ServiceName} - {service.Price}")</option>
+                                }
+                                else
+                                {
+                                    <option>@($"{service.ServiceName} - {service.Price}")</option>
+                                }
+                            }
+                        </select>
                     }
                 </div>
-            </div>
 
-            <div class="form-row mb-2 mt-1 d-flex justify-content-center">
-                @if (Model.AdminChooseWorkshop)
-                {
-                    <select disabled class="js-example-basic-multiple col-md-9 form-control" asp-for="@Model.WServices" multiple="multiple">
-                        @foreach (var service in Model.WServices)
-                        {
-                            <option selected>@service.Name</option>
-                        }
-                    </select>
-                }
-                else
-                {
-                    <select disabled class="js-example-basic-multiple col-md-9 form-control" asp-for="@Model.WorkshopServices" multiple="multiple">
-                        @foreach (var service in Model.WorkshopServices)
-                        {
-                            <option selected>@($"{service.ServiceName} - {service.Price}")</option>
-                        }
-                    </select>
-                }
-            </div>
+                <div class="pb-3 d-flex justify-content-center">
+                    <div class="col-md-10">
+                        <div class="text-center">
+                            <label class="col-form-label" asp-for="OtherServices"></label>
+                            <textarea class="form-control" asp-for="OtherServices" rows="4"> </textarea>
+                            <span asp-validation-for="OtherServices" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="pb-3 d-flex justify-content-center">
-                <div class="col-md-10">
-                    <div class="text-center">
-                        <label class="text-muted col-form-label" asp-for="OtherServices"></label>
-                        <textarea disabled class="form-control" asp-for="OtherServices" rows="4"> </textarea>
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-4">
-            <label class="col-form-label text-center">Write your message</label>
-            <textarea class="form-control input-group" rows="20"></textarea>
+            <div class="col-md-4">
+                <label class="col-form-label text-center">Write your message</label>
+                <textarea class="form-control input-group" rows="20"></textarea>
+            </div>
         </div>
     </div>
-</div>
+</form>
+
+<script src="~/js/workshop.js" asp-append-version="true"></script>

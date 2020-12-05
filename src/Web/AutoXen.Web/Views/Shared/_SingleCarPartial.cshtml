@@ -1,10 +1,11 @@
-﻿@model AutoXen.Web.ViewModels.Cars.CarViewModel
+﻿@using AutoXen.Common 
+@model AutoXen.Web.ViewModels.Cars.CarViewModel
 
 <div class="form-row pb-4 d-flex justify-content-center">
     <div class="col-md-10">
         <div class="text-center">
             <label class="text-muted col-form-label">Your car</label>
-            <input disabled class="form-control" value="@($"Brand: {Model.Brand} - Model: {Model.Model} - Plate: {Model.RegistrationPlate}")"/>
+            <input disabled class="form-control" value="@($"Brand: {Model.Brand} - Model: {Model.Model} - Plate: {Model.RegistrationPlate}")" />
         </div>
     </div>
 </div>

@@ -1,7 +1,7 @@
 // Disable/Enable workshops on click
 
 const workshopBtn = document.getElementById('AdminChooseWorkshop');
-const workshop = document.getElementById("WorkshopId");
+const workshop = document.getElementsByClassName("selectId")[0];
 const defaultOption = document.getElementById("hiddenValue");
 
 //on load
@@ -43,7 +43,7 @@ function GetWorkshopServices(workshop) {
 }
 
 function AddServicesToSelect(data) {
-    const select = document.getElementById("Ids");
+    const select = document.getElementsByClassName("selectIds")[0];
     select.innerHTML = null;
     data.forEach(x => {
         var option = document.createElement("option");

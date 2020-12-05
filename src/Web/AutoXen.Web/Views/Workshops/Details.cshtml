@@ -1,5 +1,4 @@
-﻿@using AutoXen.Common
-@using AutoXen.Web.ViewModels.Workshop
+﻿@using AutoXen.Web.ViewModels.Workshop
 @model WorkshopRequestDetailsViewModel
 
     <div class="d-flex justify-content-center">
@@ -57,7 +56,7 @@
                 <div class="form-row mb-2 mt-1 d-flex justify-content-center">
                     @if (Model.AdminChooseWorkshop)
                     {
-                        <select disabled class="js-example-basic-multiple col-md-9 form-control" asp-for="@Model.WServices" multiple="multiple">
+                        <select disabled class="js-select-multiple col-md-9 form-control" asp-for="@Model.WServices" multiple="multiple">
                             @foreach (var service in Model.WServices)
                             {
                                 <option selected>@service.Name</option>
@@ -66,7 +65,7 @@
                     }
                     else
                     {
-                        <select disabled class="js-example-basic-multiple col-md-9 form-control" asp-for="@Model.WorkshopServices" multiple="multiple">
+                        <select disabled class="js-select-multiple col-md-9 form-control" asp-for="@Model.WorkshopServices" multiple="multiple">
                             @foreach (var service in Model.WorkshopServices)
                             {
                                 <option selected>@($"{service.ServiceName} - {service.Price}")</option>

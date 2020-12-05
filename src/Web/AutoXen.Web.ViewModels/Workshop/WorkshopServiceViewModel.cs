@@ -7,7 +7,7 @@
         [Required]
         public string ServiceName { get; set; }
 
-        public string ServiceId { get; set; }
+        public int ServiceId { get; set; }
 
         [Required]
         public double Price { get; set; }
