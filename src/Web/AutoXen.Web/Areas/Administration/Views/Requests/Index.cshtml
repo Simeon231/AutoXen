@@ -1,5 +1,8 @@
 ﻿@using AutoXen.Web.ViewModels.Administration.Requests
 @using AutoXen.Common
+@using AutoXen.Data.Models
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
 @model RequestsViewModel
 @{
     this.ViewData["Title"] = "Requests";
@@ -31,6 +34,7 @@
             {
                 @foreach (var request in Model.Requests)
                 {
+                    ApplicationUser curUser = this.UserManager.GetUserAsync(this.User).GetAwaiter().GetResult();
                     <tr>
                         <td>@($"First name: {request.User.FirstName} - Sur name: {request.User.SurName}")</td>
                         <td name="date">@request.CreatedOn</td>
@@ -39,9 +43,13 @@
                         {
                             <td class="text-center"><a asp-controller="Requests" asp-action="AcceptRequest" asp-area="Administration" asp-route-requestName="@request.RequestName" asp-route-id="@request.Id" class="btn btn-outline-secondary">Accept</a></td>
                         }
+                        else if (request.AcceptedById == curUser.Id)
+                        {
+                            <td class="text-center"><a asp-controller="Email" asp-action="Send" asp-area="Administration" asp-route-requestName="@request.RequestName" asp-route-id="@request.Id" class="btn btn-outline-primary">Send email</a></td>
+                        }
                         else
                         {
-                            <td class="text-center">Accepted</td>
+                            <td class="text-center align-middle">Accepted</td>
                         }
                         @if (request.RequestName == GlobalConstants.Workshop)
                         {

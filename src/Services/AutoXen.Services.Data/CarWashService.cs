@@ -7,6 +7,7 @@
     using AutoMapper;
     using AutoXen.Data.Common.Repositories;
     using AutoXen.Data.Models.CarWash;
+    using AutoXen.Web.ViewModels.Administration.Requests;
     using AutoXen.Web.ViewModels.CarWash;
     using Microsoft.EntityFrameworkCore;
 
@@ -27,6 +28,28 @@
             this.carWashRepository = carWashRepository;
             this.carService = carService;
             this.mapper = mapper;
+        }
+
+        public async Task AcceptAsync(string adminId, string requestId)
+        {
+            var request = this.carWashRequestRepository
+                .All()
+                .FirstOrDefault(x => x.Id == requestId);
+
+            request.AcceptedById = adminId;
+
+            await this.carWashRequestRepository.SaveChangesAsync();
+        }
+
+        public async Task AcceptAsync(AcceptViewModel model)
+        {
+            var request = this.carWashRequestRepository
+                .All()
+                .FirstOrDefault(x => x.Id == model.Id);
+
+            request.AcceptedById = model.AdminId;
+
+            await this.carWashRequestRepository.SaveChangesAsync();
         }
 
         /// <summary>

@@ -10,6 +10,8 @@
     using AutoXen.Data.Repositories;
     using AutoXen.Data.Seeding;
     using AutoXen.Services.Data;
+    using AutoXen.Services.Data.Administration;
+    using AutoXen.Services.Data.Requests;
     using AutoXen.Services.Mapping;
     using AutoXen.Services.Messaging;
     using AutoXen.Web.Infrastructure.ModelBinders;
@@ -68,12 +70,13 @@
             services.AddAutoMapper(typeof(CarProfile));
 
             // Application services
-            services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IEmailSender>(x => new SendGridEmailSender(this.configuration["SendGrid:ApiKey"]));
             services.AddTransient<ICarService, CarService>();
             services.AddTransient<ICarWashService, CarWashService>();
-            services.AddTransient<Services.Data.Requests.IRequestsService, Services.Data.Requests.RequestsService>();
-            services.AddTransient<IWorkshopService, WorkshopService>();
-            services.AddTransient<Services.Data.Administration.IRequestsService, Services.Data.Administration.RequestsService>();
+            services.AddTransient<IRequestsService, RequestsService>();
+            services.AddTransient<IWorkshopService, AutoXen.Services.Data.WorkshopService>();
+            services.AddTransient<IRequestsAdminService, RequestsAdminService>();
+            services.AddTransient<IEmailService, EmailService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

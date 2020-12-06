@@ -4,9 +4,10 @@
     using System.Threading.Tasks;
 
     using AutoXen.Data.Models.CarWash;
+    using AutoXen.Services.Data.Common;
     using AutoXen.Web.ViewModels.CarWash;
 
-    public interface ICarWashService
+    public interface ICarWashService : IBaseRequestService
     {
         public IEnumerable<CarWashViewModel> GetAllCarWashes();
 

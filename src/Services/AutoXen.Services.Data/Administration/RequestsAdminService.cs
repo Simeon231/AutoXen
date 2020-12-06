@@ -1,45 +1,46 @@
 ﻿namespace AutoXen.Services.Data.Administration
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using AutoMapper;
     using AutoXen.Common;
-    using AutoXen.Data.Common.Models;
     using AutoXen.Data.Common.Repositories;
     using AutoXen.Data.Models.CarWash;
     using AutoXen.Data.Models.Workshop;
     using AutoXen.Web.ViewModels.Administration.Requests;
 
-    public class RequestsService : IRequestsService
+    public class RequestsAdminService : IRequestsAdminService
     {
-        private readonly IDeletableEntityRepository<WorkshopRequest> workshopRequestService;
-        private readonly IDeletableEntityRepository<CarWashRequest> carWashRequestService;
+        private readonly IDeletableEntityRepository<WorkshopRequest> workshopRequestServiceRepository;
+        private readonly IDeletableEntityRepository<CarWashRequest> carWashRequestServiceRepository;
         private readonly IWorkshopService workshopService;
         private readonly ICarWashService carWashService;
         private readonly IMapper mapper;
 
-        public RequestsService(
-            IDeletableEntityRepository<WorkshopRequest> workshopRequestService,
-            IDeletableEntityRepository<CarWashRequest> carWashRequestService,
+        public RequestsAdminService(
+            IDeletableEntityRepository<WorkshopRequest> workshopRequestServiceRepository,
+            IDeletableEntityRepository<CarWashRequest> carWashRequestServiceRepository,
             IWorkshopService workshopService,
             ICarWashService carWashService,
             IMapper mapper)
         {
-            this.workshopRequestService = workshopRequestService;
-            this.carWashRequestService = carWashRequestService;
+            this.workshopRequestServiceRepository = workshopRequestServiceRepository;
+            this.carWashRequestServiceRepository = carWashRequestServiceRepository;
             this.workshopService = workshopService;
             this.carWashService = carWashService;
             this.mapper = mapper;
         }
 
-        public async Task AcceptRequestAsync(string requestName, string requestId)
+        public async Task AcceptRequestAsync(AcceptViewModel model)
         {
-            // TODO !!!
-            switch (requestName)
+            switch (model.RequestName)
             {
-                case GlobalConstants.Workshop: await this.workshopService.AcceptAsync(string.Empty, requestId);
+                case GlobalConstants.Workshop:
+                    await this.workshopService.AcceptAsync(model);
+                    break;
+                case GlobalConstants.CarWash:
+                    await this.carWashService.AcceptAsync(model);
                     break;
             }
         }

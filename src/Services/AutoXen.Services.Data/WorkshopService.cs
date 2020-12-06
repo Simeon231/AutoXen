@@ -8,6 +8,8 @@
     using AutoMapper;
     using AutoXen.Data.Common.Repositories;
     using AutoXen.Data.Models.Workshop;
+    using AutoXen.Services.Data.Common;
+    using AutoXen.Web.ViewModels.Administration.Requests;
     using AutoXen.Web.ViewModels.Workshop;
     using Microsoft.EntityFrameworkCore;
 
@@ -169,9 +171,15 @@
                 .ToList();
         }
 
-        public Task AcceptAsync(string adminId, string requestId)
+        public async Task AcceptAsync(AcceptViewModel model)
         {
-            throw new NotImplementedException();
+            var request = this.workshopRequestRepository
+                .All()
+                .FirstOrDefault(x => x.Id == model.Id);
+
+            request.AcceptedById = model.AdminId;
+
+            await this.workshopRequestRepository.SaveChangesAsync();
         }
     }
 }

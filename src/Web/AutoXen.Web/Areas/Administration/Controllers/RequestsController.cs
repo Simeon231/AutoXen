@@ -1,22 +1,29 @@
 ﻿namespace AutoXen.Web.Areas.Administration.Controllers
 {
+    using System;
     using System.Security.Claims;
+    using System.Threading.Tasks;
 
     using AutoXen.Services.Data;
     using AutoXen.Services.Data.Administration;
+    using AutoXen.Web.ViewModels.Administration.Email;
+    using AutoXen.Web.ViewModels.Administration.Requests;
     using Microsoft.AspNetCore.Mvc;
 
     public class RequestsController : AdministrationController
     {
-        private readonly IRequestsService requestsService;
+        private readonly IRequestsAdminService requestsService;
         private readonly IWorkshopService workshopService;
+        private readonly IEmailService emailService;
 
         public RequestsController(
-            IRequestsService requestsService,
-            IWorkshopService workshopService)
+            IRequestsAdminService requestsService,
+            IWorkshopService workshopService,
+            IEmailService emailService)
         {
             this.requestsService = requestsService;
             this.workshopService = workshopService;
+            this.emailService = emailService;
         }
 
         public IActionResult Index(int id)
@@ -31,18 +38,22 @@
             return this.View(model);
         }
 
-        public IActionResult AcceptRequest(string requestName, string id)
+        public async Task<IActionResult> AcceptRequest(AcceptViewModel input)
         {
-            // TODO accept
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            input.AdminId = userId;
+
+            await this.requestsService.AcceptRequestAsync(input);
+
             return this.RedirectToAction(nameof(this.Index));
         }
 
-        public IActionResult WorkshopRequest(string requestId)
-        {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var model = this.workshopService.GetWorkshopDetails(userId, requestId);
+        //public IActionResult WorkshopRequest(string requestId)
+        //{
+        //    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    var model = this.workshopService.GetWorkshopDetails(userId, requestId);
 
-            return this.View();
-        }
+        //    return this.View();
+        //}
     }
 }

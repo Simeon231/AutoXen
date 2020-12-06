@@ -5,6 +5,8 @@
 
     public interface IRequest
     {
+        public string Id { get; set; }
+
         public string AcceptedById { get; set; }
 
         public ApplicationUser AcceptedBy { get; set; }

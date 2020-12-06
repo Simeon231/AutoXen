@@ -23,6 +23,7 @@
     <ProjectReference Include="..\..\Data\AutoXen.Data.Models\AutoXen.Data.Models.csproj" />
     <ProjectReference Include="..\..\Web\AutoXen.Web.ViewModels\AutoXen.Web.ViewModels.csproj" />
     <ProjectReference Include="..\AutoXen.Services.Mapping\AutoXen.Services.Mapping.csproj" />
+    <ProjectReference Include="..\AutoXen.Services.Messaging\AutoXen.Services.Messaging.csproj" />
   </ItemGroup>
 
 </Project>
