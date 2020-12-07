@@ -12,28 +12,35 @@
                 </div>
 
                 <div class="row">
-                    <div class="text-center col-md-4">
+                    <div class="text-center col-lg-4">
                         <label class="col-form-label" asp-for="PickedUp"></label>
                         <input class="form-check-inline" asp-for="PickedUp" />
                         <span asp-validation-for="PickedUp" class="text-danger"></span>
                     </div>
-                    <div class="text-center col-md-4">
+                    <div class="text-center col-lg-4">
                         <label class="col-form-label" asp-for="CarWashingDone"></label>
                         <input class="form-check-inline" asp-for="CarWashingDone" />
                         <span asp-validation-for="CarWashingDone" class="text-danger"></span>
                     </div>
-                    <div class="text-center col-md-4">
+                    <div class="text-center col-lg-4">
                         <label class="col-form-label" asp-for="ReturnedCar"></label>
                         <input class="form-check-inline" asp-for="ReturnedCar" />
                         <span asp-validation-for="ReturnedCar" class="text-danger"></span>
                     </div>
-                </div>
 
-                <div class="row d-flex justify-content-center">
-                    <div class="text-center col-sm-5">
-                        <label class=" col-form-label" asp-for="FinishedOn"></label>
-                        <input class="form-control" asp-for="FinishedOn" />
-                        <span asp-validation-for="FinishedOn" class="text-danger"></span>
+                </div>
+                <div class="row mt-1">
+                    <div class="text-center col-lg-8">
+                        <div class="col-lg-10">
+                            <label class=" col-form-label" asp-for="FinishedOn"></label>
+                            <input class="form-control" asp-for="FinishedOn" />
+                            <span asp-validation-for="FinishedOn" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="text-center mt-4">
+                            <a class="btn btn-info pl-3 pr-3" asp-controller="Users" asp-action="Profile" asp-route-userId="@Model.UserId">User's profile</a>
+                        </div>
                     </div>
                 </div>
 
@@ -46,7 +53,7 @@
                 <div class="form-row d-flex justify-content-center">
                     <div class="col-md-9 mb-3 text-center">
                         <label class="col-form-label" asp-for="Workshop.Id">Workshop</label>
-                        <select class="form-control " asp-for="Workshop.Id" onchange="GetWorkshopServices(this)">
+                        <select class="form-control selectId" name="WorkshopId" onchange="GetWorkshopServices(this)">
                             <option id="hiddenValue" hidden disabled selected>Pick a workshop</option>
                             @foreach (var workshop in this.workshopService.GetAllWorkshops())
                             {
@@ -69,37 +76,58 @@
                 </div>
 
                 <div class="form-row mb-2 mt-1 d-flex justify-content-center">
-                    @if (Model.AdminChooseWorkshop)
+                    <label class="text-center col-md-4">Services</label>
+                    @if (Model.AdminChooseWorkshop && Model.Workshop == null)
                     {
-                        <select class="js-select-multiple col-md-9 form-control selectIds" asp-for="@Model.WServices" multiple="multiple">
+                        <select class="js-select-multiple col-md-9 form-control selectIds" name="ServiceIds" asp-for="@Model.WServices" multiple="multiple">
                             @foreach (var service in workshopService.GetAllServices())
                             {
                                 if (Model.WServices.Any(x => x.Id == service.Id))
                                 {
-                                    <option selected>@service.Name</option>
+                                    <option selected value="@service.Id">@service.Name</option>
                                 }
                                 else
                                 {
-                                    <option>@service.Name</option>
+                                    <option value="@service.Id">@service.Name</option>
                                 }
+                            }
+                        </select>
+                        <label class="mt-3 text-center col-md-4">Picked services</label>
+                        <select class="js-select-multiple col-md-9" disabled multiple>
+                            @foreach (var service in Model.WServices)
+                            {
+                                <option selected>@service.Name</option>
                             }
                         </select>
                     }
                     else
                     {
-                        <select class="js-select-multiple col-md-9 form-control selectIds" asp-for="@Model.WorkshopServices" multiple="multiple">
+                        <select class="js-select-multiple col-md-9 form-control selectIds" name="ServiceIds" asp-for="@Model.WorkshopServices" multiple="multiple">
                             @foreach (var service in workshopService.GetServicesByWorkshopId(Model.Workshop.Id))
                             {
-                                if (Model.WorkshopServices.Any(x => x.ServiceId == service.Id))
+                                if (Model.WorkshopServices.Any(x => x == service.Id))
                                 {
-                                    <option selected>@($"{service.ServiceName} - {service.Price}")</option>
+                                    <option selected value="@service.Id">@($"{service.ServiceName} - {service.Price}$")</option>
                                 }
                                 else
                                 {
-                                    <option>@($"{service.ServiceName} - {service.Price}")</option>
+                                    <option value="@service.Id">@($"{service.ServiceName} - {service.Price}$")</option>
                                 }
                             }
+
                         </select>
+                        @if (Model.WServices != null)
+                        {
+                            <label class="mt-3 text-center col-md-4">Picked services</label>
+                            <select class="js-select-multiple col-md-9" disabled multiple>
+
+                                @foreach (var service in Model.WServices)
+                                {
+                                    <option selected>@service.Name</option>
+                                }
+
+                            </select>
+                        }
                     }
                 </div>
 
@@ -121,7 +149,9 @@
             </div>
 
             <div class="col-md-4">
-                <label class="col-form-label text-center">Write your message</label>
+                <div class="text-center">
+                    <label class="col-form-label">Write your message</label>
+                </div>
                 <textarea class="form-control input-group" rows="20"></textarea>
             </div>
         </div>

@@ -2,6 +2,7 @@
 {
     using AutoMapper;
     using AutoXen.Data.Models.Workshop;
+    using AutoXen.Web.ViewModels.Administration.Workshop;
     using AutoXen.Web.ViewModels.Common;
     using AutoXen.Web.ViewModels.Workshop;
 
@@ -28,6 +29,9 @@
                 .ReverseMap();
 
             this.CreateMap<WService, WServiceViewModel>()
+                .ReverseMap();
+
+            this.CreateMap<WorkshopRequest, WorkshopAdminViewModel>()
                 .ReverseMap();
         }
     }

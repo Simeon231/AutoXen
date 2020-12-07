@@ -51,7 +51,7 @@
         public IActionResult Details(string id)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var model = this.workshopService.GetWorkshopDetails(userId, id);
+            var model = this.workshopService.GetWorkshopRequestDetails(userId, id);
 
             return this.View(model);
         }

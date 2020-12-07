@@ -1,0 +1,44 @@
+﻿@using AutoXen.Web.ViewModels.Administration.User
+@model UserDetailsViewModel
+
+<div class="d-flex justify-content-center">
+    <div class="container mt-3">
+        <div class="text-center">
+            <label class="h4 font-weight-bold">User's profile</label>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="col-form-label" asp-for="FirstName"></label>
+                <input class="form-control" asp-for="FirstName" />
+            </div>
+            <div class="col-md-6">
+                <label class="col-form-label" asp-for="MiddleName"></label>
+                <input class="form-control" asp-for="MiddleName" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="col-form-label" asp-for="SurName"></label>
+                <input class="form-control" asp-for="SurName" />
+            </div>
+            <div class="col-md-6">
+                <label class="col-form-label" asp-for="PhoneNumber"></label>
+                <input class="form-control" asp-for="PhoneNumber" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="col-form-label" asp-for="Address"></label>
+                <input class="form-control" asp-for="Address" />
+            </div>
+        </div>
+        <div class="mt-4 row">
+            <div class="col-md-6 d-flex justify-content-center">
+                <a class="btn btn-info" href="">User's cars</a>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center">
+                <a class="btn btn-secondary" href="">User's requests</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -14,6 +14,7 @@
         {
             this.Id = Guid.NewGuid().ToString();
             this.WorkshopRequestWorkshopServices = new HashSet<WorkshopRequestWorkshopService>();
+            this.WorkshopRequestWServices = new HashSet<WorkshopRequestWService>();
         }
 
         public bool CarWashingDone { get; set; }
@@ -38,6 +39,8 @@
         public string OtherServices { get; set; }
 
         public ICollection<WorkshopRequestWorkshopService> WorkshopRequestWorkshopServices { get; set; }
+
+        public ICollection<WorkshopRequestWService> WorkshopRequestWServices { get; set; }
 
         public string AcceptedById { get; set; }
 

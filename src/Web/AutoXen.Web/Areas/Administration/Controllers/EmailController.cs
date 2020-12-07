@@ -30,6 +30,11 @@
         [HttpPost]
         public async Task<IActionResult> Send(EmailViewModel input)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
             input.AdminId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             await this.emailService.SendAsync(input);

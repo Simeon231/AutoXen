@@ -5,6 +5,7 @@ const workshop = document.getElementsByClassName("selectId")[0];
 const defaultOption = document.getElementById("hiddenValue");
 
 //on load
+if (workshopBtn != null) {
 if (workshop.value == defaultOption.value) {
     workshopBtn.checked = true;
     EnableDisableWorkshops(workshopBtn);
@@ -12,6 +13,7 @@ if (workshop.value == defaultOption.value) {
 else {
     workshopBtn.checked = false;
     EnableDisableWorkshops(workshopBtn);
+    }
 }
 
 function EnableDisableWorkshops(btn) {
@@ -26,7 +28,7 @@ function EnableDisableWorkshops(btn) {
 
 // Fetch
 function GetAllServices() {
-    fetch("api/WorkshopServices")
+    fetch("/api/WorkshopServices")
     .then(resources => resources.json())
     .then(data => {
         AddServicesToSelect(data);
@@ -35,7 +37,7 @@ function GetAllServices() {
 
 function GetWorkshopServices(workshop) {
     const id = workshop.selectedOptions[0].value;
-    fetch(`api/WorkshopServices/${id}`)
+    fetch(`/api/WorkshopServices/${id}`)
     .then(resources => resources.json())
     .then(data => {
         AddServicesToSelect(data);
@@ -52,6 +54,7 @@ function AddServicesToSelect(data) {
             option.value = x.id;
         }
         else {
+            option.classList.add("my-class")
             option.text = `${x.serviceName} - ${x.price}$`
             option.value = x.id;
         }

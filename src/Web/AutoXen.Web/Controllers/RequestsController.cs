@@ -2,7 +2,7 @@
 {
     using System.Security.Claims;
 
-    using AutoXen.Services.Data.Requests;
+    using AutoXen.Services.Data;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 

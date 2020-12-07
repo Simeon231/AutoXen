@@ -1,8 +1,10 @@
 ﻿namespace AutoXen.Web.Areas.Administration.Controllers
 {
+    using System.Linq;
     using System.Security.Claims;
-
+    using System.Threading.Tasks;
     using AutoXen.Services.Data;
+    using AutoXen.Web.ViewModels.Administration.Workshop;
     using AutoXen.Web.ViewModels.Workshop;
     using Microsoft.AspNetCore.Mvc;
 
@@ -19,15 +21,35 @@
         public IActionResult Details(string id)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var model = this.workshopService.GetWorkshopDetails(userId, id, true);
+            var model = this.workshopService.GetWorkshopRequestDetails(userId, id, true);
 
             return this.View(model);
         }
 
         [HttpPost]
-        public IActionResult Details(WorkshopRequestDetailsViewModel input)
+        public async Task<IActionResult> Details(WorkshopAdminViewModel input)
         {
-            return this.Redirect("Administration/Requests");
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (!this.ModelState.IsValid)
+            {
+                var model = this.workshopService.GetWorkshopRequestDetails(userId, input.Id, true);
+                if (input.WorkshopId > 0)
+                {
+                    model.Workshop = new WorkshopViewModel()
+                    {
+                        Id = input.WorkshopId,
+                    };
+
+                    model.WorkshopServices = this.workshopService.GetServicesByWorkshopId(input.WorkshopId).Select(x => x.Id);
+                }
+
+                return this.View(model);
+            }
+
+            await this.workshopService.SubmitRequestAsync(input);
+
+            return this.Redirect("/Administration/Requests");
         }
     }
 }

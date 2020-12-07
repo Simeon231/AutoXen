@@ -11,6 +11,7 @@
     {
         public string Id { get; set; }
 
+        // TODO Add user in view
         public string UserId { get; set; }
 
         public CarViewModel Car { get; set; }
@@ -34,7 +35,7 @@
 
         public IEnumerable<WServiceViewModel> WServices { get; set; }
 
-        public IEnumerable<WorkshopServiceViewModel> WorkshopServices { get; set; }
+        public IEnumerable<int> WorkshopServices { get; set; }
 
         public WorkshopViewModel Workshop { get; set; }
     }

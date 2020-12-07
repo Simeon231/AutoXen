@@ -47,13 +47,5 @@
 
             return this.RedirectToAction(nameof(this.Index));
         }
-
-        //public IActionResult WorkshopRequest(string requestId)
-        //{
-        //    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //    var model = this.workshopService.GetWorkshopDetails(userId, requestId);
-
-        //    return this.View();
-        //}
     }
 }

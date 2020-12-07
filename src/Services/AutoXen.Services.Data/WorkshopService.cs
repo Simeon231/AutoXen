@@ -8,8 +8,8 @@
     using AutoMapper;
     using AutoXen.Data.Common.Repositories;
     using AutoXen.Data.Models.Workshop;
-    using AutoXen.Services.Data.Common;
     using AutoXen.Web.ViewModels.Administration.Requests;
+    using AutoXen.Web.ViewModels.Administration.Workshop;
     using AutoXen.Web.ViewModels.Workshop;
     using Microsoft.EntityFrameworkCore;
 
@@ -55,23 +55,13 @@
             request.UserId = userId;
             await this.workshopRequestRepository.AddAsync(request);
 
-            if (model.Ids != null && this.workshopRepository.AllAsNoTracking().Any(x => x.Id == model.WorkshopId))
+            if (model.Ids != null && model.WorkshopId > 0)
             {
-                foreach (var id in model.Ids)
-                {
-                    var requestServices = new WorkshopRequestWorkshopService()
-                    {
-                        WorkshopRequestId = request.Id,
-                        WorkshopServiceId = id,
-                    };
-
-                    await this.workshopRequestWorkshopServiceRepository.AddAsync(requestServices);
-                }
-
-                await this.workshopRequestWorkshopServiceRepository.SaveChangesAsync();
+                await this.AddWorkshopServicesAsync(request.Id, model.Ids);
             }
             else if (model.Ids != null)
             {
+                // Add WServices
                 foreach (var id in model.Ids)
                 {
                     var requestWService = new WorkshopRequestWService()
@@ -89,7 +79,7 @@
             await this.workshopRequestRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<WorkshopRequest> GetWorkshopRequestsById(string userId)
+        public IEnumerable<WorkshopRequest> GetWorkshopRequestsByUserId(string userId)
         {
             return this.workshopRequestRepository
                 .AllAsNoTracking()
@@ -98,25 +88,16 @@
                 .ToList();
         }
 
-        public IEnumerable<WorkshopRequest> GetAllRequests()
-        {
-            return this.workshopRequestRepository
-                .AllAsNoTracking()
-                .Include(x => x.User)
-                .ToList();
-        }
-
-        public WorkshopRequestDetailsViewModel GetWorkshopDetails(string userId, string requestId, bool isAdmin = false)
+        public WorkshopRequestDetailsViewModel GetWorkshopRequestDetails(string userId, string requestId, bool isAdmin = false)
         {
             var dbRequest = this.workshopRequestRepository
                 .AllAsNoTracking()
                 .Include(x => x.Car)
-                .Include(x => x.WorkshopRequestWorkshopServices)
                 .FirstOrDefault(x => x.Id == requestId && (x.UserId == userId || isAdmin));
 
             var request = this.mapper.Map<WorkshopRequestDetailsViewModel>(dbRequest);
 
-            if (dbRequest.AdminChooseWorkshop)
+            if (dbRequest.AdminChooseWorkshop && dbRequest.ModifiedOn == null)
             {
                 request.WServices = this.workshopRequestWService
                     .AllAsNoTracking()
@@ -130,19 +111,39 @@
                 request.WorkshopServices = this.workshopRequestWorkshopServiceRepository
                     .AllAsNoTracking()
                     .Where(x => x.WorkshopRequestId == dbRequest.Id)
-                    .Include(x => x.WorkshopService.Service)
-                    .Select(x => this.mapper.Map<WorkshopServiceViewModel>(x.WorkshopService))
+                    .Select(x => x.WorkshopService.Id)
                     .ToList();
 
-                var dbWorkshopService = this.workshopRequestWorkshopServiceRepository
+                var dbWorkshop = this.workshopRequestWorkshopServiceRepository
                     .AllAsNoTracking()
                     .Include(x => x.WorkshopService.Workshop)
                     .FirstOrDefault(x => x.WorkshopRequestId == dbRequest.Id).WorkshopService.Workshop;
 
-                request.Workshop = this.mapper.Map<WorkshopViewModel>(dbWorkshopService);
+                request.Workshop = this.mapper.Map<WorkshopViewModel>(dbWorkshop);
             }
 
             return request;
+        }
+
+        public async Task SubmitRequestAsync(WorkshopAdminViewModel model)
+        {
+            var request = this.workshopRequestRepository
+                .All()
+                .FirstOrDefault(x => x.Id == model.Id);
+
+            request.CarWashingDone = model.CarWashingDone;
+            request.ReturnedCar = model.ReturnedCar;
+            request.PickedUp = model.PickedUp;
+            request.FinishedOn = model.FinishedOn;
+            request.OtherServices = model.OtherServices;
+            request.PickUpLocation = model.PickUpLocation;
+            request.PickUpTime = model.PickUpTime;
+            request.PickUpFastAsPossible = model.PickUpFastAsPossible;
+            request.ModifiedOn = DateTime.UtcNow;
+
+            await this.AddWorkshopServicesAsync(request.Id, model.ServiceIds);
+
+            await this.workshopRequestRepository.SaveChangesAsync();
         }
 
         public IEnumerable<WorkshopViewModel> GetAllWorkshops()
@@ -161,6 +162,17 @@
                 .ToList();
         }
 
+        // TODO Decide what to do with this method and in admin details
+        public IEnumerable<WorkshopServiceViewModel> GetWorkshopServicesByRequestId(string requestId)
+        {
+            return this.workshopRequestWorkshopServiceRepository
+                    .AllAsNoTracking()
+                    .Where(x => x.WorkshopRequestId == requestId)
+                    .Include(x => x.WorkshopService.Service)
+                    .Select(x => this.mapper.Map<WorkshopServiceViewModel>(x.WorkshopService))
+                    .ToList();
+        }
+
         public IEnumerable<ServiceWithPriceResponseModel> GetServicesByWorkshopId(int workshopId)
         {
             return this.workshopServiceRepository
@@ -168,6 +180,14 @@
                 .Include(x => x.Service)
                 .Where(x => x.WorkshopId == workshopId)
                 .Select(x => this.mapper.Map<ServiceWithPriceResponseModel>(x))
+                .ToList();
+        }
+
+        public IEnumerable<WorkshopRequest> GetAllRequests()
+        {
+            return this.workshopRequestRepository
+                .AllAsNoTracking()
+                .Include(x => x.User)
                 .ToList();
         }
 
@@ -180,6 +200,29 @@
             request.AcceptedById = model.AdminId;
 
             await this.workshopRequestRepository.SaveChangesAsync();
+        }
+
+        private async Task AddWorkshopServicesAsync(string requestId, IEnumerable<int> serviceIds)
+        {
+            foreach (var id in serviceIds)
+            {
+                var workshopService = this.workshopServiceRepository
+                    .AllAsNoTracking()
+                    .FirstOrDefault(x => x.Id == id);
+
+                if (workshopService != null)
+                {
+                    var requestServices = new WorkshopRequestWorkshopService()
+                    {
+                        WorkshopRequestId = requestId,
+                        WorkshopServiceId = workshopService.Id,
+                    };
+
+                    await this.workshopRequestWorkshopServiceRepository.AddAsync(requestServices);
+                }
+            }
+
+            await this.workshopRequestWorkshopServiceRepository.SaveChangesAsync();
         }
     }
 }

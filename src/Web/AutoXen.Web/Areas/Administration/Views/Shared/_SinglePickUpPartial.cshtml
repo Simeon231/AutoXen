@@ -10,12 +10,15 @@
                 <span asp-validation-for="PickUpLocation" class="text-danger"></span>
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-md-6">
             <div class="text-center">
-                <label class="col-form-label" asp-for="PickUpLocation"></label>
-                <input class="input-group form-control" asp-for="PickUpLocation" />
-                <span asp-validation-for="PickUpLocation" class="text-danger"></span>
+                <label class="col-form-label" asp-for="PickUpFastAsPossible"></label>
+                <input class="form-check-inline" asp-for="PickUpFastAsPossible" />
+                <input class="input-group form-control" asp-for="PickUpTime" />
+                <span asp-validation-for="PickUpTime" class="text-danger"></span>
             </div>
         </div>
     </div>
 </div>
+
+<script src="~/js/pickUp.js"></script>

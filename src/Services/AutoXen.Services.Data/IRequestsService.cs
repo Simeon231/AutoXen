@@ -1,4 +1,4 @@
-﻿namespace AutoXen.Services.Data.Requests
+﻿namespace AutoXen.Services.Data
 {
     using System.Collections.Generic;
 

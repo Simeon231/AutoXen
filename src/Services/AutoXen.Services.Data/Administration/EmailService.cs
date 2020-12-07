@@ -1,8 +1,8 @@
 ﻿namespace AutoXen.Services.Data.Administration
 {
-    using System;
     using System.Text;
     using System.Threading.Tasks;
+
     using AutoXen.Common;
     using AutoXen.Services.Messaging;
     using AutoXen.Web.ViewModels.Administration.Email;
@@ -23,6 +23,8 @@
 
         public async Task SendAsync(EmailViewModel model)
         {
+            var workshopRequest = this.workshopService.GetWorkshopRequestDetails(null, model.RequestId, true);
+
             var html = new StringBuilder();
             html.AppendLine($"<h1>{model.RequestName}</h1>");
             html.AppendLine($"{model.Message}");
@@ -31,6 +33,11 @@
             html.AppendLine($"<li>task 2</li>");
             html.AppendLine($"</ul>");
             await this.emailSender.SendEmailAsync(this.email, GlobalConstants.SystemName, model.Receiver, model.Subject, html.ToString());
+        }
+
+        private void AppendUl(StringBuilder html)
+        {
+
         }
     }
 }

@@ -11,7 +11,6 @@
     using AutoXen.Data.Seeding;
     using AutoXen.Services.Data;
     using AutoXen.Services.Data.Administration;
-    using AutoXen.Services.Data.Requests;
     using AutoXen.Services.Mapping;
     using AutoXen.Services.Messaging;
     using AutoXen.Web.Infrastructure.ModelBinders;
@@ -77,6 +76,7 @@
             services.AddTransient<IWorkshopService, AutoXen.Services.Data.WorkshopService>();
             services.AddTransient<IRequestsAdminService, RequestsAdminService>();
             services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<IUsersService, UsersService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
