@@ -15,7 +15,7 @@
         public bool PickedUp { get; set; }
 
         [Display(Name = "The washing is done")]
-        public bool CarWashingDone { get; set; }
+        public bool WorkshopServicesDone { get; set; }
 
         public DateTime? FinishedOn { get; set; }
 

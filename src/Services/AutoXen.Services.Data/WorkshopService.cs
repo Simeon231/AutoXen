@@ -131,7 +131,7 @@
                 .All()
                 .FirstOrDefault(x => x.Id == model.Id);
 
-            request.CarWashingDone = model.CarWashingDone;
+            request.WorkshopServicesDone = model.WorkshopServicesDone;
             request.ReturnedCar = model.ReturnedCar;
             request.PickedUp = model.PickedUp;
             request.FinishedOn = model.FinishedOn;
@@ -204,13 +204,15 @@
 
         private async Task AddWorkshopServicesAsync(string requestId, IEnumerable<int> serviceIds)
         {
+            var workshopRequestWorkshopServices = this.workshopRequestWorkshopServiceRepository.AllAsNoTracking().Where(x => x.WorkshopRequestId == requestId).ToList();
+
             foreach (var id in serviceIds)
             {
                 var workshopService = this.workshopServiceRepository
                     .AllAsNoTracking()
                     .FirstOrDefault(x => x.Id == id);
 
-                if (workshopService != null)
+                if (workshopService != null && !workshopRequestWorkshopServices.Any(x => x.WorkshopServiceId == workshopService.Id))
                 {
                     var requestServices = new WorkshopRequestWorkshopService()
                     {

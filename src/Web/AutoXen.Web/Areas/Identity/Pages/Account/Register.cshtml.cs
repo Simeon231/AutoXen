@@ -64,6 +64,8 @@
                     FirstName = this.Input.FirstName,
                     SurName = this.Input.SurName,
                     MiddleName = this.Input.MiddleName,
+                    PhoneNumber = this.Input.PhoneNumber,
+                    Address = this.Input.Address,
                 };
 
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
@@ -137,6 +139,16 @@
             [MinLength(2)]
             [Display(Name = "Middle name")]
             public string MiddleName { get; set; }
+
+            [Required]
+            [Phone]
+            [Display(Name = "Phone number")]
+            public string PhoneNumber { get; set; }
+
+            [Required]
+            [MinLength(6)]
+            [Display(Name = "Address")]
+            public string Address { get; set; }
         }
     }
 }

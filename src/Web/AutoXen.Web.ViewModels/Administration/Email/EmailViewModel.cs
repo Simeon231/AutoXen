@@ -8,8 +8,6 @@
         [MinLength(3)]
         public string Subject { get; set; }
 
-        public string AdminId { get; set; }
-
         public string Message { get; set; }
 
         [Required]
@@ -20,7 +18,9 @@
         [Display(Name = "Request name")]
         public string RequestName { get; set; }
 
+        public string AdminId { get; set; }
+
         [Required]
-        public string RequestId { get; set; }
+        public string Id { get; set; }
     }
 }

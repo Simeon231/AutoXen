@@ -7,9 +7,9 @@
 
 <div class="d-flex justify-content-center">
     <div class="row container">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <section>
-                <form id="account" method="post">
+                <form id="account" method="post" class="col-md-11">
                     <h4>Use a local account to log in.</h4>
                     <hr />
                     <div asp-validation-summary="All" class="text-danger"></div>
@@ -45,7 +45,8 @@
                 </form>
             </section>
         </div>
-        <div class="col-md-6 col-md-offset-2">
+        @* one day ...
+        <div class="col-md-5 col-md-offset-2">
             <section>
                 <h4>Use another service to log in.</h4>
                 <hr />
@@ -75,6 +76,7 @@
                 }
             </section>
         </div>
+        *@
     </div>
 </div>
 

@@ -20,7 +20,7 @@
         {
             var model = new EmailViewModel()
             {
-                RequestId = id,
+                Id = id,
                 RequestName = requestName,
             };
 
@@ -32,7 +32,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View();
+                return this.View(input);
             }
 
             input.AdminId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);

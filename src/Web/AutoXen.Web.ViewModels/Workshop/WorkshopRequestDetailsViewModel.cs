@@ -19,15 +19,15 @@
         [Display(Name = "Every workshop")]
         public bool AdminChooseWorkshop { get; set; }
 
-        [Display(Name = "The car is picked up")]
+        [Display(Name = "The car was picked up")]
         public bool PickedUp { get; set; }
 
-        [Display(Name = "The washing is done")]
-        public bool CarWashingDone { get; set; }
+        [Display(Name = "The car services are done")]
+        public bool WorkshopServicesDone { get; set; }
 
         public DateTime? FinishedOn { get; set; }
 
-        [Display(Name = "Car returned")]
+        [Display(Name = "The Car was returned")]
         public bool ReturnedCar { get; set; }
 
         [Display(Name = "Other services")]

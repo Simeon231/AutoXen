@@ -122,6 +122,24 @@ nav div div ul li a{
     color: white !important;
 }
 
+.btn-link {
+    color: rgb(255,196,81) !important;
+}
+
+.btn-link:hover {
+    color: rgb(240, 170, 34) !important;
+}
+
+.btn-link-white {
+    color: white !important;
+    background: none;
+    border: none;
+}
+
+.btn-link-white:hover {
+    color: rgb(255,196,81) !important;
+}
+
 .underline-primary {
     text-decoration: underline;
     text-decoration-color: rgb(255,196,81);
