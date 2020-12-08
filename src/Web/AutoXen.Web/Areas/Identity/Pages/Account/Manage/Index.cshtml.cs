@@ -69,6 +69,13 @@ namespace AutoXen.Web.Areas.Identity.Pages.Account.Manage
                 }
             }
 
+            user.Address = this.Input.Address;
+            user.FirstName = this.Input.FirstName;
+            user.MiddleName = this.Input.MiddleName;
+            user.SurName = this.Input.SurName;
+
+            await this.signInManager.UserManager.UpdateAsync(user);
+
             await this.signInManager.RefreshSignInAsync(user);
             this.StatusMessage = "Your profile has been updated";
             return this.RedirectToPage();

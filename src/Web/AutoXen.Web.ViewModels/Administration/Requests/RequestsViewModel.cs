@@ -2,9 +2,7 @@
 {
     using System.Collections.Generic;
 
-    using AutoXen.Web.ViewModels.Common;
-
-    public class RequestsViewModel : PagingViewModel
+    public class RequestsViewModel : FilterViewModel
     {
         public RequestsViewModel()
         {

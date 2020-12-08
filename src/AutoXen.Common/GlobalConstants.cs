@@ -12,7 +12,7 @@
 
         public const string RoadsideAssistance = "Roadside assistance";
 
-        public const string Ancurance = "Ancurance";
+        public const string Incurance = "Ancurance";
 
         public const string AnnualTechnicalInspection = "Annual technical inspection";
     }

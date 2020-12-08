@@ -26,14 +26,14 @@
             this.emailService = emailService;
         }
 
-        public IActionResult Index(int id)
+        public IActionResult Index(FilterViewModel model)
         {
-            if (id == 0)
+            if (model.PageNumber <= 0)
             {
-                id = 1;
+                model.PageNumber = 1;
             }
 
-            var model = this.requestsService.GetAllRequests(id);
+            model = this.requestsService.GetAllRequests(model.PageNumber);
 
             return this.View(model);
         }

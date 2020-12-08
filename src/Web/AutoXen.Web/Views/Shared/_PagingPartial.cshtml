@@ -3,16 +3,16 @@
 
 <ul class="pagination justify-content-center">
     <li class="page-item @if (!Model.HasPreviousPage) { <text>disabled</text> }">
-        <a class="page-link" asp-action="Index" asp-route-id="1">First</a>
+        <button type="submit" class="page-link" asp-route-pagenumber="1">First</button>
     </li>
     <li class="page-item @if (!Model.HasPreviousPage) { <text>disabled</text> }">
-        <a class="page-link" asp-action="Index" asp-route-id="@Model.PreviousPageNumber">Previous</a>
+        <button type="submit" class="page-link" asp-route-pagenumber="@Model.PreviousPageNumber">Previous</button>
     </li>
     @for (int i = Model.PageNumber - 3; i < Model.PageNumber; i++)
     {
         if (i > 0)
         {
-            <li class="page-item"><a class="page-link" asp-action="Index" asp-route-id="@i">@i</a></li>
+            <li class="page-item"><button type="submit" class="page-link" asp-route-pagenumber="@i">@i</button></li>
         }
     }
     <li class="page-item active" aria-current="page">
@@ -25,13 +25,13 @@
     {
         if (i <= Model.PagesCount)
         {
-            <li class="page-item"><a class="page-link" asp-action="Index" asp-route-id="@i">@i</a></li>
+            <li class="page-item"><button type="submit" class="page-link" asp-route-pagenumber="@i">@i</button></li>
         }
     }
     <li class="page-item @if (!Model.HasNextPage) { <text>disabled</text> }">
-        <a class="page-link" asp-action="Index" asp-route-id="@Model.NextPageNumber">Next</a>
+        <button type="submit" class="page-link" asp-route-pagenumber="@Model.NextPageNumber">Next</button>
     </li>
     <li class="page-item @if (!Model.HasNextPage) { <text>disabled</text> }">
-        <a class="page-link" asp-action="Index" asp-route-id="@Model.PagesCount">Last</a>
+        <button type="submit" class="page-link" asp-route-pagenumber="@Model.PagesCount">Last</button>
     </li>
 </ul>
