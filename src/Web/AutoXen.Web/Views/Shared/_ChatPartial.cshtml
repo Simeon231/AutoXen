@@ -2,9 +2,9 @@
 @using AutoXen.Common
 @model List<MessageViewModel>
 
-<link href="~/css/chat.css" rel="stylesheet" asp-append-version="true"/>
+<link href="~/css/chat.css" rel="stylesheet" asp-append-version="true" />
 
-<div class="border-left border-light box box-warning direct-chat direct-chat-warning">
+<div class="border-left border-light box box-warning direct-chat direct-chat-warning" id="chatt">
     <div class="box-header with-border">
         <h3 class="box-title">Chat Messages</h3>
         <div class="box-tools pull-right">
@@ -17,11 +17,11 @@
             @foreach (var message in Model)
             {
                 @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) && message.IsAdmin
-                || !this.User.IsInRole(GlobalConstants.AdministratorRoleName) && !message.IsAdmin)
+               || !this.User.IsInRole(GlobalConstants.AdministratorRoleName) && !message.IsAdmin)
                 {
                     <div class="direct-chat-msg right">
                         <div class="direct-chat-info clearfix">
-                            <span class="direct-chat-timestamp pull-left">@message.CreatedOn</span>
+                            <span name="date" class="direct-chat-timestamp pull-left">@message.CreatedOn</span>
                         </div>
                         <div class="direct-chat-text">@message.Text </div>
                     </div>
@@ -30,7 +30,7 @@
                 {
                     <div class="direct-chat-msg">
                         <div class="direct-chat-info clearfix">
-                            <span class="direct-chat-timestamp pull-right">@message.CreatedOn</span>
+                            <span name="date" class="direct-chat-timestamp pull-right">@message.CreatedOn</span>
                         </div>
                         <img class="direct-chat-img" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="message user image">
                         <div class="direct-chat-text"> @message.Text </div>

@@ -33,11 +33,6 @@
             // TODO check if the user made this request!
             await this.messageService.AddMessageAsync(model);
 
-            //// maybe
-            ////await this.Clients.Clients(requestId).SendAsync(
-            ////    "NewMessage",
-            ////    new Message { IsAdmin = isAdmin, Text = message, });
-
             await this.Clients.OthersInGroup(requestId).SendAsync(
                 "NewMessage",
                 message);
