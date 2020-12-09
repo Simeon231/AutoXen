@@ -31,7 +31,8 @@
 
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
 
-        // public DbSet<Message> Messages { get; set; }
+        public DbSet<Message> Messages { get; set; }
+
         public DbSet<Car> Cars { get; set; }
 
         public DbSet<OtherCarUser> OtherCarUsers { get; set; }

@@ -7,6 +7,7 @@
 
     using AutoMapper;
     using AutoXen.Data.Common.Repositories;
+    using AutoXen.Data.Models;
     using AutoXen.Data.Models.Workshop;
     using AutoXen.Web.ViewModels.Administration.Requests;
     using AutoXen.Web.ViewModels.Administration.Workshop;
@@ -21,6 +22,7 @@
         private readonly IRepository<AutoXen.Data.Models.Workshop.WorkshopService> workshopServiceRepository;
         private readonly IRepository<WorkshopRequestWorkshopService> workshopRequestWorkshopServiceRepository;
         private readonly IRepository<WorkshopRequestWService> workshopRequestWService;
+        private readonly IMessageService messageService;
         private readonly ICarService carService;
         private readonly IMapper mapper;
 
@@ -31,6 +33,7 @@
             IRepository<AutoXen.Data.Models.Workshop.WorkshopService> workshopServiceRepository,
             IRepository<WorkshopRequestWorkshopService> workshopRequestWorkshopServiceRepository,
             IRepository<WorkshopRequestWService> workshopRequestWService,
+            IMessageService messageService,
             ICarService carService,
             IMapper mapper)
         {
@@ -40,6 +43,7 @@
             this.workshopServiceRepository = workshopServiceRepository;
             this.workshopRequestWorkshopServiceRepository = workshopRequestWorkshopServiceRepository;
             this.workshopRequestWService = workshopRequestWService;
+            this.messageService = messageService;
             this.carService = carService;
             this.mapper = mapper;
         }
@@ -121,6 +125,8 @@
 
                 request.Workshop = this.mapper.Map<WorkshopViewModel>(dbWorkshop);
             }
+
+            request.Messages = this.messageService.GetAllByRequestId(requestId);
 
             return request;
         }

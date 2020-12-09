@@ -148,11 +148,9 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="text-center">
-                    <label class="col-form-label">Write your message</label>
-                </div>
-                <textarea class="form-control input-group" rows="20"></textarea>
+            <div class="col-md-4 mt-4">
+                <input disabled hidden value="@Model.Id" id="requestId" />
+                <partial name="_ChatPartial" model="Model.Messages" />
             </div>
         </div>
     </div>

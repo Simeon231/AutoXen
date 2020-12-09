@@ -13,6 +13,7 @@
     using AutoXen.Services.Data.Administration;
     using AutoXen.Services.Mapping;
     using AutoXen.Services.Messaging;
+    using AutoXen.Web.Hubs;
     using AutoXen.Web.Infrastructure.ModelBinders;
     using AutoXen.Web.Infrastructure.Profiles;
     using AutoXen.Web.ViewModels;
@@ -51,6 +52,7 @@
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
 
+            services.AddSignalR();
             services.AddControllersWithViews(
                 options =>
                     {
@@ -77,6 +79,7 @@
             services.AddTransient<IRequestsAdminService, RequestsAdminService>();
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<IMessageService, MessageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -125,11 +128,12 @@
 
             app.UseEndpoints(
                 endpoints =>
-                    {
-                        endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-                        endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                        endpoints.MapRazorPages();
-                    });
+                {
+                    endpoints.MapHub<ChatHub>("/chat");
+                    endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                    endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                    endpoints.MapRazorPages();
+                });
         }
     }
 }

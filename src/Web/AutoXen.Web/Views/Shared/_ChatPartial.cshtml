@@ -1,0 +1,50 @@
+﻿@using AutoXen.Web.ViewModels.Common
+@using AutoXen.Common
+@model List<MessageViewModel>
+
+<link href="~/css/chat.css" rel="stylesheet" asp-append-version="true"/>
+
+<div class="border-left border-light box box-warning direct-chat direct-chat-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title">Chat Messages</h3>
+        <div class="box-tools pull-right">
+            <span data-toggle="tooltip" title="" class="badge bg-yellow" data-original-title="3 New Messages">@Model.Count()</span>
+            <a id="minimizeChat" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i> </a>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="direct-chat-messages" id="messagesList">
+            @foreach (var message in Model)
+            {
+                @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) && message.IsAdmin
+                || !this.User.IsInRole(GlobalConstants.AdministratorRoleName) && !message.IsAdmin)
+                {
+                    <div class="direct-chat-msg right">
+                        <div class="direct-chat-info clearfix">
+                            <span class="direct-chat-timestamp pull-left">@message.CreatedOn</span>
+                        </div>
+                        <div class="direct-chat-text">@message.Text </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="direct-chat-msg">
+                        <div class="direct-chat-info clearfix">
+                            <span class="direct-chat-timestamp pull-right">@message.CreatedOn</span>
+                        </div>
+                        <img class="direct-chat-img" src="https://img.icons8.com/color/36/000000/administrator-male.png" alt="message user image">
+                        <div class="direct-chat-text"> @message.Text </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="box-footer">
+        <div class="input-group">
+            <input type="text" name="message" id="messageInput" placeholder="Type Message ..." class="form-control">
+            <span class="input-group-btn">
+                <a id="sendButton" class="btn btn-warning btn-flat">Send</a>
+            </span>
+        </div>
+    </div>
+</div>

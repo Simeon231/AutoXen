@@ -38,5 +38,7 @@
         public IEnumerable<int> WorkshopServices { get; set; }
 
         public WorkshopViewModel Workshop { get; set; }
+
+        public List<MessageViewModel> Messages { get; set; }
     }
 }

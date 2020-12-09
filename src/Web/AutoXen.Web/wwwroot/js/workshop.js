@@ -54,7 +54,6 @@ function AddServicesToSelect(data) {
             option.value = x.id;
         }
         else {
-            option.classList.add("my-class")
             option.text = `${x.serviceName} - ${x.price}$`
             option.value = x.id;
         }

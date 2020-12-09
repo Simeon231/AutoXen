@@ -1,10 +1,9 @@
-﻿namespace AutoXen.Data.Models
+﻿namespace AutoXen.Web.ViewModels.Common
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
 
-    using AutoXen.Data.Common.Models;
-
-    public class Message : BaseModel<int>
+    public class MessageViewModel
     {
         [Required]
         public string Text { get; set; }
@@ -13,5 +12,7 @@
 
         [Required]
         public string RequestId { get; set; }
+
+        public DateTime CreatedOn { get; set; }
     }
 }

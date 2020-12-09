@@ -11,6 +11,14 @@
       ]
     },
     {
+      "library": "@microsoft/signalr@3.1.10",
+      "destination": "wwwroot/lib/signalr/",
+      "files": [
+        "dist/browser/signalr.min.js",
+        "dist/browser/signalr.min.js.map"
+      ]
+    },
+    {
       "library": "bootstrap@4.5.3",
       "destination": "wwwroot/lib/bootstrap/",
       "files": [

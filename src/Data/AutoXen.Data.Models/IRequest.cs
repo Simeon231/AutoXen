@@ -1,7 +1,6 @@
 ﻿namespace AutoXen.Data.Models
 {
     using System;
-    using System.Collections.Generic;
 
     public interface IRequest
     {
@@ -20,7 +19,5 @@
         public Car.Car Car { get; set; }
 
         public DateTime? FinishedOn { get; set; }
-
-        // public ICollection<Message> Messages { get; set; }
     }
 }

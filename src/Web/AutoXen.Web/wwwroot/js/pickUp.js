@@ -1,6 +1,5 @@
 // pickUpFunctionallity
 var pickUpBtn = document.getElementById('PickUpFastAsPossible');
-console.log(pickUpBtn)
 var pickUpTime = document.getElementById('PickUpTime');
 
 //on load
