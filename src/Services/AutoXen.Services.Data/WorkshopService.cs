@@ -11,6 +11,7 @@
     using AutoXen.Data.Models.Workshop;
     using AutoXen.Web.ViewModels.Administration.Requests;
     using AutoXen.Web.ViewModels.Administration.Workshop;
+    using AutoXen.Web.ViewModels.Common;
     using AutoXen.Web.ViewModels.Workshop;
     using Microsoft.EntityFrameworkCore;
 
@@ -81,6 +82,18 @@
             }
 
             await this.workshopRequestRepository.SaveChangesAsync();
+
+            if (model.Message != null)
+            {
+                var message = new MessageViewModel()
+                {
+                    IsAdmin = false,
+                    RequestId = request.Id,
+                    Text = model.Message,
+                };
+
+                await this.messageService.AddMessageAsync(message);
+            }
         }
 
         public IEnumerable<WorkshopRequest> GetWorkshopRequestsByUserId(string userId)

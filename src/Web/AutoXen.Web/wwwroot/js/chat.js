@@ -1,42 +1,55 @@
 ﻿// if the document contains chat
 if (document.getElementById("messagesList") != null) {
-    var connection =
-        new signalR.HubConnectionBuilder()
-            .withUrl("/chat")
-            .build();
+    const request = document.getElementById('requestId');
+    let requestId;
+    if (request != null) {
+        requestId = request.value;
+    }
 
-    var requestId = document.getElementById('requestId').value;
+    if (requestId != null) {
+        var connection =
+            new signalR.HubConnectionBuilder()
+                .withUrl("/chat")
+                .build();
+
+        connection.start()
+            .then(() => connection.invoke("JoinGroup", requestId))
+            .catch(function (err) {
+                return console.error(err.toString());
+            });
+
+        connection.on("NewMessage",
+            function (message) {
+                console.log("here");
+                var chatMsg = document.createElement("div");
+                chatMsg.className = "direct-chat-msg";
+
+                var chatInfo = document.createElement("div");
+                chatInfo.className = "direct-chat-info clearfix";
+
+                var time = document.createElement("span");
+                time.className = "direct-chat-timestamp pull-right";
+                const fmt = 'DD/MM/YYYY HH:mm:ss';
+                time.textContent = moment().format(fmt);
+                chatInfo.append(time);
+                chatMsg.append(chatInfo);
+
+                var img = document.createElement('img');
+                img.className = 'direct-chat-img';
+                img.src = "https://img.icons8.com/color/36/000000/administrator-male.png";
+                chatMsg.append(img);
+
+                var txt = document.createElement("div");
+                txt.className = "direct-chat-text";
+                txt.textContent = message;
+                chatMsg.appendChild(txt);
+
+                messageList.append(chatMsg);
+            });
+    }
+
     var messageList = document.getElementById("messagesList");
     messageList.scrollTop = messageList.scrollHeight;
-
-    connection.on("NewMessage",
-        function (message) {
-            console.log("here");
-            var chatMsg = document.createElement("div");
-            chatMsg.className = "direct-chat-msg";
-
-            var chatInfo = document.createElement("div");
-            chatInfo.className = "direct-chat-info clearfix";
-
-            var span = document.createElement("span");
-            span.className = "direct-chat-timestamp pull-right";
-            const fmt = 'DD/MM/YYYY HH:mm:ss';
-            span.textContent = moment().format(fmt);
-            chatInfo.append(span);
-            chatMsg.append(chatInfo);
-
-            var img = document.createElement('img');
-            img.className = 'direct-chat-img';
-            img.src = "https://img.icons8.com/color/36/000000/administrator-male.png";
-            chatMsg.append(img);
-
-            var txt = document.createElement("div");
-            txt.className = "direct-chat-text";
-            txt.textContent = message;
-            chatMsg.appendChild(txt);
-
-            messageList.append(chatMsg);
-        });
 
     $("#sendButton").click(function () {
         var message = $("#messageInput").val();
@@ -45,7 +58,9 @@ if (document.getElementById("messagesList") != null) {
             return;
         }
 
-        connection.invoke("Send", message, requestId);
+        if (requestId != null) {
+            connection.invoke("Send", message, requestId);
+        }
 
         var chatMsg = document.createElement("div");
         chatMsg.className = "direct-chat-msg right";
@@ -53,12 +68,12 @@ if (document.getElementById("messagesList") != null) {
         var chatInfo = document.createElement("div");
         chatInfo.className = "direct-chat-info clearfix";
 
-        var span = document.createElement("span");
-        span.className = "direct-chat-timestamp pull-left";
+        var time = document.createElement("span");
+        time.className = "direct-chat-timestamp pull-left";
         const fmt = 'DD/MM/YYYY HH:mm:ss';
-        span.textContent = moment().format(fmt);
+        time.textContent = moment().format(fmt);
 
-        chatInfo.append(span);
+        chatInfo.append(time);
         chatMsg.append(chatInfo);
 
         var txt = document.createElement("div");
@@ -70,12 +85,6 @@ if (document.getElementById("messagesList") != null) {
 
         $("#messageInput").val("");
     });
-
-    connection.start()
-        .then(() => connection.invoke("JoinGroup", requestId))
-        .catch(function (err) {
-            return console.error(err.toString());
-        });
 
     function escapeHtml(unsafe) {
         return unsafe

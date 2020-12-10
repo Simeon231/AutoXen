@@ -1,1 +1,63 @@
-﻿carwashes details
+﻿@using AutoXen.Services.Data
+@using AutoXen.Web.ViewModels.CarWash
+@model CarWashRequestViewModel
+@inject ICarWashService washService
+
+<form method="post" class=" d-flex justify-content-center">
+    <div class="row mt-2 container">
+        <div class="col-md-8">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <partial name="_CarsPartial" model="@Model.CarId" />
+
+            <partial name="_PickUpPartial" model="@Model" />
+
+            <div class="form-row d-flex justify-content-center">
+                <div class="border p-1 col-md-4">
+                    <div class="text-center">
+                        <label class="col-form-label" asp-for="AdminChooseCarWash"></label>
+                        @if (Model.CarWashId == null)
+                        {
+                            <input checked class="form-check-inline" asp-for="AdminChooseCarWash" />
+                        }
+                        else
+                        {
+                            <input class="form-check-inline" asp-for="AdminChooseCarWash" />
+                        }
+                        <span asp-validation-for="AdminChooseCarWash" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                @foreach (var carWash in washService.GetAllCarWashes())
+                {
+                    <div class="col col-sm-2 m-3 form-check">
+                        @if (Model.CarWashId != null && Model.CarWashId == carWash.Id)
+                        {
+                            <input type="radio" checked class="form-check-input" value="@carWash.Id" name="CarWashId" id="@carWash.Id" />
+                        }
+                        else
+                        {
+                            <input type="radio" class="form-check-input " value="@carWash.Id" name="CarWashId" id="@carWash.Id" />
+                        }
+                        <label class="form-check-label nowrap" for="@carWash.Id">@carWash.Name</label>
+                    </div>
+                }
+            </div>
+
+            <div class="row mt-2">
+                <div class="col text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mt-4">
+            <input disabled hidden value="@Model.Id" id="requestId" />
+            <partial name="_ChatPartial" model="Model.Messages" />
+        </div>
+    </div>
+</form>
+
+<script src="~/js/CarWash.js"></script>

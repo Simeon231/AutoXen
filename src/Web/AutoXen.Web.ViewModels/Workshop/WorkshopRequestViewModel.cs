@@ -22,6 +22,8 @@
         [MinLength(5, ErrorMessage = "Minimum length is 5.")]
         public string OtherServices { get; set; }
 
+        public string Message { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (this.Ids == null && this.OtherServices == null)

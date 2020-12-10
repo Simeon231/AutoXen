@@ -11,7 +11,6 @@
     {
         public string Id { get; set; }
 
-        // TODO Add user in view
         public string UserId { get; set; }
 
         public CarViewModel Car { get; set; }

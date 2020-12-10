@@ -14,10 +14,6 @@
         [Display(Name = "Auto Choose car wash")]
         public bool AdminChooseCarWash { get; set; }
 
-        ////[BindNever]
-        ////public IEnumerable<CarViewModel> Cars { get; set; }
-
-        // TODO Add messages
-        // public IEnumerable<string> Messages { get; set; }
+        public string Message { get; set;
     }
 }

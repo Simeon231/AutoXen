@@ -81,9 +81,11 @@
             </div>
         </div>
 
-        <div class="col-md-4">
-            <label class="col-form-label text-center">Write your message</label>
-            <textarea class="form-control input-group" rows="20"></textarea>
+        <div class="col-md-4 mt-2">
+            <div class="text-center">
+                <label class="col-form-label" asp-for="Message">Write your message</label>
+            </div>
+            <textarea class="form-control input-group" rows="15" asp-for="Message"></textarea>
         </div>
     </div>
 </form>

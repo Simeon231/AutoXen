@@ -55,9 +55,9 @@
 
         <div class="col-md-4 mt-2">
             <div class="text-center">
-                <label for="messages" class="col-form-label">Write your message</label>
+                <label class="col-form-label" asp-for="Message">Write your message</label>
             </div>
-            <textarea id="messages" class="form-control input-group" rows="20"></textarea>
+            <textarea class="form-control input-group" rows="15" asp-for="Message"></textarea>
         </div>
     </div>
 </form>
