@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using AutoXen.Web.ViewModels.Administration.Common;
     using AutoXen.Web.ViewModels.Cars;
     using AutoXen.Web.ViewModels.Common;
 
@@ -11,18 +12,18 @@
     {
         public string Id { get; set; }
 
-        public string UserId { get; set; }
-
         public CarViewModel Car { get; set; }
 
         [Display(Name = "Every workshop")]
         public bool AdminChooseWorkshop { get; set; }
 
+        public AdminRequestInformationViewModel RequestInformation { get; set; }
+
         [Display(Name = "The car was picked up")]
         public bool PickedUp { get; set; }
 
         [Display(Name = "The car services are done")]
-        public bool WorkshopServicesDone { get; set; }
+        public bool ServiceFinished { get; set; }
 
         public DateTime? FinishedOn { get; set; }
 

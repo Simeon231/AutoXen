@@ -25,7 +25,7 @@
 
         public bool PickedUp { get; set; }
 
-        public bool WashingFinished { get; set; }
+        public bool ServiceFinished { get; set; }
 
         public bool ReturnedCar { get; set; }
 

@@ -1,58 +1,46 @@
 ﻿@using AutoXen.Services.Data
 @using AutoXen.Web.ViewModels.CarWash
-@model CarWashRequestViewModel
+@model CarWashRequestDetailsViewModel
 @inject ICarWashService washService
 
-    <h1>ADMIN</h1>
-
-<form method="post" class=" d-flex justify-content-center">
-    <div class="row mt-2 container">
+<div class="d-flex pb-3 justify-content-center">
+    <div class="form-row mt-2 container">
         <div class="col-md-8">
-            <div asp-validation-summary="All" class="text-danger"></div>
+            <form method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
 
-            <partial name="_CarsPartial" model="@Model.CarId" />
+                <partial name="_AdministrationRequestInformationPartial" model="Model.RequestInformation" />
 
-            <partial name="_PickUpPartial" model="@Model" />
+                <partial name="_SingleCarPartial" model="Model.Car" />
 
-            <div class="form-row d-flex justify-content-center">
-                <div class="border p-1 col-md-4">
-                    <div class="text-center">
-                        <label class="col-form-label" asp-for="AdminChooseCarWash"></label>
-                        @if (Model.CarWashId == null)
-                        {
-                            <input checked class="form-check-inline" asp-for="AdminChooseCarWash" />
-                        }
-                        else
-                        {
-                            <input class="form-check-inline" asp-for="AdminChooseCarWash" />
-                        }
-                        <span asp-validation-for="AdminChooseCarWash" class="text-danger"></span>
+                <partial name="_SinglePickUpPartial" model="@Model" />
+
+
+                <label class="font-weight-bold">Car wash</label>
+
+                <div class="form-row">
+                    @foreach (var carWash in washService.GetAllCarWashes())
+                    {
+                        <div class="col col-sm-2 m-3 form-check">
+                            @if (Model.CarWashId != null && Model.CarWashId == carWash.Id)
+                            {
+                                <input type="radio" checked class="form-check-input" value="@carWash.Id" name="CarWashId" id="@carWash.Id" />
+                            }
+                            else
+                            {
+                                <input type="radio" class="form-check-input " value="@carWash.Id" name="CarWashId" id="@carWash.Id" />
+                            }
+                            <label class="form-check-label nowrap" for="@carWash.Id">@carWash.Name</label>
+                        </div>
+                    }
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col text-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
-            </div>
-
-            <div class="form-row">
-                @foreach (var carWash in washService.GetAllCarWashes())
-                {
-                    <div class="col col-sm-2 m-3 form-check">
-                        @if (Model.CarWashId != null && Model.CarWashId == carWash.Id)
-                        {
-                            <input type="radio" checked class="form-check-input" value="@carWash.Id" name="CarWashId" id="@carWash.Id" />
-                        }
-                        else
-                        {
-                            <input type="radio" class="form-check-input " value="@carWash.Id" name="CarWashId" id="@carWash.Id" />
-                        }
-                        <label class="form-check-label nowrap" for="@carWash.Id">@carWash.Name</label>
-                    </div>
-                }
-            </div>
-
-            <div class="row mt-2">
-                <div class="col text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </div>
+            </form>
         </div>
 
         <div class="col-md-4 mt-4">
@@ -60,6 +48,4 @@
             <partial name="_ChatPartial" model="Model.Messages" />
         </div>
     </div>
-</form>
-
-<script src="~/js/CarWash.js"></script>
+</div>

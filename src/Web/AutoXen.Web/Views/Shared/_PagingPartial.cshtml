@@ -32,6 +32,6 @@
         <button type="submit" class="page-link" asp-route-pagenumber="@Model.NextPageNumber">Next</button>
     </li>
     <li class="page-item @if (!Model.HasNextPage) { <text>disabled</text> }">
-        <button type="submit" class="page-link" asp-route-pagenumber="@Model.PagesCount">Last</button>
+        <a type="submit" class="page-link" asp-route-pagenumber="@Model.PagesCount">Last</a>
     </li>
 </ul>

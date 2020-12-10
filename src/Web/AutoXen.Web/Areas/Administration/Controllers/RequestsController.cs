@@ -33,7 +33,9 @@
                 model.PageNumber = 1;
             }
 
+            var wash = model.CarWashes;
             model = this.requestsService.GetAllRequests(model.PageNumber);
+            model.CarWashes = wash;
 
             return this.View(model);
         }

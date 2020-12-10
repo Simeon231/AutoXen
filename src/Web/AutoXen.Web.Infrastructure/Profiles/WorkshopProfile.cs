@@ -26,12 +26,14 @@
                 .ReverseMap();
 
             this.CreateMap<WorkshopRequest, WorkshopRequestDetailsViewModel>()
+                .ForMember(x => x.RequestInformation, src => src.MapFrom(dest => dest))
                 .ReverseMap();
 
             this.CreateMap<WService, WServiceViewModel>()
                 .ReverseMap();
 
             this.CreateMap<WorkshopRequest, WorkshopAdminViewModel>()
+                .ForMember(x => x.RequestInformation, src => src.MapFrom(dest => dest))
                 .ReverseMap();
         }
     }

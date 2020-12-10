@@ -3,6 +3,7 @@
     using AutoMapper;
     using AutoXen.Data.Models.CarWash;
     using AutoXen.Data.Models.Workshop;
+    using AutoXen.Web.ViewModels.Administration.Common;
     using AutoXen.Web.ViewModels.Administration.Requests;
 
     public class RequestsProfile : Profile
@@ -13,8 +14,14 @@
                 .ForMember(x => x.RequestName, y => y.MapFrom(x => x.ToString()))
                 .ReverseMap();
 
+            this.CreateMap<WorkshopRequest, AdminRequestInformationViewModel>()
+                .ReverseMap();
+
             this.CreateMap<CarWashRequest, RequestViewModel>()
                 .ForMember(x => x.RequestName, y => y.MapFrom(x => x.ToString()))
+                .ReverseMap();
+
+            this.CreateMap<CarWashRequest, AdminRequestInformationViewModel>()
                 .ReverseMap();
         }
     }

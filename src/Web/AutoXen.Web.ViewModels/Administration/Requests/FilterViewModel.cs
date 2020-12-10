@@ -17,7 +17,7 @@
         [Display(Name = GlobalConstants.CarWash)]
         public bool CarWashes { get; set; }
 
-        [Display(Name = GlobalConstants.Incurance)]
+        [Display(Name = GlobalConstants.Insurance)]
         public bool Insurances { get; set; }
 
         [Display(Name = GlobalConstants.RoadsideAssistance)]

@@ -112,6 +112,12 @@
                 .Include(x => x.Car)
                 .FirstOrDefault(x => x.Id == requestId && (x.UserId == userId || isAdmin));
 
+            // TODO throw exception
+            if (dbRequest == null)
+            {
+                return null;
+            }
+
             var request = this.mapper.Map<WorkshopRequestDetailsViewModel>(dbRequest);
 
             if (dbRequest.AdminChooseWorkshop && dbRequest.ModifiedOn == null)
@@ -150,10 +156,10 @@
                 .All()
                 .FirstOrDefault(x => x.Id == model.Id);
 
-            request.WorkshopServicesDone = model.WorkshopServicesDone;
-            request.ReturnedCar = model.ReturnedCar;
-            request.PickedUp = model.PickedUp;
-            request.FinishedOn = model.FinishedOn;
+            request.ServiceFinished = model.RequestInformation.ServiceFinished;
+            request.ReturnedCar = model.RequestInformation.ReturnedCar;
+            request.PickedUp = model.RequestInformation.PickedUp;
+            request.FinishedOn = model.RequestInformation.FinishedOn;
             request.OtherServices = model.OtherServices;
             request.PickUpLocation = model.PickUpLocation;
             request.PickUpTime = model.PickUpTime;

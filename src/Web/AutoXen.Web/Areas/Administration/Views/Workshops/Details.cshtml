@@ -3,48 +3,16 @@
 @model WorkshopRequestDetailsViewModel
 @inject IWorkshopService workshopService
 
-<form method="post">
-    <div class="d-flex pb-3 justify-content-center">
-        <div class="form-row mt-2 container">
-            <div class="col-md-8">
+
+<div class="d-flex pb-3 justify-content-center">
+    <div class="form-row mt-2 container">
+        <div class="col-md-8">
+            <form method="post">
                 <div class="d-flex justify-content-center">
                     <div asp-validation-summary="All" class="text-danger"></div>
                 </div>
 
-                <div class="row">
-                    <div class="text-center col-lg-4">
-                        <label class="col-form-label" asp-for="PickedUp"></label>
-                        <input class="form-check-inline" asp-for="PickedUp" />
-                        <span asp-validation-for="PickedUp" class="text-danger"></span>
-                    </div>
-                    <div class="text-center col-lg-4">
-                        <label class="col-form-label" asp-for="WorkshopServicesDone"></label>
-                        <input class="form-check-inline" asp-for="WorkshopServicesDone" />
-                        <span asp-validation-for="WorkshopServicesDone" class="text-danger"></span>
-                    </div>
-                    <div class="text-center col-lg-4">
-                        <label class="col-form-label" asp-for="ReturnedCar"></label>
-                        <input class="form-check-inline" asp-for="ReturnedCar" />
-                        <span asp-validation-for="ReturnedCar" class="text-danger"></span>
-                    </div>
-
-                </div>
-                <div class="row mt-1">
-                    <div class="text-center col-lg-8">
-                        <div class="col-lg-10">
-                            <label class=" col-form-label" asp-for="FinishedOn"></label>
-                            <input class="form-control" asp-for="FinishedOn" />
-                            <span asp-validation-for="FinishedOn" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="text-center mt-4">
-                            <a class="btn btn-info pl-3 pr-3" asp-controller="Users" asp-action="Profile" asp-route-userId="@Model.UserId">User's profile</a>
-                        </div>
-                    </div>
-                </div>
-
-                <hr />
+                <partial name="_AdministrationRequestInformationPartial" model="Model.RequestInformation" />
 
                 <partial name="_SingleCarPartial" model="Model.Car" />
 
@@ -143,17 +111,17 @@
 
                 <div class="row">
                     <div class="col text-center">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
                     </div>
                 </div>
-            </div>
+            </form>
+        </div>
 
-            <div class="col-md-4 mt-4">
-                <input disabled hidden value="@Model.Id" id="requestId" />
-                <partial name="_ChatPartial" model="Model.Messages" />
-            </div>
+        <div class="col-md-4 mt-4">
+            <input disabled hidden value="@Model.Id" id="requestId" />
+            <partial name="_ChatPartial" model="Model.Messages" />
         </div>
     </div>
-</form>
+</div>
 
 <script src="~/js/workshop.js" asp-append-version="true"></script>

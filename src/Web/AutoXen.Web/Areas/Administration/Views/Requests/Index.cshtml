@@ -85,11 +85,11 @@
                             }
                             @if (request.RequestName == GlobalConstants.Workshop)
                             {
-                                <td class="text-center"><a asp-controller="Workshops" asp-action="Details" asp-route-id="@request.Id" class="btn btn-outline-info">Info</a></td>
+                                <td class="text-center"><a asp-area="Administration" asp-controller="Workshops" asp-action="Details" asp-route-id="@request.Id" class="btn btn-outline-info">Info</a></td>
                             }
                             else if (request.RequestName == GlobalConstants.CarWash)
                             {
-                                <td class="text-center"><a asp-controller="CarWashes" asp-action="Details" asp-route-id="@request.Id" class="btn btn-outline-info">Info</a></td>
+                                <td class="text-center"><a asp-area="Administration" asp-controller="CarWashes" asp-action="Details" asp-route-id="@request.Id" class="btn btn-outline-info">Info</a></td>
                             }
                         </tr>
                     }

@@ -6,7 +6,12 @@ if (document.getElementById("messagesList") != null) {
         requestId = request.value;
     }
 
+    var messageList = document.getElementById("messagesList");
+    messageList.scrollTop = messageList.scrollHeight;
+
     if (requestId != null) {
+        let messagesCount = document.getElementById("messagesCount");
+
         var connection =
             new signalR.HubConnectionBuilder()
                 .withUrl("/chat")
@@ -44,14 +49,36 @@ if (document.getElementById("messagesList") != null) {
                 txt.textContent = message;
                 chatMsg.appendChild(txt);
 
+                let scrollBottom = false;
+                if (messageList.scrollTop - messageList.scrollHeight + messageList.offsetHeight > -1) {
+                    scrollBottom = true;
+                }
+
                 messageList.append(chatMsg);
+
+                if (scrollBottom) {
+                    messageList.scrollTop = messageList.scrollHeight;
+                }
+
+                messagesCount.textContent = parseInt(messagesCount.textContent) + 1;
             });
     }
 
-    var messageList = document.getElementById("messagesList");
-    messageList.scrollTop = messageList.scrollHeight;
+    document.getElementById('messageInput').addEventListener('keyup', (e) => {
+        if (e.key === "Enter" || e.which === 13 || e.keyCode === 13) {
+            e.preventDefault();
 
-    $("#sendButton").click(function () {
+            sendMsg();
+        }
+    })
+
+    $("#sendButton").click(function (e) {
+        e.preventDefault();
+
+        sendMsg();
+    });
+
+    function sendMsg() {
         var message = $("#messageInput").val();
         message = message.trim();
         if (message.length < 1) {
@@ -81,10 +108,20 @@ if (document.getElementById("messagesList") != null) {
         txt.textContent = message;
         chatMsg.append(txt);
 
+        let scrollBottom = false;
+        if (messageList.scrollTop - messageList.scrollHeight + messageList.offsetHeight > -1) {
+            scrollBottom = true;
+        }
+
         messageList.append(chatMsg);
 
+        if (scrollBottom) {
+            messageList.scrollTop = messageList.scrollHeight;
+        }
+
         $("#messageInput").val("");
-    });
+        messagesCount.textContent = parseInt(messagesCount.textContent) + 1;
+    }
 
     function escapeHtml(unsafe) {
         return unsafe

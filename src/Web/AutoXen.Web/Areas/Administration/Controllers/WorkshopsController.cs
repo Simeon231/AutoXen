@@ -34,14 +34,15 @@
             if (!this.ModelState.IsValid)
             {
                 var model = this.workshopService.GetWorkshopRequestDetails(userId, input.Id, true);
-                if (input.WorkshopId > 0)
+                if (input.WorkshopId != null)
                 {
+                    var workshopId = (int)input.WorkshopId;
                     model.Workshop = new WorkshopViewModel()
                     {
-                        Id = input.WorkshopId,
+                        Id = workshopId,
                     };
 
-                    model.WorkshopServices = this.workshopService.GetServicesByWorkshopId(input.WorkshopId).Select(x => x.Id);
+                    model.WorkshopServices = this.workshopService.GetServicesByWorkshopId(workshopId).Select(x => x.Id);
                 }
 
                 return this.View(model);

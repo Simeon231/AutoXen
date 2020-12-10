@@ -51,11 +51,11 @@
         private void ToWorkshop(StringBuilder html, EmailViewModel model)
         {
             var request = this.workshopService.GetWorkshopRequestDetails(string.Empty, model.Id, true);
-            var user = this.usersService.GetUser(request.UserId);
+            var user = this.usersService.GetUser(request.RequestInformation.UserId);
             var workshopServices = this.workshopService.GetWorkshopServicesByRequestId(request.Id);
 
             this.AppendHeader(html, $"{model.RequestName} - {request.Workshop.Name}");
-            this.AppendUser(html, request.UserId);
+            this.AppendUser(html, request.RequestInformation.UserId);
             this.AppendUl(html, "Car", request.Car.Brand, request.Car.Model, request.Car.RegistrationPlate);
             this.AppendPickUp(html, request);
             var services = workshopServices.Select(x => $"Name: {x.ServiceName}").ToList();

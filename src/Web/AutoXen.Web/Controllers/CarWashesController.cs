@@ -60,7 +60,10 @@
         [Authorize]
         public ActionResult Details(string id)
         {
-            return this.View();
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var model = this.carWashService.GetCarWashRequest(userId, id);
+
+            return this.View(model);
         }
 
         [HttpPost]

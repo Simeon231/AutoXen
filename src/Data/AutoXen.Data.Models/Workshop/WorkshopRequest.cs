@@ -17,7 +17,7 @@
             this.WorkshopRequestWServices = new HashSet<WorkshopRequestWService>();
         }
 
-        public bool WorkshopServicesDone { get; set; }
+        public bool ServiceFinished { get; set; }
 
         public DateTime? FinishedOn { get; set; }
 

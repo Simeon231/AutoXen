@@ -1,16 +1,18 @@
 ﻿@using AutoXen.Services.Data
 @using AutoXen.Web.ViewModels.CarWash
-@model CarWashRequestViewModel
+@model CarWashRequestDetailsViewModel
 @inject ICarWashService washService
 
-<form method="post" class=" d-flex justify-content-center">
+<div class="d-flex justify-content-center">
     <div class="row mt-2 container">
         <div class="col-md-8">
             <div asp-validation-summary="All" class="text-danger"></div>
 
-            <partial name="_CarsPartial" model="@Model.CarId" />
+            <partial name="_RequestInformationPartial" model="Model.RequestInformation" />
 
-            <partial name="_PickUpPartial" model="@Model" />
+            <partial name="_SingleCarPartial" model="Model.Car" />
+
+            <partial name="_SinglePickUpPartial" model="@Model" />
 
             <div class="form-row d-flex justify-content-center">
                 <div class="border p-1 col-md-4">
@@ -18,11 +20,11 @@
                         <label class="col-form-label" asp-for="AdminChooseCarWash"></label>
                         @if (Model.CarWashId == null)
                         {
-                            <input checked class="form-check-inline" asp-for="AdminChooseCarWash" />
+                            <input disabled checked class="form-check-inline" asp-for="AdminChooseCarWash" />
                         }
                         else
                         {
-                            <input class="form-check-inline" asp-for="AdminChooseCarWash" />
+                            <input disabled class="form-check-inline" asp-for="AdminChooseCarWash" />
                         }
                         <span asp-validation-for="AdminChooseCarWash" class="text-danger"></span>
                     </div>
@@ -35,21 +37,15 @@
                     <div class="col col-sm-2 m-3 form-check">
                         @if (Model.CarWashId != null && Model.CarWashId == carWash.Id)
                         {
-                            <input type="radio" checked class="form-check-input" value="@carWash.Id" name="CarWashId" id="@carWash.Id" />
+                            <input disabled type="radio" checked class="form-check-input" value="@carWash.Id" name="CarWashId" id="@carWash.Id" />
                         }
                         else
                         {
-                            <input type="radio" class="form-check-input " value="@carWash.Id" name="CarWashId" id="@carWash.Id" />
+                            <input disabled readonly type="radio" class="form-check-input " value="@carWash.Id" name="CarWashId" id="@carWash.Id" />
                         }
                         <label class="form-check-label nowrap" for="@carWash.Id">@carWash.Name</label>
                     </div>
                 }
-            </div>
-
-            <div class="row mt-2">
-                <div class="col text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
             </div>
         </div>
 
@@ -58,6 +54,6 @@
             <partial name="_ChatPartial" model="Model.Messages" />
         </div>
     </div>
-</form>
+</div>
 
 <script src="~/js/CarWash.js"></script>

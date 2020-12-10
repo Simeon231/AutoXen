@@ -1,0 +1,36 @@
+﻿@using AutoXen.Web.ViewModels.Administration.Common
+@model AdminRequestInformationViewModel 
+
+<div class="row">
+    <div class="text-center col-xl-4">
+        <label class="col-form-label" asp-for="PickedUp"></label>
+        <input class="form-check-inline" asp-for="PickedUp" name="RequestInformation.PickedUp"/>
+        <span asp-validation-for="PickedUp" class="text-danger"></span>
+    </div>
+    <div class="text-center col-xl-4">
+        <label class="col-form-label" asp-for="ServiceFinished"></label>
+        <input class="form-check-inline" asp-for="ServiceFinished" name="RequestInformation.ServiceFinished"/>
+        <span asp-validation-for="ServiceFinished" class="text-danger"></span>
+    </div>
+    <div class="text-center col-xl-4">
+        <label class="col-form-label" asp-for="ReturnedCar"></label>
+        <input class="form-check-inline" asp-for="ReturnedCar" name="RequestInformation.ReturnedCar"/>
+        <span asp-validation-for="ReturnedCar" class="text-danger"></span>
+    </div>
+</div>
+<div class="row mt-1">
+    <div class="text-center col-lg-8">
+        <div class="col-lg-10">
+            <label class=" col-form-label" asp-for="FinishedOn"></label>
+            <input class="form-control" asp-for="FinishedOn" name="RequestInformation.FinishedOn"/>
+            <span asp-validation-for="FinishedOn" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="text-center mt-4">
+            <a class="btn btn-info pl-3 pr-3" asp-controller="Users" asp-action="Profile" asp-route-userId="@Model.UserId">User's profile</a>
+        </div>
+    </div>
+</div>
+
+<hr />

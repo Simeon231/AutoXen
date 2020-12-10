@@ -7,8 +7,10 @@
     using AutoXen.Data.Models;
     using AutoXen.Services.Data;
     using AutoXen.Web.ViewModels.Common;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.SignalR;
 
+    [Authorize]
     public class ChatHub : Hub
     {
         private readonly IMessageService messageService;
