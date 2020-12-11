@@ -1,9 +1,9 @@
 ﻿namespace AutoXen.Services.Data
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using AutoMapper;
     using AutoXen.Data.Common.Repositories;
     using AutoXen.Data.Models;

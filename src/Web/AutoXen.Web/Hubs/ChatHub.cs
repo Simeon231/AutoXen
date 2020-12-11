@@ -4,7 +4,6 @@
     using System.Threading.Tasks;
 
     using AutoXen.Common;
-    using AutoXen.Data.Models;
     using AutoXen.Services.Data;
     using AutoXen.Web.ViewModels.Common;
     using Microsoft.AspNetCore.Authorization;

@@ -4,11 +4,11 @@
     using System.Threading.Tasks;
 
     using AutoXen.Data.Models.Workshop;
-    using AutoXen.Services.Data.Common;
+    using AutoXen.Web.ViewModels.Administration.Requests;
     using AutoXen.Web.ViewModels.Administration.Workshop;
     using AutoXen.Web.ViewModels.Workshop;
 
-    public interface IWorkshopService : IBaseRequestService
+    public interface IWorkshopService
     {
         /// <summary>
         /// <exception>Throws InvalidCarException.</exception>
@@ -30,5 +30,7 @@
         public WorkshopRequestDetailsViewModel GetWorkshopRequestDetails(string userId, string requestId, bool isAdmin = false);
 
         public IEnumerable<WorkshopServiceViewModel> GetWorkshopServicesByRequestId(string requestId);
+
+        public Task AcceptAsync(AcceptViewModel model);
     }
 }

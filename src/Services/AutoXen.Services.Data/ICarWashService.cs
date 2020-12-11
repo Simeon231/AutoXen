@@ -4,11 +4,11 @@
     using System.Threading.Tasks;
 
     using AutoXen.Data.Models.CarWash;
-    using AutoXen.Services.Data.Common;
     using AutoXen.Web.ViewModels.Administration.CarWash;
+    using AutoXen.Web.ViewModels.Administration.Requests;
     using AutoXen.Web.ViewModels.CarWash;
 
-    public interface ICarWashService : IBaseRequestService
+    public interface ICarWashService
     {
         public IEnumerable<CarWashViewModel> GetAllCarWashes();
 
@@ -24,5 +24,7 @@
         public IEnumerable<CarWashRequest> GetAllRequestsById(string userId);
 
         public IEnumerable<CarWashRequest> GetAllRequests();
+
+        public Task AcceptAsync(AcceptViewModel model);
     }
 }
