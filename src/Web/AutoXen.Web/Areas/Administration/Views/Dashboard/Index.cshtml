@@ -2,10 +2,40 @@
     this.ViewData["Title"] = "Admin dashboard";
 }
 
-<div class="d-flex justify-content-center mt-4">
-    <div class="container">
-        total not accepted requests: 15
-        Workshop requests: 3
-        Car wash requests: 5
-    </div>
-</div>
+<div class="" id="columnchart_values" ></div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load("current", { packages: ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ["Element", "Requests", { role: "style" }],
+            ["Car wash", 17, "#003f5c"],
+            ["Insurance", 10, "color: #58508d"],
+            ["Roadside assitance", 13, "color: #bc5090"],
+            ["Workshop", 21, "color: #ff6361"],
+            ["Annual technical inspection", 6, "color: #ffa600"]
+        ]);
+
+        var view = new google.visualization.DataView(data);
+        view.setColumns([0, 1,
+            {
+                calc: "stringify",
+                sourceColumn: 1,
+                type: "string",
+                role: "annotation"
+            },
+            2]);
+
+        var options = {
+            title: "Total not accepted requests",
+            width: 700,
+            height: 450,
+            bar: { groupWidth: "95%" },
+            legend: { position: "none" },
+        };
+        var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+        chart.draw(view, options);
+    }
+</script>
