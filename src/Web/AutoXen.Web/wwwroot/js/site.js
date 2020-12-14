@@ -9,8 +9,6 @@ if (deleteBtn != null) {
 // convert datetime.utc to user's datetime.now
 var dates = document.getElementsByClassName('momentTime');
 var inputDates = document.getElementsByClassName('inputMomentTime');
-console.log('here');
-console.log(dates);
 
 if (dates != null) {
     for (var i = 0; i < dates.length; i++) {
@@ -28,8 +26,12 @@ if (inputDates != null) {
 function convertTimeToLocal(time) {
     const fmt = 'DD/MM/YYYY HH:mm:ss';
     time.textContent;
-    const result = moment.utc(time.textContent, fmt).local().format(fmt);
-    console.log(result);
+    let result = moment.utc(time.textContent, fmt).local().format(fmt);
+
+    if (result == "Invalid date") {
+        result = moment.utc(time.textContent, "MM/DD/YYYY hh:mm:ss A").local().format(fmt);
+    }
+
     time.textContent = result;
 }
 
