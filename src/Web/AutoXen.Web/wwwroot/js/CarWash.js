@@ -8,7 +8,6 @@ CarWashes.forEach(x => {
     }
 })
 
-console.log(adminChooseCarWash.checked)
 if (adminChooseCarWash.checked) {
     CarWashes.forEach(x => {
         x.disabled = true;

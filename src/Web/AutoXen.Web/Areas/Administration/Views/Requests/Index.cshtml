@@ -69,7 +69,7 @@
                         ApplicationUser curUser = this.UserManager.GetUserAsync(this.User).GetAwaiter().GetResult();
                         <tr>
                             <td>@($"First name: {request.User.FirstName} - Sur name: {request.User.SurName}")</td>
-                            <td name="date">@request.CreatedOn</td>
+                            <td class="momentTime">@request.CreatedOn</td>
                             <td>@request.RequestName</td>
                             @if (request.AcceptedById == null)
                             {

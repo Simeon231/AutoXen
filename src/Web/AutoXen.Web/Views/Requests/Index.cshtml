@@ -27,7 +27,7 @@
                 {
                     <tr>
                         <td>@($"Brand: {request.Car.Brand} - Model: {request.Car.Model} - {request.Car.RegistrationPlate}")</td>
-                        <td name="date">@request.CreatedOn</td>
+                        <td class="momentTime">@request.CreatedOn</td>
                         <td>@request.RequestName</td>
                         @if (request.RequestName == GlobalConstants.Workshop)
                         {
