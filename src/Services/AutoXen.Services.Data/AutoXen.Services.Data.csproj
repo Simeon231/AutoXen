@@ -21,6 +21,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\AutoXen.Data.Common\AutoXen.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\AutoXen.Data.Models\AutoXen.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Exceptions\AutoXen.Services.Exceptions.csproj" />
+    <ProjectReference Include="..\..\Web\AutoXen.Web.Infrastructure\AutoXen.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Web\AutoXen.Web.ViewModels\AutoXen.Web.ViewModels.csproj" />
     <ProjectReference Include="..\AutoXen.Services.Mapping\AutoXen.Services.Mapping.csproj" />
     <ProjectReference Include="..\AutoXen.Services.Messaging\AutoXen.Services.Messaging.csproj" />

@@ -12,7 +12,7 @@
     <div class="form-row d-flex justify-content-center">
         <div class="col-lg-10">
             <select class="form-control" name="CarId">
-                @foreach (var car in this.carService.AllCars(user.GetUserId(this.User)))
+                @foreach (var car in this.carService.GetAllCarsByUserId(user.GetUserId(this.User)))
                 {
                     var name = $"Brand: {car.Brand} - Model: {car.Model} - Registration plate: {car.RegistrationPlate}";
                     if (car.Id == Model)

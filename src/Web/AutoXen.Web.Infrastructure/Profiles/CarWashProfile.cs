@@ -3,6 +3,7 @@
     using AutoMapper;
     using AutoXen.Data.Models.CarWash;
     using AutoXen.Web.ViewModels.Administration.CarWash;
+    using AutoXen.Web.ViewModels.Administration.Common;
     using AutoXen.Web.ViewModels.CarWash;
 
     public class CarWashProfile : Profile

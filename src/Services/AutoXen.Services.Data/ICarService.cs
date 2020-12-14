@@ -9,7 +9,7 @@
     {
         public Task AddCarAsync(string userId, DetailedCarViewModel model);
 
-        public IEnumerable<CarViewModel> AllCars(string userId);
+        public IEnumerable<CarViewModel> GetAllCarsByUserId(string userId);
 
         public IEnumerable<ExtraViewModel> GetAllExtras();
 
@@ -21,11 +21,11 @@
 
         public Task ChangeCarDetailsAsync(DetailedCarViewModel model, string userId);
 
-        public Task Delete(string carId, string userId);
+        public Task DeleteCarAsync(string carId, string userId);
 
         /// <summary>
         /// <exception>Throws InvalidCarException.</exception>
         /// </summary>
-        public void CheckUserHasCar(string userId, string carId);
+        public void CheckUserHaveACar(string userId, string carId);
     }
 }

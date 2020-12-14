@@ -42,7 +42,7 @@
             await this.carRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<CarViewModel> AllCars(string userId)
+        public IEnumerable<CarViewModel> GetAllCarsByUserId(string userId)
         {
             var cars = this.carRepository.AllAsNoTracking()
                 .Where(x => x.UserId == userId)
@@ -74,7 +74,7 @@
             await this.carRepository.SaveChangesAsync();
         }
 
-        public async Task Delete(string carId, string userId)
+        public async Task DeleteCarAsync(string carId, string userId)
         {
             var dbCar = this.GetCar(carId, userId);
 
@@ -119,11 +119,10 @@
         /// <summary>
         /// <exception>Throws InvalidCarException.</exception>
         /// </summary>
-        public void CheckUserHasCar(string userId, string carId)
+        public void CheckUserHaveACar(string userId, string carId)
         {
             var car = this.carRepository.AllAsNoTracking().FirstOrDefault(x => x.Id == carId && x.UserId == userId);
-            var usercars = this.carRepository.AllAsNoTracking().Where(x => x.UserId == userId);
-            var curcar = this.carRepository.AllAsNoTracking().Where(x => x.Id == carId);
+
             if (car == null)
             {
                 throw new InvalidCarException("Pick a valid car.");

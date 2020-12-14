@@ -22,7 +22,7 @@
         public IActionResult All()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var cars = this.carService.AllCars(userId);
+            var cars = this.carService.GetAllCarsByUserId(userId);
             return this.View(cars);
         }
 
@@ -106,7 +106,7 @@
 
             try
             {
-                await this.carService.Delete(id, userId);
+                await this.carService.DeleteCarAsync(id, userId);
             }
             catch (WrongCarOwnerException)
             {

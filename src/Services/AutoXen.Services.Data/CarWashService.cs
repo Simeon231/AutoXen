@@ -17,14 +17,14 @@
     public class CarWashService : ICarWashService
     {
         private readonly IRepository<CarWashRequest> carWashRequestRepository;
-        private readonly IDeletableEntityRepository<CarWash> carWashRepository;
+        private readonly IRepository<CarWash> carWashRepository;
         private readonly ICarService carService;
         private readonly IMessageService messageService;
         private readonly IMapper mapper;
 
         public CarWashService(
-            IRepository<CarWashRequest> carWashRequestRepository,
-            IDeletableEntityRepository<CarWash> carWashRepository,
+            IDeletableEntityRepository<CarWashRequest> carWashRequestRepository,
+            IRepository<CarWash> carWashRepository,
             ICarService carService,
             IMessageService messageService,
             IMapper mapper)
@@ -41,7 +41,7 @@
         /// </summary>
         public async Task AddCarWashRequestAsync(CarWashRequestViewModel model, string userId)
         {
-            this.carService.CheckUserHasCar(userId, model.CarId);
+            this.carService.CheckUserHaveACar(userId, model.CarId);
 
             if (model.PickUpFastAsPossible)
             {
@@ -116,9 +116,12 @@
                 .All()
                 .FirstOrDefault(x => x.Id == model.Id);
 
-            request.AcceptedById = model.AdminId;
+            if (request != null)
+            {
+                request.AcceptedById = model.AdminId;
 
-            await this.carWashRequestRepository.SaveChangesAsync();
+                await this.carWashRequestRepository.SaveChangesAsync();
+            }
         }
 
         public IEnumerable<CarWashViewModel> GetAllCarWashes()

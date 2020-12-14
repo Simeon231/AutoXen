@@ -54,7 +54,7 @@
         /// </summary>
         public async Task AddWorkshopRequestAsync(WorkshopRequestViewModel model, string userId)
         {
-            this.carService.CheckUserHasCar(userId, model.CarId);
+            this.carService.CheckUserHaveACar(userId, model.CarId);
 
             var request = this.mapper.Map<WorkshopRequest>(model);
             request.UserId = userId;
