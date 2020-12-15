@@ -20,4 +20,4 @@
 - AJAX
 - XUnit
 - Moq
-- Hosted in Azure
+- Azure
