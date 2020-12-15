@@ -8,9 +8,11 @@
 - ASP.NET [CORE 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1 "CORE 3.1") MVC
 - ASP.NET Core areas
 - Entity Framework Core
-- MSSQL
+- MSSQL Server
 - SignalR
 - SendGrid
+- XUnit
+- Moq
 - Bootstrap
 - Bootstrap [theme](https://bootstrapmade.com/demo/Gp/)
 - Font awesome
@@ -19,5 +21,3 @@
   - [Select2](https://select2.org/)
   - [Momentjs](https://momentjs.com/)
 - AJAX
-- XUnit
-- Moq
