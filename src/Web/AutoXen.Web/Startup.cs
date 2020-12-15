@@ -61,6 +61,8 @@
                     }).AddRazorRuntimeCompilation();
             services.AddRazorPages();
 
+            services.AddApplicationInsightsTelemetry();
+
             services.AddSingleton(this.configuration);
 
             // Data repositories
