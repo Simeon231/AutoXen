@@ -30,8 +30,6 @@
             requests.AddRange(this.carWashService.GetAllRequestsById(userId).Select(x => this.mapper.Map<RequestViewModel>(x)));
             requests.AddRange(this.workshopService.GetWorkshopRequestsByUserId(userId).Select(x => this.mapper.Map<RequestViewModel>(x)));
 
-            requests.OrderByDescending(x => x.CreatedOn);
-
             return requests.OrderByDescending(x => x.CreatedOn);
         }
     }
