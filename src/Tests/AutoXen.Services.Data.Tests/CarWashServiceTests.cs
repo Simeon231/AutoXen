@@ -14,10 +14,8 @@
     using AutoXen.Web.ViewModels.Administration.CarWash;
     using AutoXen.Web.ViewModels.Administration.Common;
     using AutoXen.Web.ViewModels.Administration.Requests;
-    using AutoXen.Web.ViewModels.Cars;
     using AutoXen.Web.ViewModels.CarWash;
     using AutoXen.Web.ViewModels.Common;
-    using Microsoft.EntityFrameworkCore;
     using Moq;
     using Xunit;
 

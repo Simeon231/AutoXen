@@ -120,7 +120,13 @@
 
             var request = this.mapper.Map<WorkshopRequestDetailsViewModel>(dbRequest);
 
-            if (dbRequest.AdminChooseWorkshop && dbRequest.ModifiedOn == null)
+            var requestWorkshopService = this.workshopRequestWorkshopServiceRepository
+                .AllAsNoTracking()
+                .Include(x => x.WorkshopService.Workshop)
+                .FirstOrDefault(x => x.WorkshopRequestId == dbRequest.Id);
+
+            if (dbRequest.AdminChooseWorkshop &&
+                requestWorkshopService == null)
             {
                 request.WServices = this.workshopRequestWService
                     .AllAsNoTracking()
@@ -137,12 +143,7 @@
                     .Select(x => x.WorkshopService.Id)
                     .ToList();
 
-                var dbWorkshop = this.workshopRequestWorkshopServiceRepository
-                    .AllAsNoTracking()
-                    .Include(x => x.WorkshopService.Workshop)
-                    .FirstOrDefault(x => x.WorkshopRequestId == dbRequest.Id).WorkshopService.Workshop;
-
-                request.Workshop = this.mapper.Map<WorkshopViewModel>(dbWorkshop);
+                request.Workshop = this.mapper.Map<WorkshopViewModel>(requestWorkshopService.WorkshopService.Workshop);
             }
 
             request.Messages = this.messageService.GetAllByRequestId(requestId);

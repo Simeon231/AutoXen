@@ -33,7 +33,8 @@
 
             switch (model.RequestName)
             {
-                case GlobalConstants.Workshop: this.ToWorkshop(html, model);
+                case GlobalConstants.Workshop:
+                    this.ToWorkshop(html, model);
                     break;
                 case GlobalConstants.CarWash:
                     this.ToCarWash(html, model);
@@ -45,7 +46,10 @@
 
         private void ToCarWash(StringBuilder html, EmailViewModel model)
         {
-            return;
+            // TODO add more information about the request
+            this.AppendHeader(html, $"{model.RequestName}");
+            this.AppendMessage(html, model.Message);
+            this.AppendFooter(html);
         }
 
         private void ToWorkshop(StringBuilder html, EmailViewModel model)
