@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\AutoXen.Common\AutoXen.Common.csproj" />
+    <ProjectReference Include="..\..\Services\AutoXen.Services\AutoXen.Services.csproj" />
     <ProjectReference Include="..\AutoXen.Data.Common\AutoXen.Data.Common.csproj" />
   </ItemGroup>
   

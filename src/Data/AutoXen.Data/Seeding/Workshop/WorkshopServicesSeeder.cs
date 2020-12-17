@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
 
     using AutoXen.Data.Models.Workshop;
+    using AutoXen.Services;
 
     internal class WorkshopServicesSeeder : ISeeder
     {
@@ -26,7 +27,7 @@
 
             for (int workshopId = 1; workshopId <= worhshopsCount; workshopId++)
             {
-                var randomNumbers = this.RandomNumbers(servicesCount);
+                var randomNumbers = RandomValues.RandomUniqueNumbers(servicesCount, servicesCount);
 
                 foreach (var serviceId in randomNumbers)
                 {
@@ -34,29 +35,10 @@
                     {
                         ServiceId = serviceId,
                         WorkshopId = workshopId,
-                        Price = this.RandomPrice(),
+                        Price = RandomValues.RandomPrice(),
                     });
                 }
             }
-        }
-
-        private IEnumerable<int> RandomNumbers(int maxNumber)
-        {
-            var nums = new HashSet<int>();
-
-            for (int i = 0; i < maxNumber; i++)
-            {
-                nums.Add(new Random().Next(1, maxNumber));
-            }
-
-            return nums;
-        }
-
-        private double RandomPrice()
-        {
-            var maxPrice = 100.0;
-
-            return Math.Round(new Random().NextDouble() * maxPrice, 2);
         }
     }
 }

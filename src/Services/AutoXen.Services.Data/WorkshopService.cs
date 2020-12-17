@@ -7,7 +7,6 @@
 
     using AutoMapper;
     using AutoXen.Data.Common.Repositories;
-    using AutoXen.Data.Models;
     using AutoXen.Data.Models.Workshop;
     using AutoXen.Web.ViewModels.Administration.Requests;
     using AutoXen.Web.ViewModels.Administration.Workshop;
@@ -22,7 +21,7 @@
         private readonly IRepository<Workshop> workshopRepository;
         private readonly IRepository<AutoXen.Data.Models.Workshop.WorkshopService> workshopServiceRepository;
         private readonly IRepository<WorkshopRequestWorkshopService> workshopRequestWorkshopServiceRepository;
-        private readonly IRepository<WorkshopRequestWService> workshopRequestWService;
+        private readonly IRepository<WorkshopRequestWService> workshopRequestWServiceRepository;
         private readonly IMessageService messageService;
         private readonly ICarService carService;
         private readonly IMapper mapper;
@@ -43,7 +42,7 @@
             this.workshopRepository = workshopRepository;
             this.workshopServiceRepository = workshopServiceRepository;
             this.workshopRequestWorkshopServiceRepository = workshopRequestWorkshopServiceRepository;
-            this.workshopRequestWService = workshopRequestWService;
+            this.workshopRequestWServiceRepository = workshopRequestWService;
             this.messageService = messageService;
             this.carService = carService;
             this.mapper = mapper;
@@ -75,10 +74,10 @@
                         WServiceId = id,
                     };
 
-                    await this.workshopRequestWService.AddAsync(requestWService);
+                    await this.workshopRequestWServiceRepository.AddAsync(requestWService);
                 }
 
-                await this.workshopRequestWService.SaveChangesAsync();
+                await this.workshopRequestWServiceRepository.SaveChangesAsync();
             }
 
             await this.workshopRequestRepository.SaveChangesAsync();
@@ -128,7 +127,7 @@
             if (dbRequest.AdminChooseWorkshop &&
                 requestWorkshopService == null)
             {
-                request.WServices = this.workshopRequestWService
+                request.WServices = this.workshopRequestWServiceRepository
                     .AllAsNoTracking()
                     .Include(x => x.WService)
                     .Where(x => x.WorkshopRequestId == dbRequest.Id)
