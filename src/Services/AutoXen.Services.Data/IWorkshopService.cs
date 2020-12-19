@@ -31,6 +31,8 @@
 
         public IEnumerable<WorkshopServiceViewModel> GetWorkshopServicesByRequestId(string requestId);
 
+        public IEnumerable<int> GetWorkshopServicesIdsByRequestId(string requestId);
+
         public Task AcceptAsync(AcceptViewModel model);
     }
 }

@@ -198,6 +198,15 @@
                     .ToList();
         }
 
+        public IEnumerable<int> GetWorkshopServicesIdsByRequestId(string requestId)
+        {
+            return this.workshopRequestWorkshopServiceRepository
+                    .AllAsNoTracking()
+                    .Where(x => x.WorkshopRequestId == requestId)
+                    .Select(x => x.Id)
+                    .ToList();
+        }
+
         public IEnumerable<ServiceWithPriceResponseModel> GetServicesByWorkshopId(int workshopId)
         {
             return this.workshopServiceRepository
@@ -231,6 +240,20 @@
         {
             var workshopRequestWorkshopServices = this.workshopRequestWorkshopServiceRepository.AllAsNoTracking().Where(x => x.WorkshopRequestId == requestId).ToList();
 
+            // remove all
+            if (serviceIds == null)
+            {
+                foreach (var workshopRequestWorkshopService in workshopRequestWorkshopServices)
+                {
+                    this.workshopRequestWorkshopServiceRepository.Delete(workshopRequestWorkshopService);
+                }
+
+                await this.workshopRequestWorkshopServiceRepository.SaveChangesAsync();
+
+                return;
+            }
+
+            // add
             foreach (var id in serviceIds)
             {
                 var workshopService = this.workshopServiceRepository
@@ -246,6 +269,15 @@
                     };
 
                     await this.workshopRequestWorkshopServiceRepository.AddAsync(requestServices);
+                }
+            }
+
+            // remove
+            foreach (var workshopRequestWorkshopService in workshopRequestWorkshopServices)
+            {
+                if (!serviceIds.Any(x => x == workshopRequestWorkshopService.WorkshopServiceId))
+                {
+                    this.workshopRequestWorkshopServiceRepository.Delete(workshopRequestWorkshopService);
                 }
             }
 

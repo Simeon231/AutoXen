@@ -1,6 +1,5 @@
 ﻿namespace AutoXen.Web.Areas.Administration.Controllers
 {
-    using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -43,7 +42,7 @@
                         Id = workshopId,
                     };
 
-                    model.WorkshopServices = this.workshopService.GetServicesByWorkshopId(workshopId).Select(x => x.Id);
+                    model.WorkshopServices = this.workshopService.GetWorkshopServicesIdsByRequestId(input.Id);
                 }
 
                 return this.View(model);

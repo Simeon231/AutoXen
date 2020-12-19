@@ -73,7 +73,7 @@
                         <select class="js-select-multiple col-md-9 form-control selectIds" name="ServiceIds" asp-for="@Model.WorkshopServices" multiple="multiple">
                             @foreach (var service in workshopService.GetServicesByWorkshopId(Model.Workshop.Id))
                             {
-                                if (Model.WorkshopServices.Any(x => x == service.Id))
+                                if (Model.WorkshopServices != null && Model.WorkshopServices.Any(x => x == service.Id))
                                 {
                                     <option selected value="@service.Id">@($"{service.ServiceName} - {service.Price}$")</option>
                                 }

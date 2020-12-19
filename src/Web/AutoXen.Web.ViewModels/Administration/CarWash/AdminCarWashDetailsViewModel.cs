@@ -6,7 +6,7 @@
     using AutoXen.Web.ViewModels.Cars;
     using AutoXen.Web.ViewModels.Common;
 
-    public class AdminCarWashDetailsViewModel : PickUpViewModel
+    public class AdminCarWashDetailsViewModel : AdminPickUpViewModel
     {
         public string Id { get; set; }
 
