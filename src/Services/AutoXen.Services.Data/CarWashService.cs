@@ -16,7 +16,7 @@
 
     public class CarWashService : ICarWashService
     {
-        private readonly IRepository<CarWashRequest> carWashRequestRepository;
+        private readonly IDeletableEntityRepository<CarWashRequest> carWashRequestRepository;
         private readonly IRepository<CarWash> carWashRepository;
         private readonly ICarService carService;
         private readonly IMessageService messageService;
@@ -94,7 +94,7 @@
         public CarWashRequestDetailsViewModel GetCarWashRequest(string userId, string requestId, bool isAdmin = false)
         {
             var dbRequest = this.carWashRequestRepository
-                .AllAsNoTracking()
+                .AllWithDeleted()
                 .Include(x => x.Car)
                 .FirstOrDefault(x => x.Id == requestId && (x.UserId == userId || isAdmin));
 

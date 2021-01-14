@@ -107,7 +107,7 @@
         public WorkshopRequestDetailsViewModel GetWorkshopRequestDetails(string userId, string requestId, bool isAdmin = false)
         {
             var dbRequest = this.workshopRequestRepository
-                .AllAsNoTracking()
+                .AllWithDeleted()
                 .Include(x => x.Car)
                 .FirstOrDefault(x => x.Id == requestId && (x.UserId == userId || isAdmin));
 
