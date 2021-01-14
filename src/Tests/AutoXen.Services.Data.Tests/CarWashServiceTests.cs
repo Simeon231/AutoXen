@@ -176,7 +176,7 @@
             this.requestRepository.Setup(x => x.AllAsNoTracking())
                 .Returns(requests.AsQueryable());
 
-            var usersRequests = service.GetAllRequestsById(user);
+            var usersRequests = service.GetAllRequestsByUserId(user);
 
             Assert.Equal(2, usersRequests.Count());
         }

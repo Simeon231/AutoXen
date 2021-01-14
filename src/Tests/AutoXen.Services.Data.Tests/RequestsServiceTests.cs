@@ -32,7 +32,7 @@
         public void GetAllShouldReturnAllRequests()
         {
             var carWashRequests = this.GetCarWashRequests();
-            this.carWashService.Setup(x => x.GetAllRequestsById(string.Empty))
+            this.carWashService.Setup(x => x.GetAllRequestsByUserId(string.Empty))
                 .Returns(carWashRequests);
 
             var workshopRequests = this.GetWorkshopRequests();

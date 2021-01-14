@@ -21,7 +21,7 @@
 
         public CarWashRequestDetailsViewModel GetCarWashRequest(string userId, string requestId, bool isAdmin = false);
 
-        public IEnumerable<CarWashRequest> GetAllRequestsById(string userId);
+        public IEnumerable<CarWashRequest> GetAllRequestsByUserId(string userId);
 
         public IEnumerable<CarWashRequest> GetAllRequests();
 

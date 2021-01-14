@@ -98,7 +98,7 @@
         public IEnumerable<WorkshopRequest> GetWorkshopRequestsByUserId(string userId)
         {
             return this.workshopRequestRepository
-                .AllAsNoTracking()
+                .AllWithDeleted()
                 .Include(x => x.Car)
                 .Where(x => x.UserId == userId)
                 .ToList();

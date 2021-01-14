@@ -144,10 +144,10 @@
                 .ToList();
         }
 
-        public IEnumerable<CarWashRequest> GetAllRequestsById(string userId)
+        public IEnumerable<CarWashRequest> GetAllRequestsByUserId(string userId)
         {
             return this.carWashRequestRepository
-                .AllAsNoTracking()
+                .AllWithDeleted()
                 .Include(x => x.Car)
                 .Where(x => x.UserId == userId)
                 .ToList();

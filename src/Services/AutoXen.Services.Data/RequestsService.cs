@@ -27,7 +27,7 @@
         {
             var requests = new List<RequestViewModel>();
 
-            requests.AddRange(this.carWashService.GetAllRequestsById(userId).Select(x => this.mapper.Map<RequestViewModel>(x)));
+            requests.AddRange(this.carWashService.GetAllRequestsByUserId(userId).Select(x => this.mapper.Map<RequestViewModel>(x)));
             requests.AddRange(this.workshopService.GetWorkshopRequestsByUserId(userId).Select(x => this.mapper.Map<RequestViewModel>(x)));
 
             return requests.OrderByDescending(x => x.CreatedOn);
