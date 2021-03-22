@@ -5,6 +5,7 @@
 
     using AutoXen.Data.Common.Models;
 
+    // TODO Change the name of the class. For example: IndependentService
     public class WService : BaseModel<int>
     {
         public WService()

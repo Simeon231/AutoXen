@@ -183,7 +183,6 @@
         [Fact]
         public async Task SubmitRequestAsyncShouldChangePropertiesCorrectly()
         {
-            // TODO test
             var service = this.GetService();
 
             var requests = new List<WorkshopRequest>();
@@ -219,8 +218,8 @@
                 PickUpLocation = "changed Pick up location",
                 PickUpTime = DateTime.Now.AddHours(1),
                 PickUpFastAsPossible = false,
-                WorkshopId = 0, // TODO
-                ServiceIds = new List<int>(), // TODO
+                WorkshopId = 0, // TODO add WorkshopId
+                ServiceIds = new List<int>(), // TODO add ServiceIds
             };
 
             await service.SubmitRequestAsync(model);

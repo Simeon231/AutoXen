@@ -217,6 +217,7 @@
                 .ToList();
         }
 
+        // Change to IQueryable or add ViewModel
         public IEnumerable<WorkshopRequest> GetAllRequests()
         {
             return this.workshopRequestRepository

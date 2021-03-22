@@ -6,7 +6,6 @@
     using AutoXen.Data.Models.Enums;
     using AutoXen.Web.ViewModels.ValidationAtributes;
 
-    // TODO delete Mapping
     public class DetailedCarViewModel : CarViewModel
     {
         public new string Id { get; set; }
