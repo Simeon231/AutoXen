@@ -75,7 +75,7 @@
             await service.AddWorkshopRequestAsync(model, string.Empty);
 
             Assert.Single(requests);
-            Assert.Equal(model.Ids.Count(), workshopRequestWServices.Count());
+            Assert.Equal(model.Ids.Count(), workshopRequestWServices.Count);
             Assert.Equal(model.Ids.First(), workshopRequestWServices[0].WServiceId);
             Assert.Equal(model.CarId, requests[0].CarId);
             Assert.Equal(model.AdminChooseWorkshop, requests[0].AdminChooseWorkshop);
@@ -107,7 +107,7 @@
             await service.AddWorkshopRequestAsync(model, string.Empty);
 
             Assert.Single(this.messageService.Object.GetAllByRequestId(requests[0].Id));
-            Assert.Equal(2, requests.Count());
+            Assert.Equal(2, requests.Count);
         }
 
         [Fact]
@@ -124,7 +124,7 @@
                 new WorkshopRequestWorkshopService()
                 {
                     WorkshopRequestId = "requestId",
-                    Id = workshopRequestWorkshopServices.Count() + 1,
+                    Id = workshopRequestWorkshopServices.Count + 1,
                     WorkshopServiceId = this.workshopServiceRepository.Object.AllAsNoTracking().FirstOrDefault().Id,
                 });
             this.workshopRequestWorkshopServiceRepository.Setup(x => x.AllAsNoTracking())
@@ -141,8 +141,8 @@
             model.WorkshopId = 2;
             await service.AddWorkshopRequestAsync(model, string.Empty);
 
-            Assert.Equal(2, requests.Count());
-            Assert.Equal(model.Ids.Count(), workshopRequestWorkshopServices.Count() / 2);
+            Assert.Equal(2, requests.Count);
+            Assert.Equal(model.Ids.Count(), workshopRequestWorkshopServices.Count / 2);
             Assert.Equal(model.Ids.First(), workshopRequestWorkshopServices[1].WorkshopServiceId);
             Assert.Equal(requests[0].Id, workshopRequestWorkshopServices[1].WorkshopRequestId);
         }
@@ -152,17 +152,19 @@
         {
             var service = this.GetService();
 
-            var requests = new List<WorkshopRequest>();
-            requests.Add(new WorkshopRequest()
+            var requests = new List<WorkshopRequest>
             {
-                Id = "requestId",
-                CarId = "carId",
-            });
-            requests.Add(new WorkshopRequest()
-            {
-                Id = "requestId2",
-                CarId = "carId2",
-            });
+                new WorkshopRequest()
+                {
+                    Id = "requestId",
+                    CarId = "carId",
+                },
+                new WorkshopRequest()
+                {
+                    Id = "requestId2",
+                    CarId = "carId2",
+                },
+            };
 
             this.workshopRequestRepository.Setup(x => x.All())
                 .Returns(requests.AsQueryable());
@@ -185,21 +187,23 @@
         {
             var service = this.GetService();
 
-            var requests = new List<WorkshopRequest>();
-            requests.Add(new WorkshopRequest()
+            var requests = new List<WorkshopRequest>
             {
-                Id = "requestId",
-                CarId = "carId",
-                ReturnedCar = false,
-                PickedUp = false,
-                FinishedOn = null,
-                OtherServices = "Other services",
-                PickUpLocation = "Pick up location",
-                PickUpTime = DateTime.Now,
-                PickUpFastAsPossible = false,
-                ModifiedOn = null,
-                ServiceFinished = false,
-            });
+                new WorkshopRequest()
+                {
+                    Id = "requestId",
+                    CarId = "carId",
+                    ReturnedCar = false,
+                    PickedUp = false,
+                    FinishedOn = null,
+                    OtherServices = "Other services",
+                    PickUpLocation = "Pick up location",
+                    PickUpTime = DateTime.Now,
+                    PickUpFastAsPossible = false,
+                    ModifiedOn = null,
+                    ServiceFinished = false,
+                },
+            };
 
             this.workshopRequestRepository.Setup(x => x.All())
                 .Returns(requests.AsQueryable());
@@ -357,7 +361,7 @@
                 {
                     this.workshopServices.Add(new WorkshopService()
                     {
-                        Id = this.workshopServices.Count(),
+                        Id = this.workshopServices.Count,
                         Price = RandomValues.RandomPrice(),
                         ServiceId = num,
                         WorkshopId = i,

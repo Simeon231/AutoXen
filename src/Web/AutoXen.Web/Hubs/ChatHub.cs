@@ -22,7 +22,6 @@
         public async Task Send(string message, string requestId)
         {
             var isAdmin = this.Context.User.IsInRole(GlobalConstants.AdministratorRoleName);
-            var userId = this.Context.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var model = new MessageViewModel()
             {

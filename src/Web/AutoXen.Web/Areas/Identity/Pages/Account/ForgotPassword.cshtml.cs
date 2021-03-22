@@ -14,12 +14,12 @@
     using Microsoft.AspNetCore.WebUtilities;
 
     [AllowAnonymous]
-    public class ForgotPasswordModel : PageModel
+    public class ForgotPassword : PageModel
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IEmailSender emailSender;
 
-        public ForgotPasswordModel(UserManager<ApplicationUser> userManager, IEmailSender emailSender)
+        public ForgotPassword(UserManager<ApplicationUser> userManager, IEmailSender emailSender)
         {
             this.userManager = userManager;
             this.emailSender = emailSender;
