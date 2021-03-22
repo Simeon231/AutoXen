@@ -1,13 +1,12 @@
 ﻿namespace AutoXen.Web.ViewModels.Cars
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using AutoXen.Data.Models.Enums;
     using AutoXen.Web.ViewModels.ValidationAtributes;
 
-    public class DetailedCarViewModel : CarViewModel
+    public class DetailedCarInputModel : CarViewModel
     {
         public new string Id { get; set; }
 
@@ -33,7 +32,5 @@
         public string VehicleIdentificationNumber { get; set; }
 
         public IEnumerable<int> CarExtrasIds { get; set; }
-
-        public IEnumerable<ExtraViewModel> AllExtras { get; set; }
     }
 }

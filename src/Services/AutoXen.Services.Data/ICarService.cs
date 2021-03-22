@@ -7,7 +7,7 @@
 
     public interface ICarService
     {
-        public Task AddCarAsync(string userId, DetailedCarViewModel model);
+        public Task AddCarAsync(string userId, DetailedCarInputModel model);
 
         public IEnumerable<CarViewModel> GetAllCarsByUserId(string userId);
 
@@ -19,7 +19,7 @@
 
         public List<string> GetAllTransmissionTypes();
 
-        public Task ChangeCarDetailsAsync(DetailedCarViewModel model, string userId);
+        public Task ChangeCarDetailsAsync(DetailedCarInputModel model, string userId);
 
         public Task DeleteCarAsync(string carId, string userId);
 

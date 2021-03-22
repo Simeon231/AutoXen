@@ -34,7 +34,7 @@
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Add(DetailedCarViewModel car)
+        public async Task<IActionResult> Add(DetailedCarInputModel car)
         {
             if (!this.ModelState.IsValid)
             {
@@ -46,16 +46,6 @@
 
             return this.RedirectToAction(nameof(this.All));
         }
-
-        ////[Authorize]
-        ////[HttpPost]
-        ////public IActionResult GetDetails(string id)
-        ////{
-        ////    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        ////    var model = this.carService.GetCarDetails(id, userId);
-        ////    return this.View("~/Views/Cars/Car.cshtml", model);
-        ////}
 
         [Authorize]
         public IActionResult Details(string id)
@@ -77,7 +67,7 @@
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Details(DetailedCarViewModel input)
+        public async Task<IActionResult> Details(DetailedCarInputModel input)
         {
             if (!this.ModelState.IsValid)
             {

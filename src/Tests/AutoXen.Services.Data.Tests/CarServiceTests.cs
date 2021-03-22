@@ -44,7 +44,7 @@
             this.carRepository.Setup(x => x.AddAsync(It.IsAny<Car>()))
                 .Callback((Car c) => car = c);
 
-            var carModel = new DetailedCarViewModel()
+            var carModel = new DetailedCarInputModel()
             {
                 Brand = "Brand",
                 Model = "Model",
@@ -176,9 +176,9 @@
             Assert.Empty(cars);
         }
 
-        private async Task<DetailedCarViewModel> AddCarAsync(ICarService carService)
+        private async Task<DetailedCarInputModel> AddCarAsync(ICarService carService)
         {
-            var carModel = new DetailedCarViewModel()
+            var carModel = new DetailedCarInputModel()
             {
                 Brand = "Brand",
                 Model = "Model",

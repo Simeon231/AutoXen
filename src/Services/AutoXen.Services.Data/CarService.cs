@@ -32,12 +32,12 @@
             this.mapper = mapper;
         }
 
-        public async Task AddCarAsync(string userId, DetailedCarViewModel model)
+        public async Task AddCarAsync(string userId, DetailedCarInputModel model)
         {
             var dbCar = this.mapper.Map<Car>(model);
             await this.carRepository.AddAsync(dbCar);
             dbCar.UserId = userId;
-            await this.AddExtrasToDbAsync(dbCar.Id, model.CarExtras);
+            await this.AddExtrasToDbAsync(dbCar.Id, model.CarExtrasIds);
 
             await this.carRepository.SaveChangesAsync();
         }
@@ -64,12 +64,14 @@
                 .ToList();
         }
 
-        public async Task ChangeCarDetailsAsync(DetailedCarViewModel model, string userId)
+        public async Task ChangeCarDetailsAsync(DetailedCarInputModel model, string userId)
         {
             var dbCar = this.GetCar(model.Id, userId);
 
             this.mapper.Map(model, dbCar);
-            await this.AddExtrasToDbAsync(dbCar.Id, model.CarExtras);
+
+            // TODO remove extra when it is unselected
+            await this.AddExtrasToDbAsync(dbCar.Id, model.CarExtrasIds);
 
             await this.carRepository.SaveChangesAsync();
         }
@@ -111,7 +113,8 @@
             var dbCar = this.GetCar(carId, userId);
 
             var car = this.mapper.Map<DetailedCarViewModel>(dbCar);
-            car.CarExtras = this.GetExtras(dbCar.Id);
+            car.CarExtrasIds = this.GetExtras(dbCar.Id);
+            car.AllExtras = this.GetAllExtras();
 
             return car;
         }
