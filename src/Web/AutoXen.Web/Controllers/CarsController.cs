@@ -29,7 +29,12 @@
         [Authorize]
         public IActionResult Add()
         {
-            return this.View("~/Views/Cars/Car.cshtml");
+            var model = new DetailedCarViewModel
+            {
+                AllExtras = this.carService.GetAllExtras(),
+            };
+
+            return this.View("~/Views/Cars/Car.cshtml", model);
         }
 
         [Authorize]

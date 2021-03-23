@@ -89,7 +89,7 @@
                         <div class="border-bottom pb-2 pt-2 ml-2 mr-2 col-sm-3">
                             @if (Model != null && Model.CarExtrasIds != null && Model.CarExtrasIds.Contains(extra.Id))
                             {
-                                <input class="form-check-inline" type="checkbox" name="CarExtrasIds" value="@extra.Id" checked />
+                                <input class="form-check-inline" type="checkbox" name="CarExtrasIds" value="@extra.Id" id="@extra.Id" checked />
                             }
                             else
                             {
@@ -102,7 +102,7 @@
             </div>
 
             <div class="container-fluid row ">
-                @if (Model == null)
+                @if (Model.Id == null)
                 {
                     <div class="col text-center">
                         <button type="submit" class="btn btn-primary" asp-controller="Cars" asp-action="Add">Submit</button>

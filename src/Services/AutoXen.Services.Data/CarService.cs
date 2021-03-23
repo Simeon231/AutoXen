@@ -37,7 +37,7 @@
             var dbCar = this.mapper.Map<Car>(model);
             await this.carRepository.AddAsync(dbCar);
             dbCar.UserId = userId;
-            await this.AddExtrasToDbAsync(dbCar.Id, model.CarExtrasIds);
+            await this.ChangeCarExtrasAsync(dbCar.Id, model.CarExtrasIds);
 
             await this.carRepository.SaveChangesAsync();
         }
@@ -70,8 +70,7 @@
 
             this.mapper.Map(model, dbCar);
 
-            // TODO remove extra when it is unselected
-            await this.AddExtrasToDbAsync(dbCar.Id, model.CarExtrasIds);
+            await this.ChangeCarExtrasAsync(dbCar.Id, model.CarExtrasIds);
 
             await this.carRepository.SaveChangesAsync();
         }
@@ -149,23 +148,43 @@
             return this.carExtraRepository.AllAsNoTracking().Where(x => x.CarId == carId).Select(x => x.ExtraId).ToList();
         }
 
-        private async Task AddExtrasToDbAsync(string carId, IEnumerable<int> extras)
+        private async Task ChangeCarExtrasAsync(string carId, IEnumerable<int> extraIds)
         {
-            if (extras == null)
+            if (extraIds == null)
             {
                 return;
             }
 
-            foreach (var extra in extras)
+            var dbExtras = this.carExtraRepository
+                .All()
+                .Where(x => x.CarId == carId)
+                .ToList();
+
+            // Remove extras
+            foreach (var dbExtra in dbExtras)
+            {
+                if (!extraIds.Contains(dbExtra.ExtraId))
+                {
+                    this.carExtraRepository.Delete(dbExtra);
+                }
+            }
+
+            // Add extras
+            foreach (var extraId in extraIds)
             {
                 var carExtra = new CarExtra()
                 {
                     CarId = carId,
-                    ExtraId = extra,
+                    ExtraId = extraId,
                 };
 
-                await this.carExtraRepository.AddAsync(carExtra);
+                if (!dbExtras.Any(x => x.ExtraId == carExtra.ExtraId))
+                {
+                    await this.carExtraRepository.AddAsync(carExtra);
+                }
             }
+
+            await this.carExtraRepository.SaveChangesAsync();
         }
     }
 }
