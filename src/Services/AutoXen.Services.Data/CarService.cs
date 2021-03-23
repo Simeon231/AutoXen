@@ -137,7 +137,7 @@
 
             if (dbCar == null)
             {
-                throw new WrongCarOwnerException("You are not the car owner!");
+                throw new WrongCarOwnerException();
             }
 
             return dbCar;
