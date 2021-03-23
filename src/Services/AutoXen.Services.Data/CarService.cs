@@ -37,7 +37,7 @@
             var dbCar = this.mapper.Map<Car>(model);
             await this.carRepository.AddAsync(dbCar);
             dbCar.UserId = userId;
-            await this.AddExtrasToDbAsync(dbCar.Id, model.CarExtras);
+            await this.ChangeCarExtrasAsync(dbCar.Id, model.CarExtraIds);
 
             await this.carRepository.SaveChangesAsync();
         }
@@ -69,7 +69,8 @@
             var dbCar = this.GetCar(model.Id, userId);
 
             this.mapper.Map(model, dbCar);
-            await this.AddExtrasToDbAsync(dbCar.Id, model.CarExtras);
+
+            await this.ChangeCarExtrasAsync(dbCar.Id, model.CarExtraIds);
 
             await this.carRepository.SaveChangesAsync();
         }
@@ -111,7 +112,7 @@
             var dbCar = this.GetCar(carId, userId);
 
             var car = this.mapper.Map<DetailedCarViewModel>(dbCar);
-            car.CarExtras = this.GetExtras(dbCar.Id);
+            car.CarExtraIds = this.GetExtras(dbCar.Id);
 
             return car;
         }
@@ -135,7 +136,7 @@
 
             if (dbCar == null)
             {
-                throw new WrongCarOwnerException("You are not the car owner!");
+                throw new WrongCarOwnerException();
             }
 
             return dbCar;
@@ -146,23 +147,43 @@
             return this.carExtraRepository.AllAsNoTracking().Where(x => x.CarId == carId).Select(x => x.ExtraId).ToList();
         }
 
-        private async Task AddExtrasToDbAsync(string carId, IEnumerable<int> extras)
+        private async Task ChangeCarExtrasAsync(string carId, IEnumerable<int> extraIds)
         {
-            if (extras == null)
+            if (extraIds == null)
             {
                 return;
             }
 
-            foreach (var extra in extras)
+            var dbExtras = this.carExtraRepository
+                .All()
+                .Where(x => x.CarId == carId)
+                .ToList();
+
+            // Remove extras
+            foreach (var dbExtra in dbExtras)
+            {
+                if (!extraIds.Contains(dbExtra.ExtraId))
+                {
+                    this.carExtraRepository.Delete(dbExtra);
+                }
+            }
+
+            // Add extras
+            foreach (var extraId in extraIds)
             {
                 var carExtra = new CarExtra()
                 {
                     CarId = carId,
-                    ExtraId = extra,
+                    ExtraId = extraId,
                 };
 
-                await this.carExtraRepository.AddAsync(carExtra);
+                if (!dbExtras.Any(x => x.ExtraId == carExtra.ExtraId))
+                {
+                    await this.carExtraRepository.AddAsync(carExtra);
+                }
             }
+
+            await this.carExtraRepository.SaveChangesAsync();
         }
     }
 }

@@ -12,7 +12,7 @@
                 .ReverseMap();
 
             this.CreateMap<Car, DetailedCarViewModel>()
-                .ForMember(x => x.CarExtras, opt => opt.Ignore());
+                .ForMember(x => x.CarExtraIds, opt => opt.Ignore());
 
             this.CreateMap<DetailedCarViewModel, Car>()
                 .ForMember(x => x.CarExtras, opt => opt.Ignore())

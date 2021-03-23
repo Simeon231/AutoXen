@@ -87,13 +87,13 @@
                     @foreach (var extra in carService.GetAllExtras())
                     {
                         <div class="border-bottom pb-2 pt-2 ml-2 mr-2 col-sm-3">
-                            @if (Model != null && Model.CarExtras != null && Model.CarExtras.Contains(extra.Id))
+                            @if (Model != null && Model.CarExtraIds != null && Model.CarExtraIds.Contains(extra.Id))
                             {
-                                <input class="form-check-inline" type="checkbox" name="CarExtras" value="@extra.Id" checked />
+                                <input class="form-check-inline" type="checkbox" name="CarExtraIds" value="@extra.Id" id="@extra.Id" checked />
                             }
                             else
                             {
-                                <input class="form-check-inline" type="checkbox" name="CarExtras" value="@extra.Id" id="@extra.Id" />
+                                <input class="form-check-inline" type="checkbox" name="CarExtraIds" value="@extra.Id" id="@extra.Id" />
                             }
                             <label class="d-inline" name="@extra.Name" for="@extra.Id">@extra.Name</label>
                         </div>

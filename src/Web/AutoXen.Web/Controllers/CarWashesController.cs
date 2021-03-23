@@ -12,23 +12,16 @@
     public class CarWashesController : Controller
     {
         private readonly ICarWashService carWashService;
-        private readonly ICarService carService;
 
-        public CarWashesController(
-            ICarWashService carWashService,
-            ICarService carService)
+        public CarWashesController(ICarWashService carWashService)
         {
             this.carWashService = carWashService;
-            this.carService = carService;
         }
 
         [Authorize]
         public ActionResult Index()
         {
-            ////var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            ////var carWash = new CarWashRequestViewModel() { Cars = this.carService.AllCars(userId) };
-
-            return this.View(new CarWashRequestViewModel()); ////carWash);
+            return this.View(new CarWashRequestViewModel());
         }
 
         [Authorize]
@@ -39,7 +32,6 @@
 
             if (!this.ModelState.IsValid)
             {
-                ////model.Cars = this.carService.AllCars(userId);
                 return this.View(model);
             }
 
@@ -49,9 +41,8 @@
             }
             catch (InvalidCarException err)
             {
-                ////model.Cars = this.carService.AllCars(userId);
                 this.ModelState.AddModelError("InvalidCar", err.Message);
-                return this.View(model); ////.Cars);
+                return this.View(model);
             }
 
             return this.Redirect("/Requests/Index");
@@ -64,13 +55,6 @@
             var model = this.carWashService.GetCarWashRequest(userId, id);
 
             return this.View(model);
-        }
-
-        [HttpPost]
-        [Authorize]
-        public ActionResult Details()
-        {
-            return null;
         }
     }
 }

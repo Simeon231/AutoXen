@@ -47,16 +47,6 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
-        ////[Authorize]
-        ////[HttpPost]
-        ////public IActionResult GetDetails(string id)
-        ////{
-        ////    var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        ////    var model = this.carService.GetCarDetails(id, userId);
-        ////    return this.View("~/Views/Cars/Car.cshtml", model);
-        ////}
-
         [Authorize]
         public IActionResult Details(string id)
         {

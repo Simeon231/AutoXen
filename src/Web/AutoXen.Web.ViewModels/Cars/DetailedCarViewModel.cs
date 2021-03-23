@@ -31,6 +31,6 @@
         [RegularExpression(@"^[A-Za-z0-9]{17}$", ErrorMessage = "VIN must be 17 length and have only letters and numbers")]
         public string VehicleIdentificationNumber { get; set; }
 
-        public IEnumerable<int> CarExtras { get; set; }
+        public IEnumerable<int> CarExtraIds { get; set; }
     }
 }
