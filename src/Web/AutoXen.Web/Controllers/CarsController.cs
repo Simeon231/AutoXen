@@ -29,17 +29,12 @@
         [Authorize]
         public IActionResult Add()
         {
-            var model = new DetailedCarViewModel
-            {
-                AllExtras = this.carService.GetAllExtras(),
-            };
-
-            return this.View("~/Views/Cars/Car.cshtml", model);
+            return this.View("~/Views/Cars/Car.cshtml");
         }
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Add(DetailedCarInputModel car)
+        public async Task<IActionResult> Add(DetailedCarViewModel car)
         {
             if (!this.ModelState.IsValid)
             {
@@ -72,7 +67,7 @@
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Details(DetailedCarInputModel input)
+        public async Task<IActionResult> Details(DetailedCarViewModel input)
         {
             if (!this.ModelState.IsValid)
             {

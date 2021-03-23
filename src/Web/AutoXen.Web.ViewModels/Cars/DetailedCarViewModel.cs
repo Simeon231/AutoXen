@@ -1,6 +1,5 @@
 ﻿namespace AutoXen.Web.ViewModels.Cars
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -32,8 +31,6 @@
         [RegularExpression(@"^[A-Za-z0-9]{17}$", ErrorMessage = "VIN must be 17 length and have only letters and numbers")]
         public string VehicleIdentificationNumber { get; set; }
 
-        public IEnumerable<int> CarExtrasIds { get; set; }
-
-        public IEnumerable<ExtraViewModel> AllExtras { get; set; }
+        public IEnumerable<int> CarExtraIds { get; set; }
     }
 }
