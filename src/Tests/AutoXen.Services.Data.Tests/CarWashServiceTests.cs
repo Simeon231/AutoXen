@@ -102,7 +102,7 @@
             var user = "user1";
             var requests = new List<CarWashRequest>();
 
-            this.requestRepository.Setup(x => x.AllAsNoTracking())
+            this.requestRepository.Setup(x => x.AllWithDeleted())
                 .Returns(requests.AsQueryable());
 
             var id = "1";
@@ -173,7 +173,7 @@
                 UserId = user,
             });
 
-            this.requestRepository.Setup(x => x.AllAsNoTracking())
+            this.requestRepository.Setup(x => x.AllWithDeleted())
                 .Returns(requests.AsQueryable());
 
             var usersRequests = service.GetAllRequestsByUserId(user);
