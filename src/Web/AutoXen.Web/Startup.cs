@@ -1,8 +1,5 @@
 ﻿namespace AutoXen.Web
 {
-    using System.Reflection;
-
-    using AutoMapper;
     using AutoXen.Data;
     using AutoXen.Data.Common;
     using AutoXen.Data.Common.Repositories;
@@ -11,18 +8,16 @@
     using AutoXen.Data.Seeding;
     using AutoXen.Services.Data;
     using AutoXen.Services.Data.Administration;
-    using AutoXen.Services.Mapping;
     using AutoXen.Services.Messaging;
     using AutoXen.Web.Hubs;
     using AutoXen.Web.Infrastructure.ModelBinders;
     using AutoXen.Web.Infrastructure.Profiles;
-    using AutoXen.Web.ViewModels;
 
     using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Razor;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -61,6 +56,13 @@
                         options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                         options.ModelBinderProviders.Insert(0, new TrimModelBinderProvider());
                     }).AddRazorRuntimeCompilation();
+
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+            services.AddMvc()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
+
             services.AddRazorPages();
 
             services.AddApplicationInsightsTelemetry();
@@ -88,6 +90,13 @@
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var supportedCultures = new[] { "en-US", "bg" };
+            var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
+                .AddSupportedCultures(supportedCultures)
+                .AddSupportedUICultures(supportedCultures);
+
+            app.UseRequestLocalization(localizationOptions);
+
             // needed for Services.Mapping (custom mapping from the template)
             // AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
