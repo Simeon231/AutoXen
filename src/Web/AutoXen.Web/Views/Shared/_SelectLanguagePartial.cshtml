@@ -16,12 +16,24 @@
 }
 
 <div title="@Localizer["Request culture provider:"] @requestCulture?.Provider?.GetType().Name">
-    <form id="selectLanguage" asp-controller="Home"
-          asp-action="SetLanguage" asp-route-returnUrl="@returnUrl"
+    <form id="selectLanguage"
           method="post">
-        <select name="culture"
-                onchange="this.form.submit();"
-                asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems">
-        </select>
+
+
+
+        <div class="dropdown">
+            <a class="btn-sm btn-default border border-secondary dropdown-toggle" href="#" role="button" id="dropdownLang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Languages
+            </a>
+
+            <div class="dropdown-menu bg-dark w-auto" aria-labelledby="dropdownLang">
+                @foreach (var culture in cultureItems)
+                {
+                    <button class="btn-sm dropdown-item " type="submit" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" asp-route-culture="@culture.Value">
+                        <img src="~/Country icons/@(culture.Value.ToLower())-32.ico" />
+                    </button>
+                }
+            </div>
+        </div>
     </form>
 </div>
