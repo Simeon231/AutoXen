@@ -151,3 +151,14 @@ nav div div ul li a{
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+/* for language drop down */
+.dropdown-menu {
+    min-width: 36px;
+    max-width: 51px;
+    padding: 0px;
+}
+
+.dropdown-item {
+    padding: 3px;
+}

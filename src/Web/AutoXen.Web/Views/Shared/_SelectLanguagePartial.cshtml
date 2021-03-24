@@ -8,6 +8,7 @@
 @inject IOptions<RequestLocalizationOptions> LocOptions
 
 @{
+    var pickedCulture = this.Context.Request.HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.Culture;
     var requestCulture = Context.Features.Get<IRequestCultureFeature>();
     var cultureItems = LocOptions.Value.SupportedUICultures
         .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName })
@@ -19,19 +20,18 @@
     <form id="selectLanguage"
           method="post">
 
-
-
         <div class="dropdown">
-            <a class="btn-sm btn-default border border-secondary dropdown-toggle" href="#" role="button" id="dropdownLang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Languages
-            </a>
+            <input type="image" class="dropdown-toggle" href="#" role="button" id="dropdownLang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="~/Country icons/@(pickedCulture)-32.ico"  />
 
-            <div class="dropdown-menu bg-dark w-auto" aria-labelledby="dropdownLang">
+            <div class="dropdown-menu bg-dark" aria-labelledby="dropdownLang">
                 @foreach (var culture in cultureItems)
                 {
-                    <button class="btn-sm dropdown-item " type="submit" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" asp-route-culture="@culture.Value">
-                        <img src="~/Country icons/@(culture.Value.ToLower())-32.ico" />
-                    </button>
+                    if (pickedCulture.ToString() != culture.Value)
+                    {
+                        <button class="dropdown-item small" type="submit" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" asp-route-culture="@culture.Value">
+                            <img src="~/Country icons/@(culture.Value.ToLower())-32.ico" />
+                        </button>
+                    }
                 }
             </div>
         </div>
