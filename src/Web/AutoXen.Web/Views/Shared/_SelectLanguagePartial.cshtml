@@ -28,7 +28,7 @@
                 {
                     if (pickedCulture.ToString() != culture.Value)
                     {
-                        <button class="dropdown-item small" type="submit" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" asp-route-culture="@culture.Value">
+                        <button class="dropdown-item" type="submit" asp-controller="Home" asp-action="SetLanguage" asp-route-returnUrl="@returnUrl" asp-route-culture="@culture.Value">
                             <img src="~/Country icons/@(culture.Value.ToLower())-32.ico" />
                         </button>
                     }
