@@ -153,15 +153,25 @@ nav div div ul li a{
 }
 
 /* for language drop down */
+#languageDropDown .dropdown{
+    background-color: black;
+    padding: 3px;
+}
+
 #languageDropDown .dropdown-menu {
-    min-width: 36px;
-    max-width: 51px;
-    padding: 0px;
+    min-width: 30px;
+    max-width: 40px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-bottom: 1px;
+    padding-top: 3px;
+    background-color: black;
+    outline: 0px;
+    border: 0px;
 }
 
 #languageDropDown .dropdown-menu :hover {
-    background-color: transparent;
-    padding: 0px;
+    background-color: black;
 }
 
 #languageDropDown .dropdown-toggle {
@@ -170,4 +180,10 @@ nav div div ul li a{
 
 #languageDropDown .dropdown-item {
     padding: 0px;
+    outline: 0px;
+    border: 0px;
+}
+
+#languageDropDown .dropdown-item:focus {
+    background-color: black;
 }

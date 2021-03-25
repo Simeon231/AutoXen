@@ -23,7 +23,7 @@
         <div class="dropdown">
             <input type="image" class="dropdown-toggle" href="#" role="button" id="dropdownLang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="~/Country icons/@(pickedCulture)-32.ico"  />
 
-            <div class="dropdown-menu bg-transparent" aria-labelledby="dropdownLang">
+            <div class="dropdown-menu" aria-labelledby="dropdownLang">
                 @foreach (var culture in cultureItems)
                 {
                     if (pickedCulture.ToString() != culture.Value)
