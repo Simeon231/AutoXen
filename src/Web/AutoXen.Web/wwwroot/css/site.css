@@ -160,8 +160,8 @@ nav div div ul li a{
 }
 
 #languageDropDown .dropdown-menu :hover {
-    background-color: rgb(194, 146, 52) !important;
-    border-radius: 3px;
+    background-color: transparent;
+    padding: 0px;
 }
 
 #languageDropDown .dropdown-toggle {
@@ -169,5 +169,5 @@ nav div div ul li a{
 }
 
 #languageDropDown .dropdown-item {
-    padding: 3px;
+    padding: 0px;
 }
