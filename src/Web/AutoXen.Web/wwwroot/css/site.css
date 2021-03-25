@@ -151,3 +151,39 @@ nav div div ul li a{
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+/* for language drop down */
+#languageDropDown .dropdown{
+    background-color: black;
+    padding: 3px;
+}
+
+#languageDropDown .dropdown-menu {
+    min-width: 30px;
+    max-width: 40px;
+    padding-left: 3px;
+    padding-right: 3px;
+    padding-bottom: 1px;
+    padding-top: 3px;
+    background-color: black;
+    outline: 0px;
+    border: 0px;
+}
+
+#languageDropDown .dropdown-menu :hover {
+    background-color: black;
+}
+
+#languageDropDown .dropdown-toggle {
+    outline: 0px;
+}
+
+#languageDropDown .dropdown-item {
+    padding: 0px;
+    outline: 0px;
+    border: 0px;
+}
+
+#languageDropDown .dropdown-item:focus {
+    background-color: black;
+}

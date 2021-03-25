@@ -1,13 +1,17 @@
-﻿<div class="d-flex justify-content-center mt-5">
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+
+@inject IViewLocalizer Localizer
+
+<div class="d-flex justify-content-center mt-5">
     <div class="container">
-        <h3 class="font-weight-bold">AutoXen Website is my defense project for ASP.NET Core MVC course at SoftUni. </h3>
+        <h3 class="font-weight-bold">@Localizer["AutoXenAbout"] </h3>
         <hr />
-        <a class="h4 font-weight-bold" href="https://github.com/Simeon231/AutoXen">Github link</a>
-        <hr />  
+        <a class="h4 font-weight-bold" href="https://github.com/Simeon231/AutoXen">Github @Localizer["Link"]</a>
+        <hr />
         <ul class="mt-4">
-            <lh class="font-weight-bold h5">Admins:</lh>
-            <li> <b>email:</b> admin@admin.admin && <b>pasword:</b> admin@admin.admin </li>
-            <li> <b>email:</b> admin2@admin.admin && <b>pasword:</b> admin2@admin.admin </li>
+            <lh class="font-weight-bold h5">@Localizer["Admins"]:</lh>
+            <li> <b>@Localizer["Email"]:</b> admin@admin.admin && <b>@Localizer["Email"]:</b> admin@admin.admin </li>
+            <li> <b>@Localizer["Password"]:</b> admin2@admin.admin && <b>@Localizer["Password"]:</b> admin2@admin.admin </li>
         </ul>
     </div>
 </div>

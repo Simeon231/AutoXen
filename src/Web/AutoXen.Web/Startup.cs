@@ -1,8 +1,8 @@
 ﻿namespace AutoXen.Web
 {
-    using System.Reflection;
+    using System.Collections.Generic;
+    using System.Globalization;
 
-    using AutoMapper;
     using AutoXen.Data;
     using AutoXen.Data.Common;
     using AutoXen.Data.Common.Repositories;
@@ -11,22 +11,21 @@
     using AutoXen.Data.Seeding;
     using AutoXen.Services.Data;
     using AutoXen.Services.Data.Administration;
-    using AutoXen.Services.Mapping;
     using AutoXen.Services.Messaging;
     using AutoXen.Web.Hubs;
     using AutoXen.Web.Infrastructure.ModelBinders;
     using AutoXen.Web.Infrastructure.Profiles;
-    using AutoXen.Web.ViewModels;
-
     using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Localization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Razor;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.Options;
 
     public class Startup
     {
@@ -55,12 +54,21 @@
                     });
 
             services.AddSignalR();
+
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+            services.AddMvc()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
+
             services.AddControllersWithViews(
                 options =>
                     {
                         options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                         options.ModelBinderProviders.Insert(0, new TrimModelBinderProvider());
-                    }).AddRazorRuntimeCompilation();
+                    })
+                .AddRazorRuntimeCompilation();
+
             services.AddRazorPages();
 
             services.AddApplicationInsightsTelemetry();
@@ -84,10 +92,30 @@
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<IMessageService, MessageService>();
+
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new CultureInfo[]
+                {
+                    new CultureInfo("en-US"),
+                    new CultureInfo("bg"),
+                };
+
+                options.DefaultRequestCulture = new RequestCulture(culture: "en-US", uiCulture: "en-US");
+
+                options.SupportedCultures = supportedCultures;
+
+                options.SupportedUICultures = supportedCultures;
+
+                options.RequestCultureProviders = new[] { new CookieRequestCultureProvider() };
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(locOptions.Value);
+
             // needed for Services.Mapping (custom mapping from the template)
             // AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
