@@ -50,5 +50,10 @@
 
             return this.LocalRedirect(returnUrl);
         }
+
+        public IActionResult UnderDevelopment()
+        {
+            return this.View();
+        }
     }
 }
