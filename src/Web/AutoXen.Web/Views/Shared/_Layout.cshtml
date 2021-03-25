@@ -1,7 +1,9 @@
 ﻿@using AutoXen.Common
 @using Microsoft.AspNetCore.Identity
 @using AutoXen.Data.Models
+@using Microsoft.AspNetCore.Mvc.Localization
 @inject SignInManager<ApplicationUser> SignInManager
+@inject IViewLocalizer Localizer
 
 <!DOCTYPE html>
 <html>
@@ -37,30 +39,30 @@
                         <partial name="_LoginPartial" />
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link textColor" asp-controller="Home" asp-action="Index" asp-area=""><i class="fas fa-home"></i> Home</a>
+                                <a class="nav-link textColor" asp-controller="Home" asp-action="Index" asp-area=""><i class="fas fa-home"></i> @Localizer["Home"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link textColor" asp-controller="Home" asp-action="About" asp-area=""><i class="fas fa-info-circle"></i> About</a>
+                                <a class="nav-link textColor" asp-controller="Home" asp-action="About" asp-area=""><i class="fas fa-info-circle"></i> @Localizer["About"]</a>
                             </li>
                             @if (this.SignInManager.IsSignedIn(this.User))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link textColor" asp-controller="Cars" asp-action="All" asp-area=""><i class="fas fa-car"></i> My Cars</a>
+                                    <a class="nav-link textColor" asp-controller="Cars" asp-action="All" asp-area=""><i class="fas fa-car"></i> @Localizer["MyCars"]</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle textColor" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-people-carry"></i> Маке a Request
+                                        <i class="fas fa-people-carry"></i> @Localizer["МакеARequest"]
                                     </a>
                                     <div class="dropdown-menu black-baground" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item textColor white-baground-hover" asp-controller="CarWashes" asp-action="Index" asp-area=""><i class="fas fa-soap"></i> Car wash</a>
-                                        <a class="dropdown-item textColor white-baground-hover" href="#"><i class="fas fa-shield-alt"></i> Insurence</a>
-                                        <a class="dropdown-item textColor white-baground-hover" href="#"><i class="fas fa-car-crash"></i> Roadside assistance</a>
-                                        <a class="dropdown-item textColor white-baground-hover" asp-controller="Workshops" asp-action="Index" asp-area=""><i class="fas fa-tools"></i> Workshop</a>
-                                        <a class="dropdown-item textColor white-baground-hover" href="#"><i class="fas fa-tasks"></i> Annual technical inspection</a>
+                                        <a class="dropdown-item textColor white-baground-hover" asp-controller="CarWashes" asp-action="Index" asp-area=""><i class="fas fa-soap"></i> @Localizer["CarWash"]</a>
+                                        <a class="dropdown-item textColor white-baground-hover" href="#"><i class="fas fa-shield-alt"></i> @Localizer["Insurance"]</a>
+                                        <a class="dropdown-item textColor white-baground-hover" href="#"><i class="fas fa-car-crash"></i> @Localizer["RoadsideAssistance"]</a>
+                                        <a class="dropdown-item textColor white-baground-hover" asp-controller="Workshops" asp-action="Index" asp-area=""><i class="fas fa-tools"></i> @Localizer["Workshop"]</a>
+                                        <a class="dropdown-item textColor white-baground-hover" href="#"><i class="fas fa-tasks"></i> @Localizer["AnnualTechnicalInspection"]</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link textColor" asp-controller="Requests" asp-action="Index" asp-area=""><i class="fas fa-hands"></i> Requests</a>
+                                    <a class="nav-link textColor" asp-controller="Requests" asp-action="Index" asp-area=""><i class="fas fa-hands"></i> @Localizer["Requests"]</a>
                                 </li>
                             }
                         </ul>
@@ -86,8 +88,8 @@
                             <p>
                                 A108 Adam Street <br>
                                 NY 535022, USA<br><br>
-                                <strong>Phone:</strong> +1 5589 55488 55<br>
-                                <strong>Email:</strong> info@example.com<br>
+                                <strong>@Localizer["Phone"]:</strong> +1 5589 55488 55<br>
+                                <strong>@Localizer["Email"]:</strong> info@example.com<br>
                             </p>
                             <div class="social-links mt-3">
                                 <a href="#" class="twitter"><i class="fab fa-twitter-square"></i></a>
@@ -100,35 +102,35 @@
                     </div>
 
                     <div class="col-lg-2 col-md-6 footer-links">
-                        <h4>Useful Links</h4>
+                        <h4>@Localizer["UsefulLinks"]</h4>
                         <ul>
-                            <li><i class="fas fa-home"></i> <a asp-controller="Home" asp-action="Index">Home</a></li>
-                            <li><i class="fas fa-info-circle"></i> <a asp-controller="Home" asp-action="About" asp-area="">About us</a></li>
+                            <li><i class="fas fa-home"></i> <a asp-controller="Home" asp-action="Index">@Localizer["Home"]</a></li>
+                            <li><i class="fas fa-info-circle"></i> <a asp-controller="Home" asp-action="About" asp-area="">@Localizer["About"]</a></li>
                             @if (this.SignInManager.IsSignedIn(this.User))
                             {
-                                <li><i class="fas fa-car"></i> <a asp-controller="Cars" asp-action="All" asp-area="">My cars</a></li>
-                                <li><i class="fas fa-hands"></i> <a asp-controller="Requests" asp-action="Index" asp-area="">My requests</a></li>
-                                <li><i class="fas fa-user"></i> <a asp-area="Identity" asp-page="/Account/Manage/Index">My profile</a></li>
+                                <li><i class="fas fa-car"></i> <a asp-controller="Cars" asp-action="All" asp-area="">'@Localizer["MyCars"]</a></li>
+                                <li><i class="fas fa-hands"></i> <a asp-controller="Requests" asp-action="Index" asp-area="">@Localizer["MyRequests"]</a></li>
+                                <li><i class="fas fa-user"></i> <a asp-area="Identity" asp-page="/Account/Manage/Index">@Localizer["MyProfile"]</a></li>
                             }
                         </ul>
                     </div>
 
                     <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Our Services</h4>
+                        <h4>@Localizer["OurServices"]</h4>
                         <ul>
-                            <li><i class="fas fa-soap"></i> <a asp-controller="CarWashes" asp-action="Index" asp-area="">Car wash</a></li>
-                            <li><i class="fas fa-shield-alt"></i> <a href="#">Insurance</a></li>
-                            <li><i class="fas fa-car-crash"></i> <a href="#">Roadside assistance</a></li>
-                            <li><i class="fas fa-tools"></i> <a asp-controller="Workshops" asp-action="Index" asp-area="">Workshop</a></li>
-                            <li><i class="fas fa-tasks"></i> <a href="#">Annual technical inspection</a></li>
+                            <li><i class="fas fa-soap"></i> <a asp-controller="CarWashes" asp-action="Index" asp-area="">@Localizer["CarWash"]</a></li>
+                            <li><i class="fas fa-shield-alt"></i> <a href="#">@Localizer["Insurance"]</a></li>
+                            <li><i class="fas fa-car-crash"></i> <a href="#">@Localizer["RoadsideAssistance"]</a></li>
+                            <li><i class="fas fa-tools"></i> <a asp-controller="Workshops" asp-action="Index" asp-area="">@Localizer["Workshop"]</a></li>
+                            <li><i class="fas fa-tasks"></i> <a href="#">@Localizer["AnnualTechnicalInspection"]</a></li>
                         </ul>
                     </div>
 
                     <div class="col-lg-4 col-md-6 footer-newsletter">
-                        <h4>Our Newsletter</h4>
-                        <p>Subcribe for news about our site</p>
+                        <h4>@Localizer["OurNewsletter"]</h4>
+                        <p>@Localizer["LongSubscribe"]</p>
                         <form action="" method="post">
-                            <input type="email" name="email"><input type="submit" value="Subscribe">
+                            <input type="email" name="email"><input type="submit" value="@Localizer["Subscribe"]">
                         </form>
                     </div>
                 </div>
@@ -136,10 +138,10 @@
 
             <div class="container">
                 <div class="copyright">
-                    &copy; Copyright <strong><span>AutoXen</span></strong>. All Rights Reserved
+                    &copy; Copyright <strong><span>AutoXen</span></strong>.
                 </div>
                 <div class="credits font-weight-bold">
-                    Made by <span class="underline-primary">Simeon Kirilov</span>
+                    @Localizer["MadeBy"] <span class="underline-primary">@Localizer["SimeonKirilov"]</span>
                 </div>
             </div>
         </div>
