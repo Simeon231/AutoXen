@@ -16,7 +16,7 @@
     var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
 }
 
-<div title="@Localizer["Request culture provider:"] @requestCulture?.Provider?.GetType().Name">
+<div id="languageDropDown" title="@Localizer["Request culture provider:"] @requestCulture?.Provider?.GetType().Name">
     <form id="selectLanguage"
           method="post">
 

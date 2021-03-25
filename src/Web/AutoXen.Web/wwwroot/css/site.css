@@ -153,12 +153,21 @@ nav div div ul li a{
 }
 
 /* for language drop down */
-.dropdown-menu {
+#languageDropDown .dropdown-menu {
     min-width: 36px;
     max-width: 51px;
     padding: 0px;
 }
 
-.dropdown-item {
+#languageDropDown .dropdown-menu :hover {
+    background-color: rgb(194, 146, 52) !important;
+    border-radius: 3px;
+}
+
+#languageDropDown .dropdown-toggle {
+    outline: 0px;
+}
+
+#languageDropDown .dropdown-item {
     padding: 3px;
 }

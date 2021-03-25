@@ -25,7 +25,9 @@
         <nav class="navbar navbar-dark navbar-expand-xl box-shadow">
             <div class="container-fluid">
                 <a class="navbar-brand active-text-color d-inline" asp-area="" asp-controller="Home" asp-action="Index"><i class="fab fa-asymmetrik"></i> @GlobalConstants.SystemName</a>
-                @await Html.PartialAsync("_SelectLanguagePartial")
+                <div class="mt-2">
+                    @await Html.PartialAsync("_SelectLanguagePartial")
+                </div>
                 <button class="navbar-toggler" id="logout" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon active-text-color"></span>
