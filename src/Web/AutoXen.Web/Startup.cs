@@ -1,7 +1,7 @@
 ﻿namespace AutoXen.Web
 {
-    using System.Collections.Generic;
     using System.Globalization;
+    using System.Reflection;
 
     using AutoXen.Data;
     using AutoXen.Data.Common;
@@ -59,7 +59,14 @@
 
             services.AddMvc()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                .AddDataAnnotationsLocalization();
+                .AddDataAnnotationsLocalization(options =>
+                {
+                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+                    {
+                        var assemblyName = new AssemblyName(typeof(AutoXen.Web.ViewModels.ErrorViewModel).GetTypeInfo().Assembly.FullName);
+                        return factory.Create("Translations", assemblyName.Name);
+                    };
+                });
 
             services.AddControllersWithViews(
                 options =>
