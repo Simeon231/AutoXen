@@ -43,6 +43,7 @@
 
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+                //.AddErrorDescriber<MultilanguageIdentityErrorDescriber>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -65,6 +66,14 @@
                     {
                         var assemblyName = new AssemblyName(typeof(AutoXen.Web.ViewModels.ErrorViewModel).GetTypeInfo().Assembly.FullName);
                         return factory.Create("Translations", assemblyName.Name);
+                    };
+                })
+                .AddDataAnnotationsLocalization(options =>
+                {
+                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+                    {
+                        var assemblyName = new AssemblyName(typeof(AutoXen.Data.MultilanguageIdentityErrorDescriber).GetTypeInfo().Assembly.FullName);
+                        return factory.Create("MultilanguageIdentityErrorDescriber", assemblyName.Name);
                     };
                 });
 
