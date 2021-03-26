@@ -49,4 +49,8 @@
     <ProjectReference Include="..\AutoXen.Web.Infrastructure\AutoXen.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\AutoXen.Web.ViewModels\AutoXen.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Areas\Administration\" />
+  </ItemGroup>
 </Project>
