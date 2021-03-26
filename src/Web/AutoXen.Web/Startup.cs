@@ -76,7 +76,9 @@
                     })
                 .AddRazorRuntimeCompilation();
 
-            services.AddRazorPages();
+            services.AddRazorPages()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
 
             services.AddApplicationInsightsTelemetry();
 

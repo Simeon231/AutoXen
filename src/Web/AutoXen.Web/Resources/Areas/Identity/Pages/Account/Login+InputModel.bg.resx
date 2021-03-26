@@ -117,19 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ForgotYourPassword" xml:space="preserve">
-    <value>Забравена парола?</value>
+  <data name="Email" xml:space="preserve">
+    <value>Имейл</value>
   </data>
-  <data name="InvalidLogin" xml:space="preserve">
-    <value>Невалидно вписване</value>
+  <data name="Password" xml:space="preserve">
+    <value>Парола</value>
   </data>
-  <data name="LocalAccount" xml:space="preserve">
-    <value>Използвайте локален акаунт, за да влезете.</value>
-  </data>
-  <data name="LogIn" xml:space="preserve">
-    <value>Вход</value>
-  </data>
-  <data name="NewUser" xml:space="preserve">
-    <value>Регистрирайте се като нов потребител</value>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Запомни ме</value>
   </data>
 </root>

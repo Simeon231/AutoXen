@@ -117,11 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Email" xml:space="preserve">
-    <value>Email</value>
-  </data>
   <data name="ForgotYourPassword" xml:space="preserve">
     <value>Forgot your password?</value>
+  </data>
+  <data name="InvalidLogin" xml:space="preserve">
+    <value>Invalid login</value>
   </data>
   <data name="LocalAccount" xml:space="preserve">
     <value>Use a local account to log in.</value>
@@ -131,11 +131,5 @@
   </data>
   <data name="NewUser" xml:space="preserve">
     <value>Register as a new user</value>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="RememberMe" xml:space="preserve">
-    <value>Remember me</value>
   </data>
 </root>
