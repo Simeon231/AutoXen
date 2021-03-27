@@ -1,7 +1,7 @@
 ﻿namespace AutoXen.Web
 {
-    using System.Collections.Generic;
     using System.Globalization;
+    using System.Reflection;
 
     using AutoXen.Data;
     using AutoXen.Data.Common;
@@ -42,7 +42,8 @@
                 options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
-                .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddErrorDescriber<MultilanguageIdentityErrorDescriber>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -57,9 +58,7 @@
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-            services.AddMvc()
-                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                .AddDataAnnotationsLocalization();
+            services.AddMvc();
 
             services.AddControllersWithViews(
                 options =>
@@ -69,7 +68,9 @@
                     })
                 .AddRazorRuntimeCompilation();
 
-            services.AddRazorPages();
+            services.AddRazorPages()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
 
             services.AddApplicationInsightsTelemetry();
 

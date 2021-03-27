@@ -11,6 +11,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.Extensions.Localization;
     using Microsoft.Extensions.Logging;
 
     [AllowAnonymous]
@@ -18,13 +19,16 @@
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ILogger<Login> logger;
+        private readonly IStringLocalizer<Login> localizer;
 
         public Login(
             SignInManager<ApplicationUser> signInManager,
-            ILogger<Login> logger)
+            ILogger<Login> logger,
+            IStringLocalizer<Login> localizer)
         {
             this.signInManager = signInManager;
             this.logger = logger;
+            this.localizer = localizer;
         }
 
         [BindProperty]
@@ -81,7 +85,7 @@
                 }
                 else
                 {
-                    this.ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    this.ModelState.AddModelError(string.Empty, this.localizer["InvalidLogin"]);
                     return this.Page();
                 }
             }
@@ -94,13 +98,15 @@
         {
             [Required]
             [EmailAddress]
+            [Display(Name = "Email")]
             public string Email { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
+            [Display(Name = "Password")]
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = "RememberMe")]
             public bool RememberMe { get; set; }
         }
     }
