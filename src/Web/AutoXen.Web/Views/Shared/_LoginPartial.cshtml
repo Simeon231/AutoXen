@@ -11,7 +11,7 @@
     {
         ApplicationUser curUser = this.UserManager.GetUserAsync(this.User).GetAwaiter().GetResult();
         <li class="nav-item">
-            <a class="nav-link textColor" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@Localizer["Hello"] <i class="fas fa-user"></i> @($"{curUser.FirstName} {curUser.SurName}")!</a>
+            <a class="nav-link textColor" is-active-route asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@Localizer["Hello"] <i class="fas fa-user"></i> @($"{curUser.FirstName} {curUser.SurName}")!</a>
         </li>
         if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {

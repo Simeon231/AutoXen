@@ -38,11 +38,11 @@
                     <div class="navbar-collapse collapse d-xl-inline-flex flex-xl-row-reverse">
                         <partial name="_LoginPartial" />
                         <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link textColor" asp-controller="Home" asp-action="Index" asp-area=""><i class="fas fa-home"></i> @Localizer["Home"]</a>
+                            <li class="nav-item" is-active-route>
+                                <a class="nav-link textColor" is-active-route asp-controller="Home" asp-action="Index" asp-area=""><i class="fas fa-home"></i> @Localizer["Home"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link textColor" asp-controller="Home" asp-action="About" asp-area=""><i class="fas fa-info-circle"></i> @Localizer["About"]</a>
+                                <a class="nav-link textColor" is-active-route asp-controller="Home" asp-action="About" asp-area=""><i class="fas fa-info-circle"></i> @Localizer["About"]</a>
                             </li>
                             @if (this.SignInManager.IsSignedIn(this.User))
                             {
