@@ -13,7 +13,14 @@
         <li class="nav-item">
             <a class="nav-link textColor" is-active-route asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@Localizer["Hello"] <i class="fas fa-user"></i> @($"{curUser.FirstName} {curUser.SurName}")!</a>
         </li>
-        if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+
+        string currentArea = string.Empty;
+        if (this.ViewContext.RouteData.Values.ContainsKey("Area"))
+        {
+            currentArea = this.ViewContext.RouteData.Values["Area"].ToString();
+        }
+
+        if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) && currentArea != "Administration")
         {
             <li class="nav-item">
                 <a class="nav-link textColor" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">@Localizer["Admin"]</a>
