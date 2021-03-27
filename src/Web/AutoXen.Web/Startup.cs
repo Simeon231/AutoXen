@@ -42,8 +42,8 @@
                 options => options.UseSqlServer(this.configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
-                .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
-                //.AddErrorDescriber<MultilanguageIdentityErrorDescriber>();
+                .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddErrorDescriber<MultilanguageIdentityErrorDescriber>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -58,24 +58,7 @@
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-            services.AddMvc()
-                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                .AddDataAnnotationsLocalization(options =>
-                {
-                    options.DataAnnotationLocalizerProvider = (type, factory) =>
-                    {
-                        var assemblyName = new AssemblyName(typeof(AutoXen.Web.ViewModels.ErrorViewModel).GetTypeInfo().Assembly.FullName);
-                        return factory.Create("Translations", assemblyName.Name);
-                    };
-                })
-                .AddDataAnnotationsLocalization(options =>
-                {
-                    options.DataAnnotationLocalizerProvider = (type, factory) =>
-                    {
-                        var assemblyName = new AssemblyName(typeof(AutoXen.Data.MultilanguageIdentityErrorDescriber).GetTypeInfo().Assembly.FullName);
-                        return factory.Create("MultilanguageIdentityErrorDescriber", assemblyName.Name);
-                    };
-                });
+            services.AddMvc();
 
             services.AddControllersWithViews(
                 options =>
