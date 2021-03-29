@@ -1,19 +1,21 @@
 ﻿@using AutoXen.Web.ViewModels.Cars
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @model IEnumerable<CarViewModel>
 
 <div class="mt-4">
     <div class="col text-center">
-        <a asp-controller="Cars" asp-action="Add" class="btn btn-outline-primary text-center">Add a car</a>
+        <a asp-controller="Cars" asp-action="Add" class="btn btn-outline-primary text-center">@Localizer["AddCar"]</a>
     </div>
     <p><br /></p>
     <div class="d-flex justify-content-center ">
         <table class="table table-sm table-hover col-md-10">
             <thead class="thead-dark">
                 <tr>
-                    <th>Brand</th>
-                    <th>Model</th>
-                    <th>Registration Number</th>
-                    <th>Details</th>
+                    <th>@Localizer["Brand"]</th>
+                    <th>@Localizer["Model"]</th>
+                    <th>@Localizer["RegistrationNumber"]</th>
+                    <th></th>
                 </tr>
             </thead>
             @foreach (var car in Model)
@@ -22,7 +24,7 @@
                     <td>@car.Brand</td>
                     <td>@car.Model</td>
                     <td>@car.RegistrationPlate</td>
-                    <td><a class="btn btn-outline-info" asp-controller="Cars" asp-action="Details" asp-route-id="@car.Id">Details</a></td>
+                    <td><a class="btn btn-outline-info" asp-controller="Cars" asp-action="Details" asp-route-id="@car.Id">@Localizer["Details"]</a></td>
                 </tr>
             }
         </table>
