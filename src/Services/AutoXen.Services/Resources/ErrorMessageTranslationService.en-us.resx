@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AtleastOne" xml:space="preserve">
+    <value>You must enter atleast one problem.</value>
+  </data>
+  <data name="DateCantBeInThePast" xml:space="preserve">
+    <value>The date can not be in the past and it must be atleast 30 minutes from now.</value>
+  </data>
   <data name="MinYearError" xml:space="preserve">
     <value>The date should be between {0} and {1}.</value>
   </data>

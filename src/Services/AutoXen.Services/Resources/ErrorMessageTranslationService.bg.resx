@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AtleastOne" xml:space="preserve">
+    <value>Въведете поне един проблем.</value>
+  </data>
+  <data name="DateCantBeInThePast" xml:space="preserve">
+    <value>Датата не може да бъде в миналото и трябва да е поне 30 минути от сегашното време.</value>
+  </data>
   <data name="MinYearError" xml:space="preserve">
     <value>Датата трябва да е между {0} и {1}.</value>
   </data>

@@ -3,29 +3,34 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
+    using AutoXen.Services;
+
     public class MinimumPickUpDateTimeAttribute : ValidationAttribute
     {
-        public MinimumPickUpDateTimeAttribute()
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            this.ErrorMessage = $"The date can not be in the past and it must be atleast 30 minutes from now.";
-        }
+            if (value is null)
+            {
+                return ValidationResult.Success;
+            }
 
-        public override bool IsValid(object value)
-        {
             if (value is DateTime datetime)
             {
                 if (datetime.ToUniversalTime() >= DateTime.UtcNow.AddMinutes(30))
                 {
-                    return true;
+                    return ValidationResult.Success;
                 }
             }
 
-            if (value is null)
-            {
-                return true;
-            }
+            return new ValidationResult(this.GetErrorMessage(validationContext));
+        }
 
-            return false;
+        private string GetErrorMessage(ValidationContext validationContext)
+        {
+            this.ErrorMessage = "DateCantBeInThePast";
+
+            ErrorMessageTranslationService errorTranslation = validationContext.GetService(typeof(ErrorMessageTranslationService)) as ErrorMessageTranslationService;
+            return errorTranslation.GetLocalizedError(this.ErrorMessage);
         }
     }
 }

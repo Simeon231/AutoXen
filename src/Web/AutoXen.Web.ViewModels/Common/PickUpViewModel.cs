@@ -7,16 +7,16 @@
 
     public class PickUpViewModel
     {
-        [Required]
-        [Display(Name = "Pick up location")]
-        [StringLength(150, MinimumLength = 3, ErrorMessage = "Pick up location must be with a minimum length of 3 and a maximum length of 150.")]
+        [Required(ErrorMessage = "PickUpLocationRequired")]
+        [Display(Name = "PickUpLocation")]
+        [StringLength(150, MinimumLength = 3, ErrorMessage = "PickUpLocationLength")]
         public string PickUpLocation { get; set; }
 
-        [Display(Name = "Pick up time")]
+        [Display(Name = "PickUpTime")]
         [MinimumPickUpDateTimeAttribute]
         public DateTime? PickUpTime { get; set; }
 
-        [Display(Name = "Pick up fast as possible")]
+        [Display(Name = "PickUpFastAsPossible")]
         public bool PickUpFastAsPossible { get; set; }
     }
 }
