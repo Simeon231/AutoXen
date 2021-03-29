@@ -1,11 +1,10 @@
 ﻿namespace AutoXen.Data.Models.CarWash
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using AutoXen.Common;
     using AutoXen.Data.Common.Models;
+    using AutoXen.Data.Models.Enums;
 
     public class CarWashRequest : BaseDeletableModel<string>, IRequest
     {
@@ -53,7 +52,7 @@
 
         public override string ToString()
         {
-            return GlobalConstants.CarWash;
+            return RequestName.CarWash.ToString();
         }
     }
 }

@@ -123,13 +123,28 @@
   <data name="CarWash" xml:space="preserve">
     <value>Car wash</value>
   </data>
+  <data name="CreatedOn" xml:space="preserve">
+    <value>Created On</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
   <data name="Insurance" xml:space="preserve">
     <value>Insurance</value>
+  </data>
+  <data name="RequestType" xml:space="preserve">
+    <value>Request type</value>
   </data>
   <data name="RoadsideAssistance" xml:space="preserve">
     <value>Roadside assistance</value>
   </data>
   <data name="Workshop" xml:space="preserve">
     <value>Workshop</value>
+  </data>
+  <data name="YourCar" xml:space="preserve">
+    <value>Your car</value>
+  </data>
+  <data name="YourRequests" xml:space="preserve">
+    <value>Your Requests</value>
   </data>
 </root>

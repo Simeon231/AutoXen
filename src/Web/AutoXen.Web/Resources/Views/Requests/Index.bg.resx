@@ -118,18 +118,33 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AnnualTechnicallInspection" xml:space="preserve">
-    <value>Annual technicall inspection</value>
+    <value>Годишен технически преглед</value>
   </data>
   <data name="CarWash" xml:space="preserve">
-    <value>Car wash</value>
+    <value>Автомивка</value>
+  </data>
+  <data name="CreatedOn" xml:space="preserve">
+    <value>Направена на</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Инфо</value>
   </data>
   <data name="Insurance" xml:space="preserve">
-    <value>Insurance</value>
+    <value>Затраховане</value>
+  </data>
+  <data name="RequestType" xml:space="preserve">
+    <value>Тип на заявката</value>
   </data>
   <data name="RoadsideAssistance" xml:space="preserve">
-    <value>Roadside assistance</value>
+    <value>Пътна помощ</value>
   </data>
   <data name="Workshop" xml:space="preserve">
-    <value>Workshop</value>
+    <value>Сервиз</value>
+  </data>
+  <data name="YourCar" xml:space="preserve">
+    <value>Твоята кола</value>
+  </data>
+  <data name="YourRequests" xml:space="preserve">
+    <value>Твоите заявки</value>
   </data>
 </root>
