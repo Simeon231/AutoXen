@@ -133,16 +133,16 @@
     <value>Вземане възможно най-бързо</value>
   </data>
   <data name="PickUpLocation" xml:space="preserve">
-    <value>Локация за взимане</value>
+    <value>Локация за вземане</value>
   </data>
   <data name="PickUpLocationLength" xml:space="preserve">
-    <value>Локация за взимане трябва да е с минимум 3 и максимум 150 символа.</value>
+    <value>Локация за вземане трябва да е с минимум 3 и максимум 150 символа.</value>
   </data>
   <data name="PickUpLocationRequired" xml:space="preserve">
-    <value>Локация за взимане е задължителна.</value>
+    <value>Локация за вземане е задължителна.</value>
   </data>
   <data name="PickUpTime" xml:space="preserve">
-    <value>Време за взимане</value>
+    <value>Време за вземане</value>
   </data>
   <data name="ProblemsNotListed" xml:space="preserve">
     <value>Твоите проблеми не са написани? Напиши ги тук.</value>
