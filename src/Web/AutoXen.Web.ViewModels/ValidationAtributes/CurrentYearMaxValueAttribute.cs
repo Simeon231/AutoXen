@@ -16,14 +16,18 @@
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (value != null && value is not short)
+            if (value == null)
+            {
+                return ValidationResult.Success;
+            }
+
+            if (value is not short)
             {
                 return new ValidationResult(this.GetErrorMessage(validationContext));
             }
 
-            short date = (short)value;
-            if (date > DateTime.UtcNow.Year
-                || date < this.MinYear)
+            if (value is short date
+                && (date > DateTime.UtcNow.Year || date < this.MinYear))
             {
                 return new ValidationResult(this.GetErrorMessage(validationContext));
             }
