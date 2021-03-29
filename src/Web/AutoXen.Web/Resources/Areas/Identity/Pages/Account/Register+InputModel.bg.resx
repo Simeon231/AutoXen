@@ -117,22 +117,73 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Address" xml:space="preserve">
+    <value>Адрес</value>
+  </data>
+  <data name="AddressMinLength" xml:space="preserve">
+    <value>Адресът трябва да е поне {1} символа.</value>
+  </data>
+  <data name="AddressRequired" xml:space="preserve">
+    <value>Адресът е задължителен.</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Потвърдете паролата.</value>
+  </data>
   <data name="Email" xml:space="preserve">
-    <value>Email</value>
+    <value>Имейл</value>
   </data>
   <data name="EmailRequired" xml:space="preserve">
-    <value>The Email field is required.</value>
+    <value>Имейлът е задължителен.</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Първо име</value>
+  </data>
+  <data name="FirstNameMinLength" xml:space="preserve">
+    <value>Първото име трябва да е поне {1} символа.</value>
+  </data>
+  <data name="FirstNameRequired" xml:space="preserve">
+    <value>Първото име е задължително.</value>
+  </data>
+  <data name="MiddleName" xml:space="preserve">
+    <value>Второ име</value>
+  </data>
+  <data name="MiddleNameMinLength" xml:space="preserve">
+    <value>Второто име трябва да е поне {1} символа.</value>
+  </data>
+  <data name="MiddleNameRequired" xml:space="preserve">
+    <value>Второто име е задължително.</value>
   </data>
   <data name="NotValidEmail" xml:space="preserve">
-    <value>The Email field is not a valid e-mail address.</value>
+    <value>Невалиден имейл.</value>
+  </data>
+  <data name="NotValidPhoneNumber" xml:space="preserve">
+    <value>Телефонният номер не е валиден.</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Password</value>
+    <value>Парола</value>
+  </data>
+  <data name="PasswordLength" xml:space="preserve">
+    <value>Паролата трябва да е поне {2} и най-много {1} дълга.</value>
+  </data>
+  <data name="PasswordNotSame" xml:space="preserve">
+    <value>Паролите не съвпадат.</value>
   </data>
   <data name="PasswordRequired" xml:space="preserve">
-    <value>The Password field is required.</value>
+    <value>Паролата е задължителна.</value>
   </data>
-  <data name="RememberMe" xml:space="preserve">
-    <value>Remember me</value>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Телефонен номер</value>
+  </data>
+  <data name="PhoneNumberRequired" xml:space="preserve">
+    <value>Телефонният номер е задължителен.</value>
+  </data>
+  <data name="SurName" xml:space="preserve">
+    <value>Фамилия</value>
+  </data>
+  <data name="SurNameMinLength" xml:space="preserve">
+    <value>Фамилията трябва да е поне {1} символа.</value>
+  </data>
+  <data name="SurNameRequired" xml:space="preserve">
+    <value>Фамилията е задължителна.</value>
   </data>
 </root>

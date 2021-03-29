@@ -124,7 +124,7 @@
     <value>Невалидно вписване</value>
   </data>
   <data name="LocalAccount" xml:space="preserve">
-    <value>Използвайте локален акаунт, за да влезете.</value>
+    <value>Използвайте вашия акаунт, за да влезете.</value>
   </data>
   <data name="LogIn" xml:space="preserve">
     <value>Вход</value>

@@ -117,22 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Email" xml:space="preserve">
-    <value>Email</value>
+  <data name="HaveAnAccount" xml:space="preserve">
+    <value>Already have an account? Login in.</value>
   </data>
-  <data name="EmailRequired" xml:space="preserve">
-    <value>The Email field is required.</value>
+  <data name="NewAccount" xml:space="preserve">
+    <value>Create a new account.</value>
   </data>
-  <data name="NotValidEmail" xml:space="preserve">
-    <value>The Email field is not a valid e-mail address.</value>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="PasswordRequired" xml:space="preserve">
-    <value>The Password field is required.</value>
-  </data>
-  <data name="RememberMe" xml:space="preserve">
-    <value>Remember me</value>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
   </data>
 </root>

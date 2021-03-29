@@ -120,8 +120,17 @@
   <data name="Email" xml:space="preserve">
     <value>Имейл</value>
   </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>Имейлът е задължителен.</value>
+  </data>
+  <data name="NotValidEmail" xml:space="preserve">
+    <value>Невалиден имейл.</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Парола</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Паролата е задължителна.</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Запомни ме</value>

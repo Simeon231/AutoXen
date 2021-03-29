@@ -117,22 +117,73 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="AddressMinLength" xml:space="preserve">
+    <value>The Address field must be at least {1} characters long.</value>
+  </data>
+  <data name="AddressRequired" xml:space="preserve">
+    <value>The Address field is required.</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password.</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
   <data name="EmailRequired" xml:space="preserve">
     <value>The Email field is required.</value>
   </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="FirstNameMinLength" xml:space="preserve">
+    <value>The First name field must be at least {1} characters long.</value>
+  </data>
+  <data name="FirstNameRequired" xml:space="preserve">
+    <value>The First name field is required.</value>
+  </data>
+  <data name="MiddleName" xml:space="preserve">
+    <value>Middle name</value>
+  </data>
+  <data name="MiddleNameMinLength" xml:space="preserve">
+    <value>The Middle name field must be at least {1} characters long.</value>
+  </data>
+  <data name="MiddleNameRequired" xml:space="preserve">
+    <value>The Middle name field is required.</value>
+  </data>
   <data name="NotValidEmail" xml:space="preserve">
     <value>The Email field is not a valid e-mail address.</value>
+  </data>
+  <data name="NotValidPhoneNumber" xml:space="preserve">
+    <value>The Phone number field is not a valid phone number.</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="PasswordLength" xml:space="preserve">
+    <value>The {0} must be at least {2} and at max {1} characters long.</value>
+  </data>
+  <data name="PasswordNotSame" xml:space="preserve">
+    <value>The password and confirmation password do not match.</value>
+  </data>
   <data name="PasswordRequired" xml:space="preserve">
     <value>The Password field is required.</value>
   </data>
-  <data name="RememberMe" xml:space="preserve">
-    <value>Remember me</value>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="PhoneNumberRequired" xml:space="preserve">
+    <value>The Phone number field is required.</value>
+  </data>
+  <data name="SurName" xml:space="preserve">
+    <value>Sur name</value>
+  </data>
+  <data name="SurNameMinLength" xml:space="preserve">
+    <value>The Sur name field must be at least {1} characters long.</value>
+  </data>
+  <data name="SurNameRequired" xml:space="preserve">
+    <value>The Sur name field is required.</value>
   </data>
 </root>

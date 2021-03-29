@@ -117,7 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="UserName{0}Taken" xml:space="preserve">
+  <data name="EmailTaken" xml:space="preserve">
+    <value>Имейлът {0} вече съществува.</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>Грешна парола.</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Имейлът {0} е невалиден.</value>
+  </data>
+  <data name="InvalidToken" xml:space="preserve">
+    <value>Невалиден токен.</value>
+  </data>
+  <data name="PasswordRequiresDigit" xml:space="preserve">
+    <value>Паролата трябва да има поне едно число.</value>
+  </data>
+  <data name="PasswordRequiresLower" xml:space="preserve">
+    <value>Паролата трябва да има поне една малко буква.</value>
+  </data>
+  <data name="PasswordRequiresNonAlphanumeric" xml:space="preserve">
+    <value>Паролата трябва да съдържа поне един специален символ.</value>
+  </data>
+  <data name="PasswordRequiresUpper" xml:space="preserve">
+    <value>Паролата трябва да има поне една голяма буква.</value>
+  </data>
+  <data name="PasswordTooShort" xml:space="preserve">
+    <value>Паролата трябва да е поне {0} символа.</value>
+  </data>
+  <data name="UnknownFailure" xml:space="preserve">
+    <value>Непозната грешка възникна.</value>
+  </data>
+  <data name="UserExist" xml:space="preserve">
+    <value>Такъв потребител вече същестува.</value>
+  </data>
+  <data name="UserNameTaken" xml:space="preserve">
     <value>Потребителското {0} име е заето.</value>
   </data>
 </root>

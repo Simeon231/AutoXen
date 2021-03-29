@@ -96,12 +96,12 @@
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "EmailRequired")]
+            [EmailAddress(ErrorMessage = "NotValidEmail")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "PasswordRequired")]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
