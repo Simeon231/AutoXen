@@ -7,14 +7,16 @@
         [Required]
         public string Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "BrandRequired")]
+        [Display(Name = "Brand")]
         public string Brand { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "ModelRequired")]
+        [Display(Name = "Model")]
         public string Model { get; set; }
 
-        [Required]
-        [Display(Name = "Registration plate")]
+        [Required(ErrorMessage = "RegistrationPlateRequired")]
+        [Display(Name = "RegistrationPlate")]
         public string RegistrationPlate { get; set; }
     }
 }

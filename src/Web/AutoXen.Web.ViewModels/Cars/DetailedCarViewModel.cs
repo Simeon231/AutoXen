@@ -10,25 +10,29 @@
     {
         public new string Id { get; set; }
 
-        [Display(Name = "Number of seats")]
-        [Range(1, 100, ErrorMessage = "The number of seats must be atleast 1.")]
+        [Display(Name = "Seats")]
+        [Range(1, 100, ErrorMessage = "SeatsMinError")]
         public byte? NumberOfSeats { get; set; }
 
-        [Display(Name = "Year made")]
+        [Display(Name = "YearMade")]
         [CurrentYearMaxValue(1900)]
         public short? YearMade { get; set; }
 
+        [Display(Name = "Weight")]
         public int? Weight { get; set; }
 
+        [Display(Name = "Color")]
         public string Color { get; set; }
 
+        [Display(Name = "FuelType")]
         public FuelType FuelType { get; set; }
 
+        [Display(Name = "TransmissionType")]
         public TransmissionType TransmissionType { get; set; }
 
-        [StringLength(17, MinimumLength = 17, ErrorMessage = "VIN length must be 17.")]
+        [StringLength(17, MinimumLength = 17, ErrorMessage = "VINLengthError")]
         [Display(Name = "VIN")]
-        [RegularExpression(@"^[A-Za-z0-9]{17}$", ErrorMessage = "VIN must be 17 length and have only letters and numbers")]
+        [RegularExpression(@"^[A-Za-z0-9]{17}$", ErrorMessage = "VinRegularExpression")]
         public string VehicleIdentificationNumber { get; set; }
 
         public IEnumerable<int> CarExtraIds { get; set; }

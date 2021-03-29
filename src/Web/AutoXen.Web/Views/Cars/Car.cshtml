@@ -65,7 +65,7 @@
             <div class="form-row">
                 <div class="col-sm-6 d-flex justify-content-center">
                     <div class="col-md-8">
-                        <label class="col-form-label">Fuel type</label>
+                        <label class="col-form-label" asp-for="FuelType"></label>
                         <select asp-for="FuelType" class="form-control"
                                 asp-items="@Html.GetEnumSelectList<AutoXen.Data.Models.Enums.FuelType>()">
                         </select>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="col-sm-6 d-flex justify-content-center">
                     <div class="col-md-8">
-                        <label class="col-form-label">Transmission type</label>
+                        <label class="col-form-label" asp-for="TransmissionType"></label>
                         <select asp-for="TransmissionType" class="form-control"
                                 asp-items="@Html.GetEnumSelectList<AutoXen.Data.Models.Enums.TransmissionType>()">
                         </select>

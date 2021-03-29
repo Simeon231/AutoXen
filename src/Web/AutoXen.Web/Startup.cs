@@ -9,6 +9,7 @@
     using AutoXen.Data.Models;
     using AutoXen.Data.Repositories;
     using AutoXen.Data.Seeding;
+    using AutoXen.Services;
     using AutoXen.Services.Data;
     using AutoXen.Services.Data.Administration;
     using AutoXen.Services.Messaging;
@@ -77,6 +78,8 @@
             services.AddSingleton(this.configuration);
 
             services.AddAutoMapper(typeof(CarProfile));
+
+            services.AddSingleton<ErrorMessageTranslationService>();
 
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));

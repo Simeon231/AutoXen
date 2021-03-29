@@ -38,7 +38,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View("~/Views/Cars/Car.cshtml");
+                return this.View("~/Views/Cars/Car.cshtml", car);
             }
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
