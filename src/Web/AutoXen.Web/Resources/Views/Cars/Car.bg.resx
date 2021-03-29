@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="2/3 Doors" xml:space="preserve">
+    <value>2/3 врати</value>
+  </data>
+  <data name="Airbag" xml:space="preserve">
+    <value>Въздушна възглавница</value>
+  </data>
   <data name="CarExtras" xml:space="preserve">
     <value>Екстри:</value>
+  </data>
+  <data name="Climatronic" xml:space="preserve">
+    <value>Климатроник</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Изтрий</value>
@@ -126,10 +135,41 @@
   <data name="DeleteCar" xml:space="preserve">
     <value>Сигурен ли си, че искаш да изтриеш колата си?</value>
   </data>
+  <data name="Electric windows" xml:space="preserve">
+    <value>Електрически стъкла</value>
+  </data>
+  <data name="Gas system" xml:space="preserve">
+    <value>Газ система</value>
+  </data>
+  <data name="Leather interior" xml:space="preserve">
+    <value>Кожа</value>
+    <comment>Not camel case bacause it is coming from data base</comment>
+  </data>
+  <data name="Metallic" xml:space="preserve">
+    <value>Металик</value>
+  </data>
+  <data name="Navigation" xml:space="preserve">
+    <value>Навигация</value>
+  </data>
+  <data name="Parktronic" xml:space="preserve">
+    <value>Парктроник</value>
+  </data>
   <data name="Submit" xml:space="preserve">
     <value>Изпрати</value>
   </data>
   <data name="YourCar" xml:space="preserve">
     <value>Твоята кола:</value>
+  </data>
+  <data name="Аir conditioning" xml:space="preserve">
+    <value>Климатик</value>
+  </data>
+  <data name="Аuto pilot" xml:space="preserve">
+    <value>Автопилот</value>
+  </data>
+  <data name="Еlectric mirrors" xml:space="preserve">
+    <value>Електрически стъкла</value>
+  </data>
+  <data name="Мethane system" xml:space="preserve">
+    <value>Метанова система</value>
   </data>
 </root>
