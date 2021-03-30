@@ -117,16 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="PickWorkshop" xml:space="preserve">
-    <value>Pick a workshop</value>
-  </data>
-  <data name="SelectOption" xml:space="preserve">
-    <value>Select an option</value>
-  </data>
-  <data name="Submit" xml:space="preserve">
-    <value>Submit</value>
-  </data>
-  <data name="WriteMessage" xml:space="preserve">
-    <value>Write your message</value>
+  <data name="PickCar" xml:space="preserve">
+    <value>Избери кола</value>
   </data>
 </root>

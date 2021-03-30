@@ -35,7 +35,7 @@
             </div>
 
             <div class="mb-2 mt-1 d-flex justify-content-center">
-                <select class="js-select-multiple col-md-9 form-control selectIds" asp-for="@Model.Ids" multiple="multiple">
+                <select class="js-select-multiple col-md-9 form-control selectIds" asp-for="@Model.Ids" data-placeholder="@Localizer["SelectOption"]" multiple="multiple">
                     @if (Model.WorkshopId != 0)
                     {
                         @foreach (var service in this.workshopService.GetServicesByWorkshopId(Model.WorkshopId))

@@ -120,6 +120,9 @@
   <data name="PickWorkshop" xml:space="preserve">
     <value>Избери сервиз</value>
   </data>
+  <data name="SelectOption" xml:space="preserve">
+    <value>Избери опция</value>
+  </data>
   <data name="Submit" xml:space="preserve">
     <value>Изпрати</value>
   </data>
