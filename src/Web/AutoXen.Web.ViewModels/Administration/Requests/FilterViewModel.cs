@@ -7,8 +7,10 @@
 
     public class FilterViewModel : PagingViewModel
     {
+        [Display(Name = "Accepted")]
         public bool Accepted { get; set; }
 
+        [Display(Name = "Accepted by me")]
         public bool AcceptedByMe { get; set; }
 
         [Display(Name = GlobalConstants.Workshop)]

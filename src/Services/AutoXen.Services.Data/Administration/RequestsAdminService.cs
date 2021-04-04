@@ -27,10 +27,10 @@
         {
             switch (model.RequestName)
             {
-                case GlobalConstants.Workshop:
+                case nameof(GlobalConstants.Workshop):
                     await this.workshopService.AcceptAsync(model);
                     break;
-                case GlobalConstants.CarWash:
+                case nameof(GlobalConstants.CarWash):
                     await this.carWashService.AcceptAsync(model);
                     break;
             }

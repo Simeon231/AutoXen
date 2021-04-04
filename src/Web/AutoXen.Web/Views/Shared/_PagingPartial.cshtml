@@ -3,16 +3,16 @@
 
 <ul class="pagination justify-content-center">
     <li class="page-item @if (!Model.HasPreviousPage) { <text>disabled</text> }">
-        <a type="submit" class="page-link" asp-route-pagenumber="1">First</a>
+        <a type="submit" class="page-link" asp-all-route-data="@Model.Routes" asp-route-pagenumber="1">First</a>
     </li>
     <li class="page-item @if (!Model.HasPreviousPage) { <text>disabled</text> }">
-        <a type="submit" class="page-link" asp-route-pagenumber="@Model.PreviousPageNumber">Previous</a>
+        <a type="submit" class="page-link" asp-all-route-data="@Model.Routes" asp-route-pagenumber="@Model.PreviousPageNumber">Previous</a>
     </li>
     @for (int i = Model.PageNumber - 3; i < Model.PageNumber; i++)
     {
         if (i > 0)
         {
-            <li class="page-item"><a type="submit" class="page-link" asp-route-pagenumber="@i">@i</a></li>
+            <li class="page-item"><a type="submit" class="page-link" asp-all-route-data="@Model.Routes" asp-route-pagenumber="@i">@i</a></li>
         }
     }
     <li class="page-item active" aria-current="page">
@@ -25,13 +25,13 @@
     {
         if (i <= Model.PagesCount)
         {
-            <li class="page-item"><a type="submit" class="page-link" asp-route-pagenumber="@i">@i</a></li>
+            <li class="page-item"><a type="submit" class="page-link" asp-all-route-data="@Model.Routes" asp-route-pagenumber="@i">@i</a></li>
         }
     }
     <li class="page-item @if (!Model.HasNextPage) { <text>disabled</text> }">
-        <a type="submit" class="page-link" asp-route-pagenumber="@Model.NextPageNumber">Next</a>
+        <a type="submit" class="page-link" asp-all-route-data="@Model.Routes" asp-route-pagenumber="@Model.NextPageNumber">Next</a>
     </li>
     <li class="page-item @if (!Model.HasNextPage) { <text>disabled</text> }">
-        <a type="submit" class="page-link" asp-route-pagenumber="@Model.PagesCount">Last</a>
+        <a type="submit" class="page-link"  asp-all-route-data="@Model.Routes" asp-route-pagenumber="@Model.PagesCount">Last</a>
     </li>
 </ul>

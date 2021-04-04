@@ -1,6 +1,7 @@
 ﻿namespace AutoXen.Web.Areas.Administration.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -26,16 +27,25 @@
             this.emailService = emailService;
         }
 
-        public IActionResult Index(FilterViewModel model)
+        public IActionResult Index(FilterViewModel input)
         {
-            if (model.PageNumber <= 0)
+            if (input.PageNumber <= 0)
             {
-                model.PageNumber = 1;
+                input.PageNumber = 1;
             }
 
-            var wash = model.CarWashes;
-            model = this.requestsService.GetAllRequests(model.PageNumber);
-            model.CarWashes = wash;
+            var model = this.requestsService.GetAllRequests(input.PageNumber);
+
+            model.Routes = new Dictionary<string, string>
+            {
+                [nameof(model.Accepted)] = input.Accepted.ToString(),
+                [nameof(model.AcceptedByMe)] = input.AcceptedByMe.ToString(),
+                [nameof(model.RoadsideAssistance)] = input.RoadsideAssistance.ToString(),
+                [nameof(model.Insurances)] = input.Insurances.ToString(),
+                [nameof(model.AnnualTechnicalInspections)] = input.AnnualTechnicalInspections.ToString(),
+                [nameof(model.CarWashes)] = input.CarWashes.ToString(),
+                [nameof(model.Workshops)] = input.Workshops.ToString(),
+            };
 
             return this.View(model);
         }
