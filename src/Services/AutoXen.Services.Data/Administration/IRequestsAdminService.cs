@@ -6,7 +6,7 @@
 
     public interface IRequestsAdminService
     {
-        public RequestsViewModel GetAllRequests(int page, int itemsPerPage = 10);
+        public RequestsViewModel GetAllRequests(FilterViewModel model, int itemsPerPage = 10);
 
         public Task AcceptRequestAsync(AcceptViewModel model);
     }

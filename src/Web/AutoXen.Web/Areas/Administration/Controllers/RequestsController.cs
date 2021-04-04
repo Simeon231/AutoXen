@@ -31,21 +31,16 @@
         {
             if (input.PageNumber <= 0)
             {
+                // default values
                 input.PageNumber = 1;
+                input.Workshops = true;
+                input.CarWashes = true;
+                input.AnnualTechnicalInspections = true;
+                input.RoadsideAssistance = true;
+                input.Insurances = true;
             }
 
-            var model = this.requestsService.GetAllRequests(input.PageNumber);
-
-            model.Routes = new Dictionary<string, string>
-            {
-                [nameof(model.Accepted)] = input.Accepted.ToString(),
-                [nameof(model.AcceptedByMe)] = input.AcceptedByMe.ToString(),
-                [nameof(model.RoadsideAssistance)] = input.RoadsideAssistance.ToString(),
-                [nameof(model.Insurances)] = input.Insurances.ToString(),
-                [nameof(model.AnnualTechnicalInspections)] = input.AnnualTechnicalInspections.ToString(),
-                [nameof(model.CarWashes)] = input.CarWashes.ToString(),
-                [nameof(model.Workshops)] = input.Workshops.ToString(),
-            };
+            var model = this.requestsService.GetAllRequests(input);
 
             return this.View(model);
         }

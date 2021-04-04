@@ -19,6 +19,7 @@
 
         public IEnumerable<WorkshopRequest> GetWorkshopRequestsByUserId(string userId);
 
+        // TODO make it IQuerable
         public IEnumerable<WorkshopRequest> GetAllRequests();
 
         public IEnumerable<ServiceWithPriceResponseModel> GetServicesByWorkshopId(int workshopId);
