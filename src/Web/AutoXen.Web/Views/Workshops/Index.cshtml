@@ -1,7 +1,9 @@
 ﻿@using AutoXen.Web.ViewModels.Workshop
 @using AutoXen.Services.Data
-@model WorkshopRequestViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @inject IWorkshopService workshopService
+@model WorkshopRequestViewModel
 
 <form method="post" class="mt-2 d-flex justify-content-center">
     <div class="form-row container">
@@ -21,7 +23,7 @@
                         <input onchange="EnableDisableWorkshops(this)" class="form-check-inline" asp-for="AdminChooseWorkshop" onclick="GetAllServices()" />
                     </div>
                     <select class="form-control selectId" asp-for="WorkshopId" onchange="GetWorkshopServices(this)">
-                        <option id="hiddenValue" hidden disabled selected>Pick a workshop</option>
+                        <option id="hiddenValue" hidden disabled selected>@Localizer["PickWorkshop"]</option>
                         @foreach (var workshop in this.workshopService.GetAllWorkshops())
                         {
                             <option data-select2 value="@workshop.Id">
@@ -33,7 +35,7 @@
             </div>
 
             <div class="mb-2 mt-1 d-flex justify-content-center">
-                <select class="js-select-multiple col-md-9 form-control selectIds" asp-for="@Model.Ids" multiple="multiple">
+                <select class="js-select-multiple col-md-9 form-control selectIds" asp-for="@Model.Ids" data-placeholder="@Localizer["SelectOption"]" multiple="multiple">
                     @if (Model.WorkshopId != 0)
                     {
                         @foreach (var service in this.workshopService.GetServicesByWorkshopId(Model.WorkshopId))
@@ -76,14 +78,14 @@
 
             <div class="row">
                 <div class="col text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">@Localizer["Submit"]</button>
                 </div>
             </div>
         </div>
 
         <div class="col-md-4 mt-2">
             <div class="text-center">
-                <label class="col-form-label" asp-for="Message">Write your message</label>
+                <label class="col-form-label" asp-for="Message">@Localizer["WriteMessage"]</label>
             </div>
             <textarea class="form-control input-group" rows="15" asp-for="Message"></textarea>
         </div>

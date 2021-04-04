@@ -109,44 +109,44 @@
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "EmailRequired")]
+            [EmailAddress(ErrorMessage = "NotValidEmail")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "PasswordRequired")]
+            [StringLength(100, ErrorMessage = "PasswordLength", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "ConfirmPassword")]
+            [Compare("Password", ErrorMessage = "PasswordNotSame")]
             public string ConfirmPassword { get; set; }
 
-            [Required]
-            [MinLength(2)]
-            [Display(Name = "First name")]
+            [Required(ErrorMessage = "FirstNameRequired")]
+            [MinLength(2, ErrorMessage = "FirstNameMinLength")]
+            [Display(Name = "FirstName")]
             public string FirstName { get; set; }
 
-            [Required]
-            [MinLength(2)]
-            [Display(Name = "Sur name")]
+            [Required(ErrorMessage = "SurNameRequired")]
+            [MinLength(2, ErrorMessage = "SurNameMinLength")]
+            [Display(Name = "SurName")]
             public string SurName { get; set; }
 
-            [Required]
-            [MinLength(2)]
-            [Display(Name = "Middle name")]
+            [Required(ErrorMessage = "MiddleNameRequired")]
+            [MinLength(2, ErrorMessage = "MiddleNameMinLength")]
+            [Display(Name = "MiddleName")]
             public string MiddleName { get; set; }
 
-            [Required]
-            [Phone]
-            [Display(Name = "Phone number")]
+            [Required(ErrorMessage = "PhoneNumberRequired")]
+            [Phone(ErrorMessage = "NotValidPhoneNumber")]
+            [Display(Name = "PhoneNumber")]
             public string PhoneNumber { get; set; }
 
-            [Required]
-            [MinLength(6)]
+            [Required(ErrorMessage = "AddressRequired")]
+            [MinLength(6, ErrorMessage = "AddressMinLength")]
             [Display(Name = "Address")]
             public string Address { get; set; }
         }

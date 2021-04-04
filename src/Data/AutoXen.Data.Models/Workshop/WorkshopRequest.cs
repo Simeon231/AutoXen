@@ -4,9 +4,9 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using AutoXen.Common;
     using AutoXen.Data.Common.Models;
     using AutoXen.Data.Models.Car;
+    using AutoXen.Data.Models.Enums;
 
     public class WorkshopRequest : BaseDeletableModel<string>, IRequest
     {
@@ -61,7 +61,7 @@
         // Used by WorkshopProfile
         public override string ToString()
         {
-            return GlobalConstants.Workshop;
+            return RequestName.Workshop.ToString();
         }
     }
 }

@@ -1,23 +1,23 @@
-﻿@using AutoXen.Common
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using PluralizeService.Core;
+@inject IViewLocalizer Localizer
 @model IEnumerable<AutoXen.Web.ViewModels.Requests.RequestViewModel>
 
-<h4 class="text-center m-3">Your Requests</h4>
+<h4 class="text-center m-3">@Localizer["YourRequests"]</h4>
 <div class="d-flex justify-content-center">
     <table class="table table-sm table-hover border border-dark table-bordered col-md-10">
         <thead class="thead-dark">
             <tr>
                 <th>
-                    Your car
+                    @Localizer["YourCar"]
                 </th>
                 <th>
-                    Created on
+                    @Localizer["CreatedOn"]
                 </th>
                 <th>
-                    Request type
+                    @Localizer["RequestType"]
                 </th>
-                <th class="text-center">
-                    Info
-                </th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -26,17 +26,10 @@
                 @foreach (var request in Model)
                 {
                     <tr>
-                        <td>@($"Brand: {request.Car.Brand} - Model: {request.Car.Model} - {request.Car.RegistrationPlate}")</td>
+                        <td>@($"{request.Car.Brand} - {request.Car.Model} - {request.Car.RegistrationPlate}")</td>
                         <td class="momentTime">@request.CreatedOn</td>
-                        <td>@request.RequestName</td>
-                        @if (request.RequestName == GlobalConstants.Workshop)
-                        {
-                            <td class="text-center"><a asp-controller="Workshops" asp-action="Details" asp-route-id="@request.Id" class="btn btn-outline-info">Info</a></td>
-                        }
-                        else if (request.RequestName == GlobalConstants.CarWash)
-                        {
-                            <td class="text-center"><a asp-controller="CarWashes" asp-action="Details" asp-route-id="@request.Id" class="btn btn-outline-info">Info</a></td>
-                        }
+                        <td>@Localizer[request.RequestName]</td>
+                        <td class="text-center"><a asp-controller="@(PluralizationProvider.Pluralize(request.RequestName))" asp-action="Details" asp-route-id="@request.Id" class="btn btn-outline-info">@Localizer["Info"]</a></td>
                     </tr>
                 }
             }

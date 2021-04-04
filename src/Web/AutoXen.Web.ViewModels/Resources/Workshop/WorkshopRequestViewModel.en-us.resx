@@ -117,10 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Every workshop" xml:space="preserve">
+  <data name="EveryWorkshop" xml:space="preserve">
     <value>Every workshop</value>
   </data>
-  <data name="Minimum length is 5." xml:space="preserve">
-    <value>Minimum length is 5.</value>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="OtherServicesMaximumLength" xml:space="preserve">
+    <value>The Maximum length is 300.</value>
+  </data>
+  <data name="OtherServicesMinimumLength" xml:space="preserve">
+    <value>The Minimum length is 5.</value>
+  </data>
+  <data name="PickUpFastAsPossible" xml:space="preserve">
+    <value>Pick up fast as possible</value>
+  </data>
+  <data name="PickUpLocation" xml:space="preserve">
+    <value>Pick up location</value>
+  </data>
+  <data name="PickUpLocationLength" xml:space="preserve">
+    <value>Pick up location must be with a minimum length of 3 and a maximum length of 150.</value>
+  </data>
+  <data name="PickUpLocationRequired" xml:space="preserve">
+    <value>The Pick up location field is required.</value>
+  </data>
+  <data name="PickUpTime" xml:space="preserve">
+    <value>Pick up time</value>
+  </data>
+  <data name="ProblemsNotListed" xml:space="preserve">
+    <value>Your problems are not listed? Write them here.</value>
   </data>
 </root>

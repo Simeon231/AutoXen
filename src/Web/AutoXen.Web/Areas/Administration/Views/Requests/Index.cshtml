@@ -1,7 +1,7 @@
 ﻿@using AutoXen.Web.ViewModels.Administration.Requests
-@using AutoXen.Common
 @using AutoXen.Data.Models
 @using Microsoft.AspNetCore.Identity
+@using PluralizeService.Core;
 @inject UserManager<ApplicationUser> UserManager
 @model RequestsViewModel
 @{
@@ -68,7 +68,7 @@
                     {
                         ApplicationUser curUser = this.UserManager.GetUserAsync(this.User).GetAwaiter().GetResult();
                         <tr>
-                            <td>@($"First name: {request.User.FirstName} - Sur name: {request.User.SurName}")</td>
+                            <td>@($"{request.User.FirstName} {request.User.MiddleName} {request.User.SurName}")</td>
                             <td class="momentTime">@request.CreatedOn</td>
                             <td>@request.RequestName</td>
                             @if (request.AcceptedById == null)
@@ -83,14 +83,8 @@
                             {
                                 <td class="text-center align-middle">Accepted</td>
                             }
-                            @if (request.RequestName == GlobalConstants.Workshop)
-                            {
-                                <td class="text-center"><a asp-area="Administration" asp-controller="Workshops" asp-action="Details" asp-route-id="@request.Id" class="btn btn-outline-info">Info</a></td>
-                            }
-                            else if (request.RequestName == GlobalConstants.CarWash)
-                            {
-                                <td class="text-center"><a asp-area="Administration" asp-controller="CarWashes" asp-action="Details" asp-route-id="@request.Id" class="btn btn-outline-info">Info</a></td>
-                            }
+
+                            <td class="text-center"><a asp-area="Administration" asp-controller="@(PluralizationProvider.Pluralize(request.RequestName))" asp-action="Details" asp-route-id="@request.Id" class="btn btn-outline-info">Info</a></td>
                         </tr>
                     }
                 }

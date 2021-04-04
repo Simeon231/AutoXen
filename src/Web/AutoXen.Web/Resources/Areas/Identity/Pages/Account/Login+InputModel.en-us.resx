@@ -120,8 +120,17 @@
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>The Email field is required.</value>
+  </data>
+  <data name="NotValidEmail" xml:space="preserve">
+    <value>The Email field is not a valid e-mail address.</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>The Password field is required.</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember me</value>

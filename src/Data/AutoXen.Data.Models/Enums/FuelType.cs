@@ -4,17 +4,23 @@
 
     public enum FuelType
     {
+        [Display(Name = "Unknown")]
         Unknown = 0,
-        [Display(Name = "Electic gasoline")]
-        ElectricGasoline = 1,
-        Gasoline = 2,
-        Diesel = 3,
-        Gas = 4,
+        [Display(Name = "Gasoline")]
+        Gasoline = 1,
+        [Display(Name = "Diesel")]
+        Diesel = 2,
+        [Display(Name = "Gas")]
+        Gas = 3,
+        [Display(Name = "Electric")]
+        Electric = 4,
+        [Display(Name = "Methane")]
         Methane = 5,
-        [Display(Name = "Gasoline gas")]
-        GasolineGas = 6,
-        [Display(Name = "Gasoline methane")]
-        GasolineMethane = 7,
-        Electric = 8,
+        [Display(Name = "ElecticGasoline")]
+        ElectricGasoline = 6,
+        [Display(Name = "GasolineGas")]
+        GasolineGas = 7,
+        [Display(Name = "GasolineMethane")]
+        GasolineMethane = 8,
     }
 }

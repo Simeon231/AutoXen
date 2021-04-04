@@ -1,13 +1,15 @@
 ﻿@using AutoXen.Services.Data
 @using Microsoft.AspNetCore.Identity
 @using AutoXen.Data.Models
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @inject ICarService carService
 @inject UserManager<ApplicationUser> user
 @model string
 
 <div class="pb-4">
     <div class="form-row d-flex justify-content-center ">
-        <label class="col-form-label" for="CarId">Pick your car</label>
+        <label class="col-form-label" for="CarId">@Localizer["PickCar"]</label>
     </div>
     <div class="form-row d-flex justify-content-center">
         <div class="col-lg-10">

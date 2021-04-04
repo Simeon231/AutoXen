@@ -3,33 +3,44 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
+    using AutoXen.Services;
+
     public class CurrentYearMaxValueAttribute : ValidationAttribute
     {
         public CurrentYearMaxValueAttribute(int minYear)
         {
             this.MinYear = minYear;
-            this.ErrorMessage = $"Value should be between {minYear} and {DateTime.UtcNow.Year}.";
         }
 
         public int MinYear { get; }
 
-        public override bool IsValid(object value)
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (value is short intValue)
+            if (value == null)
             {
-                if (intValue <= DateTime.UtcNow.Year
-                    && intValue >= this.MinYear)
-                {
-                    return true;
-                }
+                return ValidationResult.Success;
             }
 
-            if (value is null)
+            if (value is not short)
             {
-                return true;
+                return new ValidationResult(this.GetErrorMessage(validationContext));
             }
 
-            return false;
+            if (value is short date
+                && (date > DateTime.UtcNow.Year || date < this.MinYear))
+            {
+                return new ValidationResult(this.GetErrorMessage(validationContext));
+            }
+
+            return ValidationResult.Success;
+        }
+
+        private string GetErrorMessage(ValidationContext validationContext)
+        {
+            this.ErrorMessage = "MinYearError";
+
+            ErrorMessageTranslationService errorTranslation = validationContext.GetService(typeof(ErrorMessageTranslationService)) as ErrorMessageTranslationService;
+            return string.Format(errorTranslation.GetLocalizedError(this.ErrorMessage), this.MinYear, DateTime.UtcNow.Year);
         }
     }
 }
