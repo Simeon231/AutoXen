@@ -8,7 +8,7 @@
     <li class="page-item @if (!Model.HasPreviousPage) { <text>disabled</text> }">
         <a type="submit" class="page-link" asp-all-route-data="@Model.Routes" asp-route-pagenumber="@Model.PreviousPageNumber">Previous</a>
     </li>
-    @for (int i = Model.PageNumber - 3; i < Model.PageNumber; i++)
+    @for (int i = Model.PageNumber - 2; i < Model.PageNumber; i++)
     {
         if (i > 0)
         {
@@ -21,7 +21,7 @@
             <span class="sr-only">(current)</span>
         </span>
     </li>
-    @for (int i = Model.PageNumber + 1; i <= Model.PageNumber + 3; i++)
+    @for (int i = Model.PageNumber + 1; i <= Model.PageNumber + 2; i++)
     {
         if (i <= Model.PagesCount)
         {
