@@ -1,6 +1,7 @@
 ﻿namespace AutoXen.Services.Data
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using AutoXen.Data.Models.Workshop;
@@ -19,8 +20,7 @@
 
         public IEnumerable<WorkshopRequest> GetWorkshopRequestsByUserId(string userId);
 
-        // TODO make it IQuerable
-        public IEnumerable<WorkshopRequest> GetAllRequests();
+        public IQueryable<WorkshopRequest> GetAllRequests();
 
         public IEnumerable<ServiceWithPriceResponseModel> GetServicesByWorkshopId(int workshopId);
 

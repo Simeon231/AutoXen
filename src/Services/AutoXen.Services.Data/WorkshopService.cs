@@ -217,13 +217,11 @@
                 .ToList();
         }
 
-        // Change to IQueryable or add ViewModel
-        public IEnumerable<WorkshopRequest> GetAllRequests()
+        public IQueryable<WorkshopRequest> GetAllRequests()
         {
             return this.workshopRequestRepository
                 .AllAsNoTracking()
-                .Include(x => x.User)
-                .ToList();
+                .Include(x => x.User);
         }
 
         public async Task AcceptAsync(AcceptViewModel model)

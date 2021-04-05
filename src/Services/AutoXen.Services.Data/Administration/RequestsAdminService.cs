@@ -37,47 +37,60 @@
             }
         }
 
-        public RequestsViewModel GetAllRequests(FilterViewModel model, int itemsPerPage = 10)
+        public RequestsViewModel GetAllRequests(FilterViewModel model, string userId, int itemsPerPage = 10)
         {
-            // TODO needs refactoring
-            var page = model.PageNumber;
-            var workshops = model.Workshops ?
-                this.workshopService.GetAllRequests().Select(x => this.mapper.Map<RequestViewModel>(x)).ToList() :
-                new List<RequestViewModel>();
-            var carwashes = model.CarWashes ?
-                this.carWashService.GetAllRequests().Select(x => this.mapper.Map<RequestViewModel>(x)).ToList() :
-                new List<RequestViewModel>();
+            var workshops = model.Workshops ? this.GetWorkshopRequests(model.Accepted, model.AcceptedByMe, userId) : new List<RequestViewModel>();
+            var carwashes = model.CarWashes ? this.GetCarWashRequests(model.Accepted, model.AcceptedByMe, userId) : new List<RequestViewModel>();
 
-            var requests = new RequestsViewModel()
-            {
-                ItemsPerPage = itemsPerPage,
-                PageNumber = page,
-                RequestsCount = workshops.Count + carwashes.Count,
-                Insurances = model.Insurances,
-                Accepted = model.Accepted,
-                RoadsideAssistance = model.RoadsideAssistance,
-                AcceptedByMe = model.AcceptedByMe,
-                AnnualTechnicalInspections = model.AnnualTechnicalInspections,
-                CarWashes = model.CarWashes,
-                Workshops = model.Workshops,
-            };
+            var requests = this.mapper.Map<RequestsViewModel>(model);
+            var pageNumber = model.PageNumber;
 
-            requests.Routes = new Dictionary<string, string>
-            {
-                [nameof(model.Accepted)] = model.Accepted.ToString(),
-                [nameof(model.AcceptedByMe)] = model.AcceptedByMe.ToString(),
-                [nameof(model.RoadsideAssistance)] = model.RoadsideAssistance.ToString(),
-                [nameof(model.Insurances)] = model.Insurances.ToString(),
-                [nameof(model.AnnualTechnicalInspections)] = model.AnnualTechnicalInspections.ToString(),
-                [nameof(model.CarWashes)] = model.CarWashes.ToString(),
-                [nameof(model.Workshops)] = model.Workshops.ToString(),
-            };
+            requests.ItemsPerPage = itemsPerPage;
+            requests.PageNumber = pageNumber;
+            requests.RequestsCount = workshops.Count() + carwashes.Count();
+            requests.Routes = this.GetRequestRoutes(model);
 
             requests.Requests.AddRange(workshops);
             requests.Requests.AddRange(carwashes);
-            requests.Requests = requests.Requests.OrderByDescending(x => x.CreatedOn).Skip((page - 1) * itemsPerPage).Take(itemsPerPage).ToList();
+            requests.Requests = requests.Requests.OrderByDescending(x => x.CreatedOn).Skip((pageNumber - 1) * itemsPerPage).Take(itemsPerPage).ToList();
 
             return requests;
+        }
+
+        private IEnumerable<RequestViewModel> GetWorkshopRequests(bool accepted, bool acceptedByMe, string userId)
+        {
+            var requests = this.workshopService
+                .GetAllRequests()
+                .Where(x => !string.IsNullOrEmpty(x.AcceptedById) == accepted || (acceptedByMe && x.AcceptedById == userId))
+                .Select(x => this.mapper.Map<RequestViewModel>(x))
+                .AsEnumerable();
+
+            return requests;
+        }
+
+        private IEnumerable<RequestViewModel> GetCarWashRequests(bool accepted, bool acceptedByMe, string userId)
+        {
+            var requests = this.carWashService
+                .GetAllRequests()
+                .Where(x => !string.IsNullOrEmpty(x.AcceptedById) == accepted || (acceptedByMe && x.AcceptedById == userId))
+                .Select(x => this.mapper.Map<RequestViewModel>(x))
+                .AsEnumerable();
+
+            return requests;
+        }
+
+        private IDictionary<string, string> GetRequestRoutes(FilterViewModel filter)
+        {
+            return new Dictionary<string, string>
+            {
+                [nameof(filter.Accepted)] = filter.Accepted.ToString(),
+                [nameof(filter.AcceptedByMe)] = filter.AcceptedByMe.ToString(),
+                [nameof(filter.RoadsideAssistance)] = filter.RoadsideAssistance.ToString(),
+                [nameof(filter.Insurances)] = filter.Insurances.ToString(),
+                [nameof(filter.AnnualTechnicalInspections)] = filter.AnnualTechnicalInspections.ToString(),
+                [nameof(filter.CarWashes)] = filter.CarWashes.ToString(),
+                [nameof(filter.Workshops)] = filter.Workshops.ToString(),
+            };
         }
     }
 }

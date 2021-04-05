@@ -136,12 +136,11 @@
                 .ToList();
         }
 
-        public IEnumerable<CarWashRequest> GetAllRequests()
+        public IQueryable<CarWashRequest> GetAllRequests()
         {
             return this.carWashRequestRepository
                 .AllAsNoTracking()
-                .Include(x => x.User)
-                .ToList();
+                .Include(x => x.User);
         }
 
         public IEnumerable<CarWashRequest> GetAllRequestsByUserId(string userId)

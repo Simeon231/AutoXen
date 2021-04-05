@@ -33,6 +33,8 @@
             {
                 // default values
                 input.PageNumber = 1;
+                input.Accepted = false;
+                input.AcceptedByMe = true;
                 input.Workshops = true;
                 input.CarWashes = true;
                 input.AnnualTechnicalInspections = true;
@@ -40,7 +42,8 @@
                 input.Insurances = true;
             }
 
-            var model = this.requestsService.GetAllRequests(input);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var model = this.requestsService.GetAllRequests(input, userId);
 
             return this.View(model);
         }
