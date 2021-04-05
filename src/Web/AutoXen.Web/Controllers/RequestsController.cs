@@ -3,6 +3,7 @@
     using System.Security.Claims;
 
     using AutoXen.Services.Data;
+    using AutoXen.Web.ViewModels.Requests;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,7 @@
         }
 
         [Authorize]
-        public IActionResult Index()
+        public IActionResult Index(FilterViewModel input)
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var model = this.requestsService.GetAll(userId);

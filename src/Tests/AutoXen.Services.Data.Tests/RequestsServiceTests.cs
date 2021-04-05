@@ -40,9 +40,9 @@
                 .Returns(workshopRequests);
 
             var service = new RequestsService(this.carWashService.Object, this.workshopService.Object, this.mapper);
-            var requests = service.GetAll(string.Empty).ToList();
+            var requests = service.GetAll(string.Empty).Requests.ToList();
 
-            Assert.Equal(6, requests.Count());
+            Assert.Equal(6, requests.Count);
             Assert.Equal("workshopRequest2", requests.First().Id);
             Assert.Equal("carWashRequest0", requests.Last().Id);
         }
