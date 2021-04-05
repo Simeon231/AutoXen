@@ -43,16 +43,16 @@
             var carwashes = model.CarWashes ? this.GetCarWashRequests(model.Accepted, model.AcceptedByMe, userId) : new List<RequestViewModel>();
 
             var requests = this.mapper.Map<RequestsViewModel>(model);
-            var pageNumber = model.PageNumber;
-
             requests.ItemsPerPage = itemsPerPage;
-            requests.PageNumber = pageNumber;
-            requests.RequestsCount = workshops.Count() + carwashes.Count();
             requests.Routes = this.GetRequestRoutes(model);
 
             requests.Requests.AddRange(workshops);
             requests.Requests.AddRange(carwashes);
-            requests.Requests = requests.Requests.OrderByDescending(x => x.CreatedOn).Skip((pageNumber - 1) * itemsPerPage).Take(itemsPerPage).ToList();
+            requests.RequestsCount = requests.Requests.Count;
+
+            var maximumPage = ((requests.RequestsCount - 1) / itemsPerPage) + 1;
+            requests.PageNumber = maximumPage >= model.PageNumber ? model.PageNumber : maximumPage;
+            requests.Requests = requests.Requests.OrderByDescending(x => x.CreatedOn).Skip((requests.PageNumber - 1) * itemsPerPage).Take(itemsPerPage).ToList();
 
             return requests;
         }

@@ -18,10 +18,6 @@
 
         public Task SubmitRequestAsync(WorkshopAdminViewModel model);
 
-        public IEnumerable<WorkshopRequest> GetWorkshopRequestsByUserId(string userId);
-
-        public IQueryable<WorkshopRequest> GetAllRequests();
-
         public IEnumerable<ServiceWithPriceResponseModel> GetServicesByWorkshopId(int workshopId);
 
         public IEnumerable<ServiceResponseModel> GetAllServices();
@@ -35,5 +31,9 @@
         public IEnumerable<int> GetWorkshopServicesIdsByRequestId(string requestId);
 
         public Task AcceptAsync(AcceptViewModel model);
+
+        public IQueryable<WorkshopRequest> GetAllRequestsByUserId(string userId);
+
+        public IQueryable<WorkshopRequest> GetAllRequests();
     }
 }

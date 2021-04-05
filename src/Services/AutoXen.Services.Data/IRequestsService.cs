@@ -4,6 +4,6 @@
 
     public interface IRequestsService
     {
-        public RequestsViewModel GetAll(FilterViewModel model, string userId);
+        public RequestsViewModel GetAll(FilterViewModel model, string userId, int itemsPerPage = 10);
     }
 }

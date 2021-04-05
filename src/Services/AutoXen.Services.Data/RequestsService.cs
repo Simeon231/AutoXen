@@ -22,19 +22,56 @@
             this.mapper = mapper;
         }
 
-        public RequestsViewModel GetAll(FilterViewModel model, string userId)
+        public RequestsViewModel GetAll(FilterViewModel model, string userId, int itemsPerPage = 10)
         {
+            var workshopRequests = model.Workshops ? this.GetUsersWorkshopRequests(userId) : new List<RequestViewModel>();
+            var carwashRequests = model.CarWashes ? this.GetUsersCarWashRequests(userId) : new List<RequestViewModel>();
+
             var requests = new RequestsViewModel()
             {
                 Requests = new List<RequestViewModel>(),
             };
 
-            requests.Requests.AddRange(this.carWashService.GetAllRequestsByUserId(userId).Select(x => this.mapper.Map<RequestViewModel>(x)));
-            requests.Requests.AddRange(this.workshopService.GetWorkshopRequestsByUserId(userId).Select(x => this.mapper.Map<RequestViewModel>(x)));
+            requests.ItemsPerPage = itemsPerPage;
+            requests.Routes = this.GetRequestRoutes(model);
 
-            requests.Requests = requests.Requests.OrderByDescending(x => x.CreatedOn).ToList();
+            requests.Requests.AddRange(workshopRequests);
+            requests.Requests.AddRange(carwashRequests);
+            requests.RequestsCount = requests.Requests.Count;
+
+            var maximumPage = ((requests.RequestsCount - 1) / itemsPerPage) + 1;
+            requests.PageNumber = maximumPage >= model.PageNumber ? model.PageNumber : maximumPage;
+            requests.Requests = requests.Requests.OrderByDescending(x => x.CreatedOn).Skip((requests.PageNumber - 1) * itemsPerPage).Take(itemsPerPage).ToList();
 
             return requests;
+        }
+
+        private IEnumerable<RequestViewModel> GetUsersWorkshopRequests(string userId)
+        {
+            return this.workshopService
+                .GetAllRequestsByUserId(userId)
+                .Select(x => this.mapper.Map<RequestViewModel>(x))
+                .AsEnumerable();
+        }
+
+        private IEnumerable<RequestViewModel> GetUsersCarWashRequests(string userId)
+        {
+            return this.carWashService
+                .GetAllRequestsByUserId(userId)
+                .Select(x => this.mapper.Map<RequestViewModel>(x))
+                .AsEnumerable();
+        }
+
+        private IDictionary<string, string> GetRequestRoutes(FilterViewModel filter)
+        {
+            return new Dictionary<string, string>
+            {
+                [nameof(filter.RoadsideAssistance)] = filter.RoadsideAssistance.ToString(),
+                [nameof(filter.Insurances)] = filter.Insurances.ToString(),
+                [nameof(filter.AnnualTechnicalInspections)] = filter.AnnualTechnicalInspections.ToString(),
+                [nameof(filter.CarWashes)] = filter.CarWashes.ToString(),
+                [nameof(filter.Workshops)] = filter.Workshops.ToString(),
+            };
         }
     }
 }

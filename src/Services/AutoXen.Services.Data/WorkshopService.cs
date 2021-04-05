@@ -95,13 +95,12 @@
             }
         }
 
-        public IEnumerable<WorkshopRequest> GetWorkshopRequestsByUserId(string userId)
+        public IQueryable<WorkshopRequest> GetAllRequestsByUserId(string userId)
         {
             return this.workshopRequestRepository
                 .AllWithDeleted()
                 .Include(x => x.Car)
-                .Where(x => x.UserId == userId)
-                .ToList();
+                .Where(x => x.UserId == userId);
         }
 
         public WorkshopRequestDetailsViewModel GetWorkshopRequestDetails(string userId, string requestId, bool isAdmin = false)

@@ -22,10 +22,10 @@
 
         public CarWashRequestDetailsViewModel GetCarWashRequest(string userId, string requestId, bool isAdmin = false);
 
-        public IEnumerable<CarWashRequest> GetAllRequestsByUserId(string userId);
+        public Task AcceptAsync(AcceptViewModel model);
+
+        public IQueryable<CarWashRequest> GetAllRequestsByUserId(string userId);
 
         public IQueryable<CarWashRequest> GetAllRequests();
-
-        public Task AcceptAsync(AcceptViewModel model);
     }
 }
