@@ -1,38 +1,85 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 @using PluralizeService.Core;
 @inject IViewLocalizer Localizer
-@model IEnumerable<AutoXen.Web.ViewModels.Requests.RequestViewModel>
+@model AutoXen.Web.ViewModels.Requests.RequestsViewModel
 
 <h4 class="text-center m-3">@Localizer["YourRequests"]</h4>
-<div class="d-flex justify-content-center">
-    <table class="table table-sm table-hover border border-dark table-bordered col-md-10">
-        <thead class="thead-dark">
-            <tr>
-                <th>
-                    @Localizer["YourCar"]
-                </th>
-                <th>
-                    @Localizer["CreatedOn"]
-                </th>
-                <th>
-                    @Localizer["RequestType"]
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model != null)
-            {
-                @foreach (var request in Model)
+<form class="mt-md-3" method="get">
+    <div class="d-flex justify-content-center">
+        <div class="bg-dark text-white col-md-10">
+            <div class="text-center mt-2 mb-2">
+                <button class="btn btn-primary shadow-none" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Filters
+                </button>
+            </div>
+
+            <div id="collapseExample" class="collapse m-0 p-0">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-4 col-sm-6">
+                        <label class="col-form-label" asp-for="Workshops"></label>
+                        <input class="form-check-inline" asp-for="Workshops" />
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-sm-6">
+                        <label class="col-form-label" asp-for="CarWashes"></label>
+                        <input class="form-check-inline" asp-for="CarWashes" />
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-sm-6">
+                        <label class="col-form-label" asp-for="Insurances"></label>
+                        <input class="form-check-inline" asp-for="Insurances" />
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-sm-6">
+                        <label class="col-form-label" asp-for="RoadsideAssistance"></label>
+                        <input class="form-check-inline" asp-for="RoadsideAssistance" />
+                    </div>
+                    <div class="col-xl-4 col-lg-5 col-sm-6 col-12">
+                        <label class="col-form-label" asp-for="AnnualTechnicalInspections"></label>
+                        <input class="form-check-inline" asp-for="AnnualTechnicalInspections" />
+                    </div>
+                </div>
+
+                <input hidden asp-for="PageNumber" />
+
+                <div class="d-flex justify-content-center col mb-2 mt-2">
+                    <button class="btn btn-primary pl-3 pr-3" type="submit">Filter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <table class="table table-sm table-hover border border-dark table-bordered col-md-10">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        @Localizer["YourCar"]
+                    </th>
+                    <th>
+                        @Localizer["CreatedOn"]
+                    </th>
+                    <th>
+                        @Localizer["RequestType"]
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
                 {
-                    <tr>
-                        <td>@($"{request.Car.Brand} - {request.Car.Model} - {request.Car.RegistrationPlate}")</td>
-                        <td class="momentTime">@request.CreatedOn</td>
-                        <td>@Localizer[request.RequestName]</td>
-                        <td class="text-center"><a asp-controller="@(PluralizationProvider.Pluralize(request.RequestName))" asp-action="Details" asp-route-id="@request.Id" class="btn btn-outline-info">@Localizer["Info"]</a></td>
-                    </tr>
+                    @foreach (var request in Model.Requests)
+                    {
+                        <tr>
+                            <td>@($"{request.Car.Brand} - {request.Car.Model} - {request.Car.RegistrationPlate}")</td>
+                            <td class="momentTime">@request.CreatedOn</td>
+                            <td>@Localizer[request.RequestName]</td>
+                            <td class="text-center"><a asp-controller="@(PluralizationProvider.Pluralize(request.RequestName))" asp-action="Details" asp-route-id="@request.Id" class="btn btn-outline-info">@Localizer["Info"]</a></td>
+                        </tr>
+                    }
                 }
-            }
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="row">
+            <partial name="_PagingPartial" model="@Model" />
+        </div>
+    </div>
+</form>

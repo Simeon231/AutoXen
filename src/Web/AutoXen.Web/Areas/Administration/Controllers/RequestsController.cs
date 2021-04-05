@@ -1,6 +1,7 @@
 ﻿namespace AutoXen.Web.Areas.Administration.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -26,16 +27,23 @@
             this.emailService = emailService;
         }
 
-        public IActionResult Index(FilterViewModel model)
+        public IActionResult Index(FilterViewModel input)
         {
-            if (model.PageNumber <= 0)
+            if (input.PageNumber <= 0)
             {
-                model.PageNumber = 1;
+                // default values
+                input.PageNumber = 1;
+                input.Accepted = false;
+                input.AcceptedByMe = true;
+                input.Workshops = true;
+                input.CarWashes = true;
+                input.AnnualTechnicalInspections = true;
+                input.RoadsideAssistance = true;
+                input.Insurances = true;
             }
 
-            var wash = model.CarWashes;
-            model = this.requestsService.GetAllRequests(model.PageNumber);
-            model.CarWashes = wash;
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var model = this.requestsService.GetAllRequests(input, userId);
 
             return this.View(model);
         }

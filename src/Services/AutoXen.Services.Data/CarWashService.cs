@@ -136,21 +136,19 @@
                 .ToList();
         }
 
-        public IEnumerable<CarWashRequest> GetAllRequests()
+        public IQueryable<CarWashRequest> GetAllRequests()
         {
             return this.carWashRequestRepository
                 .AllAsNoTracking()
-                .Include(x => x.User)
-                .ToList();
+                .Include(x => x.User);
         }
 
-        public IEnumerable<CarWashRequest> GetAllRequestsByUserId(string userId)
+        public IQueryable<CarWashRequest> GetAllRequestsByUserId(string userId)
         {
             return this.carWashRequestRepository
                 .AllWithDeleted()
                 .Include(x => x.Car)
-                .Where(x => x.UserId == userId)
-                .ToList();
+                .Where(x => x.UserId == userId);
         }
     }
 }

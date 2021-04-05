@@ -8,6 +8,7 @@
     using AutoXen.Data.Models.CarWash;
     using AutoXen.Data.Models.Workshop;
     using AutoXen.Web.Infrastructure.Profiles;
+    using AutoXen.Web.ViewModels.Requests;
     using Moq;
     using Xunit;
 
@@ -28,21 +29,22 @@
             this.mapper = mockMapper.CreateMapper();
         }
 
+        // TODO FIX - doesn't work
         [Fact]
         public void GetAllShouldReturnAllRequests()
         {
             var carWashRequests = this.GetCarWashRequests();
             this.carWashService.Setup(x => x.GetAllRequestsByUserId(string.Empty))
-                .Returns(carWashRequests);
+                .Returns(carWashRequests.AsQueryable());
 
             var workshopRequests = this.GetWorkshopRequests();
-            this.workshopService.Setup(x => x.GetWorkshopRequestsByUserId(string.Empty))
-                .Returns(workshopRequests);
+            this.workshopService.Setup(x => x.GetAllRequestsByUserId(string.Empty))
+                .Returns(workshopRequests.AsQueryable());
 
             var service = new RequestsService(this.carWashService.Object, this.workshopService.Object, this.mapper);
-            var requests = service.GetAll(string.Empty).ToList();
+            var requests = service.GetAll(new FilterViewModel(), string.Empty).Requests.ToList();
 
-            Assert.Equal(6, requests.Count());
+            Assert.Equal(6, requests.Count);
             Assert.Equal("workshopRequest2", requests.First().Id);
             Assert.Equal("carWashRequest0", requests.Last().Id);
         }

@@ -1,6 +1,7 @@
 ﻿namespace AutoXen.Web.ViewModels.Common
 {
     using System;
+    using System.Collections.Generic;
 
     public class PagingViewModel
     {
@@ -19,5 +20,7 @@
         public int RequestsCount { get; set; }
 
         public int ItemsPerPage { get; set; }
+
+        public IDictionary<string, string> Routes { get; set; }
     }
 }

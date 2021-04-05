@@ -95,13 +95,12 @@
             }
         }
 
-        public IEnumerable<WorkshopRequest> GetWorkshopRequestsByUserId(string userId)
+        public IQueryable<WorkshopRequest> GetAllRequestsByUserId(string userId)
         {
             return this.workshopRequestRepository
                 .AllWithDeleted()
                 .Include(x => x.Car)
-                .Where(x => x.UserId == userId)
-                .ToList();
+                .Where(x => x.UserId == userId);
         }
 
         public WorkshopRequestDetailsViewModel GetWorkshopRequestDetails(string userId, string requestId, bool isAdmin = false)
@@ -217,13 +216,11 @@
                 .ToList();
         }
 
-        // Change to IQueryable or add ViewModel
-        public IEnumerable<WorkshopRequest> GetAllRequests()
+        public IQueryable<WorkshopRequest> GetAllRequests()
         {
             return this.workshopRequestRepository
                 .AllAsNoTracking()
-                .Include(x => x.User)
-                .ToList();
+                .Include(x => x.User);
         }
 
         public async Task AcceptAsync(AcceptViewModel model)

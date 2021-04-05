@@ -1,4 +1,4 @@
-﻿namespace AutoXen.Web.ViewModels.Administration.Requests
+﻿namespace AutoXen.Web.ViewModels.Requests
 {
     using System.ComponentModel.DataAnnotations;
 
@@ -7,12 +7,6 @@
 
     public class FilterViewModel : PagingViewModel
     {
-        [Display(Name = "Accepted")]
-        public bool Accepted { get; set; }
-
-        [Display(Name = "Accepted by me")]
-        public bool AcceptedByMe { get; set; }
-
         [Display(Name = GlobalConstants.Workshop)]
         public bool Workshops { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿namespace AutoXen.Services.Data
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using AutoXen.Data.Models.CarWash;
@@ -21,10 +22,10 @@
 
         public CarWashRequestDetailsViewModel GetCarWashRequest(string userId, string requestId, bool isAdmin = false);
 
-        public IEnumerable<CarWashRequest> GetAllRequestsByUserId(string userId);
-
-        public IEnumerable<CarWashRequest> GetAllRequests();
-
         public Task AcceptAsync(AcceptViewModel model);
+
+        public IQueryable<CarWashRequest> GetAllRequestsByUserId(string userId);
+
+        public IQueryable<CarWashRequest> GetAllRequests();
     }
 }
