@@ -11,7 +11,7 @@
 
         public int? CarWashId { get; set; }
 
-        [Display(Name = "Every car wash")]
+        [Display(Name = "EveryCarWash")]
         public bool AdminChooseCarWash { get; set; }
 
         public string Message { get; set; }

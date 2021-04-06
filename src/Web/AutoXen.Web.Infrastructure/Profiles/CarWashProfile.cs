@@ -20,6 +20,9 @@
             this.CreateMap<CarWashRequest, AdminCarWashDetailsViewModel>()
                 .ForMember(x => x.RequestInformation, scr => scr.MapFrom(dest => dest))
                 .ReverseMap();
+
+            this.CreateMap<CarWash, CarWashViewModel>()
+                .ReverseMap();
         }
     }
 }

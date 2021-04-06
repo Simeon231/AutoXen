@@ -1,0 +1,10 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model string
+
+<div class="col-md-4 mt-2 mb-2">
+    <div class="text-center">
+        <label class="col-form-label" asp-for="@Model">@Localizer["WriteMessage"]</label>
+    </div>
+    <textarea class="form-control input-group" rows="15" asp-for="@Model" name="Message"></textarea>
+</div>

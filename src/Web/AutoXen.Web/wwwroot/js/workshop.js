@@ -54,7 +54,7 @@ function AddServicesToSelect(data) {
             option.value = x.id;
         }
         else {
-            option.text = `${x.serviceName} - ${x.price}$`
+            option.text = `${x.serviceName} - ${x.price}lv`
             option.value = x.id;
         }
 

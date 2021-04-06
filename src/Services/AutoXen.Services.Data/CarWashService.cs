@@ -128,11 +128,7 @@
         {
             return this.carWashRepository
                 .AllAsNoTracking()
-                .Select(x => new CarWashViewModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                })
+                .Select(x => this.mapper.Map<CarWashViewModel>(x))
                 .ToList();
         }
 

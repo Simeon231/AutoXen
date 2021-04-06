@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
 
     using AutoXen.Data.Models.CarWash;
+    using AutoXen.Services;
 
     internal class CarWashesSeeder : ISeeder
     {
@@ -15,13 +16,41 @@
                 return;
             }
 
-            await dbContext.CarWashes.AddAsync(new CarWash() { Name = "Bubble Time" });
-            await dbContext.CarWashes.AddAsync(new CarWash() { Name = "Wash Factory" });
-            await dbContext.CarWashes.AddAsync(new CarWash() { Name = "Happy Car Wash" });
-            await dbContext.CarWashes.AddAsync(new CarWash() { Name = "Blue Wave" });
-            await dbContext.CarWashes.AddAsync(new CarWash() { Name = "AutoSpa" });
-            await dbContext.CarWashes.AddAsync(new CarWash() { Name = "Auto Shine" });
-            await dbContext.CarWashes.AddAsync(new CarWash() { Name = "Waterway Gas & Wash" });
+            await dbContext.CarWashes.AddAsync(new CarWash()
+            {
+                Name = "Bubble Time", 
+                Price = RandomValues.RandomPrice(),
+            });
+            await dbContext.CarWashes.AddAsync(new CarWash()
+            {
+                Name = "Wash Factory",
+                Price = RandomValues.RandomPrice(),
+            });
+            await dbContext.CarWashes.AddAsync(new CarWash()
+            {
+                Name = "Happy Car Wash",
+                Price = RandomValues.RandomPrice(),
+            });
+            await dbContext.CarWashes.AddAsync(new CarWash()
+            {
+                Name = "Blue Wave",
+                Price = RandomValues.RandomPrice(),
+            });
+            await dbContext.CarWashes.AddAsync(new CarWash()
+            {
+                Name = "AutoSpa",
+                Price = RandomValues.RandomPrice(),
+            });
+            await dbContext.CarWashes.AddAsync(new CarWash()
+            {
+                Name = "Auto Shine",
+                Price = RandomValues.RandomPrice(),
+            });
+            await dbContext.CarWashes.AddAsync(new CarWash()
+            {
+                Name = "Waterway Gas & Wash",
+                Price = RandomValues.RandomPrice(),
+            });
         }
     }
 }

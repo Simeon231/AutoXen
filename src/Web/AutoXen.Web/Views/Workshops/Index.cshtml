@@ -27,7 +27,7 @@
                         @foreach (var workshop in this.workshopService.GetAllWorkshops())
                         {
                             <option data-select2 value="@workshop.Id">
-                                @($"Name: {workshop.Name} - Address: {workshop.Address}")
+                                @($"{workshop.Name} - {workshop.Address}")
                             </option>
                         }
                     </select>
@@ -83,13 +83,10 @@
             </div>
         </div>
 
-        <div class="col-md-4 mt-2">
-            <div class="text-center">
-                <label class="col-form-label" asp-for="Message">@Localizer["WriteMessage"]</label>
-            </div>
-            <textarea class="form-control input-group" rows="15" asp-for="Message"></textarea>
-        </div>
+        <partial name="_MessagePartial" model="@Model.Message"/>
     </div>
 </form>
 
-<script src="~/js/workshop.js"></script>
+@section Scripts{
+    <script src="~/js/workshop.js" asp-append-version="true"></script>
+}
