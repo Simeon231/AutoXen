@@ -34,7 +34,7 @@
                                 else
                                 {
                                     <option data-select2 value="@workshop.Id">
-                                        @($"Name: {workshop.Name} - Address: {workshop.Address}")
+                                        @($"{workshop.Name} - {workshop.Address}")
                                     </option>
                                 }
                             }
@@ -124,4 +124,6 @@
     </div>
 </div>
 
-<script src="~/js/workshop.js" asp-append-version="true"></script>
+@section Scripts{
+    <script src="~/js/workshop.js" asp-append-version="true"></script>
+}
