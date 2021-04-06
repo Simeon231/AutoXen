@@ -27,7 +27,7 @@
             this.emailService = emailService;
         }
 
-        public IActionResult Index(FilterViewModel input)
+        public IActionResult Index(AdminFilterViewModel input)
         {
             if (input.PageNumber <= 0)
             {

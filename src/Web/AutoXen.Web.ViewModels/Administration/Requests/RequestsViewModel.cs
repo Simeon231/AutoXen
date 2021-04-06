@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class RequestsViewModel : FilterViewModel
+    public class RequestsViewModel : AdminFilterViewModel
     {
         public RequestsViewModel()
         {

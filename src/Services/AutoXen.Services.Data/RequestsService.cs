@@ -22,7 +22,7 @@
             this.mapper = mapper;
         }
 
-        public RequestsViewModel GetAll(FilterViewModel model, string userId, int itemsPerPage = 10)
+        public RequestsViewModel GetAll(UserFilterViewModel model, string userId, int itemsPerPage = 10)
         {
             var workshopRequests = model.Workshops ? this.GetUsersWorkshopRequests(userId) : new List<RequestViewModel>();
             var carwashRequests = model.CarWashes ? this.GetUsersCarWashRequests(userId) : new List<RequestViewModel>();
@@ -62,7 +62,7 @@
                 .AsEnumerable();
         }
 
-        private IDictionary<string, string> GetRequestRoutes(FilterViewModel filter)
+        private IDictionary<string, string> GetRequestRoutes(UserFilterViewModel filter)
         {
             return new Dictionary<string, string>
             {

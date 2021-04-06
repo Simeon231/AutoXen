@@ -24,7 +24,7 @@
             this.CreateMap<CarWashRequest, AdminRequestInformationViewModel>()
                 .ReverseMap();
 
-            this.CreateMap<RequestsViewModel, FilterViewModel>()
+            this.CreateMap<RequestsViewModel, AdminFilterViewModel>()
                 .ReverseMap();
         }
     }

@@ -42,7 +42,7 @@
                 .Returns(workshopRequests.AsQueryable());
 
             var service = new RequestsService(this.carWashService.Object, this.workshopService.Object, this.mapper);
-            var requests = service.GetAll(new FilterViewModel(), string.Empty).Requests.ToList();
+            var requests = service.GetAll(new UserFilterViewModel(), string.Empty).Requests.ToList();
 
             Assert.Equal(6, requests.Count);
             Assert.Equal("workshopRequest2", requests.First().Id);
