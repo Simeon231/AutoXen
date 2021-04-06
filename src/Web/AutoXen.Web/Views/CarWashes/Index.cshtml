@@ -1,7 +1,9 @@
 ﻿@using AutoXen.Services.Data
 @using AutoXen.Web.ViewModels.CarWash
-@model CarWashRequestViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @inject ICarWashService washService
+@model CarWashRequestViewModel
 
 <form method="post" class=" d-flex justify-content-center">
     <div class="row mt-2 container">
@@ -15,7 +17,7 @@
             <div class="form-row d-flex justify-content-center">
                 <div class="p-1 col-md-5">
                     <div class="text-center">
-                        <label class="col-form-label" asp-for="AdminChooseCarWash"></label>
+                        <label class="col-form-label" asp-for="AdminChooseCarWash">@Localizer["EveryCarWash"]</label>
                         @if (Model.CarWashId == null)
                         {
                             <input checked class="form-check-inline" asp-for="AdminChooseCarWash" />
@@ -48,7 +50,7 @@
 
             <div class="row mt-2">
                 <div class="col text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">@Localizer["Submit"]</button>
                 </div>
             </div>
         </div>
