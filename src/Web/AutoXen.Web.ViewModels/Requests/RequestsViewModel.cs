@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class RequestsViewModel : FilterViewModel
+    public class RequestsViewModel : UserFilterViewModel
     {
         public List<RequestViewModel> Requests { get; set; }
     }

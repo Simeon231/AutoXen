@@ -17,7 +17,7 @@
         }
 
         [Authorize]
-        public IActionResult Index(FilterViewModel input)
+        public IActionResult Index(UserFilterViewModel input)
         {
             if (input.PageNumber <= 0)
             {

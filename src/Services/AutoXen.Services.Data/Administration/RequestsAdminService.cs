@@ -37,7 +37,7 @@
             }
         }
 
-        public RequestsViewModel GetAllRequests(FilterViewModel model, string userId, int itemsPerPage = 10)
+        public RequestsViewModel GetAllRequests(AdminFilterViewModel model, string userId, int itemsPerPage = 10)
         {
             var workshops = model.Workshops ? this.GetWorkshopRequests(model.Accepted, model.AcceptedByMe, userId) : new List<RequestViewModel>();
             var carwashes = model.CarWashes ? this.GetCarWashRequests(model.Accepted, model.AcceptedByMe, userId) : new List<RequestViewModel>();
@@ -79,7 +79,7 @@
             return requests;
         }
 
-        private IDictionary<string, string> GetRequestRoutes(FilterViewModel filter)
+        private IDictionary<string, string> GetRequestRoutes(AdminFilterViewModel filter)
         {
             return new Dictionary<string, string>
             {

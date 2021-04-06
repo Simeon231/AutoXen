@@ -1,18 +1,11 @@
-﻿namespace AutoXen.Web.ViewModels.Administration.Requests
+﻿namespace AutoXen.Web.ViewModels.Common
 {
     using System.ComponentModel.DataAnnotations;
 
     using AutoXen.Common;
-    using AutoXen.Web.ViewModels.Common;
 
-    public class FilterViewModel : PagingViewModel
+    public class RequestFilterViewModel : PagingViewModel
     {
-        [Display(Name = "Accepted")]
-        public bool Accepted { get; set; }
-
-        [Display(Name = "Accepted by me")]
-        public bool AcceptedByMe { get; set; }
-
         [Display(Name = GlobalConstants.Workshop)]
         public bool Workshops { get; set; }
 
