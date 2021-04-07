@@ -459,13 +459,13 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 26px;
 }
 
-#hero .icon-box h3 a {
-  color: #fff;
-  transition: ease-in-out 0.3s;
+#hero .icon-box a h3 {
+    color: #fff;
+    transition: ease-in-out 0.3s;
 }
 
-#hero .icon-box h3 a:hover {
-  color: #ffc451;
+#hero .icon-box a:hover h3 {
+    color: #ffc451;
 }
 
 #hero .icon-box:hover {

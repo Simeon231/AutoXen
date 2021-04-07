@@ -34,17 +34,17 @@
             <div class="form-row">
                 @foreach (var carWash in washService.GetAllCarWashes())
                 {
-                <div class="ml-4 ml-sm-0 col-sm-4 col-md-4 col-lg-3 form-check">
-                    @if (Model.CarWashId != null && Model.CarWashId == carWash.Id)
-                    {
-                        <input disabled type="radio" checked class="form-check-input" value="@carWash.Id" name="CarWashId" id="@carWash.Id" />
-                    }
-                    else
-                    {
-                        <input disabled readonly type="radio" class="form-check-input " value="@carWash.Id" name="CarWashId" id="@carWash.Id" />
-                    }
-                    <label class="form-check-label nowrap" for="@carWash.Id">@carWash.Name - @carWash.Price</label>
-                </div>
+                    <div class="ml-4 ml-sm-0 col-sm-4 col-md-6 col-lg-4 form-check">
+                        @if (Model.CarWashId != null && Model.CarWashId == carWash.Id)
+                        {
+                            <input disabled type="radio" checked class="form-check-input" value="@carWash.Id" name="CarWashId" id="@carWash.Id" />
+                        }
+                        else
+                        {
+                            <input disabled readonly type="radio" class="form-check-input " value="@carWash.Id" name="CarWashId" id="@carWash.Id" />
+                        }
+                        <label class="form-check-label nowrap" for="@carWash.Id">@carWash.Name - @carWash.Price</label>
+                    </div>
                 }
             </div>
         </div>

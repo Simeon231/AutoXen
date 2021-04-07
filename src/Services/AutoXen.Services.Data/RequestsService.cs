@@ -1,5 +1,6 @@
 ﻿namespace AutoXen.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -24,13 +25,11 @@
 
         public RequestsViewModel GetAll(UserFilterViewModel model, string userId, int itemsPerPage = 10)
         {
-            var workshopRequests = model.Workshops ? this.GetUsersWorkshopRequests(userId) : new List<RequestViewModel>();
-            var carwashRequests = model.CarWashes ? this.GetUsersCarWashRequests(userId) : new List<RequestViewModel>();
+            var workshopRequests = model.Workshops ? this.GetUsersWorkshopRequests(userId, model.Done) : new List<RequestViewModel>();
+            var carwashRequests = model.CarWashes ? this.GetUsersCarWashRequests(userId, model.Done) : new List<RequestViewModel>();
 
-            var requests = new RequestsViewModel()
-            {
-                Requests = new List<RequestViewModel>(),
-            };
+            var requests = this.mapper.Map<RequestsViewModel>(model);
+            requests.Requests = new List<RequestViewModel>();
 
             requests.ItemsPerPage = itemsPerPage;
             requests.Routes = this.GetRequestRoutes(model);
@@ -46,18 +45,20 @@
             return requests;
         }
 
-        private IEnumerable<RequestViewModel> GetUsersWorkshopRequests(string userId)
+        private IEnumerable<RequestViewModel> GetUsersWorkshopRequests(string userId, bool done)
         {
             return this.workshopService
                 .GetAllRequestsByUserId(userId)
+                .Where(x => (x.FinishedOn != null) == done)
                 .Select(x => this.mapper.Map<RequestViewModel>(x))
                 .AsEnumerable();
         }
 
-        private IEnumerable<RequestViewModel> GetUsersCarWashRequests(string userId)
+        private IEnumerable<RequestViewModel> GetUsersCarWashRequests(string userId, bool done)
         {
             return this.carWashService
                 .GetAllRequestsByUserId(userId)
+                .Where(x => (x.FinishedOn != null) == done)
                 .Select(x => this.mapper.Map<RequestViewModel>(x))
                 .AsEnumerable();
         }
@@ -71,6 +72,7 @@
                 [nameof(filter.AnnualTechnicalInspections)] = filter.AnnualTechnicalInspections.ToString(),
                 [nameof(filter.CarWashes)] = filter.CarWashes.ToString(),
                 [nameof(filter.Workshops)] = filter.Workshops.ToString(),
+                [nameof(filter.Done)] = filter.Done.ToString(),
             };
         }
     }
