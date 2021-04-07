@@ -21,22 +21,34 @@
         <div class="row mt-5 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
             <div class="col-xl-2 col-md-4 col-6">
                 <div class="icon-box">
-                    <i class="fas fa-info-circle"></i>
-                    <h3><a asp-controller="Home" asp-action="About" asp-area="">@Localizer["About"]</a></h3>
+                    <a asp-controller="Home" asp-action="About" asp-area="">
+                        <i class="fas fa-info-circle"></i>
+                        <h3>
+                            @Localizer["About"]
+                        </h3>
+                    </a>
                 </div>
             </div>
             @if (this.SignInManager.IsSignedIn(this.User))
             {
                 <div class="col-xl-2 col-md-4 col-6">
                     <div class="icon-box">
-                        <i class="fas fa-car"></i>
-                        <h3><a asp-controller="Cars" asp-action="All" asp-area="">@Localizer["MyCars"]</a></h3>
+                        <a asp-controller="Cars" asp-action="All" asp-area="">
+                            <i class="fas fa-car"></i>
+                            <h3>
+                                @Localizer["MyCars"]
+                            </h3>
+                        </a>
                     </div>
                 </div>
                 <div class="col-xl-2 col-md-4 col-6 mt-4 mt-md-0">
                     <div class="icon-box">
-                        <i class="fas fa-hands"></i>
-                        <h3><a asp-controller="Requests" asp-action="Index" asp-area="">@Localizer["MyRequests"]</a></h3>
+                        <a asp-controller="Requests" asp-action="Index" asp-area="">
+                            <i class="fas fa-hands"></i>
+                            <h3>
+                                @Localizer["MyRequests"]
+                            </h3>
+                        </a>
                     </div>
                 </div>
             }
@@ -44,14 +56,22 @@
             {
                 <div class="col-xl-2 col-md-4 col-6">
                     <div class="icon-box">
-                        <i class="fas fa-registered"></i>
-                        <h3><a asp-area="Identity" asp-page="/Account/Register"> @Localizer["Register"]</a></h3>
+                        <a asp-area="Identity" asp-page="/Account/Register">
+                            <i class="fas fa-registered"></i>
+                            <h3>
+                                @Localizer["Register"]
+                            </h3>
+                        </a>
                     </div>
                 </div>
                 <div class="col-xl-2 col-md-4 col-6 mt-4 mt-md-0">
                     <div class="icon-box">
-                        <i class="fas fa-sign-in-alt"></i>
-                        <h3><a asp-area="Identity" asp-page="/Account/Login"> @Localizer["Login"]</a></h3>
+                        <a asp-area="Identity" asp-page="/Account/Login">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <h3>
+                                @Localizer["Login"]
+                            </h3>
+                        </a>
                     </div>
                 </div>
             }
