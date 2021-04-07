@@ -21,7 +21,7 @@
                 <div class="form-row">
                     @foreach (var carWash in washService.GetAllCarWashes())
                     {
-                        <div class="col col-sm-2 m-3 form-check">
+                        <div class="ml-4 ml-sm-0 col-sm-4 col-md-6 col-lg-4 form-check">
                             @if (Model.CarWashId != null && Model.CarWashId == carWash.Id)
                             {
                                 <input type="radio" checked class="form-check-input" value="@carWash.Id" name="CarWashId" id="@carWash.Id" />
