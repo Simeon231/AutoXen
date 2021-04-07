@@ -23,6 +23,9 @@
 
             this.CreateMap<WorkshopRequest, RequestInformationViewModel>()
                 .ReverseMap();
+
+            this.CreateMap<RequestsViewModel, UserFilterViewModel>()
+                .ReverseMap();
         }
     }
 }

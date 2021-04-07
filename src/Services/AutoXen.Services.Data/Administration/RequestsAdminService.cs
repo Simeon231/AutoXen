@@ -39,8 +39,8 @@
 
         public RequestsViewModel GetAllRequests(AdminFilterViewModel model, string userId, int itemsPerPage = 10)
         {
-            var workshops = model.Workshops ? this.GetWorkshopRequests(model.Accepted, model.AcceptedByMe, userId) : new List<RequestViewModel>();
-            var carwashes = model.CarWashes ? this.GetCarWashRequests(model.Accepted, model.AcceptedByMe, userId) : new List<RequestViewModel>();
+            var workshops = model.Workshops ? this.GetWorkshopRequests(model.Accepted, model.AcceptedByMe, model.Done, userId) : new List<RequestViewModel>();
+            var carwashes = model.CarWashes ? this.GetCarWashRequests(model.Accepted, model.AcceptedByMe, model.Done, userId) : new List<RequestViewModel>();
 
             var requests = this.mapper.Map<RequestsViewModel>(model);
             requests.ItemsPerPage = itemsPerPage;
@@ -57,22 +57,29 @@
             return requests;
         }
 
-        private IEnumerable<RequestViewModel> GetWorkshopRequests(bool accepted, bool acceptedByMe, string userId)
+        // TODO add one predicate to all methods
+        private IEnumerable<RequestViewModel> GetWorkshopRequests(bool accepted, bool acceptedByMe, bool done, string userId)
         {
             var requests = this.workshopService
                 .GetAllRequests()
-                .Where(x => !string.IsNullOrEmpty(x.AcceptedById) == accepted || (acceptedByMe && x.AcceptedById == userId))
+                .Where(x =>
+                    ((!string.IsNullOrEmpty(x.AcceptedById) == accepted)
+                    && (x.AcceptedById == userId == acceptedByMe))
+                    && (x.FinishedOn != null == done))
                 .Select(x => this.mapper.Map<RequestViewModel>(x))
                 .AsEnumerable();
 
             return requests;
         }
 
-        private IEnumerable<RequestViewModel> GetCarWashRequests(bool accepted, bool acceptedByMe, string userId)
+        private IEnumerable<RequestViewModel> GetCarWashRequests(bool accepted, bool acceptedByMe, bool done, string userId)
         {
             var requests = this.carWashService
                 .GetAllRequests()
-                .Where(x => !string.IsNullOrEmpty(x.AcceptedById) == accepted || (acceptedByMe && x.AcceptedById == userId))
+                .Where(x =>
+                    ((!string.IsNullOrEmpty(x.AcceptedById) == accepted)
+                    && (x.AcceptedById == userId == acceptedByMe))
+                    && (x.FinishedOn != null == done))
                 .Select(x => this.mapper.Map<RequestViewModel>(x))
                 .AsEnumerable();
 
@@ -90,6 +97,7 @@
                 [nameof(filter.AnnualTechnicalInspections)] = filter.AnnualTechnicalInspections.ToString(),
                 [nameof(filter.CarWashes)] = filter.CarWashes.ToString(),
                 [nameof(filter.Workshops)] = filter.Workshops.ToString(),
+                [nameof(filter.Done)] = filter.Done.ToString(),
             };
         }
     }

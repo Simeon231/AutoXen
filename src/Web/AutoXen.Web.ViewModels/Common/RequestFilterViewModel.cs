@@ -20,5 +20,7 @@
 
         [Display(Name = GlobalConstants.AnnualTechnicalInspection)]
         public bool AnnualTechnicalInspections { get; set; }
+
+        public bool Done { get; set; }
     }
 }

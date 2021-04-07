@@ -33,7 +33,8 @@
             {
                 // default values
                 input.PageNumber = 1;
-                input.Accepted = false;
+                input.Done = false;
+                input.Accepted = true;
                 input.AcceptedByMe = true;
                 input.Workshops = true;
                 input.CarWashes = true;

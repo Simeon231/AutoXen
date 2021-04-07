@@ -23,6 +23,7 @@
             {
                 // default values
                 input.PageNumber = 1;
+                input.Done = false;
                 input.Workshops = true;
                 input.CarWashes = true;
                 input.AnnualTechnicalInspections = true;
