@@ -10,6 +10,9 @@
 
     public class WorkshopRequest : BaseDeletableModel<string>, IRequest
     {
+        private DateTime? pickUpTime;
+        private DateTime? finishedOn;
+
         public WorkshopRequest()
         {
             this.Id = Guid.NewGuid().ToString();
@@ -19,7 +22,17 @@
 
         public bool ServiceFinished { get; set; }
 
-        public DateTime? FinishedOn { get; set; }
+        public DateTime? FinishedOn
+        {
+            get => this.finishedOn;
+            set
+            {
+                if (value != null)
+                {
+                    this.finishedOn = ((DateTime)value).ToUniversalTime();
+                }
+            }
+        }
 
         public bool ReturnedCar { get; set; }
 
@@ -33,7 +46,17 @@
 
         public bool PickUpFastAsPossible { get; set; }
 
-        public DateTime? PickUpTime { get; set; }
+        public DateTime? PickUpTime
+        {
+            get => this.pickUpTime;
+            set
+            {
+                if (value != null)
+                {
+                    this.pickUpTime = ((DateTime)value).ToUniversalTime();
+                }
+            }
+        }
 
         [MaxLength(300)]
         public string OtherServices { get; set; }

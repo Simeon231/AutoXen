@@ -24,21 +24,24 @@ if (inputDates != null) {
 
 // moment.js
 function convertTimeToLocal(time) {
-    const fmt = 'DD/MM/YYYY HH:mm:ss';
-    time.textContent;
-    let result = moment.utc(time.textContent, fmt).local().format(fmt);
-
-    if (result == "Invalid date") {
-        result = moment.utc(time.textContent, "MM/DD/YYYY hh:mm:ss A").local().format(fmt);
-    }
+    const fmt = 'L LTS';
+    console.log(time.textContent);
+    //let result = moment.utc(time.textContent, "DD/MM/YYYY hh:mm:ss A").local().format(fmt);
+    //console.log(result);
+    //if (result == "Invalid date") {
+    result = moment.utc(time.textContent, "MM/DD/YYYY hh:mm:ss A").local().format(fmt);
+    //}
 
     time.textContent = result;
+    //console.log('')
 }
 
 function convertTimeToLocalForInput(time) {
-    const fmt = 'yyyy-MM-ddThh:mm';
-    const result = moment.utc(time.value, fmt).local().format(fmt);
-    //time.value = result;
+    const fmt = 'YYYY-MM-DDTHH:mm:ss.sss';
+
+    result = moment.utc(time.value, fmt).local().format(fmt);
+
+    time.value = result;
 }
 
 // Select2
