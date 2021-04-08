@@ -8,9 +8,6 @@
 
     public class CarWashRequest : BaseDeletableModel<string>, IRequest
     {
-        private DateTime? pickUpTime;
-        private DateTime? finishedOn;
-
         public CarWashRequest()
         {
             this.Id = Guid.NewGuid().ToString();
@@ -23,17 +20,7 @@
 
         public bool AdminChooseCarWash { get; set; }
 
-        public DateTime? PickUpTime
-        {
-            get => this.pickUpTime;
-            set
-            {
-                if (value != null)
-                {
-                    this.pickUpTime = ((DateTime)value).ToUniversalTime();
-                }
-            }
-        }
+        public DateTime? PickUpTime { get; set; }
 
         public bool PickedUp { get; set; }
 
@@ -59,17 +46,7 @@
 
         public Car.Car Car { get; set; }
 
-        public DateTime? FinishedOn
-        {
-            get => this.finishedOn;
-            set
-            {
-                if (value != null)
-                {
-                    this.finishedOn = ((DateTime)value).ToUniversalTime();
-                }
-            }
-        }
+        public DateTime? FinishedOn { get; set; }
 
         //// public ICollection<Message> Messages { get; set; }
 
