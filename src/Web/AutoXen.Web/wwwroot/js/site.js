@@ -25,12 +25,12 @@ if (inputDates != null) {
 // moment.js
 function convertTimeToLocal(time) {
     const fmt = 'L LTS';
-    console.log(time.textContent);
-    //let result = moment.utc(time.textContent, "DD/MM/YYYY hh:mm:ss A").local().format(fmt);
-    //console.log(result);
-    //if (result == "Invalid date") {
-    result = moment.utc(time.textContent, "MM/DD/YYYY hh:mm:ss A").local().format(fmt);
-    //}
+    //console.log(time.textContent);
+    let result = moment.utc(time.textContent, "DD/MM/YYYY hh:mm:ss A").local().format(fmt);
+    console.log(result);
+    if (result == "Invalid date") {
+        result = moment.utc(time.textContent, "MM/DD/YYYY hh:mm:ss A").local().format(fmt);
+    }
 
     time.textContent = result;
     //console.log('')
