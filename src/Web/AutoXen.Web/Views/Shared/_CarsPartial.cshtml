@@ -12,11 +12,11 @@
         <label class="col-form-label" for="CarId">@Localizer["PickCar"]</label>
     </div>
     <div class="form-row d-flex justify-content-center">
-        <div class="col-lg-10">
+        <div class="col-lg-8">
             <select class="form-control" name="CarId">
                 @foreach (var car in this.carService.GetAllCarsByUserId(user.GetUserId(this.User)))
                 {
-                    var name = $"Brand: {car.Brand} - Model: {car.Model} - Registration plate: {car.RegistrationPlate}";
+                    var name = $"{car.Brand} - {car.Model} - {car.RegistrationPlate}";
                     if (car.Id == Model)
                     {
                         <option selected value="@car.Id">
