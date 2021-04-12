@@ -117,19 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CarError" xml:space="preserve">
+    <value>Pick a car.</value>
+  </data>
   <data name="Company" xml:space="preserve">
     <value>Company</value>
+  </data>
+  <data name="CompanyError" xml:space="preserve">
+    <value>Pick a company.</value>
   </data>
   <data name="EndDate" xml:space="preserve">
     <value>End date</value>
   </data>
+  <data name="EndDateError" xml:space="preserve">
+    <value>End date is required.</value>
+  </data>
   <data name="Insurances" xml:space="preserve">
     <value>Insurances</value>
+  </data>
+  <data name="InsurancesError" xml:space="preserve">
+    <value>Pick insurances.</value>
+  </data>
+  <data name="NumberOfPaymentsError" xml:space="preserve">
+    <value>Pick number of payments.</value>
   </data>
   <data name="Payments" xml:space="preserve">
     <value>Payments</value>
   </data>
   <data name="StartDate" xml:space="preserve">
     <value>Start date</value>
+  </data>
+  <data name="StartDateError" xml:space="preserve">
+    <value>Start date is required.</value>
   </data>
 </root>

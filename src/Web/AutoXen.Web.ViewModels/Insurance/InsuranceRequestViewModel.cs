@@ -6,26 +6,26 @@
 
     public class InsuranceRequestViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "CarError")]
         public string CarId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "CompanyError")]
         [Display(Name = "Company")]
         public int InsurerId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "InsurancesError")]
         [Display(Name = "Insurances")]
         public IEnumerable<int> InsuranceIds { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "StartDateError")]
         [Display(Name = "StartDate")]
         public DateTime InsurenceStart { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "EndDateError")]
         [Display(Name = "EndDate")]
         public DateTime InsuranceEnd { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "NumberOfPaymentsError")]
         [Display(Name = "Payments")]
         public byte NumberOfPayments { get; set; }
 
