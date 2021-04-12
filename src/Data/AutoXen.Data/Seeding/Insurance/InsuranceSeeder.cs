@@ -1,9 +1,7 @@
 ﻿namespace AutoXen.Data.Seeding.Insurance
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
     public class InsuranceSeeder : ISeeder
