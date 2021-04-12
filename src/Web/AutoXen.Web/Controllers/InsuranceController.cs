@@ -1,5 +1,7 @@
 ﻿namespace AutoXen.Web.Controllers
 {
+    using System;
+
     using AutoXen.Web.ViewModels.Insurance;
     using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +9,7 @@
     {
         public ActionResult Index()
         {
-            return this.View(new InsuranceRequestViewModel());
+            return this.View();
         }
 
         [HttpPost]

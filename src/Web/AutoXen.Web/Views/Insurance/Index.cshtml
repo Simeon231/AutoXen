@@ -10,7 +10,7 @@
         <div class="col-md-8">
             <div asp-validation-summary="All" class="text-danger"></div>
 
-            <partial name="_CarsPartial" model="@Model.CarId" />
+            <partial name="_CarsPartial" model="@Model?.CarId" />
 
             <div class="form-row">
                 <div class="text-center col-lg-6">
@@ -37,13 +37,13 @@
             <div class="form-row mt-2">
                 <div class="text-center col-lg-5">
                     <label class="col-form-label" asp-for="InsurenceStart"></label>
-                    <input class="form-control input-group" type="datetime-local" asp-for="InsurenceStart" />
+                    <input class="form-control input-group" type="datetime-local" asp-for="InsurenceStart"/>
                     <span asp-validation-for="InsurenceStart" class="text-danger"></span>
                 </div>
 
                 <div class="text-center col-lg-5">
                     <label class="col-form-label" asp-for="InsuranceEnd"></label>
-                    <input class="form-control input-group" type="datetime-local" asp-for="InsuranceEnd" />
+                    <input class="form-control input-group" type="datetime-local" asp-for="InsuranceEnd"/>
                     <span asp-validation-for="InsuranceEnd" class="text-danger"></span>
                 </div>
 
@@ -67,7 +67,7 @@
             </div>
         </div>
 
-        <partial name="_MessagePartial" model="@Model.Message" />
+        <partial name="_MessagePartial" model="@Model?.Message" />
     </div>
 </form>
 
