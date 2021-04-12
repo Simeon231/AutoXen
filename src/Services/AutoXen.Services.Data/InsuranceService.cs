@@ -7,6 +7,7 @@
     using AutoXen.Data.Common.Repositories;
     using AutoXen.Data.Models.Insurance;
     using AutoXen.Web.ViewModels.Insurance;
+    using Microsoft.EntityFrameworkCore;
 
     public class InsuranceService : IInsuranceService
     {
@@ -36,12 +37,13 @@
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<InsuranceViewModel> GetInsurancesByInsurerId(int id)
+        public IEnumerable<InsurerInsuranceViewModel> GetInsurancesByInsurerId(int id)
         {
             var insurances = this.insurerInsurancesRepository
                 .AllAsNoTracking()
+                .Include(x => x.Insurance)
                 .Where(x => x.InsurerId == id)
-                .Select(x => this.mapper.Map<InsuranceViewModel>(x))
+                .Select(x => this.mapper.Map<InsurerInsuranceViewModel>(x))
                 .AsEnumerable();
 
             return insurances;
