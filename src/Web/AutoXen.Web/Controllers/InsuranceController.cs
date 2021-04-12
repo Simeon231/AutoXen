@@ -10,12 +10,13 @@
             return this.View(new InsuranceRequestViewModel());
         }
 
-        public ActionResult Details(int id)
+        [HttpPost]
+        public ActionResult Index(InsuranceRequestViewModel input)
         {
-            return this.View();
+            return this.View(new InsuranceRequestViewModel());
         }
 
-        public ActionResult Create()
+        public ActionResult Details(int id)
         {
             return this.View();
         }
