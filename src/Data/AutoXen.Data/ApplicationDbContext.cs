@@ -47,7 +47,7 @@
 
         public DbSet<Insurance> Insurances { get; set; }
 
-        public DbSet<InsurersRequest> InsurersRequests { get; set; }
+        public DbSet<InsuranceRequest> InsuranceRequests { get; set; }
 
         public DbSet<Insurer> Insurers { get; set; }
 
