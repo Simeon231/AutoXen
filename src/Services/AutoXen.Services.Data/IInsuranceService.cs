@@ -10,6 +10,6 @@
 
         IEnumerable<InsurerViewModel> GetInsurers();
 
-        IEnumerable<InsuranceViewModel> GetInsurance();
+        IEnumerable<InsuranceViewModel> GetInsurancesByInsurerId(int id);
     }
 }
