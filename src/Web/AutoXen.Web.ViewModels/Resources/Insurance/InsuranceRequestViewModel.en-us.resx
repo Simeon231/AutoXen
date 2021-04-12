@@ -117,7 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Submit" xml:space="preserve">
-    <value>Изпращане</value>
+  <data name="Company" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>End date</value>
+  </data>
+  <data name="Insurances" xml:space="preserve">
+    <value>Insurances</value>
+  </data>
+  <data name="Payments" xml:space="preserve">
+    <value>Payments</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Start date</value>
   </data>
 </root>

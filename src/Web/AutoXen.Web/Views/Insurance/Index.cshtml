@@ -14,7 +14,7 @@
 
             <div class="form-row">
                 <div class="text-center col-lg-6">
-                    <label class="col-form-label">@Localizer["Company"]</label>
+                    <label class="col-form-label" asp-for="InsurerId"></label>
                     <select class="form-control input-group" asp-for="InsurerId">
                         @foreach (var insurer in insuranceService.GetInsurers())
                         {
@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="text-center col-lg-6">
-                    <label class="col-form-label">@Localizer["Insurances"]</label>
+                    <label class="col-form-label" asp-for="InsuranceIds"></label>
                     <select class="form-control input-group js-select-multiple" multiple data-placeholder="@Localizer["SelectOption"]" asp-for="InsuranceIds">
                         @foreach (var insurance in insuranceService.GetInsurancesByInsurerId(1))
                         {
@@ -36,29 +36,25 @@
 
             <div class="form-row mt-2">
                 <div class="text-center col-lg-5">
-                    <label class="col-form-label">@Localizer["StartDate"]</label>
+                    <label class="col-form-label" asp-for="InsurenceStart"></label>
                     <input class="form-control input-group" type="datetime-local" asp-for="InsurenceStart"/>
                 </div>
 
                 <div class="text-center col-lg-5">
-                    <label class="col-form-label">@Localizer["EndDate"]</label>
+                    <label class="col-form-label" asp-for="InsuranceEnd"></label>
                     <input class="form-control input-group" type="datetime-local" asp-for="InsuranceEnd"/>
                 </div>
 
                 <div class="col-lg-2 d-flex justify-content-center">
                     <div class="mt-lg-0 mt-2 col-lg-12 col-md-6 col-sm-6 col-8">
-                        <label class="col-form-label text-center">@Localizer["Payments"]</label>
-                        <select class="form-control input-group">
+                        <label class="col-form-label text-center" asp-for="NumberOfPayments"></label>
+                        <select class="form-control input-group" asp-for="NumberOfPayments">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="4">4</option>
                         </select>
                     </div>
                 </div>
-            </div>
-
-            <div class="d-flex justify-content-center text-center">
-
             </div>
 
             <div class="row mt-3">
