@@ -120,6 +120,9 @@
   <data name="PickInsurer" xml:space="preserve">
     <value>Pick insurer</value>
   </data>
+  <data name="SelectOption" xml:space="preserve">
+    <value>Select an insurance</value>
+  </data>
   <data name="Submit" xml:space="preserve">
     <value>Submit</value>
   </data>

@@ -120,6 +120,9 @@
   <data name="PickInsurer" xml:space="preserve">
     <value>Избери застраховател</value>
   </data>
+  <data name="SelectOption" xml:space="preserve">
+    <value>Избери застраховка/и</value>
+  </data>
   <data name="Submit" xml:space="preserve">
     <value>Изпращане</value>
   </data>
