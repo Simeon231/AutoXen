@@ -87,7 +87,7 @@
         }
 
         [Fact]
-        public async Task GetCarWashRequestShouldWorkCorrectly()
+        public async Task GetCarWashRequestShouldReturnACarSuccessfully()
         {
             var request = new CarWashRequestViewModel()
             {
@@ -138,7 +138,7 @@
         }
 
         [Fact]
-        public async Task AcceptAsyncShouldWorkCorectly()
+        public async Task AcceptAsyncShouldAcceptRequestSuccessfully()
         {
             var service = new CarWashService(this.requestRepository.Object, this.carWashRepository.Object, this.carService.Object, this.messageService.Object, this.mapper);
             var requests = this.GetCarWashRequests();
@@ -162,7 +162,7 @@
         }
 
         [Fact]
-        public void GetAllRequestsByIdShoudWorkCorrectly()
+        public void GetAllRequestsByIdShoudReturnAllRequestsByIdSuccessfully()
         {
             var service = new CarWashService(this.requestRepository.Object, this.carWashRepository.Object, this.carService.Object, this.messageService.Object, this.mapper);
             var requests = this.GetCarWashRequests();
@@ -182,7 +182,7 @@
         }
 
         [Fact]
-        public void GetAllRequestsShouldReturnsAllRequests()
+        public void GetAllRequestsShouldReturnAllRequestsSuccessfully()
         {
             var service = new CarWashService(this.requestRepository.Object, this.carWashRepository.Object, this.carService.Object, this.messageService.Object, this.mapper);
             var requests = this.GetCarWashRequests();
@@ -196,7 +196,7 @@
         }
 
         [Fact]
-        public async Task SubmitRequestAsyncShouldWorkCorrectly()
+        public async Task SubmitRequestAsyncShouldSubmitTheRequestSuccessfully()
         {
             var service = new CarWashService(this.requestRepository.Object, this.carWashRepository.Object, this.carService.Object, this.messageService.Object, this.mapper);
             var requests = this.GetCarWashRequests();
@@ -237,7 +237,7 @@
         }
 
         [Fact]
-        public void GetAllCarWashesShouldWorkCorrectly()
+        public void GetAllCarWashesShouldReturnAllCarWashes()
         {
             var service = new CarWashService(this.requestRepository.Object, this.carWashRepository.Object, this.carService.Object, this.messageService.Object, this.mapper);
             var carWashes = this.GetCarWashes();

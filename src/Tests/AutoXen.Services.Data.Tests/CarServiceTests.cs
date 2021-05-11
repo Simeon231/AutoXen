@@ -36,7 +36,7 @@
         }
 
         [Fact]
-        public async Task AddCarAsyncShouldWorkCorrectly()
+        public async Task AddCarAsyncShouldAddACarSuccessfully()
         {
             var carService = new CarService(this.carRepository.Object, this.extraRepository.Object, this.carExtraRepository.Object, this.mapper);
             var car = new Car();
@@ -73,7 +73,7 @@
         }
 
         [Fact]
-        public void AllCarsShouldWorkCorrectly()
+        public void AllCarsShouldReturnAllCars()
         {
             var carService = new CarService(this.carRepository.Object, this.extraRepository.Object, this.carExtraRepository.Object, this.mapper);
             var cars = this.GetCars();
@@ -87,7 +87,7 @@
         }
 
         [Fact]
-        public async Task ChangeCarDetailsAsyncShouldWorkCorrectly()
+        public async Task ChangeCarDetailsAsyncShouldChangeCarSuccessfully()
         {
             var carService = new CarService(this.carRepository.Object, this.extraRepository.Object, this.carExtraRepository.Object, this.mapper);
             var car = new Car();
