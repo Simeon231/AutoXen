@@ -117,14 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AnnualTechnicallInspection" xml:space="preserve">
-    <value>Annual technicall inspection</value>
+  <data name="AnnualTechnicalInspection" xml:space="preserve">
+    <value>Annual technical inspection</value>
+  </data>
+  <data name="AnnualTechnicalInspections" xml:space="preserve">
+    <value>Annual technical inspections</value>
   </data>
   <data name="CarWash" xml:space="preserve">
     <value>Car wash</value>
   </data>
+  <data name="CarWashes" xml:space="preserve">
+    <value>Car washes</value>
+  </data>
   <data name="CreatedOn" xml:space="preserve">
     <value>Created On</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Filters</value>
   </data>
   <data name="Info" xml:space="preserve">
     <value>Info</value>
@@ -132,14 +147,23 @@
   <data name="Insurance" xml:space="preserve">
     <value>Insurance</value>
   </data>
+  <data name="Insurances" xml:space="preserve">
+    <value>Insurances</value>
+  </data>
   <data name="RequestType" xml:space="preserve">
     <value>Request type</value>
   </data>
   <data name="RoadsideAssistance" xml:space="preserve">
     <value>Roadside assistance</value>
   </data>
+  <data name="RoadsideAssistances" xml:space="preserve">
+    <value>Roadside assistances</value>
+  </data>
   <data name="Workshop" xml:space="preserve">
     <value>Workshop</value>
+  </data>
+  <data name="Workshops" xml:space="preserve">
+    <value>Workshops</value>
   </data>
   <data name="YourCar" xml:space="preserve">
     <value>Your car</value>
