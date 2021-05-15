@@ -53,11 +53,7 @@
 
         public DbSet<InsurerInsurances> InsurerInsurances { get; set; }
 
-        public DbSet<Province> Provinces { get; set; }
-
         public DbSet<RoadsideAssistance> RoadsideAssistances { get; set; }
-
-        public DbSet<RoadsideAssistanceProvince> RoadsideAssistanceProvinces { get; set; }
 
         public DbSet<RoadsideAssistanceRequest> RoadsideAssistanceRequests { get; set; }
 

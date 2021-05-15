@@ -11,5 +11,7 @@
         public int ServiceId { get; set; }
 
         public RService Service { get; set; }
+
+        public double Price { get; set; }
     }
 }
