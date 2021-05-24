@@ -16,8 +16,8 @@
                 return;
             }
 
-            var insurerIds = dbContext.Insurers.Select(x => x.Id).AsEnumerable();
-            var insuranceIds = dbContext.Insurances.Select(x => x.Id).AsEnumerable();
+            var insurerIds = dbContext.Insurers.Select(x => x.Id).ToList();
+            var insuranceIds = dbContext.Insurances.Select(x => x.Id).ToList();
 
             foreach (var insurerId in insurerIds)
             {
