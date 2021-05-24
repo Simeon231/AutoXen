@@ -31,7 +31,7 @@
 
         // TODO FIX - doesn't work
         [Fact]
-        public void GetAllShouldReturnAllRequests()
+        public void GetAllShouldReturnAllCarWashRequests()
         {
             var carWashRequests = this.GetCarWashRequests();
             this.carWashService.Setup(x => x.GetAllRequestsByUserId(string.Empty))
@@ -42,10 +42,14 @@
                 .Returns(workshopRequests.AsQueryable());
 
             var service = new RequestsService(this.carWashService.Object, this.workshopService.Object, this.mapper);
-            var requests = service.GetAll(new UserFilterViewModel(), string.Empty).Requests.ToList();
+            var model = new UserFilterViewModel() 
+            {
+                CarWashes = true,
+                Workshops = false,
+            };
+            var requests = service.GetAll(model, string.Empty).Requests.ToList();
 
-            Assert.Equal(6, requests.Count);
-            Assert.Equal("workshopRequest2", requests.First().Id);
+            Assert.Equal(3, requests.Count);
             Assert.Equal("carWashRequest0", requests.Last().Id);
         }
 

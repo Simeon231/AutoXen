@@ -9,34 +9,34 @@
         <div class="bg-dark text-white col-md-10">
             <div class="text-center mt-2 mb-2">
                 <button class="btn btn-primary shadow-none" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                    Filters
+                    @Localizer["Filters"]
                 </button>
             </div>
 
             <div id="collapseExample" class="collapse m-0 p-0">
                 <div class="row">
                     <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <label class="col-form-label" asp-for="Done"></label>
+                        <label class="col-form-label" asp-for="Done">@Localizer["Done"]</label>
                         <input class="form-check-inline" asp-for="Done" />
                     </div>
                     <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <label class="col-form-label" asp-for="Workshops"></label>
+                        <label class="col-form-label" asp-for="Workshops">@Localizer["Workshops"]</label>
                         <input class="form-check-inline" asp-for="Workshops" />
                     </div>
                     <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <label class="col-form-label" asp-for="CarWashes"></label>
+                        <label class="col-form-label" asp-for="CarWashes">@Localizer["CarWashes"]</label>
                         <input class="form-check-inline" asp-for="CarWashes" />
                     </div>
                     <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <label class="col-form-label" asp-for="Insurances"></label>
+                        <label class="col-form-label" asp-for="Insurances">@Localizer["Insurances"]</label>
                         <input class="form-check-inline" asp-for="Insurances" />
                     </div>
                     <div class="col-xl-3 col-lg-4 col-sm-6">
-                        <label class="col-form-label" asp-for="RoadsideAssistance"></label>
+                        <label class="col-form-label" asp-for="RoadsideAssistance">@Localizer["RoadsideAssistances"]</label>
                         <input class="form-check-inline" asp-for="RoadsideAssistance" />
                     </div>
                     <div class="col-xl-4 col-lg-5 col-sm-6 col-12">
-                        <label class="col-form-label" asp-for="AnnualTechnicalInspections"></label>
+                        <label class="col-form-label" asp-for="AnnualTechnicalInspections">@Localizer["AnnualTechnicalInspections"]</label>
                         <input class="form-check-inline" asp-for="AnnualTechnicalInspections" />
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                 <input hidden asp-for="PageNumber" />
 
                 <div class="d-flex justify-content-center col mb-2 mt-2">
-                    <button class="btn btn-primary pl-3 pr-3" type="submit">Filter</button>
+                    <button class="btn btn-primary pl-3 pr-3" type="submit">@Localizer["Filter"]</button>
                 </div>
             </div>
         </div>

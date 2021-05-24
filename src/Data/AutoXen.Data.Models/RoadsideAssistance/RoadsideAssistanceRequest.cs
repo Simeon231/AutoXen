@@ -1,7 +1,6 @@
 ﻿namespace AutoXen.Data.Models.RoadsideAssistance
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using AutoXen.Data.Common.Models;
@@ -17,9 +16,9 @@
         [Required]
         public string Address { get; set; }
 
-        public int RoadsideAssistanceProvinceId { get; set; }
+        public int RoadsideAssistanceId { get; set; }
 
-        public RoadsideAssistanceProvince RoadsideAssistanceProvince { get; set; }
+        public RoadsideAssistance RoadsideAssistance { get; set; }
 
         public string AcceptedById { get; set; }
 

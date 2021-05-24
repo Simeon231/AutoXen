@@ -2,12 +2,14 @@
 
 @inject IViewLocalizer Localizer
 
-<div class="d-flex justify-content-center mt-5">
+<div class="mt-5">
     <div class="container">
+        @*
         <h3 class="font-weight-bold">@Localizer["AutoXenAbout"] </h3>
         <hr />
+        *@
         <a class="h4 font-weight-bold" href="https://github.com/Simeon231/AutoXen">Github @Localizer["Link"]</a>
-        <hr />
+        <hr class="row col-lg-7"/>
         <ul class="mt-4">
             <lh class="font-weight-bold h5">@Localizer["Admins"]:</lh>
             <li> <b>@Localizer["Email"]:</b> admin@admin.admin && <b>@Localizer["Password"]:</b> admin@admin.admin </li>

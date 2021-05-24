@@ -11,6 +11,7 @@
         [Display(Name = "The car services are done")]
         public bool ServiceFinished { get; set; }
 
+        [Display(Name = "Finished on")]
         public DateTime? FinishedOn { get; set; }
 
         [Display(Name = "The Car was returned")]
