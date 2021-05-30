@@ -40,7 +40,7 @@
             }
             catch (InvalidCarException err)
             {
-                this.ModelState.AddModelError("InvalidCar", err.Message);
+                this.ModelState.AddModelError("Invalid Car", err.Message);
                 return this.View(input);
             }
 
