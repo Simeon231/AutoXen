@@ -1,12 +1,13 @@
 ﻿namespace AutoXen.Services.Data
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     using AutoXen.Web.ViewModels.Insurance;
 
     public interface IInsuranceService
     {
-        void AddInsuranceRequestAsync(InsuranceRequestViewModel model);
+        Task AddInsuranceRequestAsync(InsuranceRequestViewModel model);
 
         IEnumerable<InsurerViewModel> GetInsurers();
 

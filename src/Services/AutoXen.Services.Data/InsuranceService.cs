@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using AutoMapper;
     using AutoXen.Data.Common.Repositories;
@@ -31,10 +32,12 @@
             this.mapper = mapper;
         }
 
-        // TODO implement
-        public void AddInsuranceRequestAsync(InsuranceRequestViewModel model)
+        public async Task AddInsuranceRequestAsync(InsuranceRequestViewModel model)
         {
-            throw new System.NotImplementedException();
+            var dbModel = this.mapper.Map<InsuranceRequest>(model);
+
+            await this.insuranceRequestRepository.AddAsync(dbModel);
+            await this.insuranceRequestRepository.SaveChangesAsync();
         }
 
         public IEnumerable<InsurerInsuranceViewModel> GetInsurancesByInsurerId(int id)
