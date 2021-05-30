@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
 
     using AutoXen.Services.Data;
-    using AutoXen.Services.Data.Exceptions;
+    using AutoXen.Services.Exceptions;
     using AutoXen.Web.ViewModels.Workshop;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;

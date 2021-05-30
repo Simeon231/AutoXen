@@ -9,8 +9,7 @@
     using AutoXen.Data.Common.Repositories;
     using AutoXen.Data.Models.Car;
     using AutoXen.Data.Models.Enums;
-    using AutoXen.Services.Data.Exceptions;
-    using AutoXen.Web.ViewModels;
+    using AutoXen.Services.Exceptions;
     using AutoXen.Web.ViewModels.Cars;
 
     public class CarService : ICarService
