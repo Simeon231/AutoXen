@@ -1,6 +1,7 @@
 ﻿namespace AutoXen.Data.Models.Insurance
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using AutoXen.Data.Common.Models;
@@ -11,6 +12,7 @@
         public InsuranceRequest()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.InsuranceRequestsInsurerInsurances = new HashSet<InsuranceRequestInsurerInsurance>();
         }
 
         [Required]
@@ -33,9 +35,7 @@
 
         public byte NumberOfPayments { get; set; }
 
-        public int InsurerId { get; set; }
-
-        public Insurer Insurer { get; set; }
+        public IEnumerable<InsuranceRequestInsurerInsurance> InsuranceRequestsInsurerInsurances { get; set; }
 
         public DateTime? FinishedOn { get; set; }
 

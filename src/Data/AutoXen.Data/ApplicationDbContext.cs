@@ -53,6 +53,8 @@
 
         public DbSet<InsurerInsurance> InsurerInsurances { get; set; }
 
+        public DbSet<InsuranceRequestInsurerInsurance> InsuranceRequestsInsurerInsurances { get; set; }
+
         public DbSet<RoadsideAssistance> RoadsideAssistances { get; set; }
 
         public DbSet<RoadsideAssistanceRequest> RoadsideAssistanceRequests { get; set; }
