@@ -59,7 +59,7 @@
             }
             catch (WrongCarOwnerException)
             {
-                return this.Redirect("/");
+                return this.Redirect("/Cars/All");
             }
 
             return this.View("~/Views/Cars/Car.cshtml", model);
