@@ -10,10 +10,10 @@
     using AutoXen.Data.Common.Repositories;
     using AutoXen.Data.Models.Workshop;
     using AutoXen.Web.Infrastructure.Profiles;
-    using AutoXen.Web.ViewModels.Administration.Common;
     using AutoXen.Web.ViewModels.Administration.Requests;
     using AutoXen.Web.ViewModels.Administration.Workshop;
     using AutoXen.Web.ViewModels.Common;
+    using AutoXen.Web.ViewModels.Common.RequestInformation;
     using AutoXen.Web.ViewModels.Workshop;
     using Moq;
     using Xunit;
@@ -211,7 +211,7 @@
             var model = new WorkshopAdminViewModel()
             {
                 Id = "requestId",
-                RequestInformation = new AdminRequestInformationViewModel()
+                RequestInformation = new PickUpRequestInformationViewModel()
                 {
                     PickedUp = true,
                     FinishedOn = DateTime.UtcNow,

@@ -4,7 +4,7 @@
 
     using AutoXen.Web.ViewModels.Administration.Common;
     using AutoXen.Web.ViewModels.Cars;
-    using AutoXen.Web.ViewModels.Common;
+    using AutoXen.Web.ViewModels.Common.RequestInformation;
 
     public class AdminCarWashDetailsViewModel : AdminPickUpViewModel
     {
@@ -18,6 +18,6 @@
         [Display(Name = "Every car wash")]
         public bool AdminChooseCarWash { get; set; }
 
-        public AdminRequestInformationViewModel RequestInformation { get; set; }
+        public PickUpRequestInformationViewModel RequestInformation { get; set; }
     }
 }
