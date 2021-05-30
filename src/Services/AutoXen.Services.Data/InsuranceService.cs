@@ -5,8 +5,10 @@
     using System.Threading.Tasks;
 
     using AutoMapper;
+    using AutoXen.Common;
     using AutoXen.Data.Common.Repositories;
     using AutoXen.Data.Models.Insurance;
+    using AutoXen.Services.Exceptions;
     using AutoXen.Web.ViewModels.Insurance;
     using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +18,8 @@
         private readonly IRepository<Insurer> insurerRepository;
         private readonly IRepository<Insurance> insuranceRepository;
         private readonly IRepository<InsurerInsurance> insurerInsurancesRepository;
+        private readonly IRepository<InsuranceRequestInsurerInsurance> insuranceRequestInsurerInsuranceRepositort;
+        private readonly ICarService carService;
         private readonly IMapper mapper;
 
         public InsuranceService(
@@ -23,21 +27,39 @@
             IRepository<Insurer> insurerRepository,
             IRepository<Insurance> insuranceRepository,
             IRepository<InsurerInsurance> insurerInsurancesRepository,
+            IRepository<InsuranceRequestInsurerInsurance> insuranceRequestInsurerInsuranceRepositort,
+            ICarService carService,
             IMapper mapper)
         {
             this.insuranceRequestRepository = insuranceRequestRepository;
             this.insurerRepository = insurerRepository;
             this.insuranceRepository = insuranceRepository;
             this.insurerInsurancesRepository = insurerInsurancesRepository;
+            this.insuranceRequestInsurerInsuranceRepositort = insuranceRequestInsurerInsuranceRepositort;
+            this.carService = carService;
             this.mapper = mapper;
         }
 
-        public async Task AddInsuranceRequestAsync(InsuranceRequestViewModel model)
+        public async Task AddInsuranceRequestAsync(InsuranceRequestViewModel model, string userId)
         {
-            var dbModel = this.mapper.Map<InsuranceRequest>(model);
+            this.carService.CheckUserHaveACar(userId, model.CarId);
 
-            await this.insuranceRequestRepository.AddAsync(dbModel);
+            var dbRequest = this.mapper.Map<InsuranceRequest>(model);
+            dbRequest.UserId = userId;
+            await this.insuranceRequestRepository.AddAsync(dbRequest);
+
+            foreach (var insurerInsuranceId in model.InsurerInsuranceIds)
+            {
+                var insurerInsurances = new InsuranceRequestInsurerInsurance() 
+                {
+                    InsuranceRequestId = dbRequest.Id,
+                    InsurerInsuranceId = insurerInsuranceId,
+                };
+                await this.insuranceRequestInsurerInsuranceRepositort.AddAsync(insurerInsurances);
+            }
+
             await this.insuranceRequestRepository.SaveChangesAsync();
+            await this.insuranceRequestInsurerInsuranceRepositort.SaveChangesAsync();
         }
 
         public IEnumerable<InsurerInsuranceViewModel> GetInsurancesByInsurerId(int id)

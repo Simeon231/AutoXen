@@ -2,6 +2,7 @@
 {
     using AutoMapper;
     using AutoXen.Data.Models.CarWash;
+    using AutoXen.Data.Models.Insurance;
     using AutoXen.Data.Models.Workshop;
     using AutoXen.Web.ViewModels.Common.RequestInformation;
     using AutoXen.Web.ViewModels.Requests;
@@ -22,6 +23,13 @@
                 .ReverseMap();
 
             this.CreateMap<WorkshopRequest, PickUpRequestInformationViewModel>()
+                .ReverseMap();
+
+            this.CreateMap<InsuranceRequest, InsuranceRequestInformationViewModel>()
+                .ReverseMap();
+
+            this.CreateMap<InsuranceRequest, RequestViewModel>()
+                .ForMember(x => x.RequestName, y => y.MapFrom(x => x.ToString()))
                 .ReverseMap();
 
             this.CreateMap<RequestsViewModel, UserFilterViewModel>()

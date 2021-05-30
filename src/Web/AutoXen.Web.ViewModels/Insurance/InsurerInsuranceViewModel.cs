@@ -2,7 +2,7 @@
 {
     public class InsurerInsuranceViewModel
     {
-        public int InsuranceId { get; set; }
+        public int Id { get; set; }
 
         public string InsuranceName { get; set; }
 
