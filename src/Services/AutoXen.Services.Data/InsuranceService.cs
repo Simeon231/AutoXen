@@ -50,7 +50,7 @@
 
             foreach (var insurerInsuranceId in model.InsurerInsuranceIds)
             {
-                var insurerInsurances = new InsuranceRequestInsurerInsurance() 
+                var insurerInsurances = new InsuranceRequestInsurerInsurance()
                 {
                     InsuranceRequestId = dbRequest.Id,
                     InsurerInsuranceId = insurerInsuranceId,
@@ -82,6 +82,14 @@
                 .AsEnumerable();
 
             return insurers;
+        }
+
+        public IQueryable<InsuranceRequest> GetAllRequestsByUserId(string userId)
+        {
+            return this.insuranceRequestRepository
+                .AllWithDeleted()
+                .Include(x => x.Car)
+                .Where(x => x.UserId == userId);
         }
     }
 }
