@@ -23,7 +23,7 @@
             {
                 foreach (var insuranceId in insuranceIds)
                 {
-                    await dbContext.InsurerInsurances.AddAsync(new InsurerInsurances()
+                    await dbContext.InsurerInsurances.AddAsync(new InsurerInsurance()
                     {
                         InsurerId = insurerId,
                         InsuranceId = insuranceId,

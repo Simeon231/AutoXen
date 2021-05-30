@@ -15,14 +15,14 @@
         private readonly IDeletableEntityRepository<InsuranceRequest> insuranceRequestRepository;
         private readonly IRepository<Insurer> insurerRepository;
         private readonly IRepository<Insurance> insuranceRepository;
-        private readonly IRepository<InsurerInsurances> insurerInsurancesRepository;
+        private readonly IRepository<InsurerInsurance> insurerInsurancesRepository;
         private readonly IMapper mapper;
 
         public InsuranceService(
             IDeletableEntityRepository<InsuranceRequest> insuranceRequestRepository,
             IRepository<Insurer> insurerRepository,
             IRepository<Insurance> insuranceRepository,
-            IRepository<InsurerInsurances> insurerInsurancesRepository,
+            IRepository<InsurerInsurance> insurerInsurancesRepository,
             IMapper mapper)
         {
             this.insuranceRequestRepository = insuranceRequestRepository;
