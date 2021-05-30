@@ -2,9 +2,9 @@
 {
     using System;
 
-    public class UnauthorizedAccessRequestException : UnauthorizedAccessException
+    public class UnauthorizedRequestAccessException : UnauthorizedAccessException
     {
-        public UnauthorizedAccessRequestException(string requestName)
+        public UnauthorizedRequestAccessException(string requestName)
             : base(GetMessage(requestName))
         {
         }
