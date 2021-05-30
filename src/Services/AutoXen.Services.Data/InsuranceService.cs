@@ -62,6 +62,25 @@
             await this.insuranceRequestInsurerInsuranceRepositort.SaveChangesAsync();
         }
 
+        public InsuranceRequestDetailsViewModel GetInsuranceRequestDetails(string userId, string requestId, bool isAdmin = false)
+        {
+            var dbRequest = this.insuranceRequestRepository
+                .AllWithDeleted()
+                .Include(x => x.Car)
+                .Include(x => x.InsuranceRequestsInsurerInsurances)
+                .ThenInclude(x => x.InsurerInsurance)
+                .FirstOrDefault(x => x.Id == requestId && (x.UserId == userId || isAdmin));
+
+            if (dbRequest == null)
+            {
+                throw new UnauthorizedRequestAccessException(GlobalConstants.Insurance);
+            }
+
+            var request = this.mapper.Map<InsuranceRequestDetailsViewModel>(dbRequest);
+
+            return request;
+        }
+
         public IEnumerable<InsurerInsuranceViewModel> GetInsurancesByInsurerId(int id)
         {
             var insurances = this.insurerInsurancesRepository
