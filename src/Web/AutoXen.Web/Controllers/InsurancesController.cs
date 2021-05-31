@@ -8,11 +8,11 @@
     using AutoXen.Web.ViewModels.Insurance;
     using Microsoft.AspNetCore.Mvc;
 
-    public class InsuranceController : Controller
+    public class InsurancesController : Controller
     {
         private readonly IInsuranceService insuranceService;
 
-        public InsuranceController(IInsuranceService insuranceService)
+        public InsurancesController(IInsuranceService insuranceService)
         {
             this.insuranceService = insuranceService;
         }
@@ -44,7 +44,7 @@
             return this.Redirect("Requests/Index");
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(string id)
         {
             return this.View();
         }
