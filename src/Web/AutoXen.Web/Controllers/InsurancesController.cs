@@ -46,7 +46,10 @@
 
         public IActionResult Details(string id)
         {
-            return this.View();
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var model = this.insuranceService.GetInsuranceRequestDetails(userId, id);
+
+            return this.View(model);
         }
     }
 }

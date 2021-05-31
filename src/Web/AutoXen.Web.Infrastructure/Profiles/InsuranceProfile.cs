@@ -21,7 +21,6 @@
 
             this.CreateMap<InsuranceRequest, InsuranceRequestDetailsViewModel>()
                 .ForMember(src => src.RequestInformation, opt => opt.MapFrom(dest => dest))
-                .ForMember(src => src.InsurerInsurances, opt => opt.MapFrom(dest => dest.InsuranceRequestsInsurerInsurances.Select(x => x.InsurerInsurance)))
                 .ReverseMap();
         }
     }

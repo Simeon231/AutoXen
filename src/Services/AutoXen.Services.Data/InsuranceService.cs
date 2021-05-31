@@ -76,7 +76,29 @@
                 throw new UnauthorizedRequestAccessException(GlobalConstants.Insurance);
             }
 
+            var insurerInsurances = this.insuranceRequestInsurerInsuranceRepositort
+                .AllAsNoTracking()
+                .Where(x => x.InsuranceRequestId == dbRequest.Id)
+                .Include(x => x.InsurerInsurance)
+                .ThenInclude(x => x.Insurance)
+                .Include(x => x.InsurerInsurance)
+                .ThenInclude(x => x.Insurer)
+                .Select(x =>
+                new
+                {
+                    InsuranceName = x.InsurerInsurance.Insurance.Name,
+                    InsurerName = x.InsurerInsurance.Insurer.Name,
+                    Price = x.InsurerInsurance.Price,
+                })
+                .ToList();
+
             var request = this.mapper.Map<InsuranceRequestDetailsViewModel>(dbRequest);
+            request.InsurerName = insurerInsurances[0].InsurerName;
+            request.InsurerInsurances = insurerInsurances.Select(x => new InsuranceViewModel
+            {
+                InsuranceName = x.InsuranceName,
+                Price = x.Price,
+            });
 
             return request;
         }

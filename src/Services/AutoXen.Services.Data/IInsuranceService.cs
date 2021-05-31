@@ -16,5 +16,7 @@
         IEnumerable<InsurerInsuranceViewModel> GetInsurancesByInsurerId(int id);
 
         IQueryable<InsuranceRequest> GetAllRequestsByUserId(string userId);
+
+        public InsuranceRequestDetailsViewModel GetInsuranceRequestDetails(string userId, string requestId, bool isAdmin = false);
     }
 }
