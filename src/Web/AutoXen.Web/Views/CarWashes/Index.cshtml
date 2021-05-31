@@ -47,15 +47,11 @@
                     </div>
                 }
             </div>
-
-            <div class="row mt-2">
-                <div class="col text-center">
-                    <button type="submit" class="btn btn-primary">@Localizer["Submit"]</button>
-                </div>
-            </div>
         </div>
 
         <partial name="_MessagePartial" model="@Model.Message" />
+
+        <partial name="_SubmitRequestPartial" />
     </div>
 </form>
 
