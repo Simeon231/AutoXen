@@ -9,6 +9,7 @@
     using AutoXen.Data.Common.Repositories;
     using AutoXen.Data.Models.Insurance;
     using AutoXen.Services.Exceptions;
+    using AutoXen.Web.ViewModels.Common;
     using AutoXen.Web.ViewModels.Insurance;
     using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +21,7 @@
         private readonly IRepository<InsurerInsurance> insurerInsurancesRepository;
         private readonly IRepository<InsuranceRequestInsurerInsurance> insuranceRequestInsurerInsuranceRepositort;
         private readonly ICarService carService;
+        private readonly IMessageService messageService;
         private readonly IMapper mapper;
 
         public InsuranceService(
@@ -29,6 +31,7 @@
             IRepository<InsurerInsurance> insurerInsurancesRepository,
             IRepository<InsuranceRequestInsurerInsurance> insuranceRequestInsurerInsuranceRepositort,
             ICarService carService,
+            IMessageService messageService,
             IMapper mapper)
         {
             this.insuranceRequestRepository = insuranceRequestRepository;
@@ -37,6 +40,7 @@
             this.insurerInsurancesRepository = insurerInsurancesRepository;
             this.insuranceRequestInsurerInsuranceRepositort = insuranceRequestInsurerInsuranceRepositort;
             this.carService = carService;
+            this.messageService = messageService;
             this.mapper = mapper;
         }
 
@@ -60,6 +64,18 @@
 
             await this.insuranceRequestRepository.SaveChangesAsync();
             await this.insuranceRequestInsurerInsuranceRepositort.SaveChangesAsync();
+
+            if (model.Message != null)
+            {
+                var message = new MessageViewModel()
+                {
+                    IsAdmin = false,
+                    RequestId = dbRequest.Id,
+                    Text = model.Message,
+                };
+
+                await this.messageService.AddMessageAsync(message);
+            }
         }
 
         public InsuranceRequestDetailsViewModel GetInsuranceRequestDetails(string userId, string requestId, bool isAdmin = false)
@@ -99,6 +115,8 @@
                 InsuranceName = x.InsuranceName,
                 Price = x.Price,
             });
+
+            request.Messages = this.messageService.GetAllByRequestId(requestId);
 
             return request;
         }
