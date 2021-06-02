@@ -3,6 +3,7 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
 
+    using AutoXen.Common;
     using AutoXen.Services.Data;
     using AutoXen.Services.Exceptions;
     using AutoXen.Web.ViewModels.Workshop;
@@ -34,9 +35,10 @@
             }
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = this.User.IsInRole(GlobalConstants.AdministratorRoleName);
             try
             {
-                await this.workshopService.AddWorkshopRequestAsync(input, userId);
+                await this.workshopService.AddWorkshopRequestAsync(input, userId, isAdmin);
             }
             catch (InvalidCarException err)
             {
