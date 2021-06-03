@@ -72,7 +72,7 @@
             var model = this.GetRequestModel();
             model.Ids = RandomValues.RandomUniqueNumbers(this.repoCount, this.repoCount);
 
-            await service.AddWorkshopRequestAsync(model, string.Empty);
+            await service.AddWorkshopRequestAsync(model, string.Empty, false);
 
             Assert.Single(requests);
             Assert.Equal(model.Ids.Count(), workshopRequestWServices.Count);
@@ -101,10 +101,10 @@
             var model = this.GetRequestModel();
             model.Message = "Message";
 
-            await service.AddWorkshopRequestAsync(model, string.Empty);
+            await service.AddWorkshopRequestAsync(model, string.Empty, false);
 
             model.Message = null;
-            await service.AddWorkshopRequestAsync(model, string.Empty);
+            await service.AddWorkshopRequestAsync(model, string.Empty, false);
 
             Assert.Single(this.messageService.Object.GetAllByRequestId(requests[0].Id));
             Assert.Equal(2, requests.Count);
@@ -136,10 +136,10 @@
             model.WorkshopId = 1;
             model.Ids = RandomValues.RandomUniqueNumbers(this.repoCount, this.repoCount);
 
-            await service.AddWorkshopRequestAsync(model, string.Empty);
+            await service.AddWorkshopRequestAsync(model, string.Empty, false);
 
             model.WorkshopId = 2;
-            await service.AddWorkshopRequestAsync(model, string.Empty);
+            await service.AddWorkshopRequestAsync(model, string.Empty, false);
 
             Assert.Equal(2, requests.Count);
             Assert.Equal(model.Ids.Count(), workshopRequestWorkshopServices.Count / 2);
