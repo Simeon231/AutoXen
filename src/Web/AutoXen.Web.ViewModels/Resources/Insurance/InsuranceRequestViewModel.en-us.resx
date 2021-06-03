@@ -120,11 +120,8 @@
   <data name="CarError" xml:space="preserve">
     <value>Pick a car.</value>
   </data>
-  <data name="Company" xml:space="preserve">
-    <value>Company</value>
-  </data>
   <data name="CompanyError" xml:space="preserve">
-    <value>Pick a company.</value>
+    <value>Pick an Insurer.</value>
   </data>
   <data name="EndDate" xml:space="preserve">
     <value>End date</value>
@@ -137,6 +134,9 @@
   </data>
   <data name="InsurancesError" xml:space="preserve">
     <value>Pick insurances.</value>
+  </data>
+  <data name="Insurer" xml:space="preserve">
+    <value>Insurer</value>
   </data>
   <data name="NumberOfPaymentsError" xml:space="preserve">
     <value>Pick number of payments.</value>

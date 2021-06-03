@@ -117,37 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CarError" xml:space="preserve">
-    <value>Изберете кола.</value>
-  </data>
-  <data name="CompanyError" xml:space="preserve">
-    <value>Изберете застраховател.</value>
-  </data>
-  <data name="EndDate" xml:space="preserve">
-    <value>Крайна дата</value>
-  </data>
-  <data name="EndDateError" xml:space="preserve">
-    <value>Крайната дата е задължителна.</value>
-  </data>
-  <data name="Insurances" xml:space="preserve">
-    <value>Застраховки</value>
-  </data>
-  <data name="InsurancesError" xml:space="preserve">
-    <value>Изберете застраховки.</value>
-  </data>
-  <data name="Insurer" xml:space="preserve">
-    <value>Застраховател</value>
-  </data>
-  <data name="NumberOfPaymentsError" xml:space="preserve">
-    <value>Изберете брой на плащания.</value>
-  </data>
-  <data name="Payments" xml:space="preserve">
-    <value>Плащания</value>
-  </data>
-  <data name="StartDate" xml:space="preserve">
-    <value>Начална дата</value>
-  </data>
-  <data name="StartDateError" xml:space="preserve">
-    <value>Началната дата е задължителна.</value>
+  <data name="String1" xml:space="preserve">
+    <value />
   </data>
 </root>

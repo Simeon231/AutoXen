@@ -10,7 +10,7 @@
         public string CarId { get; set; }
 
         [Required(ErrorMessage = "CompanyError")]
-        [Display(Name = "Company")]
+        [Display(Name = "Insurer")]
         public int InsurerId { get; set; }
 
         [Required(ErrorMessage = "InsurancesError")]

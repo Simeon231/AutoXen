@@ -20,7 +20,7 @@
 
                 <div class="text-center col-lg-8">
                     <label class="col-form-label" asp-for="InsurerInsurances"></label>
-                    <select id="insurances" class="form-control input-group js-select-multiple" disabled multiple data-placeholder="@Localizer["SelectOption"]" asp-for="InsurerInsurances">
+                    <select id="insurances" class="form-control input-group js-select-multiple" disabled multiple asp-for="InsurerInsurances">
                         @foreach (var insurerInsurance in Model.InsurerInsurances)
                         {
                             <option selected>@($"{insurerInsurance.InsuranceName} - {insurerInsurance.Price}")</option>
@@ -31,8 +31,8 @@
 
             <div class="form-row mt-2">
                 <div class="text-center col-lg-5">
-                    <label class="text-muted col-form-label" asp-for="InsurenceStart"></label>
-                    <input class="form-control input-group" disabled type="datetime-local" asp-for="InsurenceStart" />
+                    <label class="text-muted col-form-label" asp-for="InsurаnceStart"></label>
+                    <input class="form-control input-group" disabled type="datetime-local" asp-for="InsurаnceStart" />
                 </div>
 
                 <div class="text-center col-lg-5">

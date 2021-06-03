@@ -17,10 +17,11 @@
         [Display(Name = "InsurerName")]
         public string InsurerName { get; set; }
 
+        [Display(Name = "InsurerInsurances")]
         public IEnumerable<InsuranceViewModel> InsurerInsurances { get; set; }
 
         [Display(Name = "InsuranceStart")]
-        public DateTime InsurenceStart { get; set; }
+        public DateTime InsurаnceStart { get; set; }
 
         [Display(Name = "InsuranceEnd")]
         public DateTime InsuranceEnd { get; set; }

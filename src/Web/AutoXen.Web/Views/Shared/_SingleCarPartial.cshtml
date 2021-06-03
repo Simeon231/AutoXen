@@ -1,10 +1,11 @@
-﻿@using AutoXen.Common 
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @model AutoXen.Web.ViewModels.Cars.CarViewModel
 
 <div class="form-row pb-4 d-flex justify-content-center">
     <div class="col-lg-8">
         <div class="text-center">
-            <label class="text-muted col-form-label">Your car</label>
+            <label class="text-muted col-form-label">@Localizer["YourCar"]</label>
             <input disabled class="form-control" value="@($"{Model.Brand} - {Model.Model} - {Model.RegistrationPlate}")" />
         </div>
     </div>
