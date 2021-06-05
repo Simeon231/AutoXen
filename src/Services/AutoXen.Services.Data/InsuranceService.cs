@@ -105,14 +105,21 @@
                 {
                     InsuranceName = x.InsurerInsurance.Insurance.Name,
                     InsurerName = x.InsurerInsurance.Insurer.Name,
+                    InsurerId = x.InsurerInsurance.InsurerId,
                     Price = x.InsurerInsurance.Price,
+                    Id = x.InsurerInsurance.Id,
                 })
                 .ToList();
 
             var request = this.mapper.Map<InsuranceRequestDetailsViewModel>(dbRequest);
-            request.InsurerName = insurerInsurances[0].InsurerName;
-            request.InsurerInsurances = insurerInsurances.Select(x => new InsuranceViewModel
+            request.Insurer = new InsurerViewModel()
             {
+                Name = insurerInsurances[0].InsurerName,
+                Id = insurerInsurances[0].InsurerId,
+            };
+            request.InsurerInsurances = insurerInsurances.Select(x => new InsurerInsuranceViewModel
+            {
+                Id = x.Id,
                 InsuranceName = x.InsuranceName,
                 Price = x.Price,
             });

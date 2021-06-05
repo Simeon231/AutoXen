@@ -15,13 +15,13 @@
         public CarViewModel Car { get; set; }
 
         [Display(Name = "InsurerName")]
-        public string InsurerName { get; set; }
+        public InsurerViewModel Insurer { get; set; }
 
         [Display(Name = "InsurerInsurances")]
-        public IEnumerable<InsuranceViewModel> InsurerInsurances { get; set; }
+        public IEnumerable<InsurerInsuranceViewModel> InsurerInsurances { get; set; }
 
         [Display(Name = "InsuranceStart")]
-        public DateTime InsurаnceStart { get; set; }
+        public DateTime InsuranceStart { get; set; }
 
         [Display(Name = "InsuranceEnd")]
         public DateTime InsuranceEnd { get; set; }
