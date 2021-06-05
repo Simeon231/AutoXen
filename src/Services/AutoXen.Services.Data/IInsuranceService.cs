@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
 
     using AutoXen.Data.Models.Insurance;
+    using AutoXen.Web.ViewModels.Administration.Requests;
     using AutoXen.Web.ViewModels.Insurance;
 
     public interface IInsuranceService
@@ -20,5 +21,7 @@
         public InsuranceRequestDetailsViewModel GetInsuranceRequestDetails(string userId, string requestId, bool isAdmin = false);
 
         public IQueryable<InsuranceRequest> GetAllRequests();
+
+        public Task AcceptAsync(AcceptViewModel model);
     }
 }

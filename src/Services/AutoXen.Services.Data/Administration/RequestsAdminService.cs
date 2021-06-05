@@ -38,6 +38,9 @@
                 case nameof(GlobalConstants.CarWash):
                     await this.carWashService.AcceptAsync(model);
                     break;
+                case nameof(GlobalConstants.Insurance):
+                    await this.insuranceService.AcceptAsync(model);
+                    break;
             }
         }
 

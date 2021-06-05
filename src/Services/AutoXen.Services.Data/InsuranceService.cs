@@ -9,6 +9,7 @@
     using AutoXen.Data.Common.Repositories;
     using AutoXen.Data.Models.Insurance;
     using AutoXen.Services.Exceptions;
+    using AutoXen.Web.ViewModels.Administration.Requests;
     using AutoXen.Web.ViewModels.Common;
     using AutoXen.Web.ViewModels.Insurance;
     using Microsoft.EntityFrameworkCore;
@@ -156,6 +157,17 @@
             return this.insuranceRequestRepository
                 .AllAsNoTracking()
                 .Include(x => x.User);
+        }
+
+        public async Task AcceptAsync(AcceptViewModel model)
+        {
+            var request = this.insuranceRequestRepository
+                .All()
+                .FirstOrDefault(x => x.Id == model.Id);
+
+            request.AcceptedById = model.AdminId;
+
+            await this.insuranceRequestRepository.SaveChangesAsync();
         }
     }
 }
