@@ -150,5 +150,12 @@
                 .Include(x => x.Car)
                 .Where(x => x.UserId == userId);
         }
+
+        public IQueryable<InsuranceRequest> GetAllRequests()
+        {
+            return this.insuranceRequestRepository
+                .AllAsNoTracking()
+                .Include(x => x.User);
+        }
     }
 }
