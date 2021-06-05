@@ -41,6 +41,53 @@
             await this.carRepository.SaveChangesAsync();
         }
 
+        public IEnumerable<string> ValidateCarForInsuranceRequest(string carId)
+        {
+            var car = this.carRepository
+                .AllWithDeleted()
+                .FirstOrDefault(x => x.Id == carId);
+
+            var errors = new List<string>();
+
+            // TODO add bulgarian
+            if (car.NumberOfSeats == null)
+            {
+                errors.Add("Car \"number of seats\" is required.");
+            }
+
+            if (car.Color == null)
+            {
+                errors.Add("Car \"color\" is required.");
+            }
+
+            if (car.FuelType == null)
+            {
+                errors.Add("Car \"fuel type\" is required.");
+            }
+
+            if (car.TransmissionType == null)
+            {
+                errors.Add("Car \"transmission type\" is required.");
+            }
+
+            if (car.VehicleIdentificationNumber == null)
+            {
+                errors.Add("Car \"vehicle identification number\" is required.");
+            }
+
+            if (car.Weight == null)
+            {
+                errors.Add("Car \"weight\" is required.");
+            }
+
+            if (car.YearMade == null)
+            {
+                errors.Add("Car \"year made\" is required.");
+            }
+
+            return errors;
+        }
+
         public IEnumerable<CarViewModel> GetAllCarsByUserId(string userId)
         {
             var cars = this.carRepository.AllAsNoTracking()

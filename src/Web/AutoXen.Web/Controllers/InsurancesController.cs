@@ -1,5 +1,7 @@
 ﻿namespace AutoXen.Web.Controllers
 {
+    using System;
+    using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -11,10 +13,14 @@
     public class InsurancesController : Controller
     {
         private readonly IInsuranceService insuranceService;
+        private readonly ICarService carService;
 
-        public InsurancesController(IInsuranceService insuranceService)
+        public InsurancesController(
+            IInsuranceService insuranceService,
+            ICarService carService)
         {
             this.insuranceService = insuranceService;
+            this.carService = carService;
         }
 
         public IActionResult Index()
@@ -25,8 +31,14 @@
         [HttpPost]
         public async Task<IActionResult> Index(InsuranceRequestViewModel input)
         {
-            if (!this.ModelState.IsValid)
+            var carErros = this.carService.ValidateCarForInsuranceRequest(input.CarId);
+            if (!this.ModelState.IsValid || carErros.Any())
             {
+                foreach (var carError in carErros)
+                {
+                    this.ModelState.AddModelError(Guid.NewGuid().ToString(), carError);
+                }
+
                 return this.View(input);
             }
 
