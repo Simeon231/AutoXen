@@ -19,7 +19,7 @@
 
         [Required(ErrorMessage = "StartDateError")]
         [Display(Name = "StartDate")]
-        public DateTime InsurenceStart { get; set; }
+        public DateTime InsuranceStart { get; set; }
 
         [Required(ErrorMessage = "EndDateError")]
         [Display(Name = "EndDate")]
