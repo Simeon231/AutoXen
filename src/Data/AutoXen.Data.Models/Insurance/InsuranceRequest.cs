@@ -39,6 +39,10 @@
 
         public DateTime? FinishedOn { get; set; }
 
+        public bool InsurancesSent { get; set; }
+
+        public bool InsurancesReceived { get; set; }
+
         // public ICollection<Message> Messages { get; set; }
 
         // Used by InsuranceProfile

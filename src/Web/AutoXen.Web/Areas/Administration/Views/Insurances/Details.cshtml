@@ -61,7 +61,7 @@
 
                 <div class="text-center col-lg-6">
                     <label class="col-form-label" for="insurances">Insurances</label>
-                    <select id="insurances" class="form-control input-group js-select-multiple" multiple name="InsurerInsurances">
+                    <select id="insurances" class="form-control input-group js-select-multiple" multiple name="InsurerInsurancesIds">
                         @foreach (var insurerInsurance in insuranceService.GetInsurancesByInsurerId(Model.Insurer.Id))
                         {
                             if (Model.InsurerInsurances.Any(x => x.Id == insurerInsurance.Id))

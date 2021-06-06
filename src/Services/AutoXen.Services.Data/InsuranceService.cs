@@ -9,6 +9,7 @@
     using AutoXen.Data.Common.Repositories;
     using AutoXen.Data.Models.Insurance;
     using AutoXen.Services.Exceptions;
+    using AutoXen.Web.ViewModels.Administration.Insurance;
     using AutoXen.Web.ViewModels.Administration.Requests;
     using AutoXen.Web.ViewModels.Common;
     using AutoXen.Web.ViewModels.Insurance;
@@ -20,7 +21,7 @@
         private readonly IRepository<Insurer> insurerRepository;
         private readonly IRepository<Insurance> insuranceRepository;
         private readonly IRepository<InsurerInsurance> insurerInsurancesRepository;
-        private readonly IRepository<InsuranceRequestInsurerInsurance> insuranceRequestInsurerInsuranceRepositort;
+        private readonly IRepository<InsuranceRequestInsurerInsurance> insuranceRequestInsurerInsuranceRepository;
         private readonly ICarService carService;
         private readonly IMessageService messageService;
         private readonly IMapper mapper;
@@ -39,7 +40,7 @@
             this.insurerRepository = insurerRepository;
             this.insuranceRepository = insuranceRepository;
             this.insurerInsurancesRepository = insurerInsurancesRepository;
-            this.insuranceRequestInsurerInsuranceRepositort = insuranceRequestInsurerInsuranceRepositort;
+            this.insuranceRequestInsurerInsuranceRepository = insuranceRequestInsurerInsuranceRepositort;
             this.carService = carService;
             this.messageService = messageService;
             this.mapper = mapper;
@@ -60,11 +61,11 @@
                     InsuranceRequestId = dbRequest.Id,
                     InsurerInsuranceId = insurerInsuranceId,
                 };
-                await this.insuranceRequestInsurerInsuranceRepositort.AddAsync(insurerInsurances);
+                await this.insuranceRequestInsurerInsuranceRepository.AddAsync(insurerInsurances);
             }
 
             await this.insuranceRequestRepository.SaveChangesAsync();
-            await this.insuranceRequestInsurerInsuranceRepositort.SaveChangesAsync();
+            await this.insuranceRequestInsurerInsuranceRepository.SaveChangesAsync();
 
             if (model.Message != null)
             {
@@ -93,7 +94,7 @@
                 throw new UnauthorizedRequestAccessException(GlobalConstants.Insurance);
             }
 
-            var insurerInsurances = this.insuranceRequestInsurerInsuranceRepositort
+            var insurerInsurances = this.insuranceRequestInsurerInsuranceRepository
                 .AllAsNoTracking()
                 .Where(x => x.InsuranceRequestId == dbRequest.Id)
                 .Include(x => x.InsurerInsurance)
@@ -127,6 +128,26 @@
             request.Messages = this.messageService.GetAllByRequestId(requestId);
 
             return request;
+        }
+
+        public async Task SubmitRequestAsync(AdminInsuranceRequestViewModel model)
+        {
+            var dbRequest = this.insuranceRequestRepository
+                .All()
+                .Include(x => x.InsuranceRequestsInsurerInsurances)
+                .ThenInclude(x => x.InsurerInsurance)
+                .FirstOrDefault(x => x.Id == model.Id);
+
+            dbRequest.InsuranceEnd = model.InsuranceEnd;
+            dbRequest.InsurenceStart = model.InsuranceStart;
+            dbRequest.NumberOfPayments = model.NumberOfPayments;
+            dbRequest.FinishedOn = model.InsuranceRequestInformation.FinishedOn;
+            dbRequest.InsurancesSent = model.InsuranceRequestInformation.InsurancesSent;
+            dbRequest.InsurancesReceived = model.InsuranceRequestInformation.InsurancesReceived;
+
+            await this.ChangeInsurerInsurancesAsync(model.Id, model.InsurerId, model.InsurerInsurancesIds);
+
+            await this.insuranceRequestRepository.SaveChangesAsync();
         }
 
         public IEnumerable<InsurerInsuranceViewModel> GetInsurancesByInsurerId(int id)
@@ -175,6 +196,15 @@
             request.AcceptedById = model.AdminId;
 
             await this.insuranceRequestRepository.SaveChangesAsync();
+        }
+
+        private async Task ChangeInsurerInsurancesAsync(string requestId, int insurerId, IEnumerable<int> insurerInsurancesIds)
+        {
+            //var insuranceRequestInsurerInsuranceRepositort = this.insuranceRequestInsurerInsuranceRepository
+            //    .All()
+            //    .Where(x => x.InsuranceRequestId == requestId);
+
+
         }
     }
 }
