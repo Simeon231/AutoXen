@@ -91,6 +91,7 @@
             await this.carWashRequestRepository.SaveChangesAsync();
         }
 
+        // TODO Rename
         public CarWashRequestDetailsViewModel GetCarWashRequest(string userId, string requestId, bool isAdmin = false)
         {
             var dbRequest = this.carWashRequestRepository
