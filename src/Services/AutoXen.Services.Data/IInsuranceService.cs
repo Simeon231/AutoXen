@@ -15,7 +15,7 @@
 
         IEnumerable<InsurerViewModel> GetInsurers();
 
-        IEnumerable<InsurerInsuranceViewModel> GetInsurancesByInsurerId(int id);
+        IEnumerable<InsuranceViewModel> GetInsurancesByInsurerId(int id);
 
         IQueryable<InsuranceRequest> GetAllRequestsByUserId(string userId);
 

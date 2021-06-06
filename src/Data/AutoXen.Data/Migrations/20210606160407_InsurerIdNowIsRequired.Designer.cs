@@ -4,14 +4,16 @@ using AutoXen.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AutoXen.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210606160407_InsurerIdNowIsRequired")]
+    partial class InsurerIdNowIsRequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -564,14 +566,14 @@ namespace AutoXen.Data.Migrations
                     b.Property<DateTime>("InsuranceEnd")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("InsuranceStart")
-                        .HasColumnType("datetime2");
-
                     b.Property<bool>("InsurancesReceived")
                         .HasColumnType("bit");
 
                     b.Property<bool>("InsurancesSent")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime>("InsurenceStart")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("InsurerId")
                         .HasColumnType("int");

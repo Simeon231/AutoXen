@@ -18,7 +18,7 @@
         }
 
         [HttpGet("{id}")]
-        public IEnumerable<InsurerInsuranceViewModel> Get(int id)
+        public IEnumerable<InsuranceViewModel> Get(int id)
         {
             return this.insuranceService.GetInsurancesByInsurerId(id);
         }

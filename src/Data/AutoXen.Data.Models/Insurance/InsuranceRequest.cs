@@ -12,7 +12,7 @@
         public InsuranceRequest()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.InsuranceRequestsInsurerInsurances = new HashSet<InsuranceRequestInsurerInsurance>();
+            this.InsuranceRequestsInsurances = new HashSet<InsuranceRequestInsurance>();
         }
 
         [Required]
@@ -29,19 +29,23 @@
 
         public Car.Car Car { get; set; }
 
-        public DateTime InsurenceStart { get; set; }
+        public DateTime InsuranceStart { get; set; }
 
         public DateTime InsuranceEnd { get; set; }
 
         public byte NumberOfPayments { get; set; }
 
-        public IEnumerable<InsuranceRequestInsurerInsurance> InsuranceRequestsInsurerInsurances { get; set; }
-
-        public DateTime? FinishedOn { get; set; }
-
         public bool InsurancesSent { get; set; }
 
         public bool InsurancesReceived { get; set; }
+
+        public Insurer Insurer { get; set; }
+
+        public int InsurerId { get; set; }
+
+        public ICollection<InsuranceRequestInsurance> InsuranceRequestsInsurances { get; set; }
+
+        public DateTime? FinishedOn { get; set; }
 
         // public ICollection<Message> Messages { get; set; }
 

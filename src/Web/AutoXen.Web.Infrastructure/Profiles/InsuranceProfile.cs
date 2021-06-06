@@ -9,7 +9,7 @@
     {
         public InsuranceProfile()
         {
-            this.CreateMap<InsurerInsurance, InsurerInsuranceViewModel>()
+            this.CreateMap<InsurerInsurance, InsuranceViewModel>()
                 .ReverseMap();
 
             this.CreateMap<Insurer, InsurerViewModel>()

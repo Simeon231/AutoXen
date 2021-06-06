@@ -120,11 +120,11 @@
   <data name="InsuranceEnd" xml:space="preserve">
     <value>Insurance end</value>
   </data>
+  <data name="Insurances" xml:space="preserve">
+    <value>Insurances</value>
+  </data>
   <data name="InsuranceStart" xml:space="preserve">
     <value>Insurance start</value>
-  </data>
-  <data name="InsurerInsurances" xml:space="preserve">
-    <value>Insurances</value>
   </data>
   <data name="InsurerName" xml:space="preserve">
     <value>Insrer</value>

@@ -2,9 +2,9 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class InsurerInsuranceViewModel
+    public class InsuranceViewModel
     {
-        public int Id { get; set; }
+        public int InsuranceId { get; set; }
 
         [Display(Name = "InsuranceName")]
         public string InsuranceName { get; set; }

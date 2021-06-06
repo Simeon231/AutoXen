@@ -17,8 +17,8 @@
         [Display(Name = "InsurerName")]
         public InsurerViewModel Insurer { get; set; }
 
-        [Display(Name = "InsurerInsurances")]
-        public IEnumerable<InsurerInsuranceViewModel> InsurerInsurances { get; set; }
+        [Display(Name = "Insurances")]
+        public IEnumerable<InsuranceViewModel> Insurances { get; set; }
 
         [Display(Name = "InsuranceStart")]
         public DateTime InsuranceStart { get; set; }

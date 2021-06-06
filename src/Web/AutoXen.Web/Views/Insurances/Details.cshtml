@@ -37,9 +37,9 @@
                 </div>
 
                 <div class="text-center col-lg-8">
-                    <label class="col-form-label" asp-for="InsurerInsurances"></label>
-                    <select id="insurances" class="form-control input-group js-select-multiple" disabled multiple asp-for="InsurerInsurances">
-                        @foreach (var insurerInsurance in Model.InsurerInsurances)
+                    <label class="col-form-label" asp-for="Insurances"></label>
+                    <select id="insurances" class="form-control input-group js-select-multiple" disabled multiple asp-for="Insurances">
+                        @foreach (var insurerInsurance in Model.Insurances)
                         {
                             <option selected>@($"{insurerInsurance.InsuranceName} - {insurerInsurance.Price}")</option>
                         }
