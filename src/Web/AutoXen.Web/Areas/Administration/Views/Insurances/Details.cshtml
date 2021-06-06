@@ -28,6 +28,14 @@
                 </div>
             </div>
 
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-4">
+                    <div class="text-center mt-4">
+                        <a class="btn btn-info pl-3 pr-3" asp-controller="Users" asp-action="Profile" asp-route-userId="@Model.RequestInformation.UserId">User's profile</a>
+                    </div>
+                </div>
+            </div>
+
             <hr />
 
             <partial name="_SingleCarPartial" model="Model.Car" />
@@ -62,7 +70,7 @@
                             }
                             else
                             {
-                                <option id="@insurerInsurance.Id" value="@insurerInsurance.Id" >@($"{insurerInsurance.InsuranceName} - {insurerInsurance.Price}")</option>
+                                <option id="@insurerInsurance.Id" value="@insurerInsurance.Id">@($"{insurerInsurance.InsuranceName} - {insurerInsurance.Price}")</option>
                             }
                         }
                     </select>
