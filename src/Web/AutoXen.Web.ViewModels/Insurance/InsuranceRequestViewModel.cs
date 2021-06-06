@@ -15,7 +15,7 @@
 
         [Required(ErrorMessage = "InsurancesError")]
         [Display(Name = "Insurances")]
-        public IEnumerable<int> InsuranceIds { get; set; }
+        public IEnumerable<int> InsurancesIds { get; set; }
 
         [Required(ErrorMessage = "StartDateError")]
         [Display(Name = "StartDate")]

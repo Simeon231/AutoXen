@@ -23,7 +23,7 @@
                 .ReverseMap();
 
             this.CreateMap<InsuranceRequest, AdminInsuranceRequestViewModel>()
-                .ForMember(src => src.InsuranceRequestInformation, opt => opt.MapFrom(dest => dest))
+                .ForMember(src => src.RequestInformation, opt => opt.MapFrom(dest => dest))
                 .ReverseMap();
         }
     }

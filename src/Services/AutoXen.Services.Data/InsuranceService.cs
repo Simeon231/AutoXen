@@ -50,7 +50,7 @@
             var dbRequest = this.mapper.Map<InsuranceRequest>(model);
             dbRequest.UserId = userId;
 
-            foreach (var insuranceId in model.InsuranceIds)
+            foreach (var insuranceId in model.InsurancesIds)
             {
                 var insuranceRequestInsurance = new InsuranceRequestInsurance()
                 {
@@ -125,14 +125,20 @@
                 .ThenInclude(x => x.Insurance)
                 .FirstOrDefault(x => x.Id == model.Id);
 
+            if (dbRequest == null)
+            {
+                return;
+            }
+
             dbRequest.InsuranceEnd = model.InsuranceEnd;
             dbRequest.InsuranceStart = model.InsuranceStart;
             dbRequest.NumberOfPayments = model.NumberOfPayments;
-            dbRequest.FinishedOn = model.InsuranceRequestInformation.FinishedOn;
-            dbRequest.InsurancesSent = model.InsuranceRequestInformation.InsurancesSent;
-            dbRequest.InsurancesReceived = model.InsuranceRequestInformation.InsurancesReceived;
+            dbRequest.FinishedOn = model.RequestInformation.FinishedOn;
+            dbRequest.InsurancesSent = model.RequestInformation.InsurancesSent;
+            dbRequest.InsurancesReceived = model.RequestInformation.InsurancesReceived;
+            dbRequest.InsurerId = model.InsurerId;
 
-            await this.ChangeInsurerInsurancesAsync(model.Id, model.InsurerId, model.InsurerInsurancesIds);
+            this.ChangeInsurerInsurances(dbRequest, model);
 
             await this.insuranceRequestRepository.SaveChangesAsync();
         }
@@ -185,13 +191,33 @@
             await this.insuranceRequestRepository.SaveChangesAsync();
         }
 
-        private async Task ChangeInsurerInsurancesAsync(string requestId, int insurerId, IEnumerable<int> insurerInsurancesIds)
+        private void ChangeInsurerInsurances(InsuranceRequest request, AdminInsuranceRequestViewModel model)
         {
-            //var insuranceRequestInsurerInsuranceRepositort = this.insuranceRequestInsurerInsuranceRepository
-            //    .All()
-            //    .Where(x => x.InsuranceRequestId == requestId);
+            //Remove
+            foreach (var insuranceRequestInsurance in request.InsuranceRequestsInsurances)
+            {
+                var id = model.InsurancesIds.FirstOrDefault(x => x == insuranceRequestInsurance.InsuranceId);
 
+                if (id == 0)
+                {
+                    this.insuranceRequestInsuranceRepository.Delete(insuranceRequestInsurance);
+                }
+            }
 
+            //Add
+            foreach (var insuranceId in model.InsurancesIds)
+            {
+                var insuranceRequestInsurance = request.InsuranceRequestsInsurances.FirstOrDefault(x => x.InsuranceId == insuranceId);
+
+                if (insuranceRequestInsurance == null)
+                {
+                    request.InsuranceRequestsInsurances.Add(new InsuranceRequestInsurance()
+                    {
+                        InsuranceId = insuranceId,
+                        InsuranceRequestId = request.Id,
+                    });
+                }
+            }
         }
     }
 }

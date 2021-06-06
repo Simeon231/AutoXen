@@ -8,8 +8,7 @@
 }
 
 function AddInsuracesToSelect(data) {
-    const insurancesSelect = document.getElementById("insurances");
-    console.log(data);
+    const insurancesSelect = document.getElementsByName("InsurancesIds")[0];
     insurancesSelect.disabled = false;
     insurancesSelect.innerHTML = null;
 

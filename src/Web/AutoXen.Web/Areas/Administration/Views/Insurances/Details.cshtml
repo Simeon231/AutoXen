@@ -61,16 +61,16 @@
 
                 <div class="text-center col-lg-6">
                     <label class="col-form-label" for="insurances">Insurances</label>
-                    <select id="insurances" class="form-control input-group js-select-multiple" multiple name="InsurancesIds">
+                    <select class="form-control input-group js-select-multiple" multiple name="InsurancesIds" >
                         @foreach (var insurance in insuranceService.GetInsurancesByInsurerId(Model.Insurer.Id))
                         {
                             if (Model.Insurances.Any(x => x.InsuranceId == insurance.InsuranceId))
                             {
-                                <option id="@insurance.InsuranceId" value="@insurance.InsuranceId" selected>@($"{insurance.InsuranceName} - {insurance.Price}")</option>
+                                <option value="@insurance.InsuranceId" selected>@($"{insurance.InsuranceName} - {insurance.Price}")</option>
                             }
                             else
                             {
-                                <option id="@insurance.InsuranceId" value="@insurance.InsuranceId">@($"{insurance.InsuranceName} - {insurance.Price}")</option>
+                                <option value="@insurance.InsuranceId">@($"{insurance.InsuranceName} - {insurance.Price}")</option>
                             }
                         }
                     </select>
