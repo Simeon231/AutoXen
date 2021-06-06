@@ -6,21 +6,25 @@
 
     using AutoMapper;
     using AutoXen.Common;
+    using AutoXen.Data.Models;
     using AutoXen.Web.ViewModels.Administration.Requests;
 
     public class RequestsAdminService : IRequestsAdminService
     {
         private readonly IWorkshopService workshopService;
         private readonly ICarWashService carWashService;
+        private readonly IInsuranceService insuranceService;
         private readonly IMapper mapper;
 
         public RequestsAdminService(
             IWorkshopService workshopService,
             ICarWashService carWashService,
+            IInsuranceService insuranceService,
             IMapper mapper)
         {
             this.workshopService = workshopService;
             this.carWashService = carWashService;
+            this.insuranceService = insuranceService;
             this.mapper = mapper;
         }
 
@@ -34,6 +38,9 @@
                 case nameof(GlobalConstants.CarWash):
                     await this.carWashService.AcceptAsync(model);
                     break;
+                case nameof(GlobalConstants.Insurance):
+                    await this.insuranceService.AcceptAsync(model);
+                    break;
             }
         }
 
@@ -41,6 +48,7 @@
         {
             var workshops = model.Workshops ? this.GetWorkshopRequests(model.Accepted, model.AcceptedByMe, model.Done, userId) : new List<RequestViewModel>();
             var carwashes = model.CarWashes ? this.GetCarWashRequests(model.Accepted, model.AcceptedByMe, model.Done, userId) : new List<RequestViewModel>();
+            var insurances = model.Insurances ? this.GetInsuranceRequests(model.Accepted, model.AcceptedByMe, model.Done, userId) : new List<RequestViewModel>();
 
             var requests = this.mapper.Map<RequestsViewModel>(model);
             requests.ItemsPerPage = itemsPerPage;
@@ -48,6 +56,7 @@
 
             requests.Requests.AddRange(workshops);
             requests.Requests.AddRange(carwashes);
+            requests.Requests.AddRange(insurances);
             requests.RequestsCount = requests.Requests.Count;
 
             var maximumPage = ((requests.RequestsCount - 1) / itemsPerPage) + 1;
@@ -57,33 +66,39 @@
             return requests;
         }
 
-        // TODO add one predicate to all methods
         private IEnumerable<RequestViewModel> GetWorkshopRequests(bool accepted, bool acceptedByMe, bool done, string userId)
         {
             var requests = this.workshopService
-                .GetAllRequests()
-                .Where(x =>
-                    ((!string.IsNullOrEmpty(x.AcceptedById) == accepted)
-                    && (x.AcceptedById == userId == acceptedByMe))
-                    && (x.FinishedOn != null == done))
-                .Select(x => this.mapper.Map<RequestViewModel>(x))
-                .AsEnumerable();
+                .GetAllRequests();
 
-            return requests;
+            return this.FilterRequests(requests, accepted, acceptedByMe, done, userId);
         }
 
         private IEnumerable<RequestViewModel> GetCarWashRequests(bool accepted, bool acceptedByMe, bool done, string userId)
         {
             var requests = this.carWashService
-                .GetAllRequests()
+                .GetAllRequests();
+
+            return this.FilterRequests(requests, accepted, acceptedByMe, done, userId);
+        }
+
+        private IEnumerable<RequestViewModel> GetInsuranceRequests(bool accepted, bool acceptedByMe, bool done, string userId)
+        {
+            var requests = this.insuranceService
+                .GetAllRequests();
+
+            return this.FilterRequests(requests, accepted, acceptedByMe, done, userId);
+        }
+
+        private IEnumerable<RequestViewModel> FilterRequests(IQueryable<IRequest> requests, bool accepted, bool acceptedByMe, bool done, string userId)
+        {
+            return requests
                 .Where(x =>
-                    ((!string.IsNullOrEmpty(x.AcceptedById) == accepted)
-                    && (x.AcceptedById == userId == acceptedByMe))
+                    (!string.IsNullOrEmpty(x.AcceptedById) == accepted)
+                    && (x.AcceptedById == userId == acceptedByMe)
                     && (x.FinishedOn != null == done))
                 .Select(x => this.mapper.Map<RequestViewModel>(x))
-                .AsEnumerable();
-
-            return requests;
+                .ToList();
         }
 
         private IDictionary<string, string> GetRequestRoutes(AdminFilterViewModel filter)

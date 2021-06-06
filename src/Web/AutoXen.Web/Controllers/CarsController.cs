@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
 
     using AutoXen.Services.Data;
-    using AutoXen.Services.Data.Exceptions;
+    using AutoXen.Services.Exceptions;
     using AutoXen.Web.ViewModels.Cars;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -59,7 +59,7 @@
             }
             catch (WrongCarOwnerException)
             {
-                return this.Redirect("/");
+                return this.Redirect("/Cars/All");
             }
 
             return this.View("~/Views/Cars/Car.cshtml", model);

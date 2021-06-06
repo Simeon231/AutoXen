@@ -51,7 +51,7 @@
         /// <summary>
         /// <exception>Throws InvalidCarException.</exception>
         /// </summary>
-        public async Task AddWorkshopRequestAsync(WorkshopRequestViewModel model, string userId)
+        public async Task AddWorkshopRequestAsync(WorkshopRequestViewModel model, string userId, bool isAdmin)
         {
             this.carService.CheckUserHaveACar(userId, model.CarId);
 
@@ -86,7 +86,7 @@
             {
                 var message = new MessageViewModel()
                 {
-                    IsAdmin = false,
+                    IsAdmin = isAdmin,
                     RequestId = request.Id,
                     Text = model.Message,
                 };

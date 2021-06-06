@@ -1,5 +1,5 @@
-﻿@using AutoXen.Web.ViewModels.Administration.Common
-@model AdminRequestInformationViewModel 
+﻿@using AutoXen.Web.ViewModels.Common.RequestInformation
+@model PickUpRequestInformationViewModel 
 
 <div class="row">
     <div class="text-center col-xl-4">
@@ -18,14 +18,14 @@
         <span asp-validation-for="ReturnedCar" class="text-danger"></span>
     </div>
 </div>
-<div class="row mt-1">
-    <div class="d-sm-flex justify-content-sm-center d-lg-inline text-center col-lg-8">
-        <div class="col-sm-8 col-lg-10">
-            <label class=" col-form-label" asp-for="FinishedOn"></label>
-            <input class="form-control" asp-for="FinishedOn" name="RequestInformation.FinishedOn"/>
-            <span asp-validation-for="FinishedOn" class="text-danger"></span>
-        </div>
+<div class="row mt-1 d-flex justify-content-center">
+    <div class="col-10 col-sm-7 col-lg-6 col-xl-5 text-center">
+        <label class=" col-form-label" asp-for="FinishedOn"></label>
+        <input class="form-control" asp-for="FinishedOn" name="RequestInformation.FinishedOn" />
+        <span asp-validation-for="FinishedOn" class="text-danger"></span>
     </div>
+</div>
+<div class="row d-flex justify-content-center">
     <div class="col-lg-4">
         <div class="text-center mt-4">
             <a class="btn btn-info pl-3 pr-3" asp-controller="Users" asp-action="Profile" asp-route-userId="@Model.UserId">User's profile</a>

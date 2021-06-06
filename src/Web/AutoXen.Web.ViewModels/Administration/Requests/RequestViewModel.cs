@@ -2,7 +2,6 @@
 {
     using System;
 
-    using AutoXen.Web.ViewModels.Common;
     using AutoXen.Web.ViewModels.User;
 
     public class RequestViewModel

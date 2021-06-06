@@ -89,9 +89,10 @@
             // Application services
             services.AddTransient<IEmailSender>(x => new SendGridEmailSender(this.configuration["SendGrid:ApiKey"]));
             services.AddTransient<ICarService, CarService>();
-            services.AddTransient<ICarWashService, CarWashService>();
             services.AddTransient<IRequestsService, RequestsService>();
+            services.AddTransient<ICarWashService, CarWashService>();
             services.AddTransient<IWorkshopService, AutoXen.Services.Data.WorkshopService>();
+            services.AddTransient<IInsuranceService, InsuranceService>();
             services.AddTransient<IRequestsAdminService, RequestsAdminService>();
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IUsersService, UsersService>();

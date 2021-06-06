@@ -48,7 +48,7 @@ function AddServicesToSelect(data) {
     const select = document.getElementsByClassName("selectIds")[0];
     select.innerHTML = null;
     data.forEach(x => {
-        var option = document.createElement("option");
+        const option = document.createElement("option");
         if (x.price == null) {
             option.text = x.name;
             option.value = x.id;

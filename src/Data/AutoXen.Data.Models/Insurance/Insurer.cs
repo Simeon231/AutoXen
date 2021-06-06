@@ -9,12 +9,12 @@
     {
         public Insurer()
         {
-            this.InsurerInsurances = new HashSet<InsurerInsurances>();
+            this.InsurerInsurances = new HashSet<InsurerInsurance>();
         }
 
         [Required]
         public string Name { get; set; }
 
-        public ICollection<InsurerInsurances> InsurerInsurances { get; set; }
+        public ICollection<InsurerInsurance> InsurerInsurances { get; set; }
     }
 }

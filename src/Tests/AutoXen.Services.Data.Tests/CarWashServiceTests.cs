@@ -12,10 +12,10 @@
     using AutoXen.Data.Models.CarWash;
     using AutoXen.Web.Infrastructure.Profiles;
     using AutoXen.Web.ViewModels.Administration.CarWash;
-    using AutoXen.Web.ViewModels.Administration.Common;
     using AutoXen.Web.ViewModels.Administration.Requests;
     using AutoXen.Web.ViewModels.CarWash;
     using AutoXen.Web.ViewModels.Common;
+    using AutoXen.Web.ViewModels.Common.RequestInformation;
     using Moq;
     using Xunit;
 
@@ -134,7 +134,6 @@
             Assert.Equal(request.PickUpLocation, requestFromService.PickUpLocation);
             Assert.Equal(request.PickUpTime, requestFromService.PickUpTime);
             Assert.Equal(request.PickUpFastAsPossible, requestFromService.PickUpFastAsPossible);
-            Assert.Equal(user, requestFromService.UserId);
         }
 
         [Fact]
@@ -212,7 +211,7 @@
                 CarWashId = 1,
                 PickUpFastAsPossible = true,
                 PickUpLocation = "Sofia",
-                RequestInformation = new AdminRequestInformationViewModel()
+                RequestInformation = new PickUpRequestInformationViewModel()
                 {
                     FinishedOn = DateTime.Now,
                     PickedUp = true,

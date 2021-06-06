@@ -1,0 +1,79 @@
+﻿@using AutoXen.Services.Data
+@using AutoXen.Web.ViewModels.Insurance
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IInsuranceService insuranceService
+@model InsuranceRequestDetailsViewModel
+
+<form method="post" class=" d-flex justify-content-center">
+    <div class="row mt-3 container">
+        <div class="col-md-8">
+            <div class="row d-flex justify-content-center">
+                <div class="text-center col-lg-6">
+                    <label class="text-muted col-form-label" asp-for="RequestInformation.InsurancesSent"></label>
+                    <input disabled class="form-check-inline" asp-for="RequestInformation.InsurancesSent" />
+                </div>
+                <div class="text-center col-lg-6">
+                    <label class="text-muted col-form-label" asp-for="RequestInformation.InsurancesReceived"></label>
+                    <input disabled class="form-check-inline" asp-for="RequestInformation.InsurancesReceived" />
+                </div>
+            </div>
+
+            <div class="row d-flex justify-content-center">
+                <div class="text-center col-sm-6 col-md-8 col-lg-6 col-xl-5">
+                    <label class=" text-muted col-form-label" asp-for="RequestInformation.FinishedOn"></label>
+                    <input disabled class="form-control" asp-for="RequestInformation.FinishedOn" />
+                </div>
+            </div>
+
+            <hr />
+
+            <partial name="_SingleCarPartial" model="Model.Car" />
+
+            <div class="form-row">
+                <div class="text-center col-lg-4">
+                    <label class="text-muted col-form-label" asp-for="Insurer.Name"></label>
+                    <input class="form-control" disabled asp-for="Insurer.Name" />
+                </div>
+
+                <div class="text-center col-lg-8">
+                    <label class="col-form-label" asp-for="Insurances"></label>
+                    <select id="insurances" class="form-control input-group js-select-multiple" disabled multiple asp-for="Insurances">
+                        @foreach (var insurerInsurance in Model.Insurances)
+                        {
+                            <option selected>@($"{insurerInsurance.InsuranceName} - {insurerInsurance.Price}")</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row mt-2">
+                <div class="text-center col-lg-5">
+                    <label class="text-muted col-form-label" asp-for="InsuranceStart"></label>
+                    <input class="form-control input-group" disabled type="datetime-local" asp-for="InsuranceStart" />
+                </div>
+
+                <div class="text-center col-lg-5">
+                    <label class="col-form-label" asp-for="InsuranceEnd"></label>
+                    <input class="form-control input-group" disabled type="datetime-local" asp-for="InsuranceEnd" />
+                </div>
+
+                <div class="col-lg-2 d-flex justify-content-center">
+                    <div class="mt-lg-0 mt-2 col-lg-12 col-md-6 col-sm-6 col-8">
+                        <label class="text-muted col-form-label text-center" asp-for="NumberOfPayments"></label>
+                        <input class="form-control input-group" disabled asp-for="NumberOfPayments" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <input hidden disabled value="@Model.Id" id="requestId" />
+            <partial name="_ChatPartial" model="Model.Messages" />
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script src="~/js/Insurance.js" asp-append-version="true"></script>
+}

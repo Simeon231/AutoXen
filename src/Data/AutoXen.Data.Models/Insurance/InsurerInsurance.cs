@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class InsurerInsurances
+    public class InsurerInsurance
     {
         public int Id { get; set; }
 

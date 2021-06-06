@@ -1,4 +1,4 @@
-﻿namespace AutoXen.Services.Data.Exceptions
+﻿namespace AutoXen.Services.Exceptions
 {
     using System;
 

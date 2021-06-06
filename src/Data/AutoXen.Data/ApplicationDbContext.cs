@@ -47,11 +47,13 @@
 
         public DbSet<Insurance> Insurances { get; set; }
 
-        public DbSet<InsurersRequest> InsurersRequests { get; set; }
+        public DbSet<InsuranceRequest> InsuranceRequests { get; set; }
 
         public DbSet<Insurer> Insurers { get; set; }
 
-        public DbSet<InsurerInsurances> InsurerInsurances { get; set; }
+        public DbSet<InsurerInsurance> InsurerInsurances { get; set; }
+
+        public DbSet<InsuranceRequestInsurance> InsuranceRequestsInsurances { get; set; }
 
         public DbSet<RoadsideAssistance> RoadsideAssistances { get; set; }
 

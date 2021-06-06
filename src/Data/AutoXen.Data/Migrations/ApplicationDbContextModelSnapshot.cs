@@ -540,6 +540,93 @@ namespace AutoXen.Data.Migrations
                     b.ToTable("Insurances");
                 });
 
+            modelBuilder.Entity("AutoXen.Data.Models.Insurance.InsuranceRequest", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AcceptedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CarId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FinishedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("InsuranceEnd")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("InsuranceStart")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("InsurancesReceived")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("InsurancesSent")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("InsurerId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte>("NumberOfPayments")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AcceptedById");
+
+                    b.HasIndex("CarId");
+
+                    b.HasIndex("InsurerId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("InsuranceRequests");
+                });
+
+            modelBuilder.Entity("AutoXen.Data.Models.Insurance.InsuranceRequestInsurance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("InsuranceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("InsuranceRequestId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InsuranceId");
+
+                    b.HasIndex("InsuranceRequestId");
+
+                    b.ToTable("InsuranceRequestsInsurances");
+                });
+
             modelBuilder.Entity("AutoXen.Data.Models.Insurance.Insurer", b =>
                 {
                     b.Property<int>("Id")
@@ -570,7 +657,7 @@ namespace AutoXen.Data.Migrations
                     b.ToTable("Insurers");
                 });
 
-            modelBuilder.Entity("AutoXen.Data.Models.Insurance.InsurerInsurances", b =>
+            modelBuilder.Entity("AutoXen.Data.Models.Insurance.InsurerInsurance", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -593,61 +680,6 @@ namespace AutoXen.Data.Migrations
                     b.HasIndex("InsurerId");
 
                     b.ToTable("InsurerInsurances");
-                });
-
-            modelBuilder.Entity("AutoXen.Data.Models.Insurance.InsurersRequest", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AcceptedById")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CarId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("FinishedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("InsurenceStart")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("InsurerInsurancesId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<byte>("NumberOfInsuranceContributions")
-                        .HasColumnType("tinyint");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AcceptedById");
-
-                    b.HasIndex("CarId");
-
-                    b.HasIndex("InsurerInsurancesId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("InsurersRequests");
                 });
 
             modelBuilder.Entity("AutoXen.Data.Models.Message", b =>
@@ -1217,7 +1249,59 @@ namespace AutoXen.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("AutoXen.Data.Models.Insurance.InsurerInsurances", b =>
+            modelBuilder.Entity("AutoXen.Data.Models.Insurance.InsuranceRequest", b =>
+                {
+                    b.HasOne("AutoXen.Data.Models.ApplicationUser", "AcceptedBy")
+                        .WithMany()
+                        .HasForeignKey("AcceptedById");
+
+                    b.HasOne("AutoXen.Data.Models.Car.Car", "Car")
+                        .WithMany()
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AutoXen.Data.Models.Insurance.Insurer", "Insurer")
+                        .WithMany()
+                        .HasForeignKey("InsurerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AutoXen.Data.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("AcceptedBy");
+
+                    b.Navigation("Car");
+
+                    b.Navigation("Insurer");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("AutoXen.Data.Models.Insurance.InsuranceRequestInsurance", b =>
+                {
+                    b.HasOne("AutoXen.Data.Models.Insurance.Insurance", "Insurance")
+                        .WithMany()
+                        .HasForeignKey("InsuranceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AutoXen.Data.Models.Insurance.InsuranceRequest", "InsuranceRequest")
+                        .WithMany("InsuranceRequestsInsurances")
+                        .HasForeignKey("InsuranceRequestId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Insurance");
+
+                    b.Navigation("InsuranceRequest");
+                });
+
+            modelBuilder.Entity("AutoXen.Data.Models.Insurance.InsurerInsurance", b =>
                 {
                     b.HasOne("AutoXen.Data.Models.Insurance.Insurance", "Insurance")
                         .WithMany()
@@ -1234,39 +1318,6 @@ namespace AutoXen.Data.Migrations
                     b.Navigation("Insurance");
 
                     b.Navigation("Insurer");
-                });
-
-            modelBuilder.Entity("AutoXen.Data.Models.Insurance.InsurersRequest", b =>
-                {
-                    b.HasOne("AutoXen.Data.Models.ApplicationUser", "AcceptedBy")
-                        .WithMany()
-                        .HasForeignKey("AcceptedById");
-
-                    b.HasOne("AutoXen.Data.Models.Car.Car", "Car")
-                        .WithMany()
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("AutoXen.Data.Models.Insurance.InsurerInsurances", "InsurerInsurances")
-                        .WithMany()
-                        .HasForeignKey("InsurerInsurancesId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("AutoXen.Data.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("AcceptedBy");
-
-                    b.Navigation("Car");
-
-                    b.Navigation("InsurerInsurances");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("AutoXen.Data.Models.RoadsideAssistance.RoadsideAssistanceRequest", b =>
@@ -1470,6 +1521,11 @@ namespace AutoXen.Data.Migrations
                     b.Navigation("CarExtras");
 
                     b.Navigation("OtherCarUsers");
+                });
+
+            modelBuilder.Entity("AutoXen.Data.Models.Insurance.InsuranceRequest", b =>
+                {
+                    b.Navigation("InsuranceRequestsInsurances");
                 });
 
             modelBuilder.Entity("AutoXen.Data.Models.Insurance.Insurer", b =>

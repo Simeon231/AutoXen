@@ -1,18 +1,17 @@
 ﻿namespace AutoXen.Web.ViewModels.Administration.Workshop
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using AutoXen.Web.ViewModels.Administration.Common;
-    using AutoXen.Web.ViewModels.Common;
+    using AutoXen.Web.ViewModels.Common.RequestInformation;
 
     public class WorkshopAdminViewModel : AdminPickUpViewModel, IValidatableObject
     {
         [Required]
         public string Id { get; set; }
 
-        public AdminRequestInformationViewModel RequestInformation { get; set; }
+        public PickUpRequestInformationViewModel RequestInformation { get; set; }
 
         [Display(Name = "Other services")]
         public string OtherServices { get; set; }

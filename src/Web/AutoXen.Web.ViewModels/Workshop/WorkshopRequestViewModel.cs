@@ -8,6 +8,7 @@
 
     public class WorkshopRequestViewModel : PickUpViewModel, IValidatableObject
     {
+        // TODO add required translations
         public int WorkshopId { get; set; }
 
         public IEnumerable<int> Ids { get; set; }

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using AutoXen.Data.Seeding.Insurance;
     using AutoXen.Data.Seeding.Workshop;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
@@ -33,6 +34,9 @@
                               new WorkshopSeeder(),
                               new WServicesSeeder(),
                               new WorkshopServicesSeeder(),
+                              new InsuranceSeeder(),
+                              new InsurerSeeder(),
+                              new InsurerInsurancesSeeder(),
                           };
 
             foreach (var seeder in seeders)

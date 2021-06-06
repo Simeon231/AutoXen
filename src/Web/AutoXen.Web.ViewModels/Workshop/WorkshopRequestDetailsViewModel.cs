@@ -1,12 +1,11 @@
 ﻿namespace AutoXen.Web.ViewModels.Workshop
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using AutoXen.Web.ViewModels.Administration.Common;
     using AutoXen.Web.ViewModels.Cars;
     using AutoXen.Web.ViewModels.Common;
+    using AutoXen.Web.ViewModels.Common.RequestInformation;
 
     public class WorkshopRequestDetailsViewModel : PickUpViewModel
     {
@@ -17,7 +16,7 @@
         [Display(Name = "Every workshop")]
         public bool AdminChooseWorkshop { get; set; }
 
-        public AdminRequestInformationViewModel RequestInformation { get; set; }
+        public PickUpRequestInformationViewModel RequestInformation { get; set; }
 
         [Display(Name = "Other services")]
         public string OtherServices { get; set; }

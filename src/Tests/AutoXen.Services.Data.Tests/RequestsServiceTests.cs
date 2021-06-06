@@ -41,8 +41,8 @@
             this.workshopService.Setup(x => x.GetAllRequestsByUserId(string.Empty))
                 .Returns(workshopRequests.AsQueryable());
 
-            var service = new RequestsService(this.carWashService.Object, this.workshopService.Object, this.mapper);
-            var model = new UserFilterViewModel() 
+            var service = new RequestsService(this.carWashService.Object, this.workshopService.Object, null, this.mapper);
+            var model = new UserFilterViewModel()
             {
                 CarWashes = true,
                 Workshops = false,

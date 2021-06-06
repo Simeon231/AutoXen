@@ -14,7 +14,7 @@
         /// <summary>
         /// <exception>Throws InvalidCarException.</exception>
         /// </summary>
-        public Task AddWorkshopRequestAsync(WorkshopRequestViewModel model, string userId);
+        public Task AddWorkshopRequestAsync(WorkshopRequestViewModel model, string userId, bool isAdmin);
 
         public Task SubmitRequestAsync(WorkshopAdminViewModel model);
 

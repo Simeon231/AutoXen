@@ -1,6 +1,5 @@
 ﻿namespace AutoXen.Services.Data
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -11,15 +10,18 @@
     {
         private readonly ICarWashService carWashService;
         private readonly IWorkshopService workshopService;
+        private readonly IInsuranceService insuranceService;
         private readonly IMapper mapper;
 
         public RequestsService(
             ICarWashService carWashService,
             IWorkshopService workshopService,
+            IInsuranceService insuranceService,
             IMapper mapper)
         {
             this.carWashService = carWashService;
             this.workshopService = workshopService;
+            this.insuranceService = insuranceService;
             this.mapper = mapper;
         }
 
@@ -27,6 +29,7 @@
         {
             var workshopRequests = model.Workshops ? this.GetUsersWorkshopRequests(userId, model.Done) : new List<RequestViewModel>();
             var carwashRequests = model.CarWashes ? this.GetUsersCarWashRequests(userId, model.Done) : new List<RequestViewModel>();
+            var insuranceRequests = model.Insurances ? this.GetUsersInsuranceRequests(userId, model.Done) : new List<RequestViewModel>();
 
             var requests = this.mapper.Map<RequestsViewModel>(model);
             requests.Requests = new List<RequestViewModel>();
@@ -36,6 +39,7 @@
 
             requests.Requests.AddRange(workshopRequests);
             requests.Requests.AddRange(carwashRequests);
+            requests.Requests.AddRange(insuranceRequests);
             requests.RequestsCount = requests.Requests.Count;
 
             var maximumPage = ((requests.RequestsCount - 1) / itemsPerPage) + 1;
@@ -51,7 +55,7 @@
                 .GetAllRequestsByUserId(userId)
                 .Where(x => (x.FinishedOn != null) == done)
                 .Select(x => this.mapper.Map<RequestViewModel>(x))
-                .AsEnumerable();
+                .ToList();
         }
 
         private IEnumerable<RequestViewModel> GetUsersCarWashRequests(string userId, bool done)
@@ -60,7 +64,16 @@
                 .GetAllRequestsByUserId(userId)
                 .Where(x => (x.FinishedOn != null) == done)
                 .Select(x => this.mapper.Map<RequestViewModel>(x))
-                .AsEnumerable();
+                .ToList();
+        }
+
+        private IEnumerable<RequestViewModel> GetUsersInsuranceRequests(string userId, bool done)
+        {
+            return this.insuranceService
+                .GetAllRequestsByUserId(userId)
+                .Where(x => (x.FinishedOn != null) == done)
+                .Select(x => this.mapper.Map<RequestViewModel>(x))
+                .ToList();
         }
 
         private IDictionary<string, string> GetRequestRoutes(UserFilterViewModel filter)

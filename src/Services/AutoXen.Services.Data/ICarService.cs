@@ -9,6 +9,8 @@
     {
         public Task AddCarAsync(string userId, DetailedCarViewModel model);
 
+        public IEnumerable<string> ValidateCarForInsuranceRequest(string carId);
+
         public IEnumerable<CarViewModel> GetAllCarsByUserId(string userId);
 
         public IEnumerable<ExtraViewModel> GetAllExtras();
