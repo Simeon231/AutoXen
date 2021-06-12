@@ -10,6 +10,13 @@
         <div class="col-md-8">
             <div asp-validation-summary="All" class="text-danger"></div>
 
+            @if (this.ViewData["CarServiceUrl"] != null)
+            {
+                <div class="offset-sm-2">
+                    <a class="underline text-dark" href="@this.ViewData["CarServiceUrl"]">@Localizer["CarUrl"]</a>
+                </div>
+            }
+
             <partial name="_CarsPartial" model="@Model?.CarId" />
 
             <div class="form-row">
