@@ -41,7 +41,7 @@
             <partial name="_SingleCarPartial" model="Model.Car" />
 
             <div class="form-row">
-                <div class="text-center col-lg-6">
+                <div class="text-center col-lg-4">
                     <label class="col-form-label" for="InsurerId">Insurer</label>
                     <select class="form-control input-group" name="InsurerId" id="InsurerId" onchange="GetInsurerInsurances(this);">
                         <option hidden disabled selected>@Localizer["PickInsurer"]</option>
@@ -59,7 +59,7 @@
                     </select>
                 </div>
 
-                <div class="text-center col-lg-6">
+                <div class="text-center col-lg-8">
                     <label class="col-form-label" for="insurances">Insurances</label>
                     <select class="form-control input-group js-select-multiple" multiple name="InsurancesIds" >
                         @foreach (var insurance in insuranceService.GetInsurancesByInsurerId(Model.Insurer.Id))
