@@ -39,6 +39,11 @@
                     this.ModelState.AddModelError(Guid.NewGuid().ToString(), carError);
                 }
 
+                if (carErros.Any())
+                {
+                    this.ViewData["CarServiceUrl"] = $"/Cars/Details/{input.CarId}";
+                }
+
                 return this.View(input);
             }
 

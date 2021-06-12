@@ -117,16 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CarUrl" xml:space="preserve">
-    <value>Линк към колата</value>
+  <data name="CarColorRequired" xml:space="preserve">
+    <value>"Цвят" за колата е задължително.</value>
   </data>
-  <data name="PickInsurer" xml:space="preserve">
-    <value>Избери застраховател</value>
+  <data name="CarFuelTypeRequired" xml:space="preserve">
+    <value>"Тип на гориво" за колата е задължително.</value>
   </data>
-  <data name="SelectOption" xml:space="preserve">
-    <value>Избери застраховка/и</value>
+  <data name="CarNumberOfSeatsRequired" xml:space="preserve">
+    <value>"Брой седалки" за колата е задължително.</value>
   </data>
-  <data name="Submit" xml:space="preserve">
-    <value>Изпращане</value>
+  <data name="CarTransmissionTypeRequired" xml:space="preserve">
+    <value>"Тип на скоростна кутия" за колата е задължително.</value>
+  </data>
+  <data name="CarVINRequired" xml:space="preserve">
+    <value>"Уникален индификационен номер/УИН" за колата е задължително.</value>
+  </data>
+  <data name="CarWeightRequired" xml:space="preserve">
+    <value>"Тежест" за колата е задължително.</value>
+  </data>
+  <data name="CarYearMadeRequired" xml:space="preserve">
+    <value>"Година на производство" за колата е задължително.</value>
   </data>
 </root>

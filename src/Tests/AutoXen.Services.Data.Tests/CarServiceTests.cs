@@ -38,7 +38,7 @@
         [Fact]
         public async Task AddCarAsyncShouldAddACarSuccessfully()
         {
-            var carService = new CarService(this.carRepository.Object, this.extraRepository.Object, this.carExtraRepository.Object, this.mapper);
+            var carService = new CarService(this.carRepository.Object, this.extraRepository.Object, this.carExtraRepository.Object, null, this.mapper);
             var car = new Car();
 
             this.carRepository.Setup(x => x.AddAsync(It.IsAny<Car>()))
@@ -75,7 +75,7 @@
         [Fact]
         public void AllCarsShouldReturnAllCars()
         {
-            var carService = new CarService(this.carRepository.Object, this.extraRepository.Object, this.carExtraRepository.Object, this.mapper);
+            var carService = new CarService(this.carRepository.Object, this.extraRepository.Object, this.carExtraRepository.Object, null, this.mapper);
             var cars = this.GetCars();
 
             this.carRepository.Setup(x => x.AllAsNoTracking())
@@ -89,7 +89,7 @@
         [Fact]
         public async Task ChangeCarDetailsAsyncShouldChangeCarSuccessfully()
         {
-            var carService = new CarService(this.carRepository.Object, this.extraRepository.Object, this.carExtraRepository.Object, this.mapper);
+            var carService = new CarService(this.carRepository.Object, this.extraRepository.Object, this.carExtraRepository.Object, null, this.mapper);
             var car = new Car();
 
             this.carRepository.Setup(x => x.AddAsync(It.IsAny<Car>()))
@@ -117,7 +117,7 @@
         [Fact]
         public async Task ChangeCarDetailsAsyncShouldThrowsWrongCarOwnerException()
         {
-            var carService = new CarService(this.carRepository.Object, this.extraRepository.Object, this.carExtraRepository.Object, this.mapper);
+            var carService = new CarService(this.carRepository.Object, this.extraRepository.Object, this.carExtraRepository.Object, null, this.mapper);
             var car = new Car();
 
             this.carRepository.Setup(x => x.AddAsync(It.IsAny<Car>()))
@@ -136,7 +136,7 @@
         [Fact]
         public async Task CheckUserHaveACarShouldThrowInvalidCarException()
         {
-            var carService = new CarService(this.carRepository.Object, this.extraRepository.Object, this.carExtraRepository.Object, this.mapper);
+            var carService = new CarService(this.carRepository.Object, this.extraRepository.Object, this.carExtraRepository.Object, null, this.mapper);
             var car = new Car();
 
             this.carRepository.Setup(x => x.AddAsync(It.IsAny<Car>()))
@@ -157,7 +157,7 @@
         [Fact]
         public async Task DeleteCarAsyncShouldDeleteTheCar()
         {
-            var carService = new CarService(this.carRepository.Object, this.extraRepository.Object, this.carExtraRepository.Object, this.mapper);
+            var carService = new CarService(this.carRepository.Object, this.extraRepository.Object, this.carExtraRepository.Object, null, this.mapper);
             var car = new Car();
 
             await this.AddCarAsync(carService);

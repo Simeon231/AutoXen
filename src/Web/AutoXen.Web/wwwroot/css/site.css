@@ -1,7 +1,4 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
+﻿a.navbar-brand {
     white-space: normal;
     text-align: center;
     word-break: break-all;
@@ -186,4 +183,28 @@ nav div div ul li a{
 
 #languageDropDown .dropdown-item:focus {
     background-color: black;
+}
+
+/* underline*/
+.underline {
+    position: relative;
+}
+
+.underline::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 1px;
+    background-color: rgb(255,196,81);
+    transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .underline:hover::before {
+        left: 0;
+        right: auto;
+        width: 100%;
+    }
 }

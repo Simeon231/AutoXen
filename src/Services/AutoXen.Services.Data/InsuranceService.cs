@@ -193,7 +193,7 @@
 
         private void ChangeInsurerInsurances(InsuranceRequest request, AdminInsuranceRequestViewModel model)
         {
-            //Remove
+            // Remove
             foreach (var insuranceRequestInsurance in request.InsuranceRequestsInsurances)
             {
                 var id = model.InsurancesIds.FirstOrDefault(x => x == insuranceRequestInsurance.InsuranceId);
@@ -204,7 +204,7 @@
                 }
             }
 
-            //Add
+            // Add
             foreach (var insuranceId in model.InsurancesIds)
             {
                 var insuranceRequestInsurance = request.InsuranceRequestsInsurances.FirstOrDefault(x => x.InsuranceId == insuranceId);

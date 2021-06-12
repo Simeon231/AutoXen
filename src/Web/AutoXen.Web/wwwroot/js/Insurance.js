@@ -14,7 +14,7 @@ function AddInsuracesToSelect(data) {
 
     data.forEach(x => {
         const option = document.createElement("option");
-        option.text = `${x.insuranceName} - ${x.price}lv`
+        option.text = `${x.insuranceName} - ${x.price}`
         option.value = x.insuranceId;
 
         insurancesSelect.add(option);
