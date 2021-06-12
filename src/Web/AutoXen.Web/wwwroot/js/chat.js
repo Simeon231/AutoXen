@@ -25,7 +25,6 @@ if (document.getElementById("messagesList") != null) {
 
         connection.on("NewMessage",
             function (message) {
-                console.log("here");
                 var chatMsg = document.createElement("div");
                 chatMsg.className = "direct-chat-msg";
 
@@ -34,7 +33,7 @@ if (document.getElementById("messagesList") != null) {
 
                 var time = document.createElement("span");
                 time.className = "direct-chat-timestamp pull-right";
-                const fmt = 'DD/MM/YYYY HH:mm:ss';
+                const fmt = 'DD/MM/YYYY hh:mm:ss A';
                 time.textContent = moment().format(fmt);
                 chatInfo.append(time);
                 chatMsg.append(chatInfo);
@@ -97,7 +96,7 @@ if (document.getElementById("messagesList") != null) {
 
         var time = document.createElement("span");
         time.className = "direct-chat-timestamp pull-left";
-        const fmt = 'DD/MM/YYYY HH:mm:ss';
+        const fmt = 'DD/MM/YYYY hh:mm:ss A';
         time.textContent = moment().format(fmt);
 
         chatInfo.append(time);
