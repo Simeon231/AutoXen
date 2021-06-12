@@ -43,7 +43,7 @@
             this.mapper = mapper;
         }
 
-        public async Task AddInsuranceRequestAsync(InsuranceRequestViewModel model, string userId)
+        public async Task AddInsuranceRequestAsync(InsuranceRequestViewModel model, string userId, bool isAdmin)
         {
             this.carService.CheckUserHaveACar(userId, model.CarId);
 
@@ -70,7 +70,7 @@
             {
                 var message = new MessageViewModel()
                 {
-                    IsAdmin = false,
+                    IsAdmin = isAdmin,
                     RequestId = dbRequest.Id,
                     Text = model.Message,
                 };

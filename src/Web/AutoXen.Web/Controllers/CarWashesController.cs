@@ -3,6 +3,7 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
 
+    using AutoXen.Common;
     using AutoXen.Services.Data;
     using AutoXen.Services.Exceptions;
     using AutoXen.Web.ViewModels.CarWash;
@@ -28,16 +29,16 @@
         [HttpPost]
         public async Task<ActionResult> Index(CarWashRequestViewModel model)
         {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
             }
 
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = this.User.IsInRole(GlobalConstants.AdministratorRoleName);
             try
             {
-                await this.carWashService.AddCarWashRequestAsync(model, userId);
+                await this.carWashService.AddCarWashRequestAsync(model, userId, isAdmin);
             }
             catch (InvalidCarException err)
             {

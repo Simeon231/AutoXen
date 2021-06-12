@@ -16,7 +16,7 @@
         /// <summary>
         /// <exception>Throws InvalidCarException.</exception>
         /// </summary>
-        public Task AddCarWashRequestAsync(CarWashRequestViewModel model, string userId);
+        public Task AddCarWashRequestAsync(CarWashRequestViewModel model, string userId, bool isAdmin);
 
         public Task SubmitRequestAsync(AdminCarWashDetailsViewModel model);
 

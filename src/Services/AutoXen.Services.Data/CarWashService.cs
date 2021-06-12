@@ -39,7 +39,7 @@
         /// <summary>
         /// <exception>Throws InvalidCarException.</exception>
         /// </summary>
-        public async Task AddCarWashRequestAsync(CarWashRequestViewModel model, string userId)
+        public async Task AddCarWashRequestAsync(CarWashRequestViewModel model, string userId, bool isAdmin)
         {
             this.carService.CheckUserHaveACar(userId, model.CarId);
 
@@ -63,7 +63,7 @@
             {
                 var message = new MessageViewModel()
                 {
-                    IsAdmin = false,
+                    IsAdmin = isAdmin,
                     RequestId = dbRequest.Id,
                     Text = model.Message,
                 };

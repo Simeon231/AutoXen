@@ -11,7 +11,7 @@
 
     public interface IInsuranceService
     {
-        Task AddInsuranceRequestAsync(InsuranceRequestViewModel model, string userId);
+        Task AddInsuranceRequestAsync(InsuranceRequestViewModel model, string userId, bool isAdmin);
 
         IEnumerable<InsurerViewModel> GetInsurers();
 
