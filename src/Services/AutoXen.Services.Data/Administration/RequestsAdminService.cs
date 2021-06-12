@@ -7,6 +7,7 @@
     using AutoMapper;
     using AutoXen.Common;
     using AutoXen.Data.Models;
+    using AutoXen.Web.ViewModels.Administration.Dashboard;
     using AutoXen.Web.ViewModels.Administration.Requests;
 
     public class RequestsAdminService : IRequestsAdminService
@@ -64,6 +65,27 @@
             requests.Requests = requests.Requests.OrderByDescending(x => x.CreatedOn).Skip((requests.PageNumber - 1) * itemsPerPage).Take(itemsPerPage).ToList();
 
             return requests;
+        }
+
+        public DashboardViewModel GetDashboardInformation()
+        {
+            var dashboardModel = new DashboardViewModel();
+
+            dashboardModel.NotAcceptedRequests = new Dictionary<string, int>();
+            dashboardModel.NotAcceptedRequests.Add("Workshops", this.workshopService.GetAllRequests().Where(x => x.AcceptedById == null).Count());
+            dashboardModel.NotAcceptedRequests.Add("CarWashes", this.carWashService.GetAllRequests().Where(x => x.AcceptedById == null).Count());
+            dashboardModel.NotAcceptedRequests.Add("Insurances", this.insuranceService.GetAllRequests().Where(x => x.AcceptedById == null).Count());
+            dashboardModel.NotAcceptedRequests.Add("RoadsideAssistances", 1);
+            dashboardModel.NotAcceptedRequests.Add("AnnualTechnicalInspections", 2);
+
+            dashboardModel.AcceptedUnfinishedRequests = new Dictionary<string, int>();
+            dashboardModel.AcceptedUnfinishedRequests.Add("Workshops", this.workshopService.GetAllRequests().Where(x => x.FinishedOn == null && x.AcceptedById != null).Count());
+            dashboardModel.AcceptedUnfinishedRequests.Add("CarWashes", this.carWashService.GetAllRequests().Where(x => x.FinishedOn == null && x.AcceptedById != null).Count());
+            dashboardModel.AcceptedUnfinishedRequests.Add("Insurances", this.insuranceService.GetAllRequests().Where(x => x.FinishedOn == null && x.AcceptedById != null).Count());
+            dashboardModel.AcceptedUnfinishedRequests.Add("RoadsideAssistances", 0);
+            dashboardModel.AcceptedUnfinishedRequests.Add("AnnualTechnicalInspections", 1);
+
+            return dashboardModel;
         }
 
         private IEnumerable<RequestViewModel> GetWorkshopRequests(bool accepted, bool acceptedByMe, bool done, string userId)

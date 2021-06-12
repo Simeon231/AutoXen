@@ -1,24 +1,31 @@
-﻿@{
+﻿@using AutoXen.Web.ViewModels.Administration.Dashboard
+@model DashboardViewModel
+
+@{
     this.ViewData["Title"] = "Admin dashboard";
 }
-
-<div class="" id="columnchart_values" ></div>
+<div class="row container-fluid d-flex justify-content-center mt-4 mb-5">
+    <div class="col-lg-6 chart" id="NotAcceptedRequestsChart"></div>
+    <div class="col-lg-6 chart" id="AcceptedUnfinishedRequests"></div>
+</div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
     google.charts.load("current", { packages: ['corechart'] });
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable([
+    google.charts.setOnLoadCallback(drawNotAcceptedRequestsChart);
+    google.charts.setOnLoadCallback(drawUnfinishedRequestsChart);
+
+    function drawNotAcceptedRequestsChart() {
+        const data = google.visualization.arrayToDataTable([
             ["Element", "Requests", { role: "style" }],
-            ["Car wash", 17, "#003f5c"],
-            ["Insurance", 10, "color: #58508d"],
-            ["Roadside assitance", 13, "color: #bc5090"],
-            ["Workshop", 21, "color: #ff6361"],
-            ["Annual technical inspection", 6, "color: #ffa600"]
+            ["Car wash", @(Model.NotAcceptedRequests["CarWashes"]), "#003f5c"],
+            ["Insurance", @(Model.NotAcceptedRequests["Insurances"]), "color: #58508d"],
+            ["Roadside assitance", @(Model.NotAcceptedRequests["RoadsideAssistances"]), "color: #bc5090"],
+            ["Workshop", @(Model.NotAcceptedRequests["Workshops"]), "color: #ff6361"],
+            ["Annual technical inspection", @(Model.NotAcceptedRequests["AnnualTechnicalInspections"]), "color: #ffa600"]
         ]);
 
-        var view = new google.visualization.DataView(data);
+        const view = new google.visualization.DataView(data);
         view.setColumns([0, 1,
             {
                 calc: "stringify",
@@ -28,14 +35,47 @@
             },
             2]);
 
-        var options = {
+        const options = {
             title: "Total not accepted requests",
-            width: 700,
-            height: 450,
+            titleTextStyle: {
+                fontSize: 16,
+            },
             bar: { groupWidth: "95%" },
             legend: { position: "none" },
         };
-        var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+        const chart = new google.visualization.ColumnChart(document.getElementById("NotAcceptedRequestsChart"));
+        chart.draw(view, options);
+    }
+
+    function drawUnfinishedRequestsChart() {
+        const data = google.visualization.arrayToDataTable([
+            ["Element", "Requests", { role: "style" }],
+            ["Car wash", @(Model.AcceptedUnfinishedRequests["CarWashes"]), "#003f5c"],
+            ["Insurance", @(Model.AcceptedUnfinishedRequests["Insurances"]), "color: #58508d"],
+            ["Roadside assitance", @(Model.AcceptedUnfinishedRequests["RoadsideAssistances"]), "color: #bc5090"],
+            ["Workshop", @(Model.AcceptedUnfinishedRequests["Workshops"]), "color: #ff6361"],
+            ["Annual technical inspection", @(Model.AcceptedUnfinishedRequests["AnnualTechnicalInspections"]), "color: #ffa600"]
+        ]);
+
+        const view = new google.visualization.DataView(data);
+        view.setColumns([0, 1,
+            {
+                calc: "stringify",
+                sourceColumn: 1,
+                type: "string",
+                role: "annotation"
+            },
+            2]);
+
+        const options = {
+            title: "Total accepted unfinished requests",
+            titleTextStyle: {
+                fontSize: 16,
+            },
+            bar: { groupWidth: "95%" },
+            legend: { position: "none" },
+        };
+        const chart = new google.visualization.ColumnChart(document.getElementById("AcceptedUnfinishedRequests"));
         chart.draw(view, options);
     }
 </script>
