@@ -11,23 +11,27 @@
     using AutoXen.Data.Models.Enums;
     using AutoXen.Services.Exceptions;
     using AutoXen.Web.ViewModels.Cars;
+    using Microsoft.Extensions.Localization;
 
     public class CarService : ICarService
     {
         private readonly IDeletableEntityRepository<Car> carRepository;
         private readonly IRepository<Extra> extraRepository;
         private readonly IRepository<CarExtra> carExtraRepository;
+        private readonly IStringLocalizer<CarService> stringLocalizer;
         private readonly IMapper mapper;
 
         public CarService(
             IDeletableEntityRepository<Car> carRepository,
             IRepository<Extra> extraRepository,
             IRepository<CarExtra> carExtraRepository,
+            IStringLocalizer<CarService> stringLocalizer,
             IMapper mapper)
         {
             this.carRepository = carRepository;
             this.extraRepository = extraRepository;
             this.carExtraRepository = carExtraRepository;
+            this.stringLocalizer = stringLocalizer;
             this.mapper = mapper;
         }
 
@@ -49,40 +53,39 @@
 
             var errors = new List<string>();
 
-            // TODO add bulgarian
             if (car.NumberOfSeats == null)
             {
-                errors.Add("Car \"number of seats\" is required.");
+                errors.Add(this.stringLocalizer["CarNumberOfSeatsRequired"]);
             }
 
             if (car.Color == null)
             {
-                errors.Add("Car \"color\" is required.");
+                errors.Add(this.stringLocalizer["CarColorRequired"]);
             }
 
             if (car.FuelType == null)
             {
-                errors.Add("Car \"fuel type\" is required.");
+                errors.Add(this.stringLocalizer["CarFuelTypeRequired"]);
             }
 
             if (car.TransmissionType == null)
             {
-                errors.Add("Car \"transmission type\" is required.");
+                errors.Add(this.stringLocalizer["CarTransmissionTypeRequired"]);
             }
 
             if (car.VehicleIdentificationNumber == null)
             {
-                errors.Add("Car \"vehicle identification number\" is required.");
+                errors.Add(this.stringLocalizer["CarVINRequired"]);
             }
 
             if (car.Weight == null)
             {
-                errors.Add("Car \"weight\" is required.");
+                errors.Add(this.stringLocalizer["CarWeightRequired"]);
             }
 
             if (car.YearMade == null)
             {
-                errors.Add("Car \"year made\" is required.");
+                errors.Add(this.stringLocalizer["CarYearMadeRequired"]);
             }
 
             return errors;

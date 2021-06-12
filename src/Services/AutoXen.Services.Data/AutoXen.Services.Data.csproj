@@ -28,4 +28,19 @@
     <ProjectReference Include="..\Exceptions\AutoXen.Services.Exceptions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Resources\CarService.en-us.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CarService.en-us.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\CarService.en-us.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CarService.en-us.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
