@@ -69,7 +69,7 @@
                 .Callback((MessageViewModel model) => message = model);
 
             var service = new CarWashService(this.requestRepository.Object, this.carWashRepository.Object, this.carService.Object, this.messageService.Object, this.mapper);
-            await service.AddCarWashRequestAsync(request, user);
+            await service.AddCarWashRequestAsync(request, user, false);
 
             Assert.Single(requests);
 
@@ -126,7 +126,7 @@
                 .Callback((MessageViewModel model) => message = model);
 
             var service = new CarWashService(this.requestRepository.Object, this.carWashRepository.Object, this.carService.Object, this.messageService.Object, this.mapper);
-            await service.AddCarWashRequestAsync(request, user);
+            await service.AddCarWashRequestAsync(request, user, false);
             var requestFromService = service.GetCarWashRequest(user, id);
 
             Assert.Equal(request.CarId, requestFromService.Car.Id);
