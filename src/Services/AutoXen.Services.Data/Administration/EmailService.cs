@@ -1,11 +1,11 @@
 ﻿namespace AutoXen.Services.Data.Administration
 {
-    using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
 
     using AutoXen.Common;
+    using AutoXen.Services.Exceptions;
     using AutoXen.Services.Messaging;
     using AutoXen.Web.ViewModels.Administration.Email;
     using AutoXen.Web.ViewModels.Common;
@@ -55,6 +55,11 @@
         private void ToWorkshop(StringBuilder html, EmailViewModel model)
         {
             var request = this.workshopService.GetWorkshopRequestDetails(string.Empty, model.Id, true);
+            if (request.Workshop == null)
+            {
+                throw new InvalidRequestException();
+            }
+
             var user = this.usersService.GetUser(request.RequestInformation.UserId);
             var workshopServices = this.workshopService.GetWorkshopServicesByRequestId(request.Id);
 

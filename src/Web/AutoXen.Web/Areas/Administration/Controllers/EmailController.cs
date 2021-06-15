@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using AutoXen.Services.Data.Administration;
+    using AutoXen.Services.Exceptions;
     using AutoXen.Web.ViewModels.Administration.Email;
     using Microsoft.AspNetCore.Mvc;
 
@@ -35,9 +36,17 @@
                 return this.View(input);
             }
 
-            input.AdminId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            try
+            {
+                input.AdminId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                await this.emailService.SendAsync(input);
+            }
+            catch (InvalidRequestException exception)
+            {
+                this.ModelState.AddModelError("InvalidRequestException", exception.Message);
 
-            await this.emailService.SendAsync(input);
+                return this.View(input);
+            }
 
             return this.RedirectToAction("Index", "Requests");
         }
