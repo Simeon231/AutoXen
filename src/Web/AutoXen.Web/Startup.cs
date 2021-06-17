@@ -1,7 +1,6 @@
 ﻿namespace AutoXen.Web
 {
     using System.Globalization;
-    using System.Reflection;
 
     using AutoXen.Data;
     using AutoXen.Data.Common;
@@ -31,10 +30,12 @@
     public class Startup
     {
         private readonly IConfiguration configuration;
+        private readonly IWebHostEnvironment env;
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             this.configuration = configuration;
+            this.env = env;
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -55,7 +56,14 @@
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
 
-            services.AddSignalR();
+            if (this.env.IsDevelopment())
+            {
+                services.AddSignalR();
+            }
+            else
+            {
+                services.AddSignalR().AddAzureSignalR(this.configuration["SignalR:ConnectionString"]);
+            }
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
