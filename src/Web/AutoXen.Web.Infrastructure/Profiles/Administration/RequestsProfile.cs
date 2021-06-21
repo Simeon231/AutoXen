@@ -13,6 +13,7 @@
         {
             this.CreateMap<WorkshopRequest, RequestViewModel>()
                 .ForMember(x => x.RequestName, y => y.MapFrom(x => x.ToString()))
+                .ForMember(x => x.Finished, y => y.MapFrom(x => x.FinishedOn != null))
                 .ReverseMap();
 
             this.CreateMap<WorkshopRequest, PickUpRequestInformationViewModel>()
@@ -20,6 +21,7 @@
 
             this.CreateMap<CarWashRequest, RequestViewModel>()
                 .ForMember(x => x.RequestName, y => y.MapFrom(x => x.ToString()))
+                .ForMember(x => x.Finished, y => y.MapFrom(x => x.FinishedOn != null))
                 .ReverseMap();
 
             this.CreateMap<CarWashRequest, PickUpRequestInformationViewModel>()
@@ -33,6 +35,7 @@
 
             this.CreateMap<InsuranceRequest, RequestViewModel>()
                 .ForMember(x => x.RequestName, y => y.MapFrom(x => x.ToString()))
+                .ForMember(x => x.Finished, y => y.MapFrom(x => x.FinishedOn != null))
                 .ReverseMap();
         }
     }

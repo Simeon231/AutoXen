@@ -96,6 +96,10 @@
                             {
                                 <td class="text-center"><a class="btn btn-outline-secondary" asp-controller="Requests" asp-action="AcceptRequest" asp-area="Administration" asp-route-requestName="@request.RequestName" asp-route-id="@request.Id">Accept</a></td>
                             }
+                            else if (request.Finished)
+                            {
+                                <td class="text-center align-middle"><button disabled class="btn btn-success">Done</button></td>
+                            }
                             else if (request.AcceptedById == curUser.Id)
                             {
                                 <td class="text-center"><a class="btn btn-outline-primary" asp-controller="Email" asp-action="Send" asp-area="Administration" asp-route-requestName="@request.RequestName" asp-route-id="@request.Id">Send email</a></td>

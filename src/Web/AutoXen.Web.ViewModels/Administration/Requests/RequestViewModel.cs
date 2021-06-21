@@ -15,5 +15,7 @@
         public DateTime CreatedOn { get; set; }
 
         public string AcceptedById { get; set; }
+
+        public bool Finished { get; set; }
     }
 }
