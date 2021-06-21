@@ -66,7 +66,6 @@
             this.AppendHeader(html, $"{model.RequestName} - {request.Workshop.Name}");
             this.AppendUser(html, request.RequestInformation.UserId);
             this.AppendUl(html, "Car", request.Car.Brand, request.Car.Model, request.Car.RegistrationPlate);
-            this.AppendPickUp(html, request);
             var services = workshopServices.Select(x => $"Name: {x.ServiceName}").ToList();
             services.Add($"Other services: {request.OtherServices}");
             this.AppendUl(html, "Services", services.ToArray());
