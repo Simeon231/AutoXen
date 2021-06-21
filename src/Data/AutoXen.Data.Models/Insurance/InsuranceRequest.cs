@@ -3,9 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    using AutoXen.Common;
     using AutoXen.Data.Common.Models;
-    using AutoXen.Data.Models.Enums;
 
     public class InsuranceRequest : BaseDeletableModel<string>, IRequest
     {
@@ -52,7 +51,7 @@
         // Used by InsuranceProfile
         public override string ToString()
         {
-            return RequestName.Insurance.ToString();
+            return GlobalConstants.Insurance;
         }
     }
 }

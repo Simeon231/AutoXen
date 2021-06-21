@@ -117,13 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AnnualTechnicalInspection" xml:space="preserve">
+  <data name="Annual technical inspection" xml:space="preserve">
     <value>Annual technical inspection</value>
   </data>
   <data name="AnnualTechnicalInspections" xml:space="preserve">
     <value>Annual technical inspections</value>
   </data>
-  <data name="CarWash" xml:space="preserve">
+  <data name="Car wash" xml:space="preserve">
     <value>Car wash</value>
   </data>
   <data name="CarWashes" xml:space="preserve">
@@ -153,7 +153,7 @@
   <data name="RequestType" xml:space="preserve">
     <value>Request type</value>
   </data>
-  <data name="RoadsideAssistance" xml:space="preserve">
+  <data name="Roadside assistance" xml:space="preserve">
     <value>Roadside assistance</value>
   </data>
   <data name="RoadsideAssistances" xml:space="preserve">

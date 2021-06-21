@@ -3,8 +3,8 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
+    using AutoXen.Common;
     using AutoXen.Data.Common.Models;
-    using AutoXen.Data.Models.Enums;
 
     public class CarWashRequest : BaseDeletableModel<string>, IRequest
     {
@@ -52,7 +52,7 @@
 
         public override string ToString()
         {
-            return RequestName.CarWash.ToString();
+            return GlobalConstants.CarWash;
         }
     }
 }
