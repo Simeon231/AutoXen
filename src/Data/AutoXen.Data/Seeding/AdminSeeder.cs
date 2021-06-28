@@ -14,10 +14,10 @@
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
-            var roleManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            await SeedAdminAsync(roleManager, "admin@admin.admin");
-            await SeedAdminAsync(roleManager, "admin2@admin.admin");
+            await SeedAdminAsync(userManager, "admin@admin.admin");
+            await SeedAdminAsync(userManager, "admin2@admin.admin");
         }
 
         private static async Task SeedAdminAsync(UserManager<ApplicationUser> userManager, string username)
