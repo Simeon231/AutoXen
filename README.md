@@ -1,3 +1,6 @@
+## Obsolete
+Please keep in mind that this project was made when I was a student. I am aware of the fact that some things could be improved.
+The app is not hosted anymore.
 ## :pencil2: Overview
 **[Autoxen](https://autoxen.azurewebsites.net/)** is a website,where the users can include information for their own cars and send different requests (services) to the administration, which in turn processes them according to the data, which was received. There are 5 types of requests: car wash, roadside assistance, car service, insurance and annual technical inspection. There is a real-time chat in each request, through which the user and the administrator/s can communicate with each other. The administrator can take a request and then he can send an email to a company about the request of the user.
 ### :cop: Admins 
